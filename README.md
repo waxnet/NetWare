@@ -1,5 +1,13 @@
 -----
 
+<p align= "center">
+  <kbd>
+    <img  src="https://raw.githubusercontent.com/waxnet/NetWare/main/.github/workflows/icon.png">
+  </kbd>
+</p>
+
+-----
+
 ### <p align="center">🕸️ NetWare 🕸️</p>
 <p align= "center">
   <img src="https://img.shields.io/github/last-commit/waxnet/NetWare">
