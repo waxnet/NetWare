@@ -29,6 +29,50 @@ by passing "Loader" as the class name and "Load" as the method name.
 
 -----
 
+### <p align="center">📜 Features 📜</p>
+
+    • Combat
+   		 + Silent Aim
+   		 	- Enabled
+   		 	- Check FOV
+   		 	- FOV Size
+   		 + Weapons
+   		 	- No Recoil
+   		 	- Infinite Ammo
+   		 	- Rapid Fire
+
+    • Visual
+   		 + ESP
+   		 	- Tracers
+   		 	- Nametags
+   		 	- Skeleton
+   		 + Camera
+   		 	- Custom FOV (toggle)
+   		 	- Custom FOV Amount
+
+    • Movement
+   		 + Speed
+   		 	- Enabled
+   		 	- Speed Amount
+   		 + Fly
+   		 	- Enabled
+   		 	- Helicopter (funny name for spinbot)
+
+    • Exploits
+   		 + Player
+   		 	- Godmode
+   		 	- Instant Land
+   		 + Other
+   		 	- Auto Play
+		 + World
+			- Freeze Players
+			- Destroy Buildings
+			- Open Crates
+			- Building Spam
+			- Rig Spam
+
+-----
+
 ### <p align="center">💡 Ideas 💡</p>
 
     • Fix my shitty code.
