@@ -15,6 +15,7 @@
   <br>
   <img src="https://img.shields.io/github/stars/waxnet/NetWare">
   <img src="https://img.shields.io/github/forks/waxnet/NetWare">
+  <img src="https://img.shields.io/github/downloads/waxnet/NetWare/total.svg">
   <br>
   <img src="https://img.shields.io/github/languages/top/waxnet/NetWare">
 </p>
