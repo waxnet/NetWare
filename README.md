@@ -66,7 +66,7 @@ by passing "Loader" as the class name and "Load" as the method name.
             - Instant Land
       + Other
             - Auto Play
-      + Other
+      + Locker
             - Unlock Emotes
             - Unlock Stickers
       + World
