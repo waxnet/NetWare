@@ -64,7 +64,7 @@ namespace NetWare
             HumanBodyBones.LeftFoot,
             HumanBodyBones.LeftLowerLeg,
             HumanBodyBones.LeftUpperLeg,
-    };
+        };
 
         // methods
         public static bool HasSkeleton(PlayerController playerController)

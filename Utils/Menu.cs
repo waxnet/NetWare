@@ -40,12 +40,11 @@ namespace NetWare
             if (isSectionOpen)
             {
                 GUILayout.EndVertical();
-                isSectionOpen = false;
             }
-            isSectionOpen = true;
 
             GUILayout.BeginVertical(new GUIContent(), "Box", GUILayout.Width((windowRect.width / 2) - 12));
             GUILayout.Box("<b>" + text + "</b>");
+            isSectionOpen = true;
         }
 
         public static void NewButton(string text, Action callback)

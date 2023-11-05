@@ -11,14 +11,18 @@ namespace NetWare
             {
                 resetFOV = true;
 
-                CameraManager localPlayerCameraManager = LocalPlayer.GetLocalPlayerCameraManager();
+                CameraManager cameraManager = LocalPlayer.GetLocalPlayerCameraManager();
 
-                localPlayerCameraManager.ResetZoomStateInstant();
-                localPlayerCameraManager.MainCamera.fieldOfView = Config.Visual.Camera.customFovAmount;
+                if (cameraManager != null)
+                {
+                    cameraManager.ResetZoomStateInstant();
+                    Camera.main.fieldOfView = Config.Visual.Camera.customFovAmount;
+                }
             } else if (resetFOV)
             {
                 resetFOV = false;
-                LocalPlayer.GetLocalPlayerCameraManager().MainCamera.fieldOfView = 60;
+
+                Camera.main.fieldOfView = 60;
             }
         }
 

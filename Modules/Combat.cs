@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+﻿using JustPlay.Equipment;
+using Photon.Pun;
 using UnityEngine;
 
 namespace NetWare
@@ -12,7 +13,8 @@ namespace NetWare
                 // silent aim
                 if (Config.Combat.SilentAim.enabled)
                 {
-                    PlayerController playerController = null;
+                    PlayerController playerController;
+
                     if (Config.Combat.SilentAim.checkFov)
                     {
                         playerController = GetBestPlayerInFOV(Config.Combat.SilentAim.fovSize);
@@ -22,22 +24,22 @@ namespace NetWare
 
                     if (playerController != null)
                     {
-                        LocalPlayer.GetLocalPlayerMainCamera().transform.LookAt(Players.GetHeadPosition(playerController));
+                        Camera.main.transform.LookAt(Players.GetHeadPosition(playerController));
                     }
                 }
 
                 // weapons
                 if (Config.Combat.Weapons.noRecoil)
                 {
-                    LocalPlayer.GetLocalPlayerThirdPersonCamera().AddRecoil(Vector2.zero, 0, 0);
+                    LocalPlayer.GetLocalPlayerThirdPersonCamera()?.AddRecoil(Vector2.zero, 0, 0);
                 }
 
                 if (Config.Combat.Weapons.infiniteAmmo)
                 {
                     WeaponsController weaponsController = LocalPlayer.GetLocalPlayerWeaponsController();
 
-                    weaponsController.PFPIKMMEICB.SetCurrentAmmoAmount(999);
-                    weaponsController.PFPIKMMEICB.SetCurrentMagazineAmount(999);
+                    weaponsController?.PFPIKMMEICB?.SetCurrentAmmoAmount(999);
+                    weaponsController?.PFPIKMMEICB?.SetCurrentMagazineAmount(999);
                 }
 
                 if (Config.Combat.Weapons.rapidFire)
@@ -46,7 +48,9 @@ namespace NetWare
 
                     if (rapidFireTimer > 3)
                     {
-                        LocalPlayer.GetLocalPlayerWeaponsController().photonView.RPC(
+                        WeaponsController weaponsController = LocalPlayer.GetLocalPlayerWeaponsController();
+
+                        weaponsController?.photonView?.RPC(
                             "FireWeaponRemote",
                             RpcTarget.All,
                             new object[] {
@@ -131,22 +135,27 @@ namespace NetWare
 
         private static PlayerController GetBestPlayer()
         {
-            Vector3 origin = LocalPlayer.GetLocalPlayer().FGBLDFEONKO;
+            PlayerController localPlayer = LocalPlayer.GetLocalPlayer();
 
             PlayerController bestPlayerController = null;
             float lastDistance = float.MaxValue;
 
-            foreach (PlayerController playerController in Storage.players)
+            if (localPlayer != null)
             {
-                if (!playerController.IsMine() && Players.IsPlayerAlive(playerController) && Skeleton.HasSkeleton(playerController))
-                {
-                    Vector3 playerCenterWorldPosition = playerController.FGBLDFEONKO;
-                    float distance = (playerCenterWorldPosition - origin).magnitude;
+                Vector3 origin = localPlayer.FGBLDFEONKO;
 
-                    if (distance < lastDistance)
+                foreach (PlayerController playerController in Storage.players)
+                {
+                    if (!playerController.IsMine() && Players.IsPlayerAlive(playerController) && Skeleton.HasSkeleton(playerController))
                     {
-                        lastDistance = distance;
-                        bestPlayerController = playerController;
+                        Vector3 playerCenterWorldPosition = playerController.FGBLDFEONKO;
+                        float distance = (playerCenterWorldPosition - origin).magnitude;
+
+                        if (distance < lastDistance)
+                        {
+                            lastDistance = distance;
+                            bestPlayerController = playerController;
+                        }
                     }
                 }
             }

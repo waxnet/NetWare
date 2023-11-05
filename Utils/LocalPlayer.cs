@@ -9,39 +9,23 @@ namespace NetWare
         // other
         public static PlayerController GetLocalPlayer()
         {
-            PlayerController localPlayerController = null;
-
-            foreach (PlayerController playerController in Storage.players)
-            {
-                if (playerController.IsMine() && Players.IsPlayerAlive(playerController))
-                {
-                    localPlayerController = playerController;
-                    break;
-                }
-            }
-
-            return localPlayerController;
+            return PlayerController.LFNGIIPNIDN;
         }
 
         public static PlayerHealth GetLocalPlayerHealth()
         {
-            return GetLocalPlayer().ABDABPEKBFM;
-        }
-
-        public static WeaponBaseData GetLocalPlayerWeaponBaseData()
-        {
-            return GetLocalPlayerWeaponsController().PFPIKMMEICB.EIJLJMOPIJH;
+            return GetLocalPlayer()?.ABDABPEKBFM;
         }
 
         // controllers
         public static vThirdPersonController GetLocalPlayerThirdPersonController()
         {
-            return GetLocalPlayer().KBAOKNMAPBD;
+            return GetLocalPlayer()?.KBAOKNMAPBD;
         }
 
         public static WeaponsController GetLocalPlayerWeaponsController()
         {
-            return GetLocalPlayer().AIACBMLLLFE;
+            return GetLocalPlayer()?.AIACBMLLLFE;
         }
 
         public static vThirdPersonCamera GetLocalPlayerThirdPersonCamera()
@@ -50,14 +34,9 @@ namespace NetWare
         }
 
         // camera
-        public static Camera GetLocalPlayerMainCamera()
-        {
-            return Camera.main;
-        }
-
         public static CameraManager GetLocalPlayerCameraManager()
         {
-            return FindObjectOfType<CameraManager>();
+            return CameraManager.NFLLAGMKOCA;
         }
     }
 }

@@ -71,6 +71,7 @@
             {
                 public static bool buildingSpam = false;
                 public static bool rigSpam = false;
+                public static bool instantBreak = false;
             }
         }
     }

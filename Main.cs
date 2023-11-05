@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace NetWare
 {
@@ -11,7 +10,7 @@ namespace NetWare
             StartCoroutine(Storage.Update());
 
             // window position and size
-            Menu.windowRect = new Rect(25, 500, 440, 240);
+            Menu.windowRect = new Rect(25, 500, 440, 290);
         }
 
         public void Update()
@@ -38,7 +37,7 @@ namespace NetWare
             // display window
             if (Menu.displayWindow)
             {
-                Menu.windowRect = GUI.Window(0, Menu.windowRect, BuildMenu, "<color=red><b>NetWare</b></color>", "Box");
+                Menu.windowRect = GUI.Window(0, Menu.windowRect, BuildMenu, "<b>Net<color=red>Ware</color></b>", "Box");
             }
         }
 
@@ -62,7 +61,7 @@ namespace NetWare
                     toggleStyle.normal.textColor = Color.gray;
                 }
 
-                if (GUILayout.Toggle(selected, "<b>" + name + "</b>", toggleStyle, GUILayout.Width((Menu.windowRect.width / 4) - 8)))
+                if (GUILayout.Toggle(selected, "<b>" + name + "</b>", toggleStyle, GUILayout.Width((Menu.windowRect.width / Menu.tabs.Length) - 8)))
                 {
                     Menu.currentTab = index;
                 }

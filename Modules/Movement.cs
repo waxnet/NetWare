@@ -1,5 +1,4 @@
-﻿using Invector.CharacterController;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace NetWare
 {
@@ -9,27 +8,30 @@ namespace NetWare
         {
             PlayerController playerController = LocalPlayer.GetLocalPlayer();
 
-            // speed
-            if (Config.Movement.Speed.speed)
+            if (playerController != null)
             {
-                playerController.NGABAFFHJBE = Config.Movement.Speed.speedAmount;
-            } else
-            {
-                playerController.NGABAFFHJBE = 1;
-            }
-
-            // fly
-            if (Config.Movement.Fly.fly)
-            {
-                playerController.SetGodMode(true);
-
-                if (Config.Movement.Fly.helicopter)
+                // speed
+                if (Config.Movement.Speed.speed)
                 {
-                    playerController.gameObject.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+                    playerController.NGABAFFHJBE = Config.Movement.Speed.speedAmount;
+                } else
+                {
+                    playerController.NGABAFFHJBE = 1;
                 }
-            } else
-            {
-                playerController.SetGodMode(false);
+
+                // fly
+                if (Config.Movement.Fly.fly)
+                {
+                    playerController.SetGodMode(true);
+
+                    if (Config.Movement.Fly.helicopter)
+                    {
+                        playerController.gameObject.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+                    }
+                } else
+                {
+                    playerController.SetGodMode(false);
+                }
             }
         }
 

@@ -21,10 +21,10 @@ namespace NetWare
         public static Color GetPlayerTeamColor(PlayerController playerController)
         {
             Color color = Color.red;
-            if (playerController.EBPEIGIEEIF)
+            if (playerController?.EBPEIGIEEIF ?? true)
             {
                 color = Color.gray;
-            } else if (playerController.BODBNDGJCLF)
+            } else if (playerController?.BODBNDGJCLF ?? true)
             {
                 color = Color.green;
             }
@@ -34,7 +34,7 @@ namespace NetWare
 
         public static bool IsPlayerAlive(PlayerController playerController)
         {
-            return playerController.ABDABPEKBFM.KillerId == null;
+            return playerController?.ABDABPEKBFM?.KillerId == null;
         }
     }
 }
