@@ -66,12 +66,16 @@ by passing "Loader" as the class name and "Load" as the method name.
             - Instant Land
       + Other
             - Auto Play
+      + Other
+            - Unlock Emotes
+            - Unlock Stickers
       + World
             - Freeze Players
             - Destroy Buildings
             - Open Crates
             - Building Spam
             - Rig Spam
+            - Instant Break
 ```
 
 -----
