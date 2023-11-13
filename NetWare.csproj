@@ -38,22 +38,22 @@
     <Compile Include="Modules\Combat.cs" />
     <Compile Include="Modules\Exploits.cs" />
     <Compile Include="Modules\Movement.cs" />
+    <Compile Include="Modules\Settings.cs" />
     <Compile Include="Modules\Visual.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\LocalPlayer.cs" />
+    <Compile Include="Utils\Access.cs" />
+    <Compile Include="Entities\LocalPlayer.cs" />
     <Compile Include="Utils\Menu.cs" />
     <Compile Include="Utils\Network.cs" />
-    <Compile Include="Utils\Players.cs" />
+    <Compile Include="Entities\Players.cs" />
     <Compile Include="Utils\Position.cs" />
     <Compile Include="Utils\Render.cs" />
-    <Compile Include="Utils\Skeleton.cs" />
+    <Compile Include="Entities\Skeleton.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="1v1">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\1v1.dll</HintPath>
-    </Reference>
-    <Reference Include="1v1.DevSettings">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\1v1.DevSettings.dll</HintPath>
+    <Reference Include="1v1, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\1v1.dll</HintPath>
     </Reference>
     <Reference Include="PhotonRealtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

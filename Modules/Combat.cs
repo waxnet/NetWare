@@ -1,5 +1,4 @@
-﻿using JustPlay.Equipment;
-using Photon.Pun;
+﻿using Photon.Pun;
 using UnityEngine;
 
 namespace NetWare
@@ -11,13 +10,18 @@ namespace NetWare
             if (Input.GetMouseButton(0))
             {
                 // silent aim
-                if (Config.Combat.SilentAim.enabled)
+                if (Config.GetBool("combat.silentaim.enabled"))
                 {
                     PlayerController playerController;
 
-                    if (Config.Combat.SilentAim.checkFov)
+                    if (Config.GetBool("combat.silentaim.checkfov"))
                     {
-                        playerController = GetBestPlayerInFOV(Config.Combat.SilentAim.fovSize);
+                        if (Config.GetBool("combat.silentaim.dynamicfov"))
+                        {
+                            playerController = GetBestPlayerInFOV(Camera.main.fieldOfView + 80);
+                        } else {
+                            playerController = GetBestPlayerInFOV(Config.GetFloat("combat.silentaim.fovsize"));
+                        }
                     } else {
                         playerController = GetBestPlayer();
                     }
@@ -29,26 +33,26 @@ namespace NetWare
                 }
 
                 // weapons
-                if (Config.Combat.Weapons.noRecoil)
+                if (Config.GetBool("combat.weapons.norecoil"))
                 {
-                    LocalPlayer.GetLocalPlayerThirdPersonCamera()?.AddRecoil(Vector2.zero, 0, 0);
+                    LocalPlayer.GetThirdPersonCamera()?.AddRecoil(Vector2.zero, 0, 0);
                 }
 
-                if (Config.Combat.Weapons.infiniteAmmo)
+                if (Config.GetBool("combat.weapons.infiniteammo"))
                 {
-                    WeaponsController weaponsController = LocalPlayer.GetLocalPlayerWeaponsController();
+                    WeaponsController weaponsController = LocalPlayer.GetWeaponsController();
 
-                    weaponsController?.PFPIKMMEICB?.SetCurrentAmmoAmount(999);
-                    weaponsController?.PFPIKMMEICB?.SetCurrentMagazineAmount(999);
+                    weaponsController?.CKDFKAJOAGF?.SetCurrentAmmoAmount(999);
+                    weaponsController?.CKDFKAJOAGF?.SetCurrentMagazineAmount(999);
                 }
 
-                if (Config.Combat.Weapons.rapidFire)
+                if (Config.GetBool("combat.weapons.rapidfire"))
                 {
                     rapidFireTimer++;
 
                     if (rapidFireTimer > 3)
                     {
-                        WeaponsController weaponsController = LocalPlayer.GetLocalPlayerWeaponsController();
+                        WeaponsController weaponsController = LocalPlayer.GetWeaponsController();
 
                         weaponsController?.photonView?.RPC(
                             "FireWeaponRemote",
@@ -68,9 +72,14 @@ namespace NetWare
 
         public static void Draw()
         {
-            if (Config.Combat.SilentAim.enabled && Config.Combat.SilentAim.checkFov)
+            if (Config.GetBool("combat.silentaim.enabled") && Config.GetBool("combat.silentaim.checkfov") && Config.GetBool("combat.silentaim.drawfov"))
             {
-                Render.DrawCircle(Color.white, Render.screenCenter, Config.Combat.SilentAim.fovSize);
+                if (Config.GetBool("combat.silentaim.dynamicfov"))
+                {
+                    Render.DrawCircle(Color.white, Render.screenCenter, Camera.main.fieldOfView + 80);
+                } else {
+                    Render.DrawCircle(Color.white, Render.screenCenter, Config.GetFloat("combat.silentaim.fovsize"));
+                }
             }
         }
 
@@ -79,16 +88,68 @@ namespace NetWare
             Menu.Begin();
 
             Menu.NewSection("Silent Aim");
-            Config.Combat.SilentAim.enabled = Menu.NewToggle(Config.Combat.SilentAim.enabled, "Enabled");
-            Config.Combat.SilentAim.checkFov = Menu.NewToggle(Config.Combat.SilentAim.checkFov, "Check FOV");
-            Config.Combat.SilentAim.fovSize = Menu.NewSlider("Silent Aim FOV", Config.Combat.SilentAim.fovSize, 50, 500);
+            Config.SetBool(
+                "combat.silentaim.enabled",
+                Menu.NewToggle(
+                    Config.GetBool("combat.silentaim.enabled"),
+                    "Enabled"
+                )
+            );
+            Config.SetBool(
+                "combat.silentaim.drawfov",
+                Menu.NewToggle(
+                    Config.GetBool("combat.silentaim.drawfov"),
+                    "Draw FOV"
+                )
+            );
+            Config.SetBool(
+                "combat.silentaim.checkfov",
+                Menu.NewToggle(
+                    Config.GetBool("combat.silentaim.checkfov"),
+                    "Check FOV"
+                )
+            );
+            Config.SetBool(
+                "combat.silentaim.dynamicfov",
+                Menu.NewToggle(
+                    Config.GetBool("combat.silentaim.dynamicfov"),
+                    "Dynamic FOV"
+                )
+            );
+            Config.SetFloat(
+                "combat.silentaim.fovsize",
+                Menu.NewSlider(
+                    "FOV Size",
+                    Config.GetFloat("combat.silentaim.fovsize"),
+                    25,
+                    500
+                )
+            );
 
             Menu.Separate();
 
             Menu.NewSection("Weapons");
-            Config.Combat.Weapons.noRecoil = Menu.NewToggle(Config.Combat.Weapons.noRecoil, "No Recoil");
-            Config.Combat.Weapons.infiniteAmmo = Menu.NewToggle(Config.Combat.Weapons.infiniteAmmo, "Infinite Ammo");
-            Config.Combat.Weapons.rapidFire = Menu.NewToggle(Config.Combat.Weapons.rapidFire, "Rapid Fire");
+            Config.SetBool(
+                "combat.weapons.norecoil",
+                Menu.NewToggle(
+                    Config.GetBool("combat.weapons.norecoil"),
+                    "No Recoil"
+                )
+            );
+            Config.SetBool(
+                "combat.weapons.infiniteammo",
+                Menu.NewToggle(
+                    Config.GetBool("combat.weapons.infiniteammo"),
+                    "Infinite Ammo"
+                )
+            );
+            Config.SetBool(
+                "combat.weapons.rapidfire",
+                Menu.NewToggle(
+                    Config.GetBool("combat.weapons.rapidfire"),
+                    "Rapid Fire"
+                )
+            );
 
             Menu.End();
         }
@@ -98,8 +159,6 @@ namespace NetWare
 
         private static PlayerController GetBestPlayerInFOV(float fov)
         {
-            Vector3 origin = new Vector3((Screen.width / 2), (Screen.height / 2));
-
             PlayerController bestPlayerController = null;
             float lastDistance = float.MaxValue;
 
@@ -112,7 +171,10 @@ namespace NetWare
 
                     if (Position.IsOnScreen(playerHeadScreenPosition))
                     {
-                        float distance = (playerHeadScreenPosition - origin).magnitude;
+                        float distance = new Vector2(
+                            playerHeadScreenPosition.x - Render.screenCenter.x,
+                            playerHeadScreenPosition.y - Render.screenCenter.y
+                        ).magnitude;
 
                         if (distance < lastDistance)
                         {
@@ -126,29 +188,27 @@ namespace NetWare
             if (lastDistance <= fov)
             {
                 return bestPlayerController;
-            }
-            else
-            {
+            } else {
                 return null;
             }
         }
 
         private static PlayerController GetBestPlayer()
         {
-            PlayerController localPlayer = LocalPlayer.GetLocalPlayer();
+            PlayerController localPlayer = LocalPlayer.Get();
 
             PlayerController bestPlayerController = null;
             float lastDistance = float.MaxValue;
 
             if (localPlayer != null)
             {
-                Vector3 origin = localPlayer.FGBLDFEONKO;
+                Vector3 origin = localPlayer.GLBFEGDMAPI;
 
                 foreach (PlayerController playerController in Storage.players)
                 {
                     if (!playerController.IsMine() && Players.IsPlayerAlive(playerController) && Skeleton.HasSkeleton(playerController))
                     {
-                        Vector3 playerCenterWorldPosition = playerController.FGBLDFEONKO;
+                        Vector3 playerCenterWorldPosition = playerController.GLBFEGDMAPI;
                         float distance = (playerCenterWorldPosition - origin).magnitude;
 
                         if (distance < lastDistance)

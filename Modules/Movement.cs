@@ -6,25 +6,25 @@ namespace NetWare
     {
         public static void Execute()
         {
-            PlayerController playerController = LocalPlayer.GetLocalPlayer();
+            PlayerController playerController = LocalPlayer.Get();
 
             if (playerController != null)
             {
                 // speed
-                if (Config.Movement.Speed.speed)
+                if (Config.GetBool("movement.speed.speed"))
                 {
-                    playerController.NGABAFFHJBE = Config.Movement.Speed.speedAmount;
+                    playerController.PDEBCCHOHIA = Config.GetFloat("movement.speed.speedamount");
                 } else
                 {
-                    playerController.NGABAFFHJBE = 1;
+                    playerController.PDEBCCHOHIA = 1;
                 }
 
                 // fly
-                if (Config.Movement.Fly.fly)
+                if (Config.GetBool("movement.fly.fly"))
                 {
                     playerController.SetGodMode(true);
 
-                    if (Config.Movement.Fly.helicopter)
+                    if (Config.GetBool("movement.fly.helicopter"))
                     {
                         playerController.gameObject.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
                     }
@@ -40,14 +40,40 @@ namespace NetWare
             Menu.Begin();
 
             Menu.NewSection("Speed");
-            Config.Movement.Speed.speed = Menu.NewToggle(Config.Movement.Speed.speed, "Enabled");
-            Config.Movement.Speed.speedAmount = Menu.NewSlider("Amount", Config.Movement.Speed.speedAmount, 1, 10);
+            Config.SetBool(
+                "movement.speed.speed",
+                Menu.NewToggle(
+                    Config.GetBool("movement.speed.speed"),
+                    "Enabled"
+                )
+            );
+            Config.SetFloat(
+                "movement.speed.speedamount",
+                Menu.NewSlider(
+                    "Amount",
+                    Config.GetFloat("movement.speed.speedamount"),
+                    1,
+                    10
+                )
+            );
             
             Menu.Separate();
 
             Menu.NewSection("Fly");
-            Config.Movement.Fly.fly = Menu.NewToggle(Config.Movement.Fly.fly, "Enabled");
-            Config.Movement.Fly.helicopter = Menu.NewToggle(Config.Movement.Fly.helicopter, "Helicopter");
+            Config.SetBool(
+                "movement.fly.fly",
+                Menu.NewToggle(
+                    Config.GetBool("movement.fly.fly"),
+                    "Enabled"
+                )
+            );
+            Config.SetBool(
+                "movement.fly.helicopter",
+                Menu.NewToggle(
+                    Config.GetBool("movement.fly.helicopter"),
+                    "Helicopter"
+                )
+            );
 
             Menu.End();
         }

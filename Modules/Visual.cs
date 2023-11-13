@@ -7,16 +7,16 @@ namespace NetWare
         public static void Execute()
         {
             // camera
-            if (Config.Visual.Camera.customFov)
+            if (Config.GetBool("visual.camera.customfov"))
             {
                 resetFOV = true;
 
-                CameraManager cameraManager = LocalPlayer.GetLocalPlayerCameraManager();
+                CameraManager cameraManager = LocalPlayer.GetCameraManager();
 
                 if (cameraManager != null)
                 {
                     cameraManager.ResetZoomStateInstant();
-                    Camera.main.fieldOfView = Config.Visual.Camera.customFovAmount;
+                    Camera.main.fieldOfView = Config.GetFloat("visual.camera.customfovamount");
                 }
             } else if (resetFOV)
             {
@@ -28,29 +28,35 @@ namespace NetWare
 
         public static void Draw()
         {
-            // esp
-            if (Config.Visual.ESP.tracers || Config.Visual.ESP.nametags || Config.Visual.ESP.skeleton)
+            // player esp
+            if (Config.GetBool("visual.esp.tracers") || Config.GetBool("visual.esp.skeleton") || Config.GetBool("visual.esp.boxes") || Config.GetBool("visual.esp.nametags"))
             {
                 foreach (PlayerController playerController in Storage.players)
                 {
                     if (!playerController.IsMine() && Players.IsPlayerAlive(playerController) && Skeleton.HasSkeleton(playerController))
                     {
                         // tracers
-                        if (Config.Visual.ESP.tracers)
+                        if (Config.GetBool("visual.esp.tracers"))
                         {
                             DrawPlayerTracer(playerController);
                         }
 
-                        // nametags
-                        if (Config.Visual.ESP.nametags)
-                        {
-                            DrawPlayerNametag(playerController, Color.black);
-                        }
-
                         // skeleton
-                        if (Config.Visual.ESP.skeleton)
+                        if (Config.GetBool("visual.esp.skeleton"))
                         {
                             DrawPlayerSkeleton(playerController);
+                        }
+
+                        // boxes
+                        if (Config.GetBool("visual.esp.boxes"))
+                        {
+                            DrawPlayerBox(playerController);
+                        }
+
+                        // nametags
+                        if (Config.GetBool("visual.esp.nametags"))
+                        {
+                            DrawPlayerNametag(playerController, Color.black);
                         }
                     }
                 }
@@ -62,15 +68,54 @@ namespace NetWare
             Menu.Begin();
 
             Menu.NewSection("ESP");
-            Config.Visual.ESP.tracers = Menu.NewToggle(Config.Visual.ESP.tracers, "Tracers");
-            Config.Visual.ESP.nametags = Menu.NewToggle(Config.Visual.ESP.nametags, "Nametags");
-            Config.Visual.ESP.skeleton = Menu.NewToggle(Config.Visual.ESP.skeleton, "Skeleton");
+            Config.SetBool(
+                "visual.esp.tracers",
+                Menu.NewToggle(
+                    Config.GetBool("visual.esp.tracers"),
+                    "Tracers"
+                )
+            );
+            Config.SetBool(
+                "visual.esp.skeleton",
+                Menu.NewToggle(
+                    Config.GetBool("visual.esp.skeleton"),
+                    "Skeleton"
+                )
+            );
+            Config.SetBool(
+                "visual.esp.boxes",
+                Menu.NewToggle(
+                    Config.GetBool("visual.esp.boxes"),
+                    "Boxes"
+                )
+            );
+            Config.SetBool(
+                "visual.esp.nametags",
+                Menu.NewToggle(
+                    Config.GetBool("visual.esp.nametags"),
+                    "Nametags"
+                )
+            );
 
             Menu.Separate();
 
             Menu.NewSection("Camera");
-            Config.Visual.Camera.customFov = Menu.NewToggle(Config.Visual.Camera.customFov, "Custom FOV");
-            Config.Visual.Camera.customFovAmount = Menu.NewSlider("Custom FOV Amount", Config.Visual.Camera.customFovAmount, 20, 150);
+            Config.SetBool(
+                "visual.camera.customfov",
+                Menu.NewToggle(
+                    Config.GetBool("visual.camera.customfov"),
+                    "Custom FOV"
+                )
+            );
+            Config.SetFloat(
+                "visual.camera.customfovamount",
+                Menu.NewSlider(
+                    "Custom FOV Amount",
+                    Config.GetFloat("visual.camera.customfovamount"),
+                    20,
+                    150
+                )
+            );
 
             Menu.End();
         }
@@ -80,10 +125,13 @@ namespace NetWare
 
         private static void DrawPlayerTracer(PlayerController playerController)
         {
+            // get position
             Vector3 playerScreenPosition = Position.ToScreen(Players.GetHipPosition(playerController));
 
+            // check if player is on screen
             if (Position.IsOnScreen(playerScreenPosition))
             {
+                // draw tracer
                 Render.DrawLine(
                     Players.GetPlayerTeamColor(playerController),
                     Render.screenCenterBottom,
@@ -103,8 +151,8 @@ namespace NetWare
             if (Position.IsOnScreen(playerHeadScreenPosition))
             {
                 // get name and name size
-                string playerName = playerController.ECFNDIOEOMA.CIJLGLDLKBF;
-                if (playerController.EBPEIGIEEIF)
+                string playerName = playerController.MFOHGDFOEHJ.DAGNIMBJDNP;
+                if (playerController.POJDIMMBOCO)
                 {
                     playerName += " (BOT)";
                 }
@@ -157,7 +205,7 @@ namespace NetWare
 
         private static void DrawPlayerSkeleton(PlayerController playerController)
         {
-            // get player animator
+            // get player animator and color
             Animator playerAnimator = playerController.GetComponent<Animator>();
             Color color = Players.GetPlayerTeamColor(playerController);
 
@@ -234,6 +282,70 @@ namespace NetWare
                         Render.DrawLine(color, originPosition, destinationPosition);
                     }
                 }
+            }
+        }
+
+        private static void DrawPlayerBox(PlayerController playerController)
+        {
+            // get positions and color
+            Color color = Players.GetPlayerTeamColor(playerController);
+
+            Vector3 headWorldPosition = Players.GetHeadPosition(playerController);
+            headWorldPosition.y += .22f;
+            Vector3 headScreenPosition = Position.ToScreen(headWorldPosition);
+
+            Vector3 feetWorldPosition = Players.GetFeetPosition(playerController);
+            feetWorldPosition.y -= .2f;
+            Vector3 feetScreenPosition = Position.ToScreen(feetWorldPosition);
+
+            // check if player is on screen
+            if (Position.IsOnScreen(headScreenPosition) && Position.IsOnScreen(feetScreenPosition))
+            {
+                // get box position
+                float boxX = headScreenPosition.x + (feetScreenPosition.x - headScreenPosition.x) * .5f;
+                float boxY = headScreenPosition.y + (feetScreenPosition.y - headScreenPosition.y) * .5f;
+
+                // get box size
+                float boxHeightA = Mathf.Abs(headScreenPosition.x - feetScreenPosition.x) / 2;
+                float boxHeightB = Mathf.Abs(headScreenPosition.y - feetScreenPosition.y) / 2;
+
+                float boxWidth = boxHeightB / 1.5f;
+                float boxHeight = boxHeightB;
+
+                if (boxHeightA > boxWidth)
+                {
+                    boxWidth = boxHeightA;
+                    boxHeight = boxHeightA / 1.5f;
+                }
+
+                // get corners
+                Vector3 topLeft = new Vector3(boxX - boxWidth, boxY - boxHeight, 0);
+                Vector3 topRight = new Vector3(boxX + boxWidth, boxY - boxHeight, 0);
+
+                Vector3 bottomLeft = new Vector3(boxX - boxWidth, boxY + boxHeight, 0);
+                Vector3 bottomRight = new Vector3(boxX + boxWidth, boxY + boxHeight, 0);
+
+                // draw box
+                Render.DrawLine(
+                    color,
+                    topLeft,
+                    topRight
+                );
+                Render.DrawLine(
+                    color,
+                    topRight,
+                    bottomRight
+                );
+                Render.DrawLine(
+                    color,
+                    bottomRight,
+                    bottomLeft
+                );
+                Render.DrawLine(
+                    color,
+                    bottomLeft,
+                    topLeft
+                );
             }
         }
     }

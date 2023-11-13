@@ -6,11 +6,21 @@ namespace NetWare
     {
         public void Start()
         {
+            // config
+            Config.Setup();
+
             // start storage updater
             StartCoroutine(Storage.Update());
 
+            // window data
+            int windowWidth = 440;
+            int windowHeight = 320;
+
+            int windowX = 200;
+            int windowY = ((Screen.height / 2) - (windowHeight / 2));
+
             // window position and size
-            Menu.windowRect = new Rect(25, 500, 440, 290);
+            Menu.windowRect = new Rect(windowX, windowY, windowWidth, windowHeight);
         }
 
         public void Update()
@@ -75,7 +85,6 @@ namespace NetWare
                     Combat.Tab();
                     break;
                 case 1:
-
                     Visual.Tab();
                     break;
                 case 2:
@@ -83,6 +92,9 @@ namespace NetWare
                     break;
                 case 3:
                     Exploits.Tab();
+                    break;
+                case 4:
+                    Settings.Tab();
                     break;
                 default:
                     Combat.Tab();

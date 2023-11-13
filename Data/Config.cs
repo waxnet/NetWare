@@ -1,78 +1,143 @@
-﻿namespace NetWare
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace NetWare
 {
     public class Config
     {
-        // combat
-        public static class Combat
+        private static readonly string configFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/NetWare/configs";
+        public static List<string> configList = new List<string>();
+        
+        private static Dictionary<string, string> config = new Dictionary<string, string>()
         {
-            public static class SilentAim
+            // combat
+            ["combat.silentaim.enabled"] = "false",
+            ["combat.silentaim.checkfov"] = "true",
+            ["combat.silentaim.dynamicfov"] = "false",
+            ["combat.silentaim.drawfov"] = "true",
+            ["combat.silentaim.fovsize"] = "200",
+
+            ["combat.weapons.norecoil"] = "false",
+            ["combat.weapons.infiniteammo"] = "false",
+            ["combat.weapons.rapidfire"] = "false",
+
+            // visual
+            ["visual.esp.tracers"] = "false",
+            ["visual.esp.skeleton"] = "false",
+            ["visual.esp.boxes"] = "false",
+            ["visual.esp.nametags"] = "false",
+
+            ["visual.camera.customfov"] = "false",
+            ["visual.camera.customfovamount"] = "100",
+
+            // movement
+            ["movement.speed.speed"] = "false",
+            ["movement.speed.speedamount"] = "5",
+
+            ["movement.fly.fly"] = "false",
+            ["movement.fly.helicopter"] = "false",
+
+            // exploits
+            ["exploits.player.godmode"] = "false",
+            ["exploits.player.instantland"] = "false",
+            ["exploits.player.infinitematerials"] = "false",
+
+            ["exploits.other.autoplay"] = "false",
+
+            ["exploits.world.buildingspam"] = "false",
+            ["exploits.world.rigspam"] = "false",
+            ["exploits.world.instantbreak"] = "false",
+        };
+
+        // setup
+        public static void Setup()
+        {
+            if (!Directory.Exists(configFolder))
             {
-                public static bool enabled = false;
-                public static bool checkFov = true;
-                public static float fovSize = 200;
+                Directory.CreateDirectory(configFolder);
             }
 
-            public static class Weapons
+            foreach (string file in Directory.GetFiles(configFolder))
             {
-                public static bool noRecoil = false;
-                public static bool infiniteAmmo = false;
-                public static bool rapidFire = false;
+                string fileName = file.Split(new string[] { "\\" }, StringSplitOptions.None).Last().Replace(".nwc", "");
+
+                configList.Add(fileName);
             }
         }
 
-        // visual
-        public static class Visual
+        // load, save and delete
+        public static void Load(string configName)
         {
-            public static class ESP
-            {
-                public static bool tracers = false;
-                public static bool nametags = false;
-                public static bool skeleton = false;
-            }
+            string configPath = Path.Combine(configFolder, configName + ".nwc");
 
-            public static class Camera
+            if (File.Exists(configPath))
             {
-                public static bool customFov = false;
-                public static float customFovAmount = 100;
+                string[] packedContent = File.ReadAllText(configPath).Split(new string[] { "\n" }, StringSplitOptions.None);
+
+                foreach (string packedData in packedContent)
+                {
+                    string[] unpackedData = packedData.Split(new string[] { " " }, StringSplitOptions.None);
+
+                    if (unpackedData.Length == 2)
+                    {
+                        config[unpackedData[0]] = unpackedData[1];
+                    }
+                }
             }
         }
 
-        // movement
-        public static class Movement
+        public static void Save(string configName)
         {
-            public static class Speed
+            string configPath = Path.Combine(configFolder, configName + ".nwc");
+            string packedConfig = "";
+
+            foreach (KeyValuePair<string, string> data in config)
             {
-                public static bool speed = false;
-                public static float speedAmount = 5;
+                packedConfig += (data.Key + " " + data.Value + "\n");
             }
 
-            public static class Fly
+            File.WriteAllText(configPath, packedConfig);
+
+            if (!configList.Contains(configName))
             {
-                public static bool fly = false;
-                public static bool helicopter = false;
+                configList.Add(configName);
             }
         }
 
-        // exploits
-        public static class Exploits
+        public static void Delete(string configName)
         {
-            public static class Player
-            {
-                public static bool godmode = false;
-                public static bool instantLand = false;
-            }
+            string configPath = Path.Combine(configFolder, configName + ".nwc");
 
-            public static class Other
-            {
-                public static bool autoPlay = false;
-            }
+            File.Delete(configPath);
 
-            public static class World
+            if (configList.Contains(configName))
             {
-                public static bool buildingSpam = false;
-                public static bool rigSpam = false;
-                public static bool instantBreak = false;
+                configList.Remove(configName);
             }
+        }
+
+        // booleans
+        public static bool GetBool(string key)
+        {
+            return bool.Parse(config[key]);
+        }
+
+        public static void SetBool(string key, bool value)
+        {
+            config[key] = value.ToString();
+        }
+
+        // integers
+        public static float GetFloat(string key)
+        {
+            return float.Parse(config[key]);
+        }
+
+        public static void SetFloat(string key, float value)
+        {
+            config[key] = value.ToString();
         }
     }
 }

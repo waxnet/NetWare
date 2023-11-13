@@ -8,7 +8,7 @@ namespace NetWare
         public static Rect windowRect;
         public static bool displayWindow = true;
 
-        public static string[] tabs = { "Combat", "Visual", "Movement", "Exploits" };
+        public static string[] tabs = { "Combat", "Visual", "Movement", "Exploits", "Settings" };
         public static int currentTab = 0;
 
         public static bool isSectionOpen = false;
@@ -79,6 +79,15 @@ namespace NetWare
 
             // create slider and return new value
             return GUILayout.HorizontalSlider(value, minimum, maximum);
+        }
+
+        public static string NewTextField(string text)
+        {
+            // set text field style
+            GUIStyle textFieldStyle = new GUIStyle("Box") { fontSize = 12 };
+
+            // create textfield and return new value
+            return GUILayout.TextField(text, textFieldStyle);
         }
     }
 }
