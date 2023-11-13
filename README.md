@@ -37,6 +37,8 @@ by passing "Loader" as the class name and "Load" as the method name.
       + Silent Aim
             - Enabled
             - Check FOV
+            - Dynamic Fov
+            - Draw Fov
             - FOV Size
       + Weapons
             - No Recoil
@@ -46,8 +48,9 @@ by passing "Loader" as the class name and "Load" as the method name.
 • Visual
       + ESP
             - Tracers
-            - Nametags
+            - Boxes
             - Skeleton
+            - Nametags
       + Camera
             - Custom FOV (toggle)
             - Custom FOV Amount
@@ -64,6 +67,7 @@ by passing "Loader" as the class name and "Load" as the method name.
       + Player
             - Godmode
             - Instant Land
+            - Infinite Materials
       + Other
             - Auto Play
       + Locker
