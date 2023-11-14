@@ -24,8 +24,8 @@
 
 ### <p align="center">🔑 Usage 🔑</p>
 <p align="center"><i><b>
-To inject NetWare you can use <a href="https://github.com/warbler/SharpMonoInjector">SharpMonoInjector</a>
-by passing "Loader" as the class name and "Load" as the method name.
+After you've downloaded and extracted the latest release of NetWare, open 1v1.LOL
+and run "inject.cmd" to load NetWare.
 </b></i></p>
 
 -----
