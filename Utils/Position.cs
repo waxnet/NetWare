@@ -20,7 +20,7 @@ namespace NetWare
             return (screenPosition.x >= 0 && screenPosition.x <= Screen.width) && (screenPosition.y >= 0 && screenPosition.y <= Screen.height) && (screenPosition.z > 0);
         }
 		
-		public static bool IsBehindCamera(Vector3 screenPosition)
+	public static bool IsBehindCamera(Vector3 screenPosition)
         {
             // check if screen position is in front of the camera
             return (screenPosition.z > 0);
