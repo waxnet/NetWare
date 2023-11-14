@@ -8,7 +8,7 @@ namespace NetWare
         {
             Animator playerAnimator = playerController.GetComponent<Animator>();
 
-            return playerAnimator.GetBoneTransform(HumanBodyBones.UpperChest).transform.position;
+            return playerAnimator.GetBoneTransform(HumanBodyBones.Head).transform.position;
         }
 
         public static Vector3 GetHipPosition(PlayerController playerController)

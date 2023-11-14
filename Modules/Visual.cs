@@ -129,7 +129,7 @@ namespace NetWare
             Vector3 playerScreenPosition = Position.ToScreen(Players.GetHipPosition(playerController));
 
             // check if player is on screen
-            if (Position.IsOnScreen(playerScreenPosition))
+            if (!Position.IsBehindCamera(playerScreenPosition))
             {
                 // draw tracer
                 Render.DrawLine(
@@ -148,7 +148,7 @@ namespace NetWare
             Vector3 playerHeadScreenPosition = Position.ToScreen(playerHeadWorldPosition);
 
             // check if player is on screen
-            if (Position.IsOnScreen(playerHeadScreenPosition))
+            if (!Position.IsBehindCamera(playerHeadScreenPosition))
             {
                 // get name and name size
                 string playerName = playerController.MFOHGDFOEHJ.DAGNIMBJDNP;
@@ -221,7 +221,7 @@ namespace NetWare
                     Vector3 originPosition = Position.ToScreen(playerAnimator.GetBoneTransform(originBone).transform.position);
                     Vector3 destinationPosition = Position.ToScreen(playerAnimator.GetBoneTransform(destinationBone).transform.position);
 
-                    if (Position.IsOnScreen(originPosition) && Position.IsOnScreen(destinationPosition))
+                    if (!Position.IsBehindCamera(originPosition) && !Position.IsBehindCamera(destinationPosition))
                     {
                         Render.DrawLine(color, originPosition, destinationPosition);
                     }
@@ -236,7 +236,7 @@ namespace NetWare
                     Vector3 originPosition = Position.ToScreen(playerAnimator.GetBoneTransform(originBone).transform.position);
                     Vector3 destinationPosition = Position.ToScreen(playerAnimator.GetBoneTransform(destinationBone).transform.position);
 
-                    if (Position.IsOnScreen(originPosition) && Position.IsOnScreen(destinationPosition))
+                    if (!Position.IsBehindCamera(originPosition) && !Position.IsBehindCamera(destinationPosition))
                     {
                         Render.DrawLine(color, originPosition, destinationPosition);
                     }
@@ -249,7 +249,7 @@ namespace NetWare
                     Vector3 originPosition = Position.ToScreen(playerAnimator.GetBoneTransform(originBone).transform.position);
                     Vector3 destinationPosition = Position.ToScreen(playerAnimator.GetBoneTransform(destinationBone).transform.position);
 
-                    if (Position.IsOnScreen(originPosition) && Position.IsOnScreen(destinationPosition))
+                    if (!Position.IsBehindCamera(originPosition) && !Position.IsBehindCamera(destinationPosition))
                     {
                         Render.DrawLine(color, originPosition, destinationPosition);
                     }
@@ -264,7 +264,7 @@ namespace NetWare
                     Vector3 originPosition = Position.ToScreen(playerAnimator.GetBoneTransform(originBone).transform.position);
                     Vector3 destinationPosition = Position.ToScreen(playerAnimator.GetBoneTransform(destinationBone).transform.position);
 
-                    if (Position.IsOnScreen(originPosition) && Position.IsOnScreen(destinationPosition))
+                    if (!Position.IsBehindCamera(originPosition) && !Position.IsBehindCamera(destinationPosition))
                     {
                         Render.DrawLine(color, originPosition, destinationPosition);
                     }
@@ -277,7 +277,7 @@ namespace NetWare
                     Vector3 originPosition = Position.ToScreen(playerAnimator.GetBoneTransform(originBone).transform.position);
                     Vector3 destinationPosition = Position.ToScreen(playerAnimator.GetBoneTransform(destinationBone).transform.position);
 
-                    if (Position.IsOnScreen(originPosition) && Position.IsOnScreen(destinationPosition))
+                    if (!Position.IsBehindCamera(originPosition) && !Position.IsBehindCamera(destinationPosition))
                     {
                         Render.DrawLine(color, originPosition, destinationPosition);
                     }
@@ -299,7 +299,7 @@ namespace NetWare
             Vector3 feetScreenPosition = Position.ToScreen(feetWorldPosition);
 
             // check if player is on screen
-            if (Position.IsOnScreen(headScreenPosition) && Position.IsOnScreen(feetScreenPosition))
+            if (!Position.IsBehindCamera(headScreenPosition) && !Position.IsBehindCamera(feetScreenPosition))
             {
                 // get box position
                 float boxX = headScreenPosition.x + (feetScreenPosition.x - headScreenPosition.x) * .5f;
