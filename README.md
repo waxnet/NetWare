@@ -34,11 +34,18 @@ and run "inject.cmd" to load NetWare.
 
 ```
 • Combat
+      + Soft Aim
+            - Enabled
+            - Check FOV
+            - Draw Fov
+            - Dynamic Fov
+            - FOV Size
+            - Smoothing
       + Silent Aim
             - Enabled
             - Check FOV
-            - Dynamic Fov
             - Draw Fov
+            - Dynamic Fov
             - FOV Size
       + Weapons
             - No Recoil
@@ -80,6 +87,11 @@ and run "inject.cmd" to load NetWare.
             - Building Spam
             - Rig Spam
             - Instant Break
+• Settings
+      + Config Manager
+            - Save
+            - Delete
+      + Config Loader
 ```
 
 -----
