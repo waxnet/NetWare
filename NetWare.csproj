@@ -44,7 +44,6 @@
     <Compile Include="Utils\Access.cs" />
     <Compile Include="Entities\LocalPlayer.cs" />
     <Compile Include="Utils\Menu.cs" />
-    <Compile Include="Utils\Mouse.cs" />
     <Compile Include="Utils\Network.cs" />
     <Compile Include="Entities\Players.cs" />
     <Compile Include="Utils\Position.cs" />
@@ -56,7 +55,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\1v1.dll</HintPath>
     </Reference>
-    <Reference Include="Photon3Unity3D, Version=4.1.6.24, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="PhotonRealtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\PhotonRealtime.dll</HintPath>

@@ -13,9 +13,10 @@ namespace NetWare
                 // speed
                 if (Config.GetBool("movement.speed.speed"))
                 {
-                    playerController.KHHDLLIIKOE = Config.GetInt("movement.speed.speedamount");
-                } else {
-                    playerController.KHHDLLIIKOE = 1;
+                    playerController.PDEBCCHOHIA = Config.GetFloat("movement.speed.speedamount");
+                } else
+                {
+                    playerController.PDEBCCHOHIA = 1;
                 }
 
                 // fly
@@ -27,7 +28,8 @@ namespace NetWare
                     {
                         playerController.gameObject.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
                     }
-                } else {
+                } else
+                {
                     playerController.SetGodMode(false);
                 }
             }
@@ -45,11 +47,11 @@ namespace NetWare
                     "Enabled"
                 )
             );
-            Config.SetInt(
+            Config.SetFloat(
                 "movement.speed.speedamount",
                 Menu.NewSlider(
                     "Amount",
-                    Config.GetInt("movement.speed.speedamount"),
+                    Config.GetFloat("movement.speed.speedamount"),
                     1,
                     10
                 )

@@ -11,11 +11,15 @@ namespace NetWare
             HumanBodyBones.Head
         };
 
-        public static HumanBodyBones[] arms = {
-            HumanBodyBones.RightHand,
-            HumanBodyBones.RightLowerArm,
-            HumanBodyBones.RightUpperArm,
+        public static HumanBodyBones[] rightArm = {
+            HumanBodyBones.UpperChest,
             HumanBodyBones.RightShoulder,
+            HumanBodyBones.RightUpperArm,
+            HumanBodyBones.RightLowerArm,
+            HumanBodyBones.RightHand
+        };
+
+        public static HumanBodyBones[] leftArm = {
             HumanBodyBones.UpperChest,
             HumanBodyBones.LeftShoulder,
             HumanBodyBones.LeftUpperArm,
@@ -23,14 +27,18 @@ namespace NetWare
             HumanBodyBones.LeftHand
         };
 
-        public static HumanBodyBones[] legs = {
+        public static HumanBodyBones[] rightLeg = {
             HumanBodyBones.RightFoot,
             HumanBodyBones.RightLowerLeg,
             HumanBodyBones.RightUpperLeg,
-            HumanBodyBones.Hips,
-            HumanBodyBones.LeftUpperLeg,
+            HumanBodyBones.Hips
+        };
+
+        public static HumanBodyBones[] leftLeg = {
+            HumanBodyBones.LeftFoot,
             HumanBodyBones.LeftLowerLeg,
-            HumanBodyBones.LeftFoot
+            HumanBodyBones.LeftUpperLeg,
+            HumanBodyBones.Hips
         };
 
         // full body

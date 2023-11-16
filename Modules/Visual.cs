@@ -16,7 +16,7 @@ namespace NetWare
                 if (cameraManager != null)
                 {
                     cameraManager.ResetZoomStateInstant();
-                    Camera.main.fieldOfView = Config.GetInt("visual.camera.customfovamount");
+                    Camera.main.fieldOfView = Config.GetFloat("visual.camera.customfovamount");
                 }
             } else if (resetFOV)
             {
@@ -107,11 +107,11 @@ namespace NetWare
                     "Custom FOV"
                 )
             );
-            Config.SetInt(
+            Config.SetFloat(
                 "visual.camera.customfovamount",
                 Menu.NewSlider(
                     "Custom FOV Amount",
-                    Config.GetInt("visual.camera.customfovamount"),
+                    Config.GetFloat("visual.camera.customfovamount"),
                     20,
                     150
                 )
@@ -136,6 +136,69 @@ namespace NetWare
                     Players.GetPlayerTeamColor(playerController),
                     Render.screenCenterBottom,
                     playerScreenPosition
+                );
+            }
+        }
+
+        private static void DrawPlayerNametag(PlayerController playerController, Color backgroundColor)
+        {
+            // get positions
+            Vector3 playerHeadWorldPosition = Players.GetHeadPosition(playerController);
+            playerHeadWorldPosition.y += .2f;
+            Vector3 playerHeadScreenPosition = Position.ToScreen(playerHeadWorldPosition);
+
+            // check if player is on screen
+            if (!Position.IsBehindCamera(playerHeadScreenPosition))
+            {
+                // get name and name size
+                string playerName = playerController.MFOHGDFOEHJ.DAGNIMBJDNP;
+                if (playerController.POJDIMMBOCO)
+                {
+                    playerName += " (BOT)";
+                }
+                Vector2 playerNameSize = new GUIStyle().CalcSize(new GUIContent(playerName));
+
+                // draw name box
+                float boxX = playerHeadScreenPosition.x;
+                float boxY = (playerHeadScreenPosition.y - (playerNameSize.y + 5));
+                float boxSizeX = (playerNameSize.x + 10);
+                float boxSizeY = (playerNameSize.y + 5);
+
+                Render.DrawBox(
+                    backgroundColor,
+                    new Vector2(
+                        boxX,
+                        boxY
+                    ),
+                    boxSizeX,
+                    boxSizeY
+                );
+
+                // draw team line
+                boxSizeX /= 2;
+                boxSizeY /= 2;
+
+                Render.DrawLine(
+                    Players.GetPlayerTeamColor(playerController),
+                    new Vector3(
+                        boxX + boxSizeX,
+                        boxY - boxSizeY
+                    ),
+                    new Vector3(
+                        boxX - boxSizeX,
+                        boxY - boxSizeY
+                    )
+                );
+
+                // draw name
+                GUI.Label(
+                    new Rect(
+                        (playerHeadScreenPosition.x - (playerNameSize.x / 2)),
+                        (playerHeadScreenPosition.y - (playerNameSize.y * 2)),
+                        playerNameSize.x,
+                        (playerNameSize.y * 1.5f)
+                    ),
+                    playerName
                 );
             }
         }
@@ -165,10 +228,23 @@ namespace NetWare
                 }
 
                 // arms
-                for (int index = 0; (index + 1) != Skeleton.arms.Length; index++)
+                for (int index = 0; (index + 1) != Skeleton.rightArm.Length; index++)
                 {
-                    HumanBodyBones originBone = Skeleton.arms[index];
-                    HumanBodyBones destinationBone = Skeleton.arms[index + 1];
+                    HumanBodyBones originBone = Skeleton.rightArm[index];
+                    HumanBodyBones destinationBone = Skeleton.rightArm[index + 1];
+
+                    Vector3 originPosition = Position.ToScreen(playerAnimator.GetBoneTransform(originBone).transform.position);
+                    Vector3 destinationPosition = Position.ToScreen(playerAnimator.GetBoneTransform(destinationBone).transform.position);
+
+                    if (!Position.IsBehindCamera(originPosition) && !Position.IsBehindCamera(destinationPosition))
+                    {
+                        Render.DrawLine(color, originPosition, destinationPosition);
+                    }
+                }
+                for (int index = 0; (index + 1) != Skeleton.leftArm.Length; index++)
+                {
+                    HumanBodyBones originBone = Skeleton.leftArm[index];
+                    HumanBodyBones destinationBone = Skeleton.leftArm[index + 1];
 
                     Vector3 originPosition = Position.ToScreen(playerAnimator.GetBoneTransform(originBone).transform.position);
                     Vector3 destinationPosition = Position.ToScreen(playerAnimator.GetBoneTransform(destinationBone).transform.position);
@@ -180,10 +256,23 @@ namespace NetWare
                 }
 
                 // legs
-                for (int index = 0; (index + 1) != Skeleton.legs.Length; index++)
+                for (int index = 0; (index + 1) != Skeleton.rightLeg.Length; index++)
                 {
-                    HumanBodyBones originBone = Skeleton.legs[index];
-                    HumanBodyBones destinationBone = Skeleton.legs[index + 1];
+                    HumanBodyBones originBone = Skeleton.rightLeg[index];
+                    HumanBodyBones destinationBone = Skeleton.rightLeg[index + 1];
+
+                    Vector3 originPosition = Position.ToScreen(playerAnimator.GetBoneTransform(originBone).transform.position);
+                    Vector3 destinationPosition = Position.ToScreen(playerAnimator.GetBoneTransform(destinationBone).transform.position);
+
+                    if (!Position.IsBehindCamera(originPosition) && !Position.IsBehindCamera(destinationPosition))
+                    {
+                        Render.DrawLine(color, originPosition, destinationPosition);
+                    }
+                }
+                for (int index = 0; (index + 1) != Skeleton.leftLeg.Length; index++)
+                {
+                    HumanBodyBones originBone = Skeleton.leftLeg[index];
+                    HumanBodyBones destinationBone = Skeleton.leftLeg[index + 1];
 
                     Vector3 originPosition = Position.ToScreen(playerAnimator.GetBoneTransform(originBone).transform.position);
                     Vector3 destinationPosition = Position.ToScreen(playerAnimator.GetBoneTransform(destinationBone).transform.position);
@@ -256,69 +345,6 @@ namespace NetWare
                     color,
                     bottomLeft,
                     topLeft
-                );
-            }
-        }
-
-        private static void DrawPlayerNametag(PlayerController playerController, Color backgroundColor)
-        {
-            // get positions
-            Vector3 playerHeadWorldPosition = Players.GetHeadPosition(playerController);
-            playerHeadWorldPosition.y += .2f;
-            Vector3 playerHeadScreenPosition = Position.ToScreen(playerHeadWorldPosition);
-
-            // check if player is on screen
-            if (!Position.IsBehindCamera(playerHeadScreenPosition))
-            {
-                // get name and name size
-                string playerName = playerController.KLIBLMFDGDJ.CMFMIAGKLDB;
-                if (playerController.FJLDBODHGKB)
-                {
-                    playerName += " (BOT)";
-                }
-                Vector2 playerNameSize = new GUIStyle().CalcSize(new GUIContent(playerName));
-
-                // draw name box
-                float boxX = playerHeadScreenPosition.x;
-                float boxY = (playerHeadScreenPosition.y - (playerNameSize.y + 5));
-                float boxSizeX = (playerNameSize.x + 10);
-                float boxSizeY = (playerNameSize.y + 5);
-
-                Render.DrawBox(
-                    backgroundColor,
-                    new Vector2(
-                        boxX,
-                        boxY
-                    ),
-                    boxSizeX,
-                    boxSizeY
-                );
-
-                // draw team line
-                boxSizeX /= 2;
-                boxSizeY /= 2;
-
-                Render.DrawLine(
-                    Players.GetPlayerTeamColor(playerController),
-                    new Vector3(
-                        boxX + boxSizeX,
-                        boxY - boxSizeY
-                    ),
-                    new Vector3(
-                        boxX - boxSizeX,
-                        boxY - boxSizeY
-                    )
-                );
-
-                // draw name
-                GUI.Label(
-                    new Rect(
-                        (playerHeadScreenPosition.x - (playerNameSize.x / 2)),
-                        (playerHeadScreenPosition.y - (playerNameSize.y * 2)),
-                        playerNameSize.x,
-                        (playerNameSize.y * 1.5f)
-                    ),
-                    playerName
                 );
             }
         }
