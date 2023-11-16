@@ -71,14 +71,14 @@ namespace NetWare
             return GUILayout.Toggle(value, text, toggleStyle);
         }
 
-        public static float NewSlider(string text, float value, float minimum, float maximum)
+        public static int NewSlider(string text, int value, float minimum, float maximum)
         {
             // slider title and title style
             GUIStyle labelStyle = new GUIStyle("Box") { fontSize = 12 };
-            GUILayout.Label(text, labelStyle);
+            GUILayout.Label(text + " : " + value.ToString(), labelStyle);
 
             // create slider and return new value
-            return GUILayout.HorizontalSlider(value, minimum, maximum);
+            return (int)Math.Round(GUILayout.HorizontalSlider(value, minimum, maximum));
         }
 
         public static string NewTextField(string text)
