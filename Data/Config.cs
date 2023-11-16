@@ -13,6 +13,13 @@ namespace NetWare
         private static Dictionary<string, string> config = new Dictionary<string, string>()
         {
             // combat
+            ["combat.softaim.enabled"] = "false",
+            ["combat.softaim.checkfov"] = "true",
+            ["combat.softaim.dynamicfov"] = "false",
+            ["combat.softaim.drawfov"] = "true",
+            ["combat.softaim.fovsize"] = "200",
+            ["combat.softaim.smoothing"] = "5",
+
             ["combat.silentaim.enabled"] = "false",
             ["combat.silentaim.checkfov"] = "true",
             ["combat.silentaim.dynamicfov"] = "false",
@@ -130,12 +137,12 @@ namespace NetWare
         }
 
         // integers
-        public static float GetFloat(string key)
+        public static int GetInt(string key)
         {
-            return float.Parse(config[key]);
+            return int.Parse(config[key]);
         }
 
-        public static void SetFloat(string key, float value)
+        public static void SetInt(string key, int value)
         {
             config[key] = value.ToString();
         }

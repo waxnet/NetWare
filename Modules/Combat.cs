@@ -7,6 +7,37 @@ namespace NetWare
     {
         public static void Execute()
         {
+            if (Input.GetMouseButton(1))
+            {
+                // soft aim
+                if (Config.GetBool("combat.softaim.enabled"))
+                {
+                    PlayerController playerController;
+
+                    if (Config.GetBool("combat.softaim.checkfov"))
+                    {
+                        if (Config.GetBool("combat.softaim.dynamicfov"))
+                        {
+                            playerController = GetBestPlayerInFOV(Camera.main.fieldOfView + 80);
+                        } else {
+                            playerController = GetBestPlayerInFOV(Config.GetInt("combat.softaim.fovsize"));
+                        }
+                    } else {
+                        playerController = GetBestPlayer();
+                    }
+
+                    if (playerController != null)
+                    {
+                        Vector3 playerScreenPosition = Position.ToScreen(Players.GetHeadPosition(playerController));
+
+                        if (Position.IsOnScreen(playerScreenPosition))
+                        {
+                            Mouse.MoveTo(playerScreenPosition, Config.GetInt("combat.softaim.smoothing"));
+                        }
+                    }
+                }
+            }
+
             if (Input.GetMouseButton(0))
             {
                 // silent aim
@@ -20,7 +51,7 @@ namespace NetWare
                         {
                             playerController = GetBestPlayerInFOV(Camera.main.fieldOfView + 80);
                         } else {
-                            playerController = GetBestPlayerInFOV(Config.GetFloat("combat.silentaim.fovsize"));
+                            playerController = GetBestPlayerInFOV(Config.GetInt("combat.silentaim.fovsize"));
                         }
                     } else {
                         playerController = GetBestPlayer();
@@ -40,10 +71,10 @@ namespace NetWare
 
                 if (Config.GetBool("combat.weapons.infiniteammo"))
                 {
-                    WeaponsController weaponsController = LocalPlayer.GetWeaponsController();
+                    WeaponModel weaponModel = LocalPlayer.GetWeaponModel();
 
-                    weaponsController?.CKDFKAJOAGF?.SetCurrentAmmoAmount(999);
-                    weaponsController?.CKDFKAJOAGF?.SetCurrentMagazineAmount(999);
+                    weaponModel?.SetCurrentAmmoAmount(999);
+                    weaponModel?.SetCurrentMagazineAmount(999);
                 }
 
                 if (Config.GetBool("combat.weapons.rapidfire"))
@@ -72,13 +103,29 @@ namespace NetWare
 
         public static void Draw()
         {
+            // soft aim
+            if (Config.GetBool("combat.softaim.enabled") && Config.GetBool("combat.softaim.checkfov") && Config.GetBool("combat.softaim.drawfov"))
+            {
+                Color fovColor = new Color(1, .3f, .3f, 1);
+
+                if (Config.GetBool("combat.softaim.dynamicfov"))
+                {
+                    Render.DrawCircle(fovColor, Render.screenCenter, Camera.main.fieldOfView + 80);
+                } else {
+                    Render.DrawCircle(fovColor, Render.screenCenter, Config.GetInt("combat.softaim.fovsize"));
+                }
+            }
+
+            // silent aim
             if (Config.GetBool("combat.silentaim.enabled") && Config.GetBool("combat.silentaim.checkfov") && Config.GetBool("combat.silentaim.drawfov"))
             {
+                Color fovColor = new Color(.3f, .3f, 1, 1);
+
                 if (Config.GetBool("combat.silentaim.dynamicfov"))
                 {
-                    Render.DrawCircle(Color.white, Render.screenCenter, Camera.main.fieldOfView + 80);
+                    Render.DrawCircle(fovColor, Render.screenCenter, Camera.main.fieldOfView + 80);
                 } else {
-                    Render.DrawCircle(Color.white, Render.screenCenter, Config.GetFloat("combat.silentaim.fovsize"));
+                    Render.DrawCircle(fovColor, Render.screenCenter, Config.GetInt("combat.silentaim.fovsize"));
                 }
             }
         }
@@ -86,6 +133,56 @@ namespace NetWare
         public static void Tab()
         {
             Menu.Begin();
+
+            Menu.NewSection("Soft Aim");
+            Config.SetBool(
+                "combat.softaim.enabled",
+                Menu.NewToggle(
+                    Config.GetBool("combat.softaim.enabled"),
+                    "Enabled"
+                )
+            );
+            Config.SetBool(
+                "combat.softaim.checkfov",
+                Menu.NewToggle(
+                    Config.GetBool("combat.softaim.checkfov"),
+                    "Check FOV"
+                )
+            );
+            Config.SetBool(
+                "combat.softaim.drawfov",
+                Menu.NewToggle(
+                    Config.GetBool("combat.softaim.drawfov"),
+                    "Draw FOV"
+                )
+            );
+            Config.SetBool(
+                "combat.softaim.dynamicfov",
+                Menu.NewToggle(
+                    Config.GetBool("combat.softaim.dynamicfov"),
+                    "Dynamic FOV"
+                )
+            );
+            Config.SetInt(
+                "combat.softaim.fovsize",
+                Menu.NewSlider(
+                    "FOV Size",
+                    Config.GetInt("combat.softaim.fovsize"),
+                    10,
+                    500
+                )
+            );
+            Config.SetInt(
+                "combat.softaim.smoothing",
+                Menu.NewSlider(
+                    "Smoothing",
+                    Config.GetInt("combat.softaim.smoothing"),
+                    5,
+                    10
+                )
+            );
+
+            Menu.Separate();
 
             Menu.NewSection("Silent Aim");
             Config.SetBool(
@@ -96,17 +193,17 @@ namespace NetWare
                 )
             );
             Config.SetBool(
-                "combat.silentaim.drawfov",
-                Menu.NewToggle(
-                    Config.GetBool("combat.silentaim.drawfov"),
-                    "Draw FOV"
-                )
-            );
-            Config.SetBool(
                 "combat.silentaim.checkfov",
                 Menu.NewToggle(
                     Config.GetBool("combat.silentaim.checkfov"),
                     "Check FOV"
+                )
+            );
+            Config.SetBool(
+                "combat.silentaim.drawfov",
+                Menu.NewToggle(
+                    Config.GetBool("combat.silentaim.drawfov"),
+                    "Draw FOV"
                 )
             );
             Config.SetBool(
@@ -116,17 +213,15 @@ namespace NetWare
                     "Dynamic FOV"
                 )
             );
-            Config.SetFloat(
+            Config.SetInt(
                 "combat.silentaim.fovsize",
                 Menu.NewSlider(
                     "FOV Size",
-                    Config.GetFloat("combat.silentaim.fovsize"),
-                    25,
+                    Config.GetInt("combat.silentaim.fovsize"),
+                    10,
                     500
                 )
             );
-
-            Menu.Separate();
 
             Menu.NewSection("Weapons");
             Config.SetBool(
@@ -171,14 +266,14 @@ namespace NetWare
 
                     if (Position.IsOnScreen(playerHeadScreenPosition))
                     {
-                        float distance = new Vector2(
+                        float screenDistance = new Vector2(
                             playerHeadScreenPosition.x - Render.screenCenter.x,
                             playerHeadScreenPosition.y - Render.screenCenter.y
                         ).magnitude;
 
-                        if (distance < lastDistance)
+                        if (screenDistance < lastDistance)
                         {
-                            lastDistance = distance;
+                            lastDistance = screenDistance;
                             bestPlayerController = playerController;
                         }
                     }
@@ -202,14 +297,13 @@ namespace NetWare
 
             if (localPlayer != null)
             {
-                Vector3 origin = localPlayer.GLBFEGDMAPI;
+                Vector3 origin = localPlayer.IMCKFPJJOFH;
 
                 foreach (PlayerController playerController in Storage.players)
                 {
                     if (!playerController.IsMine() && Players.IsPlayerAlive(playerController) && Skeleton.HasSkeleton(playerController))
                     {
-                        Vector3 playerCenterWorldPosition = playerController.GLBFEGDMAPI;
-                        float distance = (playerCenterWorldPosition - origin).magnitude;
+                        float distance = (playerController.IMCKFPJJOFH - origin).magnitude;
 
                         if (distance < lastDistance)
                         {
