@@ -54,7 +54,7 @@ namespace NetWare
                     10
                 )
             );
-            
+
             Menu.Separate();
 
             Menu.NewSection("Fly");

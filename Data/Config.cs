@@ -34,6 +34,7 @@ namespace NetWare
             ["visual.esp.tracers"] = "false",
             ["visual.esp.skeleton"] = "false",
             ["visual.esp.boxes"] = "false",
+            ["visual.esp.info"] = "false",
             ["visual.esp.nametags"] = "false",
 
             ["visual.camera.customfov"] = "false",

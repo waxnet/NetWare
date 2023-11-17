@@ -57,6 +57,7 @@ and run "inject.cmd" to load NetWare.
             - Tracers
             - Boxes
             - Skeleton
+            - Info
             - Nametags
       + Camera
             - Custom FOV (toggle)

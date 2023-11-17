@@ -18,22 +18,20 @@ namespace NetWare
                     cameraManager.ResetZoomStateInstant();
                     Camera.main.fieldOfView = Config.GetInt("visual.camera.customfovamount");
                 }
-            } else if (resetFOV)
-            {
+            } else if (resetFOV) {
                 resetFOV = false;
-
                 Camera.main.fieldOfView = 60;
             }
         }
 
         public static void Draw()
         {
-            // player esp
+            // esp
             if (Config.GetBool("visual.esp.tracers") || Config.GetBool("visual.esp.skeleton") || Config.GetBool("visual.esp.boxes") || Config.GetBool("visual.esp.nametags"))
             {
                 foreach (PlayerController playerController in Storage.players)
                 {
-                    if (!playerController.IsMine() && Players.IsPlayerAlive(playerController) && Skeleton.HasSkeleton(playerController))
+                    if (Players.IsPlayerValid(playerController))
                     {
                         // tracers
                         if (Config.GetBool("visual.esp.tracers"))
@@ -51,6 +49,12 @@ namespace NetWare
                         if (Config.GetBool("visual.esp.boxes"))
                         {
                             DrawPlayerBox(playerController);
+                        }
+
+                        // info
+                        if (Config.GetBool("visual.esp.info"))
+                        {
+                            DrawPlayerInfo(playerController, Color.black);
                         }
 
                         // nametags
@@ -90,6 +94,13 @@ namespace NetWare
                 )
             );
             Config.SetBool(
+                "visual.esp.info",
+                Menu.NewToggle(
+                    Config.GetBool("visual.esp.info"),
+                    "Info"
+                )
+            );
+            Config.SetBool(
                 "visual.esp.nametags",
                 Menu.NewToggle(
                     Config.GetBool("visual.esp.nametags"),
@@ -126,16 +137,16 @@ namespace NetWare
         private static void DrawPlayerTracer(PlayerController playerController)
         {
             // get position
-            Vector3 playerScreenPosition = Position.ToScreen(Players.GetHipPosition(playerController));
+            Vector3 screenPosition = Position.ToScreen(Players.GetHipPosition(playerController));
 
             // check if player is on screen
-            if (!Position.IsBehindCamera(playerScreenPosition))
+            if (!Position.IsBehindCamera(screenPosition))
             {
                 // draw tracer
                 Render.DrawLine(
                     Players.GetPlayerTeamColor(playerController),
                     Render.screenCenterBottom,
-                    playerScreenPosition
+                    screenPosition
                 );
             }
         }
@@ -143,11 +154,11 @@ namespace NetWare
         private static void DrawPlayerSkeleton(PlayerController playerController)
         {
             // get player animator and color
-            Animator playerAnimator = playerController.GetComponent<Animator>();
+            Animator animator = playerController.GetComponent<Animator>();
             Color color = Players.GetPlayerTeamColor(playerController);
 
             // check if player animator exists
-            if (playerAnimator != null )
+            if (animator != null )
             {
                 // spine
                 for (int index = 0; (index + 1) != Skeleton.spine.Length; index++)
@@ -155,8 +166,8 @@ namespace NetWare
                     HumanBodyBones originBone = Skeleton.spine[index];
                     HumanBodyBones destinationBone = Skeleton.spine[index + 1];
 
-                    Vector3 originPosition = Position.ToScreen(playerAnimator.GetBoneTransform(originBone).transform.position);
-                    Vector3 destinationPosition = Position.ToScreen(playerAnimator.GetBoneTransform(destinationBone).transform.position);
+                    Vector3 originPosition = Position.ToScreen(animator.GetBoneTransform(originBone).transform.position);
+                    Vector3 destinationPosition = Position.ToScreen(animator.GetBoneTransform(destinationBone).transform.position);
 
                     if (!Position.IsBehindCamera(originPosition) && !Position.IsBehindCamera(destinationPosition))
                     {
@@ -170,8 +181,8 @@ namespace NetWare
                     HumanBodyBones originBone = Skeleton.arms[index];
                     HumanBodyBones destinationBone = Skeleton.arms[index + 1];
 
-                    Vector3 originPosition = Position.ToScreen(playerAnimator.GetBoneTransform(originBone).transform.position);
-                    Vector3 destinationPosition = Position.ToScreen(playerAnimator.GetBoneTransform(destinationBone).transform.position);
+                    Vector3 originPosition = Position.ToScreen(animator.GetBoneTransform(originBone).transform.position);
+                    Vector3 destinationPosition = Position.ToScreen(animator.GetBoneTransform(destinationBone).transform.position);
 
                     if (!Position.IsBehindCamera(originPosition) && !Position.IsBehindCamera(destinationPosition))
                     {
@@ -185,8 +196,8 @@ namespace NetWare
                     HumanBodyBones originBone = Skeleton.legs[index];
                     HumanBodyBones destinationBone = Skeleton.legs[index + 1];
 
-                    Vector3 originPosition = Position.ToScreen(playerAnimator.GetBoneTransform(originBone).transform.position);
-                    Vector3 destinationPosition = Position.ToScreen(playerAnimator.GetBoneTransform(destinationBone).transform.position);
+                    Vector3 originPosition = Position.ToScreen(animator.GetBoneTransform(originBone).transform.position);
+                    Vector3 destinationPosition = Position.ToScreen(animator.GetBoneTransform(destinationBone).transform.position);
 
                     if (!Position.IsBehindCamera(originPosition) && !Position.IsBehindCamera(destinationPosition))
                     {
@@ -209,7 +220,7 @@ namespace NetWare
             feetWorldPosition.y -= .2f;
             Vector3 feetScreenPosition = Position.ToScreen(feetWorldPosition);
 
-            // check if player is on screen
+            // check if player is behind camera
             if (!Position.IsBehindCamera(headScreenPosition) && !Position.IsBehindCamera(feetScreenPosition))
             {
                 // get box position
@@ -260,18 +271,97 @@ namespace NetWare
             }
         }
 
+        private static void DrawPlayerInfo(PlayerController playerController, Color backgroundColor)
+        {
+            // get positions
+            Vector3 feetWorldPosition = Players.GetFeetPosition(playerController);
+            feetWorldPosition.y -= .2f;
+            Vector3 feetScreenPosition = Position.ToScreen(feetWorldPosition);
+
+            // check if player is behind camera
+            if (!Position.IsBehindCamera(feetScreenPosition))
+            {
+                // get info
+                string rankXP = "RankXP : " + Players.GetPlayerRankXP(playerController)?.ToString();
+                string distance = "Distance : " + Players.GetPlayerDistance(playerController).ToString("0.0") + "m";
+
+                GUIStyle textStyle = new GUIStyle() { fontSize = 10 };
+                textStyle.normal.textColor = Color.white;
+                Vector2[] sizes = {
+                    textStyle.CalcSize(new GUIContent(rankXP)),
+                    textStyle.CalcSize(new GUIContent(distance))
+                };
+
+                Vector2 biggestSize = new Vector2(0, 0);
+                foreach (Vector2 size in sizes)
+                {
+                    if (size.x > biggestSize.x)
+                    {
+                        biggestSize.x = size.x;
+                    }
+
+                    if (size.y > biggestSize.y)
+                    {
+                        biggestSize.y = size.y;
+                    }
+                }
+
+                // draw info box
+                float boxX = feetScreenPosition.x;
+                float boxY = (feetScreenPosition.y + (biggestSize.y + 5));
+                float boxSizeX = (biggestSize.x + 10);
+                float boxSizeY = ((biggestSize.y * sizes.Length) + 5);
+
+                Render.DrawBox(
+                    backgroundColor,
+                    new Vector2(
+                        boxX,
+                        boxY
+                    ),
+                    boxSizeX,
+                    boxSizeY
+                );
+
+                // draw name
+                int offset = 1;
+
+                GUI.Label(
+                    new Rect(
+                        (feetScreenPosition.x - (biggestSize.x / 2)),
+                        (float)(feetScreenPosition.y + ((biggestSize.y / 2) * offset)),
+                        biggestSize.x,
+                        (biggestSize.y * 1.5f)
+                    ),
+                    rankXP,
+                    textStyle
+                );
+                offset += 2;
+
+                GUI.Label(
+                    new Rect(
+                        (feetScreenPosition.x - (biggestSize.x / 2)),
+                        (float)(feetScreenPosition.y + ((biggestSize.y / 2) * offset)),
+                        biggestSize.x,
+                        (biggestSize.y * 1.5f)
+                    ),
+                    distance,
+                    textStyle
+                );
+            }
+        }
+
         private static void DrawPlayerNametag(PlayerController playerController, Color backgroundColor)
         {
             // get positions
-            Vector3 playerHeadWorldPosition = Players.GetHeadPosition(playerController);
-            playerHeadWorldPosition.y += .2f;
-            Vector3 playerHeadScreenPosition = Position.ToScreen(playerHeadWorldPosition);
+            Vector3 headWorldPosition = Players.GetHeadPosition(playerController);
+            headWorldPosition.y += .22f;
+            Vector3 headScreenPosition = Position.ToScreen(headWorldPosition);
 
             // check if player is on screen
-            if (!Position.IsBehindCamera(playerHeadScreenPosition))
+            if (!Position.IsBehindCamera(headScreenPosition))
             {
                 // get name and name size
-                string playerName = playerController.KLIBLMFDGDJ.CMFMIAGKLDB;
+                string playerName = Players.GetPlayerName(playerController);
                 if (playerController.FJLDBODHGKB)
                 {
                     playerName += " (BOT)";
@@ -279,8 +369,8 @@ namespace NetWare
                 Vector2 playerNameSize = new GUIStyle().CalcSize(new GUIContent(playerName));
 
                 // draw name box
-                float boxX = playerHeadScreenPosition.x;
-                float boxY = (playerHeadScreenPosition.y - (playerNameSize.y + 5));
+                float boxX = headScreenPosition.x;
+                float boxY = ((headScreenPosition.y - playerNameSize.y) + 2);
                 float boxSizeX = (playerNameSize.x + 10);
                 float boxSizeY = (playerNameSize.y + 5);
 
@@ -313,8 +403,8 @@ namespace NetWare
                 // draw name
                 GUI.Label(
                     new Rect(
-                        (playerHeadScreenPosition.x - (playerNameSize.x / 2)),
-                        (playerHeadScreenPosition.y - (playerNameSize.y * 2)),
+                        (headScreenPosition.x - (playerNameSize.x / 2)),
+                        (headScreenPosition.y - (playerNameSize.y * 2) + 7),
                         playerNameSize.x,
                         (playerNameSize.y * 1.5f)
                     ),

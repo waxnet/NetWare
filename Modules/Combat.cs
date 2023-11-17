@@ -23,7 +23,7 @@ namespace NetWare
                             playerController = GetBestPlayerInFOV(Config.GetInt("combat.softaim.fovsize"));
                         }
                     } else {
-                        playerController = GetBestPlayer();
+                        playerController = GetBestPlayerInFOV(Screen.width);
                     }
 
                     if (playerController != null)
@@ -259,7 +259,7 @@ namespace NetWare
 
             foreach (PlayerController playerController in Storage.players)
             {
-                if (!playerController.IsMine() && Players.IsPlayerAlive(playerController) && Skeleton.HasSkeleton(playerController))
+                if (!Players.IsPlayerTeammate(playerController) && Players.IsPlayerValid(playerController))
                 {
                     Vector3 playerHeadWorldPosition = Players.GetHeadPosition(playerController);
                     Vector3 playerHeadScreenPosition = Position.ToScreen(playerHeadWorldPosition);
@@ -301,7 +301,7 @@ namespace NetWare
 
                 foreach (PlayerController playerController in Storage.players)
                 {
-                    if (!playerController.IsMine() && Players.IsPlayerAlive(playerController) && Skeleton.HasSkeleton(playerController))
+                    if (!Players.IsPlayerTeammate(playerController) && Players.IsPlayerValid(playerController))
                     {
                         float distance = (playerController.IMCKFPJJOFH - origin).magnitude;
 
