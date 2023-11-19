@@ -110,4 +110,10 @@ and run "inject.cmd" to load NetWare.
 
 -----
 
+### <p align="center">⚠️ Disclaimer ⚠️</p>
+
+<p align="center"><i><b>This program is meant for educational purposes only.</b></i></p>
+
+-----
+
 ### <p align="center"><a href="https://github.com/waxnet">waxnet</a></p>
