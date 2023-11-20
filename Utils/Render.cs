@@ -5,11 +5,6 @@ namespace NetWare
 
     public class Render : MonoBehaviour
     {
-        public static Vector3 screenCenter = new Vector3((Screen.width / 2), (Screen.height / 2));
-        public static Vector3 screenCenterBottom = new Vector3((Screen.width / 2), Screen.height);
-
-        public static Material overlayMaterial = null;
-        
         public static void DrawLine(Color color, Vector3 origin, Vector3 destination)
         {
             // initialize material
@@ -99,7 +94,12 @@ namespace NetWare
             GL.PopMatrix();
         }
 
-        // internal methods
+        // internal methods and variables
+        public static Vector3 screenCenter = new Vector3((Screen.width / 2), (Screen.height / 2));
+        public static Vector3 screenCenterBottom = new Vector3((Screen.width / 2), Screen.height);
+
+        private static Material overlayMaterial = null;
+
         private static void Init()
         {
             // create materials

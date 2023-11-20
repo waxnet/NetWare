@@ -39,14 +39,16 @@ and run "inject.cmd" to load NetWare.
             - Check FOV
             - Draw Fov
             - Dynamic Fov
-            - FOV Size
-            - Smoothing
+            - FOV Size (10 - 500)
+            - Smoothing (5 - 10)
+            - FOV Color
       + Silent Aim
             - Enabled
             - Check FOV
             - Draw Fov
             - Dynamic Fov
-            - FOV Size
+            - FOV Size (10 - 500)
+            - FOV Color
       + Weapons
             - No Recoil
             - Infinite Ammo
@@ -59,35 +61,39 @@ and run "inject.cmd" to load NetWare.
             - Skeleton
             - Info
             - Nametags
-      + Camera
-            - Custom FOV (toggle)
-            - Custom FOV Amount
+      + FOV Changer
+            - Enabled
+            - Amount (20 - 150)
 
 • Movement
       + Speed
             - Enabled
-            - Speed Amount
+            - Amount (1 - 10)
       + Fly
             - Enabled
-            - Helicopter (funny name for spinbot)
 
 • Exploits
       + Player
             - Godmode
             - Instant Land
             - Infinite Materials
+            - Anti Freeze
       + Other
             - Auto Play
-      + Locker
-            - Unlock Emotes
-            - Unlock Stickers
       + World
+            - Kill All
             - Freeze Players
             - Destroy Buildings
             - Open Crates
             - Building Spam
             - Rig Spam
             - Instant Break
+      + Locker
+            - Unlock Emotes
+            - Unlock Stickers
+            - Skin Changer
+            - Pickaxe Changer
+
 • Settings
       + Config Manager
             - Save

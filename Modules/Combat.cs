@@ -1,4 +1,5 @@
 ﻿using Photon.Pun;
+using System;
 using UnityEngine;
 
 namespace NetWare
@@ -20,7 +21,7 @@ namespace NetWare
                         {
                             playerController = GetBestPlayerInFOV(Camera.main.fieldOfView + 80);
                         } else {
-                            playerController = GetBestPlayerInFOV(Config.GetInt("combat.softaim.fovsize"));
+                            playerController = GetBestPlayerInFOV(Config.GetFloat("combat.softaim.fovsize"));
                         }
                     } else {
                         playerController = GetBestPlayerInFOV(Screen.width);
@@ -32,7 +33,7 @@ namespace NetWare
 
                         if (Position.IsOnScreen(playerScreenPosition))
                         {
-                            Mouse.MoveTo(playerScreenPosition, Config.GetInt("combat.softaim.smoothing"));
+                            Mouse.MoveTo(playerScreenPosition, (int)Math.Round(Config.GetFloat("combat.softaim.smoothing"), 0));
                         }
                     }
                 }
@@ -51,7 +52,7 @@ namespace NetWare
                         {
                             playerController = GetBestPlayerInFOV(Camera.main.fieldOfView + 80);
                         } else {
-                            playerController = GetBestPlayerInFOV(Config.GetInt("combat.silentaim.fovsize"));
+                            playerController = GetBestPlayerInFOV(Config.GetFloat("combat.silentaim.fovsize"));
                         }
                     } else {
                         playerController = GetBestPlayer();
@@ -106,26 +107,26 @@ namespace NetWare
             // soft aim
             if (Config.GetBool("combat.softaim.enabled") && Config.GetBool("combat.softaim.checkfov") && Config.GetBool("combat.softaim.drawfov"))
             {
-                Color fovColor = new Color(1, .3f, .3f, 1);
+                Color fovColor = Colors.HexToRGB(Config.GetString("combat.softaim.fovcolor"));
 
                 if (Config.GetBool("combat.softaim.dynamicfov"))
                 {
                     Render.DrawCircle(fovColor, Render.screenCenter, Camera.main.fieldOfView + 80);
                 } else {
-                    Render.DrawCircle(fovColor, Render.screenCenter, Config.GetInt("combat.softaim.fovsize"));
+                    Render.DrawCircle(fovColor, Render.screenCenter, Config.GetFloat("combat.softaim.fovsize"));
                 }
             }
 
             // silent aim
             if (Config.GetBool("combat.silentaim.enabled") && Config.GetBool("combat.silentaim.checkfov") && Config.GetBool("combat.silentaim.drawfov"))
             {
-                Color fovColor = new Color(.3f, .3f, 1, 1);
+                Color fovColor = Colors.HexToRGB(Config.GetString("combat.silentaim.fovcolor"));
 
                 if (Config.GetBool("combat.silentaim.dynamicfov"))
                 {
                     Render.DrawCircle(fovColor, Render.screenCenter, Camera.main.fieldOfView + 80);
                 } else {
-                    Render.DrawCircle(fovColor, Render.screenCenter, Config.GetInt("combat.silentaim.fovsize"));
+                    Render.DrawCircle(fovColor, Render.screenCenter, Config.GetFloat("combat.silentaim.fovsize"));
                 }
             }
         }
@@ -142,6 +143,7 @@ namespace NetWare
                     "Enabled"
                 )
             );
+            Menu.NewTitle("FOV Settings");
             Config.SetBool(
                 "combat.softaim.checkfov",
                 Menu.NewToggle(
@@ -163,22 +165,31 @@ namespace NetWare
                     "Dynamic FOV"
                 )
             );
-            Config.SetInt(
+            Config.SetFloat(
                 "combat.softaim.fovsize",
                 Menu.NewSlider(
                     "FOV Size",
-                    Config.GetInt("combat.softaim.fovsize"),
+                    Config.GetFloat("combat.softaim.fovsize"),
                     10,
                     500
                 )
             );
-            Config.SetInt(
+            Menu.NewTitle("Smoothing");
+            Config.SetFloat(
                 "combat.softaim.smoothing",
                 Menu.NewSlider(
                     "Smoothing",
-                    Config.GetInt("combat.softaim.smoothing"),
+                    Config.GetFloat("combat.softaim.smoothing"),
                     5,
                     10
+                )
+            );
+            Menu.NewTitle("Colors");
+            Config.SetString(
+                "combat.softaim.fovcolor",
+                Menu.NewTextField(
+                    "FOV Color",
+                    Config.GetString("combat.softaim.fovcolor").ToUpper()
                 )
             );
 
@@ -192,6 +203,7 @@ namespace NetWare
                     "Enabled"
                 )
             );
+            Menu.NewTitle("FOV Settings");
             Config.SetBool(
                 "combat.silentaim.checkfov",
                 Menu.NewToggle(
@@ -213,13 +225,21 @@ namespace NetWare
                     "Dynamic FOV"
                 )
             );
-            Config.SetInt(
+            Config.SetFloat(
                 "combat.silentaim.fovsize",
                 Menu.NewSlider(
                     "FOV Size",
-                    Config.GetInt("combat.silentaim.fovsize"),
+                    Config.GetFloat("combat.silentaim.fovsize"),
                     10,
                     500
+                )
+            );
+            Menu.NewTitle("Colors");
+            Config.SetString(
+                "combat.silentaim.fovcolor",
+                Menu.NewTextField(
+                    "FOV Color",
+                    Config.GetString("combat.silentaim.fovcolor").ToUpper()
                 )
             );
 

@@ -9,7 +9,7 @@ namespace NetWare
             Menu.Begin();
 
             Menu.NewSection("Config Manager");
-            textFieldContent = Menu.NewTextField(textFieldContent);
+            textFieldContent = Menu.NewTextField("Config Name", textFieldContent);
             Menu.NewButton("Save", Save);
             Menu.NewButton("Delete", Delete);
 

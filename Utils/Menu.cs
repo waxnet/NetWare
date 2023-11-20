@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 namespace NetWare
@@ -71,23 +72,90 @@ namespace NetWare
             return GUILayout.Toggle(value, text, toggleStyle);
         }
 
-        public static int NewSlider(string text, int value, float minimum, float maximum)
+        public static float NewSlider(string text, float value, float minimum, float maximum)
         {
+            GUILayout.BeginVertical(new GUIContent(), "Box");
+
             // slider title and title style
-            GUIStyle labelStyle = new GUIStyle("Box") { fontSize = 12 };
+            GUIStyle labelStyle = new GUIStyle("Label") { fontSize = 12, alignment = TextAnchor.MiddleCenter };
             GUILayout.Label(text + " : " + value.ToString(), labelStyle);
 
             // create slider and return new value
-            return (int)Math.Round(GUILayout.HorizontalSlider(value, minimum, maximum));
+            float newValue = (float)Math.Round(GUILayout.HorizontalSlider(value, minimum, maximum), 1);
+
+            GUILayout.EndVertical();
+
+            return newValue;
         }
 
-        public static string NewTextField(string text)
+        public static string NewTextField(string title, string value)
         {
-            // set text field style
-            GUIStyle textFieldStyle = new GUIStyle("Box") { fontSize = 12 };
+            GUILayout.BeginVertical(new GUIContent(), "Box");
 
-            // create textfield and return new value
-            return GUILayout.TextField(text, textFieldStyle);
+            // text field title and title style
+            GUIStyle labelStyle = new GUIStyle("Label") { fontSize = 12, alignment = TextAnchor.MiddleCenter };
+            GUILayout.Label(title, labelStyle);
+
+            // set text field style, create textfield and return new value
+            GUIStyle textFieldStyle = new GUIStyle("Box") { fontSize = 12 };
+            string newValue = GUILayout.TextField(value, textFieldStyle);
+
+            GUILayout.EndVertical();
+
+            return newValue;
+        }
+
+        public static void NewTitle(string text)
+        {
+            // title style
+            GUIStyle labelStyle = new GUIStyle("Label") { fontSize = 12, alignment = TextAnchor.MiddleCenter };
+
+            // get amount of dashes to put for better separation (pretty random code but it works ig)
+            float textSize = labelStyle.CalcSize(new GUIContent(text)).x;
+            float dashSize = labelStyle.CalcSize(new GUIContent("-")).x;
+            float sectionSize = ((windowRect.width / 2) - 12);
+
+            int dashMultiplier = (int)((
+                (
+                    (sectionSize - textSize) - (dashSize * 4)
+                ) / dashSize) / 2
+            );
+            
+            string separators = string.Concat(Enumerable.Repeat("-", dashMultiplier));
+            
+            // create title
+            GUILayout.Label("<b>" + separators + " " + text + " " + separators + "</b>", labelStyle);
+        }
+
+        public static string NewList(string title, string currentValue, string[] values)
+        {
+            GUILayout.BeginVertical(new GUIContent(), "Box");
+
+            // list title and title style
+            GUIStyle labelStyle = new GUIStyle("Label") { fontSize = 12, alignment = TextAnchor.MiddleCenter };
+            GUILayout.Label(title, labelStyle);
+
+            // get current value index
+            int currentValueIndex = Array.IndexOf(values, currentValue);
+
+            // set new value
+            string newValue = currentValue;
+
+            if (GUILayout.Button(currentValue))
+            {
+                int newIndex = (currentValueIndex + 1);
+
+                if (newIndex >= values.Length)
+                {
+                    newValue = values[0];
+                } else {
+                    newValue = values[newIndex];
+                }
+            }
+
+            GUILayout.EndVertical();
+
+            return newValue;
         }
     }
 }

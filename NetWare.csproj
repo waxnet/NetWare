@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Data\Storage.cs" />
@@ -43,6 +45,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Access.cs" />
     <Compile Include="Entities\LocalPlayer.cs" />
+    <Compile Include="Utils\Colors.cs" />
     <Compile Include="Utils\Menu.cs" />
     <Compile Include="Utils\Mouse.cs" />
     <Compile Include="Utils\Network.cs" />
@@ -56,20 +59,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\1v1.dll</HintPath>
     </Reference>
-    <Reference Include="Photon3Unity3D, Version=4.1.6.24, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="PhotonRealtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\PhotonRealtime.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\PhotonRealtime.dll</HintPath>
     </Reference>
-    <Reference Include="PhotonUnityNetworking">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\PhotonUnityNetworking.dll</HintPath>
+    <Reference Include="PhotonUnityNetworking, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\PhotonUnityNetworking.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\UnityEngine.AnimationModule.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\UnityEngine.AnimationModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
@@ -80,12 +84,9 @@
     <Reference Include="UnityEngine.InputLegacyModule">
       <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

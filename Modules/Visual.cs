@@ -6,8 +6,8 @@ namespace NetWare
     {
         public static void Execute()
         {
-            // camera
-            if (Config.GetBool("visual.camera.customfov"))
+            // fov changer
+            if (Config.GetBool("visual.fovchanger.enabled"))
             {
                 resetFOV = true;
 
@@ -16,7 +16,7 @@ namespace NetWare
                 if (cameraManager != null)
                 {
                     cameraManager.ResetZoomStateInstant();
-                    Camera.main.fieldOfView = Config.GetInt("visual.camera.customfovamount");
+                    Camera.main.fieldOfView = Config.GetFloat("visual.fovchanger.fovchangeramount");
                 }
             } else if (resetFOV) {
                 resetFOV = false;
@@ -27,7 +27,13 @@ namespace NetWare
         public static void Draw()
         {
             // esp
-            if (Config.GetBool("visual.esp.tracers") || Config.GetBool("visual.esp.skeleton") || Config.GetBool("visual.esp.boxes") || Config.GetBool("visual.esp.nametags"))
+            if (
+                Config.GetBool("visual.esp.tracers") ||
+                Config.GetBool("visual.esp.skeleton") ||
+                Config.GetBool("visual.esp.boxes") ||
+                Config.GetBool("visual.esp.info") ||
+                Config.GetBool("visual.esp.nametags")
+            )
             {
                 foreach (PlayerController playerController in Storage.players)
                 {
@@ -110,19 +116,19 @@ namespace NetWare
 
             Menu.Separate();
 
-            Menu.NewSection("Camera");
+            Menu.NewSection("FOV Changer");
             Config.SetBool(
-                "visual.camera.customfov",
+                "visual.fovchanger.enabled",
                 Menu.NewToggle(
-                    Config.GetBool("visual.camera.customfov"),
-                    "Custom FOV"
+                    Config.GetBool("visual.fovchanger.enabled"),
+                    "Enabled"
                 )
             );
-            Config.SetInt(
-                "visual.camera.customfovamount",
+            Config.SetFloat(
+                "visual.fovchanger.fovchangeramount",
                 Menu.NewSlider(
-                    "Custom FOV Amount",
-                    Config.GetInt("visual.camera.customfovamount"),
+                    "Amount",
+                    Config.GetFloat("visual.fovchanger.fovchangeramount"),
                     20,
                     150
                 )
@@ -158,7 +164,7 @@ namespace NetWare
             Color color = Players.GetPlayerTeamColor(playerController);
 
             // check if player animator exists
-            if (animator != null )
+            if (animator != null)
             {
                 // spine
                 for (int index = 0; (index + 1) != Skeleton.spine.Length; index++)

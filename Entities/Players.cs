@@ -11,7 +11,7 @@ namespace NetWare
 
             return playerAnimator.GetBoneTransform(HumanBodyBones.Head).transform.position;
         }
-
+        
         public static Vector3 GetHipPosition(PlayerController playerController)
         {
             Animator playerAnimator = playerController.GetComponent<Animator>();
@@ -60,6 +60,11 @@ namespace NetWare
         public static GGBKONLGBCD GetPlayerInfo(PlayerController playerController)
         {
             return playerController?.KLIBLMFDGDJ;
+        }
+
+        public static PlayerHealth GetPlayerHealth(PlayerController playerController)
+        {
+            return playerController?.MLCGAAINICC;
         }
 
         public static string GetPlayerName(PlayerController playerController)

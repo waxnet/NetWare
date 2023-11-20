@@ -18,6 +18,7 @@ namespace NetWare
             ["combat.softaim.dynamicfov"] = "false",
             ["combat.softaim.drawfov"] = "true",
             ["combat.softaim.fovsize"] = "200",
+            ["combat.softaim.fovcolor"] = "#FF4C4C",
             ["combat.softaim.smoothing"] = "5",
 
             ["combat.silentaim.enabled"] = "false",
@@ -25,6 +26,7 @@ namespace NetWare
             ["combat.silentaim.dynamicfov"] = "false",
             ["combat.silentaim.drawfov"] = "true",
             ["combat.silentaim.fovsize"] = "200",
+            ["combat.silentaim.fovcolor"] = "#4C4CFF",
 
             ["combat.weapons.norecoil"] = "false",
             ["combat.weapons.infiniteammo"] = "false",
@@ -37,20 +39,20 @@ namespace NetWare
             ["visual.esp.info"] = "false",
             ["visual.esp.nametags"] = "false",
 
-            ["visual.camera.customfov"] = "false",
-            ["visual.camera.customfovamount"] = "100",
+            ["visual.fovchanger.enabled"] = "false",
+            ["visual.fovchanger.fovchangeramount"] = "100",
 
             // movement
             ["movement.speed.speed"] = "false",
             ["movement.speed.speedamount"] = "5",
 
             ["movement.fly.fly"] = "false",
-            ["movement.fly.helicopter"] = "false",
 
             // exploits
             ["exploits.player.godmode"] = "false",
             ["exploits.player.instantland"] = "false",
             ["exploits.player.infinitematerials"] = "false",
+            ["exploits.player.antifreeze"] = "false",
 
             ["exploits.other.autoplay"] = "false",
 
@@ -131,21 +133,29 @@ namespace NetWare
         {
             return bool.Parse(config[key]);
         }
-
         public static void SetBool(string key, bool value)
         {
             config[key] = value.ToString();
         }
 
-        // integers
-        public static int GetInt(string key)
+        // floats
+        public static float GetFloat(string key)
         {
-            return int.Parse(config[key]);
+            return (float)Math.Round(float.Parse(config[key]), 1);
         }
-
-        public static void SetInt(string key, int value)
+        public static void SetFloat(string key, float value)
         {
             config[key] = value.ToString();
+        }
+
+        // strings
+        public static string GetString(string key)
+        {
+            return config[key];
+        }
+        public static void SetString(string key, string value)
+        {
+            config[key] = value;
         }
     }
 }

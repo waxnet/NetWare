@@ -7,7 +7,7 @@ namespace NetWare
     {
         public static BuildingNetworkController GetBuildingNetworkController()
         {
-            return FindObjectOfType<BuildingNetworkController>();
+            return BuildingNetworkController.Instance;
         }
 
         public static void BecomeMasterClient()

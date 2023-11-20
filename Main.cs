@@ -14,7 +14,7 @@ namespace NetWare
 
             // window data
             int windowWidth = 440;
-            int windowHeight = 350;
+            int windowHeight = 515;
 
             int windowX = 200;
             int windowY = ((Screen.height / 2) - (windowHeight / 2));
@@ -30,7 +30,7 @@ namespace NetWare
             Movement.Execute();
             Visual.Execute();
             Exploits.Execute();
-
+            
             // toggle window
             if (Input.GetKeyDown(KeyCode.Insert))
             {
