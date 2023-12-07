@@ -368,7 +368,7 @@ namespace NetWare
             {
                 // get name and name size
                 string playerName = Players.GetPlayerName(playerController);
-                if (playerController.FJLDBODHGKB)
+                if (playerController.FGOFLOEPNHI)
                 {
                     playerName += " (BOT)";
                 }

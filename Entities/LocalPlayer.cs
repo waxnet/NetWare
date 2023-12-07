@@ -8,34 +8,34 @@ namespace NetWare
         // other
         public static PlayerController Get()
         {
-            return PlayerController.PFMGMMBMDMO;
+            return PlayerController.IKIFDINMMKC;
         }
 
         public static PlayerHealth GetHealth()
         {
-            return Get()?.MLCGAAINICC;
+            return Get()?.MECEACOMEMD;
         }
 
         // controllers
         public static vThirdPersonController GetThirdPersonController()
         {
-            return Get()?.HNADBHINEPA;
+            return Get()?.JCEELPIJOML;
         }
 
         public static WeaponsController GetWeaponsController()
         {
-            return Get()?.AJEAHIPKNPG;
+            return Get()?.FFFJCDBAEBO;
         }
 
         public static WeaponModel GetWeaponModel()
         {
-            return GetWeaponsController()?.CAJMLMBFGKK;
+            return GetWeaponsController()?.PIIMNHFPCBF;
         }
 
         // camera
         public static CameraManager GetCameraManager()
         {
-            return CameraManager.KODEGOFIJIC;
+            return CameraManager.OJICDNBLPIC;
         }
 
         public static vThirdPersonCamera GetThirdPersonCamera()

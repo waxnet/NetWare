@@ -13,5 +13,4 @@ namespace NetWare
 
         private static GameObject instance;
     }
-
 }

@@ -71,7 +71,7 @@ namespace NetWare
                     toggleStyle.normal.textColor = Color.gray;
                 }
 
-                if (GUILayout.Toggle(selected, "<b>" + name + "</b>", toggleStyle, GUILayout.Width((Menu.windowRect.width / Menu.tabs.Length) - 8)))
+                if (GUILayout.Toggle(selected, "<b>" + name + "</b>", toggleStyle, GUILayout.Width((Menu.windowRect.width / Menu.tabs.Length) - 12)))
                 {
                     Menu.currentTab = index;
                 }
