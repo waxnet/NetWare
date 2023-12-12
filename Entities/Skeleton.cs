@@ -10,7 +10,6 @@ namespace NetWare
             HumanBodyBones.UpperChest,
             HumanBodyBones.Head
         };
-
         public static HumanBodyBones[] arms = {
             HumanBodyBones.RightHand,
             HumanBodyBones.RightLowerArm,
@@ -22,7 +21,6 @@ namespace NetWare
             HumanBodyBones.LeftLowerArm,
             HumanBodyBones.LeftHand
         };
-
         public static HumanBodyBones[] legs = {
             HumanBodyBones.RightFoot,
             HumanBodyBones.RightLowerLeg,
@@ -49,13 +47,13 @@ namespace NetWare
             HumanBodyBones.LeftLowerArm,
             HumanBodyBones.LeftHand,
 
-            HumanBodyBones.RightFoot,
-            HumanBodyBones.RightLowerLeg,
             HumanBodyBones.RightUpperLeg,
+            HumanBodyBones.RightLowerLeg,
+            HumanBodyBones.RightFoot,
 
-            HumanBodyBones.LeftFoot,
-            HumanBodyBones.LeftLowerLeg,
             HumanBodyBones.LeftUpperLeg,
+            HumanBodyBones.LeftLowerLeg,
+            HumanBodyBones.LeftFoot
         };
 
         // methods
@@ -74,6 +72,78 @@ namespace NetWare
             }
 
             return hasSkeleton;
+        }
+
+        public static HumanBodyBones GetBoneFromString(string boneName)
+        {
+            HumanBodyBones bone;
+
+            switch (boneName)
+            {
+                // spine
+                case "Head":
+                    bone = HumanBodyBones.Head;
+                    break;
+                case "UpperChest":
+                    bone = HumanBodyBones.UpperChest;
+                    break;
+                case "Hips":
+                    bone = HumanBodyBones.Hips;
+                    break;
+                
+                // arms
+                case "RightShoulder":
+                    bone = HumanBodyBones.RightShoulder;
+                    break;
+                case "RightUpperArm":
+                    bone = HumanBodyBones.RightUpperArm;
+                    break;
+                case "RightLowerArm":
+                    bone = HumanBodyBones.RightLowerArm;
+                    break;
+                case "RightHand":
+                    bone = HumanBodyBones.RightHand;
+                    break;
+                case "LeftShoulder":
+                    bone = HumanBodyBones.LeftShoulder;
+                    break;
+                case "LeftUpperArm":
+                    bone = HumanBodyBones.LeftUpperArm;
+                    break;
+                case "LeftLowerArm":
+                    bone = HumanBodyBones.LeftLowerArm;
+                    break;
+                case "LeftHand":
+                    bone = HumanBodyBones.LeftHand;
+                    break;
+                
+                // legs
+                case "RightUpperLeg":
+                    bone = HumanBodyBones.RightUpperLeg;
+                    break;
+                case "RightLowerLeg":
+                    bone = HumanBodyBones.RightLowerLeg;
+                    break;
+                case "RightFoot":
+                    bone = HumanBodyBones.RightFoot;
+                    break;
+                case "LeftUpperLeg":
+                    bone = HumanBodyBones.LeftUpperLeg;
+                    break;
+                case "LeftLowerLeg":
+                    bone = HumanBodyBones.LeftLowerLeg;
+                    break;
+                case "LeftFoot":
+                    bone = HumanBodyBones.LeftFoot;
+                    break;
+
+                // default
+                default:
+                    bone = HumanBodyBones.Head;
+                    break;
+            }
+
+            return bone;
         }
     }
 }
