@@ -137,7 +137,7 @@ namespace NetWare
                     bone = HumanBodyBones.LeftFoot;
                     break;
 
-                // default
+                // default bone
                 default:
                     bone = HumanBodyBones.Head;
                     break;
