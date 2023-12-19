@@ -16,12 +16,6 @@
   <img src="https://img.shields.io/github/stars/waxnet/NetWare">
   <img src="https://img.shields.io/github/forks/waxnet/NetWare">
   <img src="https://img.shields.io/github/downloads/waxnet/NetWare/total.svg">
-  <br>
-  <img src="https://img.shields.io/github/issues-pr/waxnet/NetWare">
-  <img src="https://img.shields.io/github/issues-pr-closed/waxnet/NetWare">
-  <br>
-  <img src="https://img.shields.io/github/issues/waxnet/NetWare">
-  <img src="https://img.shields.io/github/issues-closed/waxnet/NetWare">
 </p>
 
 -----
