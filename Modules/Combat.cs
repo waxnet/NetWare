@@ -317,13 +317,13 @@ namespace NetWare
 
             if (localPlayer != null)
             {
-                Vector3 origin = localPlayer.FHAOJNEKKGD;
+                Vector3 origin = localPlayer.OBPJMLEMMCN;
 
                 foreach (PlayerController playerController in Storage.players)
                 {
                     if (!Players.IsPlayerTeammate(playerController) && Players.IsPlayerValid(playerController))
                     {
-                        float distance = (playerController.FHAOJNEKKGD - origin).magnitude;
+                        float distance = (playerController.OBPJMLEMMCN - origin).magnitude;
 
                         if (distance < lastDistance)
                         {

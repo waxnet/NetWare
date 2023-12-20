@@ -32,10 +32,10 @@ namespace NetWare
         public static Color GetPlayerTeamColor(PlayerController playerController)
         {
             Color color = Color.red;
-            if (playerController?.FGOFLOEPNHI ?? true)
+            if (playerController?.DKGMJCDBDMN ?? true)
             {
                 color = Color.white;
-            } else if (playerController?.GIFCMNNJNHD ?? true) {
+            } else if (playerController?.IFAAIDGNPOL ?? true) {
                 color = Color.green;
             }
 
@@ -44,7 +44,7 @@ namespace NetWare
 
         public static bool IsPlayerTeammate(PlayerController playerController)
         {
-            return playerController?.GIFCMNNJNHD ?? true;
+            return playerController?.IFAAIDGNPOL ?? true;
         }
 
         public static bool IsPlayerValid(PlayerController playerController)
@@ -54,22 +54,22 @@ namespace NetWare
 
         public static bool IsPlayerAlive(PlayerController playerController)
         {
-            return playerController?.MECEACOMEMD?.KillerId == null;
+            return playerController?.PAEKEKFLHOK?.KillerId == null;
         }
 
-        public static HAGBDAJLLLO GetPlayerInfo(PlayerController playerController)
+        public static EOLCHOFICLK GetPlayerInfo(PlayerController playerController)
         {
-            return playerController?.HJAHHGHDJOC;
+            return playerController?.PBIJHIGLJEM;
         }
 
         public static string GetPlayerName(PlayerController playerController)
         {
-            return GetPlayerInfo(playerController)?.FGAKFLDCKGF;
+            return GetPlayerInfo(playerController)?.JBNPFKLFFCH;
         }
 
         public static int? GetPlayerRankXP(PlayerController playerController)
         {
-            return GetPlayerInfo(playerController)?.LIGFJJNBMEE;
+            return GetPlayerInfo(playerController)?.PDNGCJKAPNC;
         }
 
         public static double GetPlayerDistance(PlayerController playerController)
