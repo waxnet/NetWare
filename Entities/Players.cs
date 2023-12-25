@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using UnityEngine;
 
 namespace NetWare
@@ -29,17 +30,11 @@ namespace NetWare
             return Vector3.Lerp(rightFoot, leftFoot, .5f);
         }
 
-        public static Color GetPlayerTeamColor(PlayerController playerController)
+        public static Vector3 GetBonePosition(PlayerController playerController, HumanBodyBones bone)
         {
-            Color color = Color.red;
-            if (playerController?.DKGMJCDBDMN ?? true)
-            {
-                color = Color.white;
-            } else if (playerController?.IFAAIDGNPOL ?? true) {
-                color = Color.green;
-            }
+            Animator playerAnimator = playerController.GetComponent<Animator>();
 
-            return color;
+            return playerAnimator.GetBoneTransform(bone).transform.position;
         }
 
         public static bool IsPlayerTeammate(PlayerController playerController)
@@ -75,6 +70,11 @@ namespace NetWare
         public static double GetPlayerDistance(PlayerController playerController)
         {
             return Math.Round((LocalPlayer.Get().transform.position - playerController.transform.position).magnitude, 1);
+        }
+
+        public static PlayerHealth GetHealth(PlayerController playerController)
+        {
+            return playerController?.PAEKEKFLHOK;
         }
     }
 }

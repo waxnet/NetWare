@@ -32,21 +32,24 @@ and run "inject.cmd" to load NetWare.
 
 ```
 • Combat
-      + Soft Aim
+      + Aimbot
             - Enabled
+			- Aim Bone
+			- Aim Mode
             - Check FOV
             - Draw Fov
             - Dynamic Fov
             - FOV Size (10 - 500)
             - Smoothing (5 - 10)
-            - FOV Color
+            - FOV Color Picker
       + Silent Aim
             - Enabled
+			- Aim Bone
             - Check FOV
             - Draw Fov
             - Dynamic Fov
             - FOV Size (10 - 500)
-            - FOV Color
+            - FOV Color Picker
       + Weapons
             - No Recoil
             - Infinite Ammo
@@ -55,10 +58,15 @@ and run "inject.cmd" to load NetWare.
 • Visual
       + ESP
             - Tracers
-            - Boxes
             - Skeleton
+			- 3D Boxes
+			- 2D Boxes
             - Info
             - Nametags
+			- Background Color Picker
+			- Teammate Color Picker
+			- Enemy Color Picker
+			- Bot Color Picker
       + FOV Changer
             - Enabled
             - Amount (20 - 150)
@@ -69,6 +77,8 @@ and run "inject.cmd" to load NetWare.
             - Amount (1 - 10)
       + Fly
             - Enabled
+	  + BHop
+			- Enabled
 
 • Exploits
       + Player
@@ -76,9 +86,16 @@ and run "inject.cmd" to load NetWare.
             - Instant Land
             - Infinite Materials
             - Anti Freeze
-      + Other
+      + Gameplay
+			- Leave Game
             - Auto Play
-      + World
+	  + Locker
+            - Unlock Emotes
+            - Unlock Stickers
+            - Skin Changer
+            - Pickaxe Changer
+      + Game
+			- Force Win
             - Kill All
             - Freeze Players
             - Destroy Buildings
@@ -86,16 +103,18 @@ and run "inject.cmd" to load NetWare.
             - Building Spam
             - Rig Spam
             - Instant Break
-      + Locker
-            - Unlock Emotes
-            - Unlock Stickers
-            - Skin Changer
-            - Pickaxe Changer
+	  + Fun
+			- Add 10k Fake Gold
+			- Add 10k Fake Gems
+			- Loadout Level Changer
 
 • Settings
       + Config Manager
             - Save
             - Delete
+	  + Interface
+			- Watermark
+			- Watermark Time Type
       + Config Loader
 ```
 

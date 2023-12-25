@@ -12,7 +12,7 @@ namespace NetWare
         public static string[] tabs = { "Combat", "Visual", "Movement", "Exploits", "Settings" };
         public static int currentTab = 0;
 
-        public static bool isSectionOpen = false;
+        private static bool isSectionOpen = false;
 
         public static void Begin()
         {

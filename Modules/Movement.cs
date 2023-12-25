@@ -11,19 +11,20 @@ namespace NetWare
             if (playerController != null)
             {
                 // speed
-                if (Config.GetBool("movement.speed.speed"))
+                if (Config.GetBool("movement.speed.enabled"))
                 {
-                    playerController.MGOCBLHDAOP = Config.GetFloat("movement.speed.speedamount");
+                    playerController.MGOCBLHDAOP = Config.GetFloat("movement.speed.amount");
                 } else {
                     playerController.MGOCBLHDAOP = 1;
                 }
 
                 // fly
-                if (Config.GetBool("movement.fly.fly"))
+                playerController.SetGodMode(Config.GetBool("movement.fly.enabled"));
+
+                // bhop
+                if (Config.GetBool("movement.bhop.enabled") && Input.GetKey(KeyCode.Space))
                 {
-                    playerController.SetGodMode(true);
-                } else {
-                    playerController.SetGodMode(false);
+                    LocalPlayer.GetThirdPersonController()?.Jump();
                 }
             }
         }
@@ -34,17 +35,17 @@ namespace NetWare
 
             Menu.NewSection("Speed");
             Config.SetBool(
-                "movement.speed.speed",
+                "movement.speed.enabled",
                 Menu.NewToggle(
-                    Config.GetBool("movement.speed.speed"),
+                    Config.GetBool("movement.speed.enabled"),
                     "Enabled"
                 )
             );
             Config.SetFloat(
-                "movement.speed.speedamount",
+                "movement.speed.amount",
                 Menu.NewSlider(
                     "Amount",
-                    Config.GetFloat("movement.speed.speedamount"),
+                    Config.GetFloat("movement.speed.amount"),
                     1,
                     10
                 )
@@ -54,9 +55,18 @@ namespace NetWare
 
             Menu.NewSection("Fly");
             Config.SetBool(
-                "movement.fly.fly",
+                "movement.fly.enabled",
                 Menu.NewToggle(
-                    Config.GetBool("movement.fly.fly"),
+                    Config.GetBool("movement.fly.enabled"),
+                    "Enabled"
+                )
+            );
+
+            Menu.NewSection("BHop");
+            Config.SetBool(
+                "movement.bhop.enabled",
+                Menu.NewToggle(
+                    Config.GetBool("movement.bhop.enabled"),
                     "Enabled"
                 )
             );

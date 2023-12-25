@@ -9,19 +9,22 @@ namespace NetWare
     {
         private static readonly string configFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/NetWare/configs";
         public static List<string> configList = new List<string>();
-        
+
         private static Dictionary<string, string> config = new Dictionary<string, string>()
         {
             // combat
-            ["combat.softaim.enabled"] = "false",
-            ["combat.softaim.checkfov"] = "true",
-            ["combat.softaim.dynamicfov"] = "false",
-            ["combat.softaim.drawfov"] = "true",
-            ["combat.softaim.fovsize"] = "200",
-            ["combat.softaim.fovcolor"] = "#FF4C4C",
-            ["combat.softaim.smoothing"] = "5",
+            ["combat.aimbot.enabled"] = "false",
+            ["combat.aimbot.aimbone"] = "Head",
+            ["combat.aimbot.aimmode"] = "Mouse",
+            ["combat.aimbot.checkfov"] = "true",
+            ["combat.aimbot.dynamicfov"] = "false",
+            ["combat.aimbot.drawfov"] = "true",
+            ["combat.aimbot.fovsize"] = "200",
+            ["combat.aimbot.smoothing"] = "0.5",
+            ["combat.aimbot.fovcolor"] = "#FF4C4C",
 
             ["combat.silentaim.enabled"] = "false",
+            ["combat.silentaim.aimbone"] = "Head",
             ["combat.silentaim.checkfov"] = "true",
             ["combat.silentaim.dynamicfov"] = "false",
             ["combat.silentaim.drawfov"] = "true",
@@ -35,18 +38,25 @@ namespace NetWare
             // visual
             ["visual.esp.tracers"] = "false",
             ["visual.esp.skeleton"] = "false",
-            ["visual.esp.boxes"] = "false",
+            ["visual.esp.3dboxes"] = "false",
+            ["visual.esp.2dboxes"] = "false",
             ["visual.esp.info"] = "false",
             ["visual.esp.nametags"] = "false",
+            ["visual.esp.backgroundcolor"] = "#000000",
+            ["visual.esp.teammatecolor"] = "#00FF00",
+            ["visual.esp.enemycolor"] = "#FF0000",
+            ["visual.esp.botcolor"] = "#FFFFFF",
 
             ["visual.fovchanger.enabled"] = "false",
             ["visual.fovchanger.fovchangeramount"] = "100",
 
             // movement
-            ["movement.speed.speed"] = "false",
-            ["movement.speed.speedamount"] = "5",
+            ["movement.speed.enabled"] = "false",
+            ["movement.speed.amount"] = "5",
 
-            ["movement.fly.fly"] = "false",
+            ["movement.fly.enabled"] = "false",
+
+            ["movement.bhop.enabled"] = "false",
 
             // exploits
             ["exploits.player.godmode"] = "false",
@@ -54,11 +64,18 @@ namespace NetWare
             ["exploits.player.infinitematerials"] = "false",
             ["exploits.player.antifreeze"] = "false",
 
-            ["exploits.other.autoplay"] = "false",
+            ["exploits.gameplay.autoplay"] = "false",
 
-            ["exploits.world.buildingspam"] = "false",
-            ["exploits.world.rigspam"] = "false",
-            ["exploits.world.instantbreak"] = "false",
+            ["exploits.game.buildingspam"] = "false",
+            ["exploits.game.rigspam"] = "false",
+            ["exploits.game.instantbreak"] = "false",
+
+            ["exploits.fun.levelchanger"] = "false",
+            ["exploits.fun.levelchangeramount"] = "100000",
+
+            // settings
+            ["settings.interface.watermark"] = "true",
+            ["settings.interface.timetype"] = "Standard",
         };
 
         // setup
@@ -97,7 +114,6 @@ namespace NetWare
                 }
             }
         }
-
         public static void Save(string configName)
         {
             string configPath = Path.Combine(configFolder, configName + ".nwc");
@@ -115,7 +131,6 @@ namespace NetWare
                 configList.Add(configName);
             }
         }
-
         public static void Delete(string configName)
         {
             string configPath = Path.Combine(configFolder, configName + ".nwc");
@@ -144,6 +159,16 @@ namespace NetWare
             return (float)Math.Round(float.Parse(config[key]), 1);
         }
         public static void SetFloat(string key, float value)
+        {
+            config[key] = value.ToString();
+        }
+
+        // integers
+        public static int GetInt(string key)
+        {
+            return int.Parse(config[key]);
+        }
+        public static void SetInt(string key, int value)
         {
             config[key] = value.ToString();
         }

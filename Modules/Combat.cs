@@ -1,6 +1,6 @@
 ﻿using Photon.Pun;
-using System;
 using UnityEngine;
+using NetWare.Helpers;
 
 namespace NetWare
 {
@@ -10,30 +10,63 @@ namespace NetWare
         {
             if (Input.GetMouseButton(1))
             {
-                // soft aim
-                if (Config.GetBool("combat.softaim.enabled"))
+                // aimbot
+                if (Config.GetBool("combat.aimbot.enabled"))
                 {
                     PlayerController playerController;
 
-                    if (Config.GetBool("combat.softaim.checkfov"))
+                    // get best player
+                    if (Config.GetBool("combat.aimbot.checkfov"))
                     {
-                        if (Config.GetBool("combat.softaim.dynamicfov"))
+                        if (Config.GetBool("combat.aimbot.dynamicfov"))
                         {
-                            playerController = GetBestPlayerInFOV(Camera.main.fieldOfView + 80);
+                            playerController = CombatH.GetBestPlayerInFOV(Camera.main.fieldOfView + 80);
                         } else {
-                            playerController = GetBestPlayerInFOV(Config.GetFloat("combat.softaim.fovsize"));
+                            playerController = CombatH.GetBestPlayerInFOV(Config.GetFloat("combat.aimbot.fovsize"));
                         }
                     } else {
-                        playerController = GetBestPlayerInFOV(Screen.width);
+                        playerController = CombatH.GetBestPlayerInFOV(Screen.width);
                     }
 
                     if (playerController != null)
                     {
-                        Vector3 playerScreenPosition = Position.ToScreen(Players.GetHeadPosition(playerController));
+                        // get player positions
+                        Vector3 playerWorldPosition = Players.GetBonePosition(
+                            playerController,
+                            Skeleton.GetBoneFromString(Config.GetString("combat.aimbot.aimbone"))
+                        );
+                        Vector3 playerScreenPosition = Position.ToScreen(playerWorldPosition);
 
-                        if (Position.IsOnScreen(playerScreenPosition))
-                        {
-                            Mouse.MoveTo(playerScreenPosition, (int)Math.Round(Config.GetFloat("combat.softaim.smoothing"), 0));
+                        // get aimbot aim mode
+                        string aimbotAimMode = Config.GetString("combat.aimbot.aimmode");
+
+                        // aim at player
+                        if (aimbotAimMode == "Mouse" && Position.IsOnScreen(playerScreenPosition)) {
+                            Mouse.MoveTo(playerScreenPosition, (Config.GetFloat("combat.aimbot.smoothing") * 10));
+                        }
+
+                        if (aimbotAimMode == "Camera") {
+                            vThirdPersonCamera camera = LocalPlayer.GetThirdPersonCamera();
+
+                            // get rotations
+                            Quaternion startRotation = camera.transform.rotation;
+                            camera.transform.LookAt(playerWorldPosition);
+                            Quaternion endRotation = camera.transform.rotation;
+
+                            // reset camera rotation
+                            camera.transform.rotation = startRotation;
+
+                            // get new rotation
+                            Quaternion newRotation = Quaternion.Lerp(
+                                startRotation,
+                                endRotation,
+                                Config.GetFloat("combat.aimbot.smoothing")
+                            );
+
+                            // set camera rotation
+                            Camera.main.transform.rotation = newRotation;
+                            camera.transform.rotation = newRotation;
+                            camera.SetRotation(newRotation.eulerAngles);
                         }
                     }
                 }
@@ -42,25 +75,32 @@ namespace NetWare
             if (Input.GetMouseButton(0))
             {
                 // silent aim
-                if (Config.GetBool("combat.silentaim.enabled"))
+                if (Config.GetBool("combat.silentaim.enabled") && LocalPlayer.CanShoot())
                 {
                     PlayerController playerController;
 
+                    // get best player
                     if (Config.GetBool("combat.silentaim.checkfov"))
                     {
                         if (Config.GetBool("combat.silentaim.dynamicfov"))
                         {
-                            playerController = GetBestPlayerInFOV(Camera.main.fieldOfView + 80);
+                            playerController = CombatH.GetBestPlayerInFOV(Camera.main.fieldOfView + 80);
                         } else {
-                            playerController = GetBestPlayerInFOV(Config.GetFloat("combat.silentaim.fovsize"));
+                            playerController = CombatH.GetBestPlayerInFOV(Config.GetFloat("combat.silentaim.fovsize"));
                         }
                     } else {
-                        playerController = GetBestPlayer();
+                        playerController = CombatH.GetBestPlayer();
                     }
 
                     if (playerController != null)
                     {
-                        Camera.main.transform.LookAt(Players.GetHeadPosition(playerController));
+                        // make main camera aim at player
+                        Camera.main.transform.LookAt(
+                            Players.GetBonePosition(
+                                playerController,
+                                Skeleton.GetBoneFromString(Config.GetString("combat.silentaim.aimbone"))
+                            )
+                        );
                     }
                 }
 
@@ -80,9 +120,9 @@ namespace NetWare
 
                 if (Config.GetBool("combat.weapons.rapidfire"))
                 {
-                    rapidFireTimer++;
+                    CombatH.rapidFireTimer++;
 
-                    if (rapidFireTimer > 3)
+                    if (CombatH.rapidFireTimer > 3)
                     {
                         WeaponsController weaponsController = LocalPlayer.GetWeaponsController();
 
@@ -96,7 +136,7 @@ namespace NetWare
                             }
                         );
 
-                        rapidFireTimer = 0;
+                        CombatH.rapidFireTimer = 0;
                     }
                 }
             }
@@ -104,16 +144,16 @@ namespace NetWare
 
         public static void Draw()
         {
-            // soft aim
-            if (Config.GetBool("combat.softaim.enabled") && Config.GetBool("combat.softaim.checkfov") && Config.GetBool("combat.softaim.drawfov"))
+            // aimbot
+            if (Config.GetBool("combat.aimbot.enabled") && Config.GetBool("combat.aimbot.checkfov") && Config.GetBool("combat.aimbot.drawfov"))
             {
-                Color fovColor = Colors.HexToRGB(Config.GetString("combat.softaim.fovcolor"));
+                Color fovColor = Colors.HexToRGB(Config.GetString("combat.aimbot.fovcolor"));
 
-                if (Config.GetBool("combat.softaim.dynamicfov"))
+                if (Config.GetBool("combat.aimbot.dynamicfov"))
                 {
                     Render.DrawCircle(fovColor, Render.screenCenter, Camera.main.fieldOfView + 80);
                 } else {
-                    Render.DrawCircle(fovColor, Render.screenCenter, Config.GetFloat("combat.softaim.fovsize"));
+                    Render.DrawCircle(fovColor, Render.screenCenter, Config.GetFloat("combat.aimbot.fovsize"));
                 }
             }
 
@@ -135,61 +175,78 @@ namespace NetWare
         {
             Menu.Begin();
 
-            Menu.NewSection("Soft Aim");
+            Menu.NewSection("Aimbot");
             Config.SetBool(
-                "combat.softaim.enabled",
+                "combat.aimbot.enabled",
                 Menu.NewToggle(
-                    Config.GetBool("combat.softaim.enabled"),
+                    Config.GetBool("combat.aimbot.enabled"),
                     "Enabled"
+                )
+            );
+            Menu.NewTitle("Targeting");
+            Config.SetString(
+                "combat.aimbot.aimbone",
+                Menu.NewList(
+                    "Aim Bone",
+                    Config.GetString("combat.aimbot.aimbone"),
+                    new string[] { "Head", "Hips" }
+                )
+            );
+            Config.SetString(
+                "combat.aimbot.aimmode",
+                Menu.NewList(
+                    "Aim Mode",
+                    Config.GetString("combat.aimbot.aimmode"),
+                    new string[] { "Mouse", "Camera" }
                 )
             );
             Menu.NewTitle("FOV Settings");
             Config.SetBool(
-                "combat.softaim.checkfov",
+                "combat.aimbot.checkfov",
                 Menu.NewToggle(
-                    Config.GetBool("combat.softaim.checkfov"),
+                    Config.GetBool("combat.aimbot.checkfov"),
                     "Check FOV"
                 )
             );
             Config.SetBool(
-                "combat.softaim.drawfov",
+                "combat.aimbot.drawfov",
                 Menu.NewToggle(
-                    Config.GetBool("combat.softaim.drawfov"),
+                    Config.GetBool("combat.aimbot.drawfov"),
                     "Draw FOV"
                 )
             );
             Config.SetBool(
-                "combat.softaim.dynamicfov",
+                "combat.aimbot.dynamicfov",
                 Menu.NewToggle(
-                    Config.GetBool("combat.softaim.dynamicfov"),
+                    Config.GetBool("combat.aimbot.dynamicfov"),
                     "Dynamic FOV"
                 )
             );
             Config.SetFloat(
-                "combat.softaim.fovsize",
+                "combat.aimbot.fovsize",
                 Menu.NewSlider(
                     "FOV Size",
-                    Config.GetFloat("combat.softaim.fovsize"),
+                    Config.GetFloat("combat.aimbot.fovsize"),
                     10,
                     500
                 )
             );
             Menu.NewTitle("Smoothing");
             Config.SetFloat(
-                "combat.softaim.smoothing",
+                "combat.aimbot.smoothing",
                 Menu.NewSlider(
                     "Smoothing",
-                    Config.GetFloat("combat.softaim.smoothing"),
-                    5,
-                    10
+                    Config.GetFloat("combat.aimbot.smoothing"),
+                    0,
+                    1
                 )
             );
             Menu.NewTitle("Colors");
             Config.SetString(
-                "combat.softaim.fovcolor",
+                "combat.aimbot.fovcolor",
                 Menu.NewTextField(
                     "FOV Color",
-                    Config.GetString("combat.softaim.fovcolor").ToUpper()
+                    Config.GetString("combat.aimbot.fovcolor").ToUpper()
                 )
             );
 
@@ -201,6 +258,15 @@ namespace NetWare
                 Menu.NewToggle(
                     Config.GetBool("combat.silentaim.enabled"),
                     "Enabled"
+                )
+            );
+            Menu.NewTitle("Targeting");
+            Config.SetString(
+                "combat.silentaim.aimbone",
+                Menu.NewList(
+                    "Aim Bone",
+                    Config.GetString("combat.silentaim.aimbone"),
+                    new string[] { "Head", "Hips" }
                 )
             );
             Menu.NewTitle("FOV Settings");
@@ -267,74 +333,6 @@ namespace NetWare
             );
 
             Menu.End();
-        }
-
-        // internal methods and variables
-        private static int rapidFireTimer = 0;
-
-        private static PlayerController GetBestPlayerInFOV(float fov)
-        {
-            PlayerController bestPlayerController = null;
-            float lastDistance = float.MaxValue;
-
-            foreach (PlayerController playerController in Storage.players)
-            {
-                if (!Players.IsPlayerTeammate(playerController) && Players.IsPlayerValid(playerController))
-                {
-                    Vector3 playerHeadWorldPosition = Players.GetHeadPosition(playerController);
-                    Vector3 playerHeadScreenPosition = Position.ToScreen(playerHeadWorldPosition);
-
-                    if (Position.IsOnScreen(playerHeadScreenPosition))
-                    {
-                        float screenDistance = new Vector2(
-                            playerHeadScreenPosition.x - Render.screenCenter.x,
-                            playerHeadScreenPosition.y - Render.screenCenter.y
-                        ).magnitude;
-
-                        if (screenDistance < lastDistance)
-                        {
-                            lastDistance = screenDistance;
-                            bestPlayerController = playerController;
-                        }
-                    }
-                }
-            }
-
-            if (lastDistance <= fov)
-            {
-                return bestPlayerController;
-            } else {
-                return null;
-            }
-        }
-
-        private static PlayerController GetBestPlayer()
-        {
-            PlayerController localPlayer = LocalPlayer.Get();
-
-            PlayerController bestPlayerController = null;
-            float lastDistance = float.MaxValue;
-
-            if (localPlayer != null)
-            {
-                Vector3 origin = localPlayer.OBPJMLEMMCN;
-
-                foreach (PlayerController playerController in Storage.players)
-                {
-                    if (!Players.IsPlayerTeammate(playerController) && Players.IsPlayerValid(playerController))
-                    {
-                        float distance = (playerController.OBPJMLEMMCN - origin).magnitude;
-
-                        if (distance < lastDistance)
-                        {
-                            lastDistance = distance;
-                            bestPlayerController = playerController;
-                        }
-                    }
-                }
-            }
-
-            return bestPlayerController;
         }
     }
 }

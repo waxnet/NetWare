@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
 namespace NetWare
 {
@@ -6,31 +7,34 @@ namespace NetWare
     {
         public void Start()
         {
-            // config
-            Config.Setup();
-
             // start storage updater
             StartCoroutine(Storage.Update());
 
             // window data
             int windowWidth = 440;
-            int windowHeight = 515;
+            int windowHeight = 560;
 
             int windowX = 200;
             int windowY = ((Screen.height / 2) - (windowHeight / 2));
 
             // window position and size
             Menu.windowRect = new Rect(windowX, windowY, windowWidth, windowHeight);
+
+            // setup config
+            Config.Setup();
         }
 
         public void Update()
         {
             // run features
-            Combat.Execute();
-            Movement.Execute();
-            Visual.Execute();
-            Exploits.Execute();
-            
+            if (PhotonNetwork.InRoom)
+            {
+                Combat.Execute();
+                Movement.Execute();
+                Visual.Execute();
+                Exploits.Execute();
+            }
+
             // toggle window
             if (Input.GetKeyDown(KeyCode.Insert))
             {
@@ -42,7 +46,11 @@ namespace NetWare
         {
             // run features
             Combat.Draw();
-            Visual.Draw();
+            if (PhotonNetwork.InRoom)
+            {
+                Visual.Draw();
+            }
+            Settings.Draw();
 
             // display window
             if (Menu.displayWindow)

@@ -40,18 +40,18 @@ namespace NetWare
             GL.LoadPixelMatrix(0, Screen.width, Screen.height, 0);
             GL.Begin(2);
 
-            for (float angle = 0f; angle < 6.28318548f; angle += 0.05f)
+            for (float angle = 0; angle < 6.28318548f; angle += .05f)
             {
                 GL.Vertex(
                     new Vector3(
-                        (Mathf.Cos(angle) * radius) + position.x,
-                        (Mathf.Sin(angle) * radius) + position.y
+                        ((Mathf.Cos(angle) * radius) + position.x),
+                        ((Mathf.Sin(angle) * radius) + position.y)
                     )
                 );
                 GL.Vertex(
                     new Vector3(
-                        (Mathf.Cos(angle + .05f) * radius) + position.x,
-                        (Mathf.Sin(angle + .05f) * radius) + position.y
+                        ((Mathf.Cos(angle + .05f) * radius) + position.x),
+                        ((Mathf.Sin(angle + .05f) * radius) + position.y)
                     )
                 );
             }

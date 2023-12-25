@@ -10,6 +10,7 @@ namespace NetWare
             HumanBodyBones.UpperChest,
             HumanBodyBones.Head
         };
+
         public static HumanBodyBones[] arms = {
             HumanBodyBones.RightHand,
             HumanBodyBones.RightLowerArm,
@@ -21,6 +22,7 @@ namespace NetWare
             HumanBodyBones.LeftLowerArm,
             HumanBodyBones.LeftHand
         };
+
         public static HumanBodyBones[] legs = {
             HumanBodyBones.RightFoot,
             HumanBodyBones.RightLowerLeg,
@@ -47,13 +49,13 @@ namespace NetWare
             HumanBodyBones.LeftLowerArm,
             HumanBodyBones.LeftHand,
 
-            HumanBodyBones.RightUpperLeg,
-            HumanBodyBones.RightLowerLeg,
             HumanBodyBones.RightFoot,
+            HumanBodyBones.RightLowerLeg,
+            HumanBodyBones.RightUpperLeg,
 
-            HumanBodyBones.LeftUpperLeg,
+            HumanBodyBones.LeftFoot,
             HumanBodyBones.LeftLowerLeg,
-            HumanBodyBones.LeftFoot
+            HumanBodyBones.LeftUpperLeg,
         };
 
         // methods
@@ -90,7 +92,7 @@ namespace NetWare
                 case "Hips":
                     bone = HumanBodyBones.Hips;
                     break;
-                
+
                 // arms
                 case "RightShoulder":
                     bone = HumanBodyBones.RightShoulder;
@@ -116,7 +118,7 @@ namespace NetWare
                 case "LeftHand":
                     bone = HumanBodyBones.LeftHand;
                     break;
-                
+
                 // legs
                 case "RightUpperLeg":
                     bone = HumanBodyBones.RightUpperLeg;

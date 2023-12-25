@@ -16,6 +16,11 @@ namespace NetWare
             return Get()?.PAEKEKFLHOK;
         }
 
+        public static PlayerBuildingManager GetPlayerBuildingManager()
+        {
+            return Get()?.PlayerBuildingManager;
+        }
+
         // controllers
         public static vThirdPersonController GetThirdPersonController()
         {
@@ -43,10 +48,10 @@ namespace NetWare
             return GetCameraManager()?.TPCamera;
         }
 
-        // other
-        public static PlayerBuildingManager GetPlayerBuildingManager()
+        // checks
+        public static bool CanShoot()
         {
-            return Get()?.PlayerBuildingManager;
+            return GetPlayerBuildingManager()?.state == FHFJGGHJAGA.NONE;
         }
     }
 }

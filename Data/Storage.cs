@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using UnityEngine;
 
 namespace NetWare
@@ -11,7 +12,10 @@ namespace NetWare
         {
             while (true)
             {
-                players = FindObjectsOfType<PlayerController>();
+                if (PhotonNetwork.InRoom)
+                {
+                    players = FindObjectsOfType<PlayerController>();
+                }
 
                 yield return new WaitForSeconds(1);
             }

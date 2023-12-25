@@ -21,5 +21,19 @@ namespace NetWare
                 }
             }
         }
+
+        public static object GetValue<T>(T instance, string field)
+        {
+            FieldInfo[] fieldInfos = instance.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
+
+            foreach (FieldInfo fieldInfo in fieldInfos)
+            {
+                if (fieldInfo.Name == field)
+                {
+                    return fieldInfo.GetValue(instance);
+                }
+            }
+            return null;
+        }
     }
 }
