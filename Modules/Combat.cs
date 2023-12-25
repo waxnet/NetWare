@@ -42,7 +42,7 @@ namespace NetWare
 
                         // aim at player
                         if (aimbotAimMode == "Mouse" && Position.IsOnScreen(playerScreenPosition)) {
-                            Mouse.MoveTo(playerScreenPosition, (Config.GetFloat("combat.aimbot.smoothing") * 10));
+                            Mouse.MoveTo(playerScreenPosition, (int)Config.GetFloat("combat.aimbot.smoothing"));
                         }
 
                         if (aimbotAimMode == "Camera") {
@@ -60,7 +60,7 @@ namespace NetWare
                             Quaternion newRotation = Quaternion.Lerp(
                                 startRotation,
                                 endRotation,
-                                Config.GetFloat("combat.aimbot.smoothing")
+                                (Config.GetFloat("combat.aimbot.smoothing") / 10)
                             );
 
                             // set camera rotation
@@ -197,7 +197,7 @@ namespace NetWare
                 Menu.NewList(
                     "Aim Mode",
                     Config.GetString("combat.aimbot.aimmode"),
-                    new string[] { "Mouse", "Camera" }
+                    new string[] { "Camera", "Mouse" }
                 )
             );
             Menu.NewTitle("FOV Settings");
@@ -237,8 +237,8 @@ namespace NetWare
                 Menu.NewSlider(
                     "Smoothing",
                     Config.GetFloat("combat.aimbot.smoothing"),
-                    0,
-                    1
+                    1,
+                    10
                 )
             );
             Menu.NewTitle("Colors");

@@ -15,12 +15,12 @@ namespace NetWare
             // combat
             ["combat.aimbot.enabled"] = "false",
             ["combat.aimbot.aimbone"] = "Head",
-            ["combat.aimbot.aimmode"] = "Mouse",
+            ["combat.aimbot.aimmode"] = "Camera",
             ["combat.aimbot.checkfov"] = "true",
             ["combat.aimbot.dynamicfov"] = "false",
             ["combat.aimbot.drawfov"] = "true",
             ["combat.aimbot.fovsize"] = "200",
-            ["combat.aimbot.smoothing"] = "0.5",
+            ["combat.aimbot.smoothing"] = "5",
             ["combat.aimbot.fovcolor"] = "#FF4C4C",
 
             ["combat.silentaim.enabled"] = "false",

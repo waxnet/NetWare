@@ -41,9 +41,11 @@ namespace NetWare
                 Menu.displayWindow = !Menu.displayWindow;
             }
         }
-
+        public static string a = "";
         public void OnGUI()
         {
+            GUI.Label(new Rect(100, 100, 600, 600), a);
+
             // run features
             Combat.Draw();
             if (PhotonNetwork.InRoom)
@@ -75,7 +77,9 @@ namespace NetWare
                 if (selected)
                 {
                     toggleStyle.normal.textColor = Color.white;
-                } else {
+                }
+                else
+                {
                     toggleStyle.normal.textColor = Color.gray;
                 }
 
