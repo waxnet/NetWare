@@ -42,7 +42,7 @@ namespace NetWare
 
                         // aim at player
                         if (aimbotAimMode == "Mouse" && Position.IsOnScreen(playerScreenPosition)) {
-                            Mouse.MoveTo(playerScreenPosition, (int)Config.GetFloat("combat.aimbot.smoothing"));
+                            Mouse.MoveTo(playerScreenPosition, Config.GetInt("combat.aimbot.smoothing"));
                         }
 
                         if (aimbotAimMode == "Camera") {
