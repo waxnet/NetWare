@@ -45,6 +45,18 @@ namespace NetWare.Helpers
 
                     if (!Position.IsBehindCamera(originPosition) && !Position.IsBehindCamera(destinationPosition))
                     {
+                        if ((index + 2) == Skeleton.spine.Length)
+                        {
+                            originPosition.z = 0;
+                            destinationPosition.z = 0;
+
+                            float circleRadius = (originPosition - destinationPosition).magnitude;
+
+                            Render.DrawCircle(color, destinationPosition, circleRadius);
+
+                            continue;
+                        }
+
                         Render.DrawLine(color, originPosition, destinationPosition);
                     }
                 }
@@ -365,7 +377,7 @@ namespace NetWare.Helpers
             {
                 // get name and name size
                 string playerName = Players.GetPlayerName(playerController);
-                if (playerController.DKGMJCDBDMN)
+                if (playerController.HEFMPNOPFEP)
                 {
                     playerName += " (BOT)";
                 }

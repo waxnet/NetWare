@@ -12,6 +12,8 @@ namespace NetWare
         public static string[] tabs = { "Combat", "Visual", "Movement", "Exploits", "Settings" };
         public static int currentTab = 0;
 
+        public static Vector2 tabScrollPosition = Vector2.zero;
+
         private static bool isSectionOpen = false;
 
         public static void Begin()
@@ -120,9 +122,9 @@ namespace NetWare
                     (sectionSize - textSize) - (dashSize * 4)
                 ) / dashSize) / 2
             );
-            
+
             string separators = string.Concat(Enumerable.Repeat("-", dashMultiplier));
-            
+
             // create title
             GUILayout.Label("<b>" + separators + " " + text + " " + separators + "</b>", labelStyle);
         }

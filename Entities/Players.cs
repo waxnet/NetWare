@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using UnityEngine;
 
 namespace NetWare
@@ -39,7 +38,7 @@ namespace NetWare
 
         public static bool IsPlayerTeammate(PlayerController playerController)
         {
-            return playerController?.IFAAIDGNPOL ?? true;
+            return playerController?.OPKOAJACEFI ?? true;
         }
 
         public static bool IsPlayerValid(PlayerController playerController)
@@ -49,22 +48,22 @@ namespace NetWare
 
         public static bool IsPlayerAlive(PlayerController playerController)
         {
-            return playerController?.PAEKEKFLHOK?.KillerId == null;
+            return playerController?.MLMEBEKJKAE?.KillerId == null;
         }
 
-        public static EOLCHOFICLK GetPlayerInfo(PlayerController playerController)
+        public static EMNMIIDMPNL GetPlayerInfo(PlayerController playerController)
         {
-            return playerController?.PBIJHIGLJEM;
+            return playerController?.ANNFEKLCHMI;
         }
 
         public static string GetPlayerName(PlayerController playerController)
         {
-            return GetPlayerInfo(playerController)?.JBNPFKLFFCH;
+            return GetPlayerInfo(playerController)?.HNFNLIFMJCD;
         }
 
         public static int? GetPlayerRankXP(PlayerController playerController)
         {
-            return GetPlayerInfo(playerController)?.PDNGCJKAPNC;
+            return GetPlayerInfo(playerController)?.ENFMGIKJDFB;
         }
 
         public static double GetPlayerDistance(PlayerController playerController)
@@ -74,7 +73,7 @@ namespace NetWare
 
         public static PlayerHealth GetHealth(PlayerController playerController)
         {
-            return playerController?.PAEKEKFLHOK;
+            return playerController?.MLMEBEKJKAE;
         }
     }
 }

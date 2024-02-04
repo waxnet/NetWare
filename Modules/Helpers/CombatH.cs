@@ -54,13 +54,13 @@ namespace NetWare.Helpers
 
             if (localPlayer != null)
             {
-                Vector3 origin = localPlayer.OBPJMLEMMCN;
+                Vector3 origin = localPlayer.PFCNHGBHDLO;
 
                 foreach (PlayerController playerController in Storage.players)
                 {
                     if (!Players.IsPlayerTeammate(playerController) && Players.IsPlayerValid(playerController))
                     {
-                        float distance = (playerController.OBPJMLEMMCN - origin).magnitude;
+                        float distance = (playerController.PFCNHGBHDLO - origin).magnitude;
 
                         if (distance < lastDistance)
                         {

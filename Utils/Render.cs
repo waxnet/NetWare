@@ -10,14 +10,12 @@ namespace NetWare
             // initialize material
             Init();
 
-            // set material color
-            overlayMaterial.SetColor("_Color", color);
-
             // draw line
             GL.PushMatrix();
             overlayMaterial.SetPass(0);
             GL.LoadPixelMatrix(0, Screen.width, Screen.height, 0);
             GL.Begin(2);
+            GL.Color(color);
 
             GL.Vertex(new Vector3(origin.x, origin.y));
             GL.Vertex(new Vector3(destination.x, destination.y));
@@ -31,14 +29,12 @@ namespace NetWare
             // initialize material
             Init();
 
-            // set material color
-            overlayMaterial.SetColor("_Color", color);
-
             // draw circle
             GL.PushMatrix();
             overlayMaterial.SetPass(0);
             GL.LoadPixelMatrix(0, Screen.width, Screen.height, 0);
             GL.Begin(2);
+            GL.Color(color);
 
             for (float angle = 0; angle < 6.28318548f; angle += .05f)
             {
@@ -65,9 +61,6 @@ namespace NetWare
             // initialize material
             Init();
 
-            // set material color
-            overlayMaterial.SetColor("_Color", color);
-
             // fixed values
             width /= 2;
             height /= 2;
@@ -77,6 +70,7 @@ namespace NetWare
             overlayMaterial.SetPass(0);
             GL.LoadPixelMatrix(0, Screen.width, Screen.height, 0);
             GL.Begin(7);
+            GL.Color(color);
 
             GL.TexCoord2(position.x + width, position.y + height);
             GL.Vertex(new Vector3(position.x + width, position.y + height));
@@ -99,10 +93,10 @@ namespace NetWare
         public static Vector3 screenCenterBottom = new Vector3((Screen.width / 2), Screen.height);
 
         private static Material overlayMaterial = null;
-
+        
         private static void Init()
         {
-            // create materials
+            // create overlay material
             if (overlayMaterial == null)
             {
                 overlayMaterial = new Material(Shader.Find("Hidden/Internal-Colored"))

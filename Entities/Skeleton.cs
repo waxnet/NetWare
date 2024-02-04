@@ -8,6 +8,7 @@ namespace NetWare
         public static HumanBodyBones[] spine = {
             HumanBodyBones.Hips,
             HumanBodyBones.UpperChest,
+            HumanBodyBones.Neck,
             HumanBodyBones.Head
         };
 
@@ -15,9 +16,7 @@ namespace NetWare
             HumanBodyBones.RightHand,
             HumanBodyBones.RightLowerArm,
             HumanBodyBones.RightUpperArm,
-            HumanBodyBones.RightShoulder,
             HumanBodyBones.UpperChest,
-            HumanBodyBones.LeftShoulder,
             HumanBodyBones.LeftUpperArm,
             HumanBodyBones.LeftLowerArm,
             HumanBodyBones.LeftHand
@@ -36,6 +35,7 @@ namespace NetWare
         // full body
         public static HumanBodyBones[] body = {
             HumanBodyBones.Head,
+            HumanBodyBones.Neck,
             HumanBodyBones.UpperChest,
             HumanBodyBones.Hips,
 
@@ -85,6 +85,9 @@ namespace NetWare
                 // spine
                 case "Head":
                     bone = HumanBodyBones.Head;
+                    break;
+                case "Neck":
+                    bone = HumanBodyBones.Neck;
                     break;
                 case "UpperChest":
                     bone = HumanBodyBones.UpperChest;

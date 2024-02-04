@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Invector.CharacterController;
+using UnityEngine;
 
 namespace NetWare
 {
@@ -6,25 +7,26 @@ namespace NetWare
     {
         public static void Execute()
         {
+            vThirdPersonController thirdPersonController = LocalPlayer.GetThirdPersonController();
             PlayerController playerController = LocalPlayer.Get();
 
-            if (playerController != null)
+            if (playerController != null && thirdPersonController != null)
             {
                 // speed
                 if (Config.GetBool("movement.speed.enabled"))
                 {
-                    playerController.MGOCBLHDAOP = Config.GetFloat("movement.speed.amount");
+                    playerController.DJFKBAEGOBB = Config.GetFloat("movement.speed.amount");
                 } else {
-                    playerController.MGOCBLHDAOP = 1;
+                    playerController.DJFKBAEGOBB = 1;
                 }
 
                 // fly
-                playerController.SetGodMode(Config.GetBool("movement.fly.enabled"));
+                thirdPersonController.SetGodMode(Config.GetBool("movement.fly.enabled"));
 
                 // bhop
                 if (Config.GetBool("movement.bhop.enabled") && Input.GetKey(KeyCode.Space))
                 {
-                    LocalPlayer.GetThirdPersonController()?.Jump();
+                    thirdPersonController.Jump();
                 }
             }
         }

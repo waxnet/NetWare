@@ -10,12 +10,11 @@
 
 ### <p align="center">🕸️ NetWare 🕸️</p>
 <p align= "center">
-  <img src="https://img.shields.io/github/stars/waxnet/NetWare">
-  <img src="https://img.shields.io/github/forks/waxnet/NetWare">
-  <br>
   <img src="https://img.shields.io/github/last-commit/waxnet/NetWare">
   <img src="https://img.shields.io/github/license/waxnet/NetWare">
   <br>
+  <img src="https://img.shields.io/github/stars/waxnet/NetWare">
+  <img src="https://img.shields.io/github/forks/waxnet/NetWare">
   <img src="https://img.shields.io/github/downloads/waxnet/NetWare/total.svg">
 </p>
 
@@ -97,8 +96,6 @@ and run "inject.cmd" to load NetWare.
             - Pickaxe Changer
       + Game
             - Force Win
-            - Kill All
-            - Freeze Players
             - Destroy Buildings
             - Open Crates
             - Building Spam
@@ -108,6 +105,9 @@ and run "inject.cmd" to load NetWare.
             - Add 10k Fake Gold
             - Add 10k Fake Gems
             - Loadout Level Changer
+            - Building Gun
+            - Teleport Gun
+            - Explosion Gun
 
 • Settings
       + Config Manager

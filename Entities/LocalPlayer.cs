@@ -1,4 +1,5 @@
 ﻿using Invector.CharacterController;
+using JustPlay.Equipment;
 using UnityEngine;
 
 namespace NetWare
@@ -8,12 +9,12 @@ namespace NetWare
         // other
         public static PlayerController Get()
         {
-            return PlayerController.HGPJOFAPIBH;
+            return PlayerController.JGCPJEAMFIG;
         }
 
         public static PlayerHealth GetHealth()
         {
-            return Get()?.PAEKEKFLHOK;
+            return Get()?.MLMEBEKJKAE;
         }
 
         public static PlayerBuildingManager GetPlayerBuildingManager()
@@ -24,23 +25,28 @@ namespace NetWare
         // controllers
         public static vThirdPersonController GetThirdPersonController()
         {
-            return Get()?.OEGGIHFLNAN;
+            return Get()?.KNCPCFDCFCD;
         }
 
         public static WeaponsController GetWeaponsController()
         {
-            return Get()?.CIMFGBELHOH;
+            return Get()?.DCINIDFEEJF;
         }
 
         public static WeaponModel GetWeaponModel()
         {
-            return GetWeaponsController()?.MMFGMHOCMEP;
+            return GetWeaponsController()?.FFJBKALIODH;
+        }
+
+        public static WeaponStats? GetWeaponStats()
+        {
+            return GetWeaponModel()?.BJEJCJJBMCC;
         }
 
         // camera
         public static CameraManager GetCameraManager()
         {
-            return CameraManager.LIPLNDMKLDB;
+            return CameraManager.CPBDFOPICLP;
         }
 
         public static vThirdPersonCamera GetThirdPersonCamera()
@@ -51,7 +57,7 @@ namespace NetWare
         // checks
         public static bool CanShoot()
         {
-            return GetPlayerBuildingManager()?.state == FHFJGGHJAGA.NONE;
+            return GetPlayerBuildingManager()?.state == GOBILIEJCKA.NONE;
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace NetWare
 {
-    public class Config
+    public static class Config
     {
         private static readonly string configFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/NetWare/configs";
         public static List<string> configList = new List<string>();
@@ -72,6 +72,10 @@ namespace NetWare
 
             ["exploits.fun.levelchanger"] = "false",
             ["exploits.fun.levelchangeramount"] = "100000",
+
+            ["exploits.fun.buildinggun"] = "false",
+            ["exploits.fun.teleportgun"] = "false",
+            ["exploits.fun.explosiongun"] = "false",
 
             // settings
             ["settings.interface.watermark"] = "true",

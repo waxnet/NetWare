@@ -11,8 +11,8 @@ namespace NetWare
             StartCoroutine(Storage.Update());
 
             // window data
-            int windowWidth = 440;
-            int windowHeight = 560;
+            int windowWidth = 450;
+            int windowHeight = 550;
 
             int windowX = 200;
             int windowY = ((Screen.height / 2) - (windowHeight / 2));
@@ -72,13 +72,20 @@ namespace NetWare
                 string name = Menu.tabs[index];
 
                 GUIStyle toggleStyle = new GUIStyle("Box");
-                if (selected) {
+                if (selected)
+                {
                     toggleStyle.normal.textColor = Color.white;
                 } else {
                     toggleStyle.normal.textColor = Color.gray;
                 }
 
-                if (GUILayout.Toggle(selected, "<b>" + name + "</b>", toggleStyle, GUILayout.Width((Menu.windowRect.width / Menu.tabs.Length) - 12)))
+                int offset = 8;
+                if (index == 2)
+                {
+                    offset = 4;
+                }
+
+                if (GUILayout.Toggle(selected, "<b>" + name + "</b>", toggleStyle, GUILayout.Width((Menu.windowRect.width / Menu.tabs.Length) - offset)))
                 {
                     Menu.currentTab = index;
                 }
@@ -86,6 +93,7 @@ namespace NetWare
             GUILayout.EndHorizontal();
 
             // tabs
+            Menu.tabScrollPosition = GUILayout.BeginScrollView(Menu.tabScrollPosition, false, false, GUIStyle.none, GUIStyle.none, GUIStyle.none);
             switch (Menu.currentTab)
             {
                 case 0:
@@ -107,6 +115,7 @@ namespace NetWare
                     Combat.Tab();
                     break;
             }
+            GUILayout.EndScrollView();
 
             // make menu draggable
             GUILayout.EndArea();
