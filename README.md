@@ -22,8 +22,16 @@
 
 ### <p align="center">🔑 Usage 🔑</p>
 <p align="center"><i><b>
-After you've downloaded and extracted the latest release, open 1v1.LOL
-and run "inject.cmd" to load NetWare.
+Welcome to NetWare!
+Here is how you use it!
+
+1. Download from <a href="https://github.com/waxnet/NetWare/releases">Releases</a>. You can keep this in your downloads.
+2. Unzip, you may want to put this in a safe folder. This is the injector for netware.
+3. Inject. Open 1v1.LOL and then run the INJECT.CMD file.
+4. Play. You now have NetWare injected into your game.
+Welcome to NetWare.
+
+⚠️DISCLAIMER⚠️:  Each time you restart 1v1.LOL, you have to repeat steps 3 and 4.
 </b></i></p>
 
 -----
@@ -124,13 +132,16 @@ and run "inject.cmd" to load NetWare.
 ### <p align="center">💡 Ideas 💡</p>
 
     • Fix my shitty code.
+    • Make UI Look Cleaner
+    • Use better injector
+    • Get Dev Team
 
 <p align="center"><i><b>Feel free to submit any idea by making a pull request on this repository!</b></i></p>
 
 -----
 
 ### <p align="center">💾 Dependencies 💾</p>
-<p align="center"><a href="https://github.com/warbler/SharpMonoInjector">SharpMonoInjector</a></p>
+<p align="center"><a href="https://github.com/warbler/SharpMonoInjector">SharpMonoInjector</a> (Installed with NetWare)</p>
 
 -----
 
