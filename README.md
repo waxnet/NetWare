@@ -41,7 +41,7 @@ and run "inject.cmd" to load NetWare.
             - Dynamic Fov
             - FOV Size (10 - 500)
             - Smoothing (5 - 10)
-            - FOV Color Picker
+            - FOV Color Picker (type rgb for rainbow fov)
       + Silent Aim
             - Enabled
             - Aim Bone
@@ -49,11 +49,13 @@ and run "inject.cmd" to load NetWare.
             - Draw Fov
             - Dynamic Fov
             - FOV Size (10 - 500)
-            - FOV Color Picker
+            - FOV Color Picker (type rgb for rainbow fov)
       + Weapons
             - No Recoil
             - Infinite Ammo
             - Rapid Fire
+            - No Spread
+            - Infinite Range
 
 • Visual
       + ESP
@@ -61,6 +63,7 @@ and run "inject.cmd" to load NetWare.
             - Skeleton
             - 3D Boxes
             - 2D Boxes
+            - Filled Boxes
             - Info
             - Nametags
             - Background Color Picker
@@ -96,6 +99,8 @@ and run "inject.cmd" to load NetWare.
             - Pickaxe Changer
       + Game
             - Force Win
+            - Freeze All
+            - Kill All
             - Destroy Buildings
             - Open Crates
             - Building Spam
