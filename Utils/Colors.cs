@@ -15,17 +15,23 @@ namespace NetWare
             return new Color(red, green, blue);
         }
 
+        public static Color HexToRGBAA(string hexColor)
+        {
+            if (hexColor.Length != 7)
+                return Color.white;
+
+            if (ColorUtility.TryParseHtmlString(hexColor, out Color color))
+                return color;
+            return Color.white;
+        }
+
         public static Color HexToRGB(string hexColor)
         {
             if (hexColor.Length != 7)
-            {
                 return Color.white;
-            }
 
             if (ColorUtility.TryParseHtmlString(hexColor, out Color color))
-            {
                 return color;
-            }
             return Color.white;
         }
 
@@ -33,9 +39,9 @@ namespace NetWare
         {
             Color color = HexToRGB(Config.GetString("visual.esp.enemycolor"));
 
-            if (playerController?.HEFMPNOPFEP ?? true) {
+            if (playerController?.JFBKIMDGDIH ?? true) {
                 color = HexToRGB(Config.GetString("visual.esp.botcolor"));
-            } else if (playerController?.OPKOAJACEFI ?? true) {
+            } else if (playerController?.DKDMEOFNMBJ ?? true) {
                 color = HexToRGB(Config.GetString("visual.esp.teammatecolor"));
             }
 

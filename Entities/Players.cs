@@ -38,7 +38,7 @@ namespace NetWare
 
         public static bool IsPlayerTeammate(PlayerController playerController)
         {
-            return playerController?.OPKOAJACEFI ?? true;
+            return playerController?.DKDMEOFNMBJ ?? true;
         }
 
         public static bool IsPlayerValid(PlayerController playerController)
@@ -48,22 +48,22 @@ namespace NetWare
 
         public static bool IsPlayerAlive(PlayerController playerController)
         {
-            return playerController?.MLMEBEKJKAE?.KillerId == null;
+            return playerController?.DNBIIJJDBLN?.KillerId == null;
         }
 
-        public static EMNMIIDMPNL GetPlayerInfo(PlayerController playerController)
+        public static BILPBJBHCII GetPlayerInfo(PlayerController playerController)
         {
-            return playerController?.ANNFEKLCHMI;
+            return playerController?.BOEJCPIGOOP;
         }
 
         public static string GetPlayerName(PlayerController playerController)
         {
-            return GetPlayerInfo(playerController)?.HNFNLIFMJCD;
+            return GetPlayerInfo(playerController)?.NKGIELNJNKI;
         }
 
         public static int? GetPlayerRankXP(PlayerController playerController)
         {
-            return GetPlayerInfo(playerController)?.ENFMGIKJDFB;
+            return GetPlayerInfo(playerController)?.DEJEFFAEJMO;
         }
 
         public static double GetPlayerDistance(PlayerController playerController)
@@ -73,7 +73,7 @@ namespace NetWare
 
         public static PlayerHealth GetHealth(PlayerController playerController)
         {
-            return playerController?.MLMEBEKJKAE;
+            return playerController?.DNBIIJJDBLN;
         }
     }
 }

@@ -9,12 +9,12 @@ namespace NetWare
         // other
         public static PlayerController Get()
         {
-            return PlayerController.JGCPJEAMFIG;
+            return PlayerController.LKIGDIGGPAD;
         }
 
         public static PlayerHealth GetHealth()
         {
-            return Get()?.MLMEBEKJKAE;
+            return Get()?.DNBIIJJDBLN;
         }
 
         public static PlayerBuildingManager GetPlayerBuildingManager()
@@ -25,28 +25,28 @@ namespace NetWare
         // controllers
         public static vThirdPersonController GetThirdPersonController()
         {
-            return Get()?.KNCPCFDCFCD;
+            return Get()?.EHCIACFKDOK;
         }
 
         public static WeaponsController GetWeaponsController()
         {
-            return Get()?.DCINIDFEEJF;
+            return Get()?.DNLMMIKCGGE;
         }
 
         public static WeaponModel GetWeaponModel()
         {
-            return GetWeaponsController()?.FFJBKALIODH;
+            return GetWeaponsController()?.EPKJMHJNGIB;
         }
 
         public static WeaponStats? GetWeaponStats()
         {
-            return GetWeaponModel()?.BJEJCJJBMCC;
+            return GetWeaponModel()?.HMHEAENHHCF;
         }
 
         // camera
         public static CameraManager GetCameraManager()
         {
-            return CameraManager.CPBDFOPICLP;
+            return CameraManager.NKEFBCLBLKI;
         }
 
         public static vThirdPersonCamera GetThirdPersonCamera()
@@ -57,7 +57,7 @@ namespace NetWare
         // checks
         public static bool CanShoot()
         {
-            return GetPlayerBuildingManager()?.state == GOBILIEJCKA.NONE;
+            return GetPlayerBuildingManager()?.state == HLOAPFHPADJ.NONE;
         }
     }
 }

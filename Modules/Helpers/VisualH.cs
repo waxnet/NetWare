@@ -224,8 +224,7 @@ namespace NetWare.Helpers
             Vector3 headWorldPosition = Players.GetHeadPosition(playerController);
             Vector3 feetWorldPosition = Players.GetFeetPosition(playerController);
 
-            if (headWorldPosition.y > feetWorldPosition.y)
-            {
+            if (headWorldPosition.y > feetWorldPosition.y) {
                 headWorldPosition.y += .22f;
                 feetWorldPosition.y -= .2f;
             } else {
@@ -251,8 +250,7 @@ namespace NetWare.Helpers
                 float boxWidth = boxHeightB / 1.5f;
                 float boxHeight = boxHeightB;
 
-                if (boxHeightA > boxWidth)
-                {
+                if (boxHeightA > boxWidth) {
                     boxWidth = boxHeightA;
                     boxHeight = boxHeightA / 1.5f;
                 }
@@ -284,6 +282,56 @@ namespace NetWare.Helpers
                     color,
                     bottomLeft,
                     topLeft
+                );
+            }
+        }
+        public static void DrawPlayerFilledBox(PlayerController playerController)
+        {
+            // get color and set alpha
+            Color color = Colors.GetPlayerTeamColor(playerController);
+            color.a = .2f;
+
+            // get head and feet world position
+            Vector3 headWorldPosition = Players.GetHeadPosition(playerController);
+            Vector3 feetWorldPosition = Players.GetFeetPosition(playerController);
+
+            if (headWorldPosition.y > feetWorldPosition.y) {
+                headWorldPosition.y += .22f;
+                feetWorldPosition.y -= .2f;
+            } else {
+                headWorldPosition.y -= .22f;
+                feetWorldPosition.y += .2f;
+            }
+
+            // get head and feet screen position
+            Vector3 headScreenPosition = Position.ToScreen(headWorldPosition);
+            Vector3 feetScreenPosition = Position.ToScreen(feetWorldPosition);
+
+            // check if player is behind camera
+            if (!Position.IsBehindCamera(headScreenPosition) && !Position.IsBehindCamera(feetScreenPosition))
+            {
+                // get box position
+                float boxX = headScreenPosition.x + (feetScreenPosition.x - headScreenPosition.x) * .5f;
+                float boxY = headScreenPosition.y + (feetScreenPosition.y - headScreenPosition.y) * .5f;
+
+                // get box size
+                float boxHeightA = Mathf.Abs(headScreenPosition.x - feetScreenPosition.x);
+                float boxHeightB = Mathf.Abs(headScreenPosition.y - feetScreenPosition.y);
+
+                float boxWidth = boxHeightB / 1.5f;
+                float boxHeight = boxHeightB;
+
+                if (boxHeightA > boxWidth) {
+                    boxWidth = boxHeightA;
+                    boxHeight = boxHeightA / 1.5f;
+                }
+
+                // draw box
+                Render.DrawBox(
+                    color,
+                    new Vector3(boxX, boxY, 0),
+                    boxWidth,
+                    boxHeight
                 );
             }
         }
@@ -377,10 +425,8 @@ namespace NetWare.Helpers
             {
                 // get name and name size
                 string playerName = Players.GetPlayerName(playerController);
-                if (playerController.HEFMPNOPFEP)
-                {
+                if (playerController.JFBKIMDGDIH)
                     playerName += " (BOT)";
-                }
                 Vector2 playerNameSize = new GUIStyle().CalcSize(new GUIContent(playerName));
 
                 // draw name box
@@ -403,8 +449,11 @@ namespace NetWare.Helpers
                 boxSizeX /= 2;
                 boxSizeY /= 2;
 
+                Color teamLineColor = Colors.GetPlayerTeamColor(playerController);
+                teamLineColor.a = backgroundColor.a;
+
                 Render.DrawLine(
-                    Colors.GetPlayerTeamColor(playerController),
+                    teamLineColor,
                     new Vector3(
                         boxX + boxSizeX,
                         boxY - boxSizeY

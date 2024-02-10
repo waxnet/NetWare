@@ -12,7 +12,12 @@ namespace NetWare
 
         public static void BecomeMasterClient()
         {
-            PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
+            PhotonNetwork.CurrentRoom.SetMasterClient(PhotonNetwork.LocalPlayer);
+        }
+
+        public static ServerUser GetServerUser()
+        {
+            return FirebaseManager.NKEFBCLBLKI?.APPPPIDEGDH;
         }
     }
 }

@@ -33,6 +33,7 @@ namespace NetWare
                 Config.GetBool("visual.esp.skeleton") ||
                 Config.GetBool("visual.esp.3dboxes") ||
                 Config.GetBool("visual.esp.2dboxes") ||
+                Config.GetBool("visual.esp.filledboxes") ||
                 Config.GetBool("visual.esp.info") ||
                 Config.GetBool("visual.esp.nametags")
             )
@@ -56,7 +57,7 @@ namespace NetWare
                             VisualH.DrawPlayerSkeleton(playerController);
                         }
 
-                        // 3d and 2d boxes
+                        // 3d, 2d and filled boxes
                         if (Config.GetBool("visual.esp.3dboxes"))
                         {
                             VisualH.DrawPlayer3DBox(playerController);
@@ -64,6 +65,10 @@ namespace NetWare
                         if (Config.GetBool("visual.esp.2dboxes"))
                         {
                             VisualH.DrawPlayer2DBox(playerController);
+                        }
+                        if (Config.GetBool("visual.esp.filledboxes"))
+                        {
+                            VisualH.DrawPlayerFilledBox(playerController);
                         }
 
                         // info
@@ -113,6 +118,13 @@ namespace NetWare
                 Menu.NewToggle(
                     Config.GetBool("visual.esp.2dboxes"),
                     "2D Boxes"
+                )
+            );
+            Config.SetBool(
+                "visual.esp.filledboxes",
+                Menu.NewToggle(
+                    Config.GetBool("visual.esp.filledboxes"),
+                    "Filled Boxes"
                 )
             );
             Config.SetBool(

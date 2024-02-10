@@ -6,6 +6,7 @@ namespace NetWare.Helpers
     {
         // values
         public static int rapidFireTimer = 0;
+        public static int weaponStatsTimer = 0;
 
         // other
         public static PlayerController GetBestPlayerInFOV(float fov)
@@ -54,13 +55,13 @@ namespace NetWare.Helpers
 
             if (localPlayer != null)
             {
-                Vector3 origin = localPlayer.PFCNHGBHDLO;
+                Vector3 origin = Players.GetHipPosition(localPlayer);
 
                 foreach (PlayerController playerController in Storage.players)
                 {
                     if (!Players.IsPlayerTeammate(playerController) && Players.IsPlayerValid(playerController))
                     {
-                        float distance = (playerController.PFCNHGBHDLO - origin).magnitude;
+                        float distance = (Players.GetHipPosition(playerController) - origin).magnitude;
 
                         if (distance < lastDistance)
                         {

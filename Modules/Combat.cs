@@ -1,6 +1,8 @@
 ﻿using Photon.Pun;
 using UnityEngine;
 using NetWare.Helpers;
+using JustPlay.Equipment;
+using System.Reflection;
 
 namespace NetWare
 {
@@ -140,6 +142,38 @@ namespace NetWare
                     }
                 }
             }
+
+            if (CombatH.weaponStatsTimer >= 10)
+            {
+                WeaponModel weaponModel = LocalPlayer.GetWeaponModel();
+                WeaponStats stats = weaponModel.HMHEAENHHCF;
+
+                bool editWeaponStats = false;
+
+                if (Config.GetBool("combat.weapons.nospread"))
+                {
+                    stats.StatsForLevel.SpreadSettings.IncreasePerShot = 0f;
+                    stats.StatsForLevel.SpreadSettings.AimingSpread = 0f;
+                    stats.StatsForLevel.SpreadSettings.DefaultSpread = 0f;
+                    editWeaponStats = true;
+                }
+
+                if (Config.GetBool("combat.weapons.infiniterange"))
+                {
+                    stats.Range = 999;
+                    editWeaponStats = true;
+                }
+
+                if (editWeaponStats)
+                {
+                    PropertyInfo property = typeof(WeaponModel).GetProperty("HMHEAENHHCF");
+                    property.DeclaringType.GetProperty("HMHEAENHHCF");
+                    property.GetSetMethod(true).Invoke(weaponModel, new object[] { stats });
+                }
+
+                CombatH.weaponStatsTimer = 0;
+            }
+            CombatH.weaponStatsTimer++;
         }
 
         public static void Draw()
@@ -147,10 +181,12 @@ namespace NetWare
             // aimbot
             if (Config.GetBool("combat.aimbot.enabled") && Config.GetBool("combat.aimbot.checkfov") && Config.GetBool("combat.aimbot.drawfov"))
             {
-                Color fovColor = Colors.HexToRGB(Config.GetString("combat.aimbot.fovcolor"));
+                string fovSelectedColor = Config.GetString("combat.aimbot.fovcolor");
+                Color fovColor = Colors.HexToRGB(fovSelectedColor);
+                if (fovSelectedColor == "RGB")
+                    fovColor = Colors.GetRainbow();
 
-                if (Config.GetBool("combat.aimbot.dynamicfov"))
-                {
+                if (Config.GetBool("combat.aimbot.dynamicfov")) {
                     Render.DrawCircle(fovColor, Render.screenCenter, Camera.main.fieldOfView + 80);
                 } else {
                     Render.DrawCircle(fovColor, Render.screenCenter, Config.GetFloat("combat.aimbot.fovsize"));
@@ -160,10 +196,12 @@ namespace NetWare
             // silent aim
             if (Config.GetBool("combat.silentaim.enabled") && Config.GetBool("combat.silentaim.checkfov") && Config.GetBool("combat.silentaim.drawfov"))
             {
-                Color fovColor = Colors.HexToRGB(Config.GetString("combat.silentaim.fovcolor"));
+                string fovSelectedColor = Config.GetString("combat.silentaim.fovcolor");
+                Color fovColor = Colors.HexToRGB(fovSelectedColor);
+                if (fovSelectedColor == "RGB")
+                    fovColor = Colors.GetRainbow();
 
-                if (Config.GetBool("combat.silentaim.dynamicfov"))
-                {
+                if (Config.GetBool("combat.silentaim.dynamicfov")) {
                     Render.DrawCircle(fovColor, Render.screenCenter, Camera.main.fieldOfView + 80);
                 } else {
                     Render.DrawCircle(fovColor, Render.screenCenter, Config.GetFloat("combat.silentaim.fovsize"));
@@ -318,6 +356,13 @@ namespace NetWare
                 )
             );
             Config.SetBool(
+                "combat.weapons.nospread",
+                Menu.NewToggle(
+                    Config.GetBool("combat.weapons.nospread"),
+                    "No Spread"
+                )
+            );
+            Config.SetBool(
                 "combat.weapons.infiniteammo",
                 Menu.NewToggle(
                     Config.GetBool("combat.weapons.infiniteammo"),
@@ -329,6 +374,13 @@ namespace NetWare
                 Menu.NewToggle(
                     Config.GetBool("combat.weapons.rapidfire"),
                     "Rapid Fire"
+                )
+            );
+            Config.SetBool(
+                "combat.weapons.infiniterange",
+                Menu.NewToggle(
+                    Config.GetBool("combat.weapons.infiniterange"),
+                    "Infinite Range"
                 )
             );
 

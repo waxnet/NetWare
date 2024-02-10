@@ -32,14 +32,17 @@ namespace NetWare
             ["combat.silentaim.fovcolor"] = "#4C4CFF",
 
             ["combat.weapons.norecoil"] = "false",
+            ["combat.weapons.nospread"] = "false",
             ["combat.weapons.infiniteammo"] = "false",
             ["combat.weapons.rapidfire"] = "false",
+            ["combat.weapons.infiniterange"] = "false",
 
             // visual
             ["visual.esp.tracers"] = "false",
             ["visual.esp.skeleton"] = "false",
             ["visual.esp.3dboxes"] = "false",
             ["visual.esp.2dboxes"] = "false",
+            ["visual.esp.filledboxes"] = "false",
             ["visual.esp.info"] = "false",
             ["visual.esp.nametags"] = "false",
             ["visual.esp.backgroundcolor"] = "#000000",
