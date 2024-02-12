@@ -22,7 +22,7 @@
 
 ### <p align="center">🔑 Usage 🔑</p>
 <p align="center"><i><b>
-After you've downloaded and extracted the latest release, open 1v1.LOL
+After you've downloaded and extracted the <a href="https://github.com/waxnet/NetWare/releases/latest">latest release</a>, open 1v1.LOL
 and run "inject.cmd" to load NetWare.
 </b></i></p>
 
