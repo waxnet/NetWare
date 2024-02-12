@@ -39,9 +39,9 @@ namespace NetWare
         {
             Color color = HexToRGB(Config.GetString("visual.esp.enemycolor"));
 
-            if (playerController?.JFBKIMDGDIH ?? true) {
+            if (Players.IsPlayerBot(playerController)) {
                 color = HexToRGB(Config.GetString("visual.esp.botcolor"));
-            } else if (playerController?.DKDMEOFNMBJ ?? true) {
+            } else if (Players.IsPlayerTeammate(playerController)) {
                 color = HexToRGB(Config.GetString("visual.esp.teammatecolor"));
             }
 

@@ -3,6 +3,7 @@ using UnityEngine;
 using NetWare.Helpers;
 using JustPlay.Equipment;
 using System.Reflection;
+using JustPlay.Equipment.Weapons;
 
 namespace NetWare
 {
@@ -146,7 +147,9 @@ namespace NetWare
             if (CombatH.weaponStatsTimer >= 10)
             {
                 WeaponModel weaponModel = LocalPlayer.GetWeaponModel();
-                WeaponStats stats = weaponModel.HMHEAENHHCF;
+                if (weaponModel == null)
+                    return;
+                WeaponStats stats = weaponModel.LPPPKNPIPME;
 
                 bool editWeaponStats = false;
 

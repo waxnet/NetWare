@@ -425,7 +425,7 @@ namespace NetWare.Helpers
             {
                 // get name and name size
                 string playerName = Players.GetPlayerName(playerController);
-                if (playerController.JFBKIMDGDIH)
+                if (Players.IsPlayerBot(playerController))
                     playerName += " (BOT)";
                 Vector2 playerNameSize = new GUIStyle().CalcSize(new GUIContent(playerName));
 

@@ -17,7 +17,7 @@ namespace NetWare
 
         public static ServerUser GetServerUser()
         {
-            return FirebaseManager.NKEFBCLBLKI?.APPPPIDEGDH;
+            return FirebaseManager.GDJIEOJCGNC?.CKEGJBJEOBO;
         }
     }
 }

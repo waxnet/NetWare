@@ -13,11 +13,10 @@ namespace NetWare
             if (playerController != null && thirdPersonController != null)
             {
                 // speed
-                if (Config.GetBool("movement.speed.enabled"))
-                {
-                    playerController.BICJMAJGJJC = Config.GetFloat("movement.speed.amount");
+                if (Config.GetBool("movement.speed.enabled")) {
+                    playerController.NFCCGJNHAIG = Config.GetFloat("movement.speed.amount");
                 } else {
-                    playerController.BICJMAJGJJC = 1;
+                    playerController.NFCCGJNHAIG = 1;
                 }
 
                 // fly
