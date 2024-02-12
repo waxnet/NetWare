@@ -1,5 +1,4 @@
 ﻿using Invector.CharacterController;
-using JustPlay.Equipment;
 using UnityEngine;
 
 namespace NetWare

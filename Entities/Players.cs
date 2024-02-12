@@ -48,7 +48,11 @@ namespace NetWare
         
         public static bool IsPlayerValid(PlayerController playerController)
         {
-            return !playerController.IsMine() && IsPlayerAlive(playerController) && Skeleton.HasSkeleton(playerController);
+            try {
+                return !playerController.IsMine() && IsPlayerAlive(playerController) && Skeleton.HasSkeleton(playerController);
+            } catch (Exception _) {
+                return false;
+            }
         }
 
         public static bool IsPlayerAlive(PlayerController playerController)

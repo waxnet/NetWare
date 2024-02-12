@@ -61,12 +61,12 @@ namespace NetWare
         // methods
         public static bool HasSkeleton(PlayerController playerController)
         {
-            Animator playerAnimator = playerController.GetComponent<Animator>();
+            Animator playerAnimator = playerController?.GetComponent<Animator>();
             bool hasSkeleton = true;
 
             foreach (HumanBodyBones bone in body)
             {
-                if (playerAnimator.GetBoneTransform(bone) == null)
+                if (playerAnimator?.GetBoneTransform(bone) == null)
                 {
                     hasSkeleton = false;
                     break;

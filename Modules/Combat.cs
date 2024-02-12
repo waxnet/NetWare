@@ -3,7 +3,6 @@ using UnityEngine;
 using NetWare.Helpers;
 using JustPlay.Equipment;
 using System.Reflection;
-using JustPlay.Equipment.Weapons;
 
 namespace NetWare
 {
@@ -169,8 +168,8 @@ namespace NetWare
 
                 if (editWeaponStats)
                 {
-                    PropertyInfo property = typeof(WeaponModel).GetProperty("HMHEAENHHCF");
-                    property.DeclaringType.GetProperty("HMHEAENHHCF");
+                    PropertyInfo property = typeof(WeaponModel).GetProperty("LPPPKNPIPME");
+                    property.DeclaringType.GetProperty("LPPPKNPIPME");
                     property.GetSetMethod(true).Invoke(weaponModel, new object[] { stats });
                 }
 
