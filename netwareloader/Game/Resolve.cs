@@ -13,21 +13,10 @@ namespace NetWareLoader
             // main paths
             string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
-            //// loader and injector
+            //// loader/cheat
 
-            // setup loader and injector path
-            string loaderPath = Path.Combine(appdata, "NetWare\\loader");
-            if (!Directory.Exists(loaderPath))
-            {
-                Directory.CreateDirectory(loaderPath);
-            }
-            Data.loaderPath = loaderPath;
-            Data.injectorPath = Path.Combine(loaderPath, "injector");
-
-            //// cheat
-
-            // setup cheat path
-            string cheatPath = Path.Combine(loaderPath, "cheat");
+            // setup loader/cheat path
+            string cheatPath = Path.Combine(appdata, "NetWare\\loader");
             if (!Directory.Exists(cheatPath))
             {
                 Directory.CreateDirectory(cheatPath);

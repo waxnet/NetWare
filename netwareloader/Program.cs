@@ -1,5 +1,5 @@
-﻿using System.Diagnostics;
-using NetWareLoader;
+﻿using NetWareLoader.SharpMonoInjector;
+using System.Diagnostics;
 
 namespace NetWareLoader
 {
@@ -8,7 +8,7 @@ namespace NetWareLoader
         public static void Main()
         {
             // setup console
-            Window.SetSize(90, 20);
+            Window.SetSize(80, 20);
             Window.SetTitle("NetWare Loader");
             Console.Clear();
 
@@ -33,35 +33,6 @@ namespace NetWareLoader
                 return;
             }
 
-            // download injector
-            if (!Directory.Exists(Data.injectorPath))
-            {
-                IO.Puts("Downloading injector . . .", ConsoleColor.DarkYellow);
-
-                // create injector path
-                Directory.CreateDirectory(Data.injectorPath);
-
-                // download injector
-                bool downloadedZIP = Network.DownloadZIP(
-                    "https://github.com/warbler/SharpMonoInjector/releases/download/v2.2/SharpMonoInjector.Console.zip",
-                    Data.injectorPath
-                );
-                if (!downloadedZIP)
-                {
-                    Message.ShowError("Please report this on GitHub through an issue or on Discord.\nError Code : 001");
-                    return;
-                }
-
-                // cleanup
-                string componentsFolder = Path.Combine(Data.injectorPath, "SharpMonoInjector.Console");
-                string componentA = Path.Combine(Data.injectorPath, componentsFolder, "SharpMonoInjector.dll");
-                string componentB = Path.Combine(Data.injectorPath, componentsFolder, "smi.exe");
-
-                File.Move(componentA, Path.Combine(Data.injectorPath, Path.GetFileName(componentA)));
-                File.Move(componentB, Path.Combine(Data.injectorPath, Path.GetFileName(componentB)));
-                Directory.Delete(componentsFolder);
-            }
-
             // download latest cheat version
             IO.Puts("Downloading latest cheat version . . .", ConsoleColor.DarkYellow);
             
@@ -69,12 +40,12 @@ namespace NetWareLoader
                 File.Delete(Data.cheatPath);
 
             bool downloadedFile = Network.DownloadFile(
-                "https://github.com/waxnet/NetWare/releases/latest/download/NetWare.dll",
+                "https://raw.githubusercontent.com/waxnet/NetWare/main/.build/NetWare.dll",
                 Data.cheatPath
             );
             if (!downloadedFile)
             {
-                Message.ShowError("Please report this on GitHub through an issue or on Discord.\nError Code : 002");
+                Message.ShowError("Please report this on GitHub through an issue or on Discord.\nError Code : 001");
                 return;
             }
 
@@ -82,7 +53,7 @@ namespace NetWareLoader
             IO.Puts("Patching AntiCheat . . .", ConsoleColor.DarkYellow);
             if (!AntiCheat.Patch())
             {
-                Message.ShowError("Please report this on GitHub through an issue or on Discord.\nError Code : 003");
+                Message.ShowError("Please report this on GitHub through an issue or on Discord.\nError Code : 002");
                 return;
             }
 
@@ -90,15 +61,25 @@ namespace NetWareLoader
             IO.Puts("Starting 1v1.LOL . . .", ConsoleColor.DarkYellow);
             if (!Manager.StartGameProcess())
             {
-                Message.ShowError("Please report this on GitHub through an issue or on Discord.\nError Code : 004");
+                Message.ShowError("Please report this on GitHub through an issue or on Discord.\nError Code : 003");
                 return;
             }
 
             // wait for injection
             IO.WaitForInput("\nPress any key to inject once the game has loaded . . .", ConsoleColor.DarkYellow);
-            if (!Injector.Inject())
+
+            Injector gameInjector = new("1v1_LOL");
+            IntPtr hasInjected = gameInjector.Inject(
+                File.ReadAllBytes(Data.cheatPath),
+                "NetWare",
+                "Loader",
+                "Load"
+            );
+            gameInjector.Dispose();
+
+            if (hasInjected == IntPtr.Zero)
             {
-                Message.ShowError("Please report this on GitHub through an issue or on Discord.\nError Code : 005");
+                Message.ShowError("Please report this on GitHub through an issue or on Discord.\nError Code : 004");
                 return;
             }
         }
