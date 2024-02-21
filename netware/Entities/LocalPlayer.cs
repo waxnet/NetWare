@@ -51,7 +51,14 @@ namespace NetWare
         // checks
         public static bool CanShoot()
         {
-            return GetPlayerBuildingManager()?.state == CEFHGHANAKP.NONE;
+            if (GetPlayerBuildingManager()?.state == CEFHGHANAKP.NONE)
+            {
+                return true;
+            } else if (GetCameraManager().isActiveAndEnabled && !GetPlayerBuildingManager().enabled)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
