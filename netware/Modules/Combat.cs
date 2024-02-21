@@ -77,7 +77,7 @@ namespace NetWare
             if (Input.GetMouseButton(0))
             {
                 // silent aim
-                if (Config.GetBool("combat.silentaim.enabled") && LocalPlayer.CanShoot())
+                if (Config.GetBool("combat.silentaim.enabled") && LocalPlayer.IsHoldingWeapon())
                 {
                     PlayerController playerController;
 

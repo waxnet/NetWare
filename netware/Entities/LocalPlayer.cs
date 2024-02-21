@@ -49,16 +49,9 @@ namespace NetWare
         }
 
         // checks
-        public static bool CanShoot()
+        public static bool IsHoldingWeapon()
         {
-            if (GetPlayerBuildingManager()?.state == CEFHGHANAKP.NONE)
-            {
-                return true;
-            } else if (GetCameraManager().isActiveAndEnabled && !GetPlayerBuildingManager().enabled)
-            {
-                return true;
-            }
-            return false;
+            return (GetPlayerBuildingManager()?.state == CEFHGHANAKP.NONE) || (!GetPlayerBuildingManager().enabled);
         }
     }
 }

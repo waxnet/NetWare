@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace NetWare
 {
@@ -80,7 +79,7 @@ namespace NetWare
         public static Vector3 screenCenter = new Vector3((Screen.width / 2), (Screen.height / 2));
         public static Vector3 screenCenterBottom = new Vector3((Screen.width / 2), Screen.height);
 
-        public static Material overlayMaterial = null;
+        private static Material overlayMaterial = null;
         
         private static void Init()
         {
