@@ -7,13 +7,6 @@ namespace NetWareLoader
     {
         public static bool Patch()
         {
-            // classes to patch
-            string[] targetClasses = {
-                "ObscuredCheatingDetector",
-                "SpeedHackDetector",
-                "InjectionDetector"
-            };
-
             // get and check paths
             string originalAssembly = Path.Combine(Data.gamePath, "1v1_LOL_Data\\Managed\\ACTk.Runtime.dll");
             string patchedAssembly = Path.Combine(Data.gamePath, "1v1_LOL_Data\\Managed\\ACTk.Runtime.dll_");
@@ -21,16 +14,17 @@ namespace NetWareLoader
             if (!File.Exists(originalAssembly))
                 return false;
 
-            // load original anticheat assembly
+            // load anticheat assembly
             ModuleDefMD module = ModuleDefMD.Load(originalAssembly);
 
-            // patch classes
-            foreach (string targetClass in targetClasses)
+            // patch anticheat assembly
+            foreach (TypeDef type in module.GetTypes())
             {
-                // find class
-                TypeDef type = module.Find("CodeStage.AntiCheat.Detectors." + targetClass, true);
+                // check if type is valid
+                if (!type.FullName.StartsWith("CodeStage.AntiCheat.Detectors"))
+                    continue;
 
-                // patch all methods called "StartDetection"
+                // patch all methods called "StartDetection" inside the type
                 foreach (MethodDef method in type.FindMethods("StartDetection"))
                 {
                     method.Body.Instructions.Clear();

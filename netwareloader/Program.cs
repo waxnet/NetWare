@@ -1,5 +1,5 @@
-﻿using NetWareLoader.SharpMonoInjector;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using SharpMonoInjector;
 
 namespace NetWareLoader
 {

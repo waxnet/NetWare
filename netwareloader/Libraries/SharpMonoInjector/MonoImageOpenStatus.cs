@@ -1,4 +1,4 @@
-﻿namespace NetWareLoader.SharpMonoInjector
+﻿namespace SharpMonoInjector
 {
     public enum MonoImageOpenStatus
     {

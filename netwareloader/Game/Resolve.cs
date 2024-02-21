@@ -13,9 +13,9 @@ namespace NetWareLoader
             // main paths
             string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
-            //// loader/cheat
+            //// cheat
 
-            // setup loader/cheat path
+            // setup cheat path
             string cheatPath = Path.Combine(appdata, "NetWare\\loader");
             if (!Directory.Exists(cheatPath))
             {

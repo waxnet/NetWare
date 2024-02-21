@@ -1,4 +1,6 @@
-﻿namespace NetWareLoader.SharpMonoInjector
+﻿using System;
+
+namespace SharpMonoInjector
 {
     public class InjectorException : Exception
     {

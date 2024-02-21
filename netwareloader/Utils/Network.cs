@@ -1,5 +1,4 @@
-﻿using System.IO.Compression;
-using System.Net;
+﻿using System.Net;
 
 namespace NetWareLoader
 {
