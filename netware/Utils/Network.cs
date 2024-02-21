@@ -15,9 +15,14 @@ namespace NetWare
             PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
         }
 
+        public static FirebaseManager GetFirebaseManager()
+        {
+            return FirebaseManager.IAOLLGGFCDC;
+        }
+
         public static ServerUser GetServerUser()
         {
-            return FirebaseManager.IAOLLGGFCDC?.IOAJKGBFCFM;
+            return GetFirebaseManager()?.IOAJKGBFCFM;
         }
     }
 }

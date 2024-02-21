@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace NetWare
 {
@@ -26,34 +27,21 @@ namespace NetWare
 
         public static void DrawCircle(Color color, Vector2 position, float radius)
         {
-            // initialize material
-            Init();
-
             // draw circle
-            GL.PushMatrix();
-            overlayMaterial.SetPass(0);
-            GL.LoadPixelMatrix(0, Screen.width, Screen.height, 0);
-            GL.Begin(2);
-            GL.Color(color);
-
             for (float angle = 0; angle < 6.28318548f; angle += .05f)
             {
-                GL.Vertex(
+                DrawLine(
+                    color,
                     new Vector3(
                         ((Mathf.Cos(angle) * radius) + position.x),
                         ((Mathf.Sin(angle) * radius) + position.y)
-                    )
-                );
-                GL.Vertex(
+                    ),
                     new Vector3(
                         ((Mathf.Cos(angle + .05f) * radius) + position.x),
                         ((Mathf.Sin(angle + .05f) * radius) + position.y)
                     )
                 );
             }
-
-            GL.End();
-            GL.PopMatrix();
         }
 
         public static void DrawBox(Color color, Vector2 position, float width, float height)
@@ -92,7 +80,7 @@ namespace NetWare
         public static Vector3 screenCenter = new Vector3((Screen.width / 2), (Screen.height / 2));
         public static Vector3 screenCenterBottom = new Vector3((Screen.width / 2), Screen.height);
 
-        private static Material overlayMaterial = null;
+        public static Material overlayMaterial = null;
         
         private static void Init()
         {
