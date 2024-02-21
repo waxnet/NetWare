@@ -61,14 +61,14 @@
   <ItemGroup>
     <Reference Include="1v1, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\1v1.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\1v1.dll</HintPath>
     </Reference>
     <Reference Include="1v1.DevSettings">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\1v1.DevSettings.dll</HintPath>
     </Reference>
     <Reference Include="ACTk.Runtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\ACTk.Runtime.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\ACTk.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="PhotonRealtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

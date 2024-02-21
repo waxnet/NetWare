@@ -38,41 +38,41 @@ namespace NetWare
 
         public static bool IsPlayerTeammate(PlayerController playerController)
         {
-            return playerController?.PBNHGKJLIIN ?? true;
+            return playerController?.DJLPPEAIEPN ?? true;
         }
 
         public static bool IsPlayerBot(PlayerController playerController)
         {
-            return playerController?.COGBALPIBLI ?? true;
+            return playerController?.GOMDJKNPEME ?? true;
         }
         
         public static bool IsPlayerValid(PlayerController playerController)
         {
             try {
                 return !playerController.IsMine() && IsPlayerAlive(playerController) && Skeleton.HasSkeleton(playerController);
-            } catch (Exception _) {
+            } catch {
                 return false;
             }
         }
 
         public static bool IsPlayerAlive(PlayerController playerController)
         {
-            return playerController?.OLIMGMBHJAP?.KillerId == null;
+            return GetHealth(playerController)?.KillerId == null;
         }
 
-        public static GPFNEBBKOHL GetPlayerInfo(PlayerController playerController)
+        public static BNCCCAFHJBP GetPlayerInfo(PlayerController playerController)
         {
-            return playerController?.LJKJALOGLLB;
+            return playerController?.ADOEBLGNHKP;
         }
 
         public static string GetPlayerName(PlayerController playerController)
         {
-            return GetPlayerInfo(playerController)?.PBNAMEHNEFD;
+            return GetPlayerInfo(playerController)?.CDFCGBAEILF;
         }
 
         public static int? GetPlayerRankXP(PlayerController playerController)
         {
-            return GetPlayerInfo(playerController)?.FBFEGHBMIMO;
+            return GetPlayerInfo(playerController)?.OIDEKJLLEAF;
         }
 
         public static double GetPlayerDistance(PlayerController playerController)
@@ -82,7 +82,7 @@ namespace NetWare
 
         public static PlayerHealth GetHealth(PlayerController playerController)
         {
-            return playerController?.OLIMGMBHJAP;
+            return playerController?.MGDFNIKPEDA;
         }
     }
 }

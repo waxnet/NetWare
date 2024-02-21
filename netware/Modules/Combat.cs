@@ -148,7 +148,7 @@ namespace NetWare
                 WeaponModel weaponModel = LocalPlayer.GetWeaponModel();
                 if (weaponModel == null)
                     return;
-                WeaponStats stats = weaponModel.LPPPKNPIPME;
+                WeaponStats stats = weaponModel.IIADOJDLHCO;
 
                 bool editWeaponStats = false;
 
@@ -168,8 +168,8 @@ namespace NetWare
 
                 if (editWeaponStats)
                 {
-                    PropertyInfo property = typeof(WeaponModel).GetProperty("LPPPKNPIPME");
-                    property.DeclaringType.GetProperty("LPPPKNPIPME");
+                    PropertyInfo property = typeof(WeaponModel).GetProperty("IIADOJDLHCO");
+                    property.DeclaringType.GetProperty("IIADOJDLHCO");
                     property.GetSetMethod(true).Invoke(weaponModel, new object[] { stats });
                 }
 
