@@ -136,6 +136,11 @@ and run "inject.cmd" to load NetWare.
 
 ### <p align="center">💾 Dependencies 💾</p>
 <p align="center"><a href="https://github.com/warbler/SharpMonoInjector">SharpMonoInjector</a></p>
+<p align="center"><a href="https://github.com/0xd4d/dnlib">dnlib</a></p>
+<p align="center"><a href="https://github.com/Fody/Costura">Costura.Fody</a></p>
+<p align="center"><a href="https://github.com/shravan2x/Gameloop.Vdf">Gameloop.Vdf</a></p>
+<p align="center"><a href="https://github.com/shravan2x/Gameloop.Vdf.JsonConverter">Gameloop.Vdf.JsonConverter</a></p>
+<p align="center"><a href="https://github.com/JamesNK/Newtonsoft.Json">Newtonsoft.Json</a></p>
 
 -----
 
