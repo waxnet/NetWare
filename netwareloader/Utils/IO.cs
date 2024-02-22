@@ -33,12 +33,13 @@ namespace NetWareLoader
             Console.WriteLine();
         }
 
-        public static void WaitForInput(string text = "", ConsoleColor color = ConsoleColor.White)
+        public static char WaitForInput(string text = "", ConsoleColor color = ConsoleColor.White)
         {
             Console.ForegroundColor = color;
             Console.Write(text);
             Console.ResetColor();
-            Console.ReadKey(intercept: true);
+
+            return Console.ReadKey(true).KeyChar;
         }
     }
 }

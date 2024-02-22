@@ -1,20 +1,49 @@
 ﻿using System.Diagnostics;
 using SharpMonoInjector;
+using Microsoft.Win32;
 
 namespace NetWareLoader
 {
-    public class Program
+    public static class Program
     {
         public static void Main()
         {
             // setup console
             Window.SetSize(80, 20);
             Window.SetTitle("NetWare Loader");
-            Console.Clear();
 
-            // display banner
-            Banner.Display();
+            while (true)
+            {
+                // display banner
+                Console.Clear();
+                Banner.Display();
 
+                char selection = IO.WaitForInput(
+                    " [1] Load\n [2] Clean\n [3] Exit\n\n",
+                    ConsoleColor.DarkGray
+                );
+
+                // display banner without options
+                Console.Clear();
+                Banner.Display();
+
+                // execute selected option
+                switch (selection)
+                {
+                    case '1':
+                        Load();
+                        break;
+                    case '2':
+                        Clean();
+                        break;
+                    case '3':
+                        return;
+                }
+            }
+        }
+
+        public static void Load()
+        {
             // check if 1v1.lol is already running and shut it down
             Process? gameProcess = Manager.FindGameProcess();
             if (gameProcess != null)
@@ -26,10 +55,11 @@ namespace NetWareLoader
 
             // search game and steam path
             IO.Puts("Searching paths . . .", ConsoleColor.DarkYellow);
-            Resolve.Paths();
+            Resolve.CheatPath();
+            Resolve.SteamPaths();
             if (!Data.ArePathsValid())
             {
-                Message.ShowError("Please report this on GitHub through an issue or on Discord.\nError Code : 000");
+                Message.ShowError("000");
                 return;
             }
 
@@ -45,7 +75,7 @@ namespace NetWareLoader
             );
             if (!downloadedFile)
             {
-                Message.ShowError("Please report this on GitHub through an issue or on Discord.\nError Code : 001");
+                Message.ShowError("001");
                 return;
             }
 
@@ -53,7 +83,7 @@ namespace NetWareLoader
             IO.Puts("Patching AntiCheat . . .", ConsoleColor.DarkYellow);
             if (!AntiCheat.Patch())
             {
-                Message.ShowError("Please report this on GitHub through an issue or on Discord.\nError Code : 002");
+                Message.ShowError("002");
                 return;
             }
 
@@ -61,7 +91,7 @@ namespace NetWareLoader
             IO.Puts("Starting 1v1.LOL . . .", ConsoleColor.DarkYellow);
             if (!Manager.StartGameProcess())
             {
-                Message.ShowError("Please report this on GitHub through an issue or on Discord.\nError Code : 003");
+                Message.ShowError("003");
                 return;
             }
 
@@ -79,9 +109,25 @@ namespace NetWareLoader
 
             if (hasInjected == IntPtr.Zero)
             {
-                Message.ShowError("Please report this on GitHub through an issue or on Discord.\nError Code : 004");
+                Message.ShowError("004");
                 return;
             }
+
+            // wait for input to exit
+            IO.Puts("\nDone!", ConsoleColor.DarkGreen);
+            IO.WaitForInput("\nPress any key to continue . . .", ConsoleColor.DarkGray);
+        }
+
+        public static void Clean()
+        {
+            // delete 1v1.lol registry data
+            IO.Puts("Deleting registry data . . .", ConsoleColor.DarkYellow);
+            if (Registry.CurrentUser.OpenSubKey("HKEY_CURRENT_USER\\SOFTWARE\\JustPlay.LOL") != null)
+                Registry.CurrentUser.DeleteSubKeyTree("HKEY_CURRENT_USER\\SOFTWARE\\JustPlay.LOL");
+
+            // wait for input to exit
+            IO.Puts("Done!", ConsoleColor.DarkGreen);
+            IO.WaitForInput("\nPress any key to continue . . .", ConsoleColor.DarkGray);
         }
     }
 }

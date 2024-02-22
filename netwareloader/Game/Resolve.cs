@@ -8,23 +8,20 @@ namespace NetWareLoader
 {
     public static class Resolve
     {
-        public static void Paths()
+        private static readonly string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+        public static void CheatPath()
         {
-            // main paths
-            string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-
-            //// cheat
-
-            // setup cheat path
             string cheatPath = Path.Combine(appdata, "NetWare\\loader");
             if (!Directory.Exists(cheatPath))
             {
                 Directory.CreateDirectory(cheatPath);
             }
             Data.cheatPath = Path.Combine(cheatPath, "NetWare.dll");
+        }
 
-            //// steam and 1v1.lol
-
+        public static void SteamPaths()
+        {
             // get correct registry key
             string registryKey;
             if (Environment.Is64BitOperatingSystem) {
