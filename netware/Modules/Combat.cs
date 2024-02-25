@@ -189,9 +189,19 @@ namespace NetWare
                     fovColor = Colors.GetRainbow();
 
                 if (Config.GetBool("combat.aimbot.dynamicfov")) {
-                    Render.DrawCircle(fovColor, Render.screenCenter, Camera.main.fieldOfView + 80);
+                    Render.DrawCircle(
+                        fovColor,
+                        Render.screenCenter,
+                        (Camera.main.fieldOfView + 80),
+                        Config.GetInt("combat.aimbot.fovsides")
+                    );
                 } else {
-                    Render.DrawCircle(fovColor, Render.screenCenter, Config.GetFloat("combat.aimbot.fovsize"));
+                    Render.DrawCircle(
+                        fovColor,
+                        Render.screenCenter,
+                        Config.GetFloat("combat.aimbot.fovsize"),
+                        Config.GetInt("combat.aimbot.fovsides")
+                    );
                 }
             }
 
@@ -204,9 +214,19 @@ namespace NetWare
                     fovColor = Colors.GetRainbow();
 
                 if (Config.GetBool("combat.silentaim.dynamicfov")) {
-                    Render.DrawCircle(fovColor, Render.screenCenter, Camera.main.fieldOfView + 80);
+                    Render.DrawCircle(
+                        fovColor,
+                        Render.screenCenter,
+                        (Camera.main.fieldOfView + 80),
+                        Config.GetInt("combat.silentaim.fovsides")
+                    );
                 } else {
-                    Render.DrawCircle(fovColor, Render.screenCenter, Config.GetFloat("combat.silentaim.fovsize"));
+                    Render.DrawCircle(
+                        fovColor,
+                        Render.screenCenter,
+                        Config.GetFloat("combat.silentaim.fovsize"),
+                        Config.GetInt("combat.silentaim.fovsides")
+                    );
                 }
             }
         }
@@ -262,13 +282,22 @@ namespace NetWare
                     "Dynamic FOV"
                 )
             );
-            Config.SetFloat(
+            Config.SetInt(
                 "combat.aimbot.fovsize",
-                Menu.NewSlider(
+                (int)Menu.NewSlider(
                     "FOV Size",
-                    Config.GetFloat("combat.aimbot.fovsize"),
+                    Config.GetInt("combat.aimbot.fovsize"),
                     10,
                     500
+                )
+            );
+            Config.SetInt(
+                "combat.aimbot.fovsides",
+                (int)Menu.NewSlider(
+                    "FOV Sides",
+                    Config.GetInt("combat.aimbot.fovsides"),
+                    3,
+                    80
                 )
             );
             Menu.NewTitle("Smoothing");
@@ -331,13 +360,22 @@ namespace NetWare
                     "Dynamic FOV"
                 )
             );
-            Config.SetFloat(
+            Config.SetInt(
                 "combat.silentaim.fovsize",
-                Menu.NewSlider(
+                (int)Menu.NewSlider(
                     "FOV Size",
-                    Config.GetFloat("combat.silentaim.fovsize"),
+                    Config.GetInt("combat.silentaim.fovsize"),
                     10,
                     500
+                )
+            );
+            Config.SetInt(
+                "combat.silentaim.fovsides",
+                (int)Menu.NewSlider(
+                    "FOV Sides",
+                    Config.GetInt("combat.silentaim.fovsides"),
+                    3,
+                    80
                 )
             );
             Menu.NewTitle("Colors");

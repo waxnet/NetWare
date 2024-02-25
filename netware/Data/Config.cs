@@ -20,6 +20,7 @@ namespace NetWare
             ["combat.aimbot.dynamicfov"] = "false",
             ["combat.aimbot.drawfov"] = "true",
             ["combat.aimbot.fovsize"] = "200",
+            ["combat.aimbot.fovsides"] = "50",
             ["combat.aimbot.smoothing"] = "5",
             ["combat.aimbot.fovcolor"] = "#FF4C4C",
 
@@ -29,6 +30,7 @@ namespace NetWare
             ["combat.silentaim.dynamicfov"] = "false",
             ["combat.silentaim.drawfov"] = "true",
             ["combat.silentaim.fovsize"] = "200",
+            ["combat.silentaim.fovsides"] = "50",
             ["combat.silentaim.fovcolor"] = "#4C4CFF",
 
             ["combat.weapons.norecoil"] = "false",

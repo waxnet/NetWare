@@ -24,10 +24,12 @@ namespace NetWare
             GL.PopMatrix();
         }
 
-        public static void DrawCircle(Color color, Vector2 position, float radius)
+        public static void DrawCircle(Color color, Vector2 position, float radius, int sides = 16)
         {
+            float angleIncrement = (6.28318548f / sides);
+
             // draw circle
-            for (float angle = 0; angle < 6.28318548f; angle += .05f)
+            for (float angle = 0; angle < 6.28318548f; angle += angleIncrement)
             {
                 DrawLine(
                     color,
@@ -36,8 +38,8 @@ namespace NetWare
                         ((Mathf.Sin(angle) * radius) + position.y)
                     ),
                     new Vector3(
-                        ((Mathf.Cos(angle + .05f) * radius) + position.x),
-                        ((Mathf.Sin(angle + .05f) * radius) + position.y)
+                        ((Mathf.Cos(angle + angleIncrement) * radius) + position.x),
+                        ((Mathf.Sin(angle + angleIncrement) * radius) + position.y)
                     )
                 );
             }
