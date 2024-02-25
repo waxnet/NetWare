@@ -10,10 +10,10 @@
 
 ### <p align="center">🕸️ NetWare 🕸️</p>
 <p align= "center">
-  <img src="https://img.shields.io/github/last-commit/waxnet/NetWare?color=%23000000&logoColor=%23000000">
-  <img src="https://img.shields.io/github/license/waxnet/NetWare?color=%23000000&logoColor=%23000000">
+  <img src="https://img.shields.io/github/last-commit/waxnet/NetWare">
+  <img src="https://img.shields.io/github/license/waxnet/NetWare">
   <br>
-  <img src="https://img.shields.io/github/downloads/waxnet/NetWare/total.svg?color=%23000000&logoColor=%23000000">
+  <img src="https://img.shields.io/github/downloads/waxnet/NetWare/total.svg">
   <br>
   <img src="https://img.shields.io/github/stars/waxnet/NetWare">
   <img src="https://img.shields.io/github/forks/waxnet/NetWare">
