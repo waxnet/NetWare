@@ -6,7 +6,7 @@ namespace NetWareLoader
     {
         public static Process? FindGameProcess()
         {
-            Process[] processes = Process.GetProcessesByName("1v1_LOL.exe");
+            Process[] processes = Process.GetProcessesByName("1v1_LOL");
 
             if (processes.Length == 1)
             {
