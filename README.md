@@ -38,8 +38,8 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Aim Bone
             - Aim Mode
             - Check FOV
-            - Draw Fov
             - Dynamic Fov
+            - Draw Fov
             - FOV Size (10 - 500)
             - Smoothing (5 - 10)
             - FOV Color Picker (type rgb for rainbow fov)
@@ -47,8 +47,16 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Enabled
             - Aim Bone
             - Check FOV
-            - Draw Fov
             - Dynamic Fov
+            - Draw Fov
+            - FOV Size (10 - 500)
+            - FOV Color Picker (type rgb for rainbow fov)
+      + Silent Aim
+            - Enabled
+            - Frequency (1 - 100)
+            - Check FOV
+            - Dynamic Fov
+            - Draw Fov
             - FOV Size (10 - 500)
             - FOV Color Picker (type rgb for rainbow fov)
       + Weapons
