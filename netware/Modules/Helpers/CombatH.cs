@@ -7,6 +7,33 @@ namespace NetWare.Helpers
         // values
         public static int rapidFireTimer = 0;
         public static int weaponStatsTimer = 0;
+        public static int magicBulletSkips = 0;
+        public static bool magicBulletReset = false;
+
+        // magic bullet
+        public static void ResetMagicBullet()
+        {
+            PlayerController localPlayer = LocalPlayer.Get();
+
+            if (localPlayer != null)
+            {
+                // get and check aim position and weapon model
+                Vector3? aimPosition = LocalPlayer.GetAimPosition();
+                WeaponModel weaponModel = LocalPlayer.GetWeaponModel();
+
+                if (aimPosition != null && weaponModel != null)
+                {
+                    // get weapon fire origin transform
+                    Transform weaponFireOrigin = (Transform)Access.GetValue(weaponModel, "_weaponFireOrigin");
+
+                    // edit weapon fire origin position
+                    weaponFireOrigin.position = Players.GetHeadPosition(localPlayer);
+
+                    // set new weapon fire origin transform
+                    Access.SetValue(weaponModel, "_weaponFireOrigin", weaponFireOrigin);
+                }
+            }
+        }
 
         // other
         public static PlayerController GetBestPlayerInFOV(float fov)

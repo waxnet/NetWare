@@ -106,6 +106,60 @@ namespace NetWare
                     }
                 }
 
+                // magic bullet
+                if (CombatH.magicBulletSkips >= Config.GetInt("combat.magicbullet.frequency"))
+                {
+                    if (LocalPlayer.IsHoldingWeapon())
+                    {
+                        if (Config.GetBool("combat.magicbullet.enabled"))
+                        {
+                            CombatH.magicBulletReset = true;
+
+                            PlayerController playerController;
+
+                            // get best player
+                            if (Config.GetBool("combat.magicbullet.checkfov"))
+                            {
+                                if (Config.GetBool("combat.magicbullet.dynamicfov"))
+                                {
+                                    playerController = CombatH.GetBestPlayerInFOV(Camera.main.fieldOfView + 80);
+                                } else {
+                                    playerController = CombatH.GetBestPlayerInFOV(Config.GetFloat("combat.magicbullet.fovsize"));
+                                }
+                            } else {
+                                playerController = CombatH.GetBestPlayer();
+                            }
+
+                            if (playerController != null)
+                            {
+                                // get and check aim position and weapon model
+                                Vector3? aimPosition = LocalPlayer.GetAimPosition();
+                                WeaponModel weaponModel = LocalPlayer.GetWeaponModel();
+
+                                if (aimPosition != null && weaponModel != null)
+                                {
+                                    // get weapon fire origin transform
+                                    Transform weaponFireOrigin = (Transform)Access.GetValue(weaponModel, "_weaponFireOrigin");
+
+                                    // edit weapon fire origin position
+                                    Vector3 playerPosition = Players.GetHipPosition(playerController);
+                                    Vector3 direction = (playerPosition - (Vector3)aimPosition).normalized;
+                                    weaponFireOrigin.position = (playerPosition + direction);
+
+                                    // set new weapon fire origin transform
+                                    Access.SetValue(weaponModel, "_weaponFireOrigin", weaponFireOrigin);
+                                }
+                            }
+                        } else if (CombatH.magicBulletReset) {
+                            CombatH.magicBulletReset = false;
+                            CombatH.ResetMagicBullet();
+                        }
+                    }
+
+                    CombatH.magicBulletSkips = 0;
+                }
+                CombatH.magicBulletSkips++;
+
                 // weapons
                 if (Config.GetBool("combat.weapons.norecoil"))
                 {
@@ -229,6 +283,32 @@ namespace NetWare
                     );
                 }
             }
+
+            // magic bullet
+            if (Config.GetBool("combat.magicbullet.enabled") && Config.GetBool("combat.magicbullet.checkfov") && Config.GetBool("combat.magicbullet.drawfov"))
+            {
+                string fovSelectedColor = Config.GetString("combat.magicbullet.fovcolor");
+                Color fovColor = Colors.HexToRGB(fovSelectedColor);
+                if (fovSelectedColor == "RGB")
+                    fovColor = Colors.GetRainbow();
+
+                if (Config.GetBool("combat.magicbullet.dynamicfov"))
+                {
+                    Render.DrawCircle(
+                        fovColor,
+                        Render.screenCenter,
+                        (Camera.main.fieldOfView + 80),
+                        Config.GetInt("combat.magicbullet.fovsides")
+                    );
+                } else {
+                    Render.DrawCircle(
+                        fovColor,
+                        Render.screenCenter,
+                        Config.GetFloat("combat.magicbullet.fovsize"),
+                        Config.GetInt("combat.magicbullet.fovsides")
+                    );
+                }
+            }
         }
 
         public static void Tab()
@@ -316,6 +396,73 @@ namespace NetWare
                 Menu.NewTextField(
                     "FOV Color",
                     Config.GetString("combat.aimbot.fovcolor").ToUpper()
+                )
+            );
+
+            Menu.NewSection("Magic Bullet");
+            Config.SetBool(
+                "combat.magicbullet.enabled",
+                Menu.NewToggle(
+                    Config.GetBool("combat.magicbullet.enabled"),
+                    "Enabled"
+                )
+            );
+            Menu.NewTitle("Targeting");
+            Config.SetInt(
+                "combat.magicbullet.frequency",
+                (int)Menu.NewSlider(
+                    "Frequency",
+                    Config.GetInt("combat.magicbullet.frequency"),
+                    1,
+                    100
+                )
+            );
+            Menu.NewTitle("FOV Settings");
+            Config.SetBool(
+                "combat.magicbullet.checkfov",
+                Menu.NewToggle(
+                    Config.GetBool("combat.magicbullet.checkfov"),
+                    "Check FOV"
+                )
+            );
+            Config.SetBool(
+                "combat.magicbullet.drawfov",
+                Menu.NewToggle(
+                    Config.GetBool("combat.magicbullet.drawfov"),
+                    "Draw FOV"
+                )
+            );
+            Config.SetBool(
+                "combat.magicbullet.dynamicfov",
+                Menu.NewToggle(
+                    Config.GetBool("combat.magicbullet.dynamicfov"),
+                    "Dynamic FOV"
+                )
+            );
+            Config.SetInt(
+                "combat.magicbullet.fovsize",
+                (int)Menu.NewSlider(
+                    "FOV Size",
+                    Config.GetInt("combat.magicbullet.fovsize"),
+                    10,
+                    500
+                )
+            );
+            Config.SetInt(
+                "combat.magicbullet.fovsides",
+                (int)Menu.NewSlider(
+                    "FOV Sides",
+                    Config.GetInt("combat.magicbullet.fovsides"),
+                    3,
+                    80
+                )
+            );
+            Menu.NewTitle("Colors");
+            Config.SetString(
+                "combat.magicbullet.fovcolor",
+                Menu.NewTextField(
+                    "FOV Color",
+                    Config.GetString("combat.magicbullet.fovcolor").ToUpper()
                 )
             );
 

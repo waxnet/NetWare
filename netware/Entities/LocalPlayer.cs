@@ -53,5 +53,11 @@ namespace NetWare
         {
             return (GetPlayerBuildingManager()?.state == CEFHGHANAKP.NONE) || (!GetPlayerBuildingManager().enabled);
         }
+
+        // other
+        public static Vector3? GetAimPosition()
+        {
+            return GetWeaponsController()?.DJNLBHOMKMN.point;
+        }
     }
 }

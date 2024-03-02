@@ -33,6 +33,15 @@ namespace NetWare
             ["combat.silentaim.fovsides"] = "50",
             ["combat.silentaim.fovcolor"] = "#4C4CFF",
 
+            ["combat.magicbullet.enabled"] = "false",
+            ["combat.magicbullet.frequency"] = "10",
+            ["combat.magicbullet.checkfov"] = "true",
+            ["combat.magicbullet.dynamicfov"] = "false",
+            ["combat.magicbullet.drawfov"] = "true",
+            ["combat.magicbullet.fovsize"] = "200",
+            ["combat.magicbullet.fovsides"] = "50",
+            ["combat.magicbullet.fovcolor"] = "#9900FF",
+
             ["combat.weapons.norecoil"] = "false",
             ["combat.weapons.nospread"] = "false",
             ["combat.weapons.infiniteammo"] = "false",
