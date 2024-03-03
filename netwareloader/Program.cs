@@ -44,47 +44,53 @@ namespace NetWareLoader
 
         public static void Load()
         {
-            // check if 1v1.lol is already running and shut it down
-            Process? gameProcess = Manager.FindGameProcess();
-            if (gameProcess != null)
+            // add sha256 checksum checking to see if it already patched to prevent unnecessary patching/closing of the game
+            string currentChecksum = Game.Checksum.currentChecksum();
+            // TODO: Make checksum automatically update when a new patched dll is released (not urgent)
+            if (currentChecksum != "944B17117AD35866BC1619591192FD88268173F581101CA6E20BBC0FEDCAC6D0")
             {
-                IO.Puts("Killing 1v1.LOL process . . .", ConsoleColor.DarkYellow);
-                gameProcess.Kill();
-                gameProcess.WaitForExit();
-            }
+                // check if 1v1.lol is already running and shut it down
+                Process? gameProcess = Manager.FindGameProcess();
+                if (gameProcess != null)
+                {
+                    IO.Puts("Killing 1v1.LOL process . . .", ConsoleColor.DarkYellow);
+                    gameProcess.Kill();
+                    gameProcess.WaitForExit();
+                }
 
-            // search game and steam path
-            IO.Puts("Searching paths . . .", ConsoleColor.DarkYellow);
-            Resolve.CheatPath();
-            Resolve.SteamPaths();
-            if (!Data.ArePathsValid())
-            {
-                Message.ShowError("000");
-                return;
-            }
+                // search game and steam path
+                IO.Puts("Searching paths . . .", ConsoleColor.DarkYellow);
+                Resolve.CheatPath();
+                Resolve.SteamPaths();
+                if (!Data.ArePathsValid())
+                {
+                    Message.ShowError("000");
+                    return;
+                }
 
-            // download latest cheat version
-            IO.Puts("Downloading latest cheat version . . .", ConsoleColor.DarkYellow);
-            
-            if (File.Exists(Data.cheatPath))
-                File.Delete(Data.cheatPath);
+                // download latest cheat version
+                IO.Puts("Downloading latest cheat version . . .", ConsoleColor.DarkYellow);
 
-            bool downloadedFile = Network.DownloadFile(
-                "https://raw.githubusercontent.com/waxnet/NetWare/main/.build/NetWare.dll",
-                Data.cheatPath
-            );
-            if (!downloadedFile)
-            {
-                Message.ShowError("001");
-                return;
-            }
+                if (File.Exists(Data.cheatPath))
+                    File.Delete(Data.cheatPath);
 
-            // disable/patch anticheat
-            IO.Puts("Patching AntiCheat . . .", ConsoleColor.DarkYellow);
-            if (!AntiCheat.Patch())
-            {
-                Message.ShowError("002");
-                return;
+                bool downloadedFile = Network.DownloadFile(
+                    "https://raw.githubusercontent.com/waxnet/NetWare/main/.build/NetWare.dll",
+                    Data.cheatPath
+                );
+                if (!downloadedFile)
+                {
+                    Message.ShowError("001");
+                    return;
+                }
+
+                // disable/patch anticheat
+                IO.Puts("Patching AntiCheat . . .", ConsoleColor.DarkYellow);
+                if (!AntiCheat.Patch())
+                {
+                    Message.ShowError("002");
+                    return;
+                }
             }
 
             // start 1v1.lol
@@ -98,6 +104,7 @@ namespace NetWareLoader
             // wait for injection
             IO.WaitForInput("\nPress any key to inject once the game has loaded . . .", ConsoleColor.DarkYellow);
 
+            Resolve.CheatPath();
             Injector gameInjector = new("1v1_LOL");
             IntPtr hasInjected = gameInjector.Inject(
                 File.ReadAllBytes(Data.cheatPath),
