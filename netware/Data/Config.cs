@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -184,7 +185,13 @@ namespace NetWare
         // integers
         public static int GetInt(string key)
         {
-            return int.Parse(config[key]);
+            if (int.TryParse(config[key], out int intValue))
+                return intValue;
+
+            if (double.TryParse(config[key].Replace(",", "."), out double doubleValue))
+                return (int)Math.Round(doubleValue);
+
+            return 10;
         }
         public static void SetInt(string key, int value)
         {

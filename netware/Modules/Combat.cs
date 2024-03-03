@@ -253,7 +253,7 @@ namespace NetWare
                     Render.DrawCircle(
                         fovColor,
                         Render.screenCenter,
-                        Config.GetFloat("combat.aimbot.fovsize"),
+                        Config.GetInt("combat.aimbot.fovsize"),
                         Config.GetInt("combat.aimbot.fovsides")
                     );
                 }
@@ -278,7 +278,7 @@ namespace NetWare
                     Render.DrawCircle(
                         fovColor,
                         Render.screenCenter,
-                        Config.GetFloat("combat.silentaim.fovsize"),
+                        Config.GetInt("combat.silentaim.fovsize"),
                         Config.GetInt("combat.silentaim.fovsides")
                     );
                 }
@@ -304,7 +304,7 @@ namespace NetWare
                     Render.DrawCircle(
                         fovColor,
                         Render.screenCenter,
-                        Config.GetFloat("combat.magicbullet.fovsize"),
+                        Config.GetInt("combat.magicbullet.fovsize"),
                         Config.GetInt("combat.magicbullet.fovsides")
                     );
                 }

@@ -59,7 +59,7 @@ namespace NetWare
             }
         }
 
-        public static bool NewToggle(bool value, string text, Action<bool> callback = null)
+        public static bool NewToggle(bool value, string text)
         {
             // set toggle style
             GUIStyle toggleStyle = new GUIStyle("Box") { fontSize = 12 };
@@ -70,14 +70,8 @@ namespace NetWare
                 toggleStyle.normal.textColor = new Color(1, 0, 0);
             }
 
-            // make and get new toggle value
-            bool newValue = GUILayout.Toggle(value, text, toggleStyle);
-
-            // execute callback
-            callback?.Invoke(newValue);
-
-            // return new value
-            return newValue;
+            // make toggle and return new value
+            return GUILayout.Toggle(value, text, toggleStyle);
         }
 
         public static float NewSlider(string text, float value, float minimum, float maximum)
