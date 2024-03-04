@@ -75,7 +75,7 @@ namespace NetWareLoader
                     File.Delete(Data.cheatPath);
 
                 bool downloadedFile = Network.DownloadFile(
-                    "https://raw.githubusercontent.com/waxnet/NetWare/main/.build/NetWare.dll",
+                    "https://raw.githubusercontent.com/basmannetjeee/NetWare/main/.build/NetWare.dll",
                     Data.cheatPath
                 );
                 if (!downloadedFile)

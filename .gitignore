@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/NetWare/v17
+/netware/.vs/NetWare/FileContentIndex
+/netware/.vs/NetWare/v17
+/netware/.vs
+/netware/bin/Debug
+/netware/obj/Debug
+/netwareloader/.vs/NetWareLoader
+/netwareloader/bin/Debug/net8.0
+/netwareloader/obj
