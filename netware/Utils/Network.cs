@@ -1,9 +1,8 @@
 ﻿using Photon.Pun;
-using UnityEngine;
 
 namespace NetWare
 {
-    public class Network : MonoBehaviour
+    public static class Network
     {
         public static BuildingNetworkController GetBuildingNetworkController()
         {

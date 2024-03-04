@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace NetWare
 {
-    public class Movement : MonoBehaviour
+    public static class Movement
     {
         public static void Execute()
         {

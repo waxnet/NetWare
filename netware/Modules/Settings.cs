@@ -4,7 +4,7 @@ using NetWare.Helpers;
 
 namespace NetWare
 {
-    public class Settings : MonoBehaviour
+    public static class Settings
     {
         public static void Draw()
         {
@@ -33,7 +33,7 @@ namespace NetWare
                 SettingsH.fpsCounterTimer++;
 
                 // watermark content and style
-                GUIContent titleContent = new GUIContent("<b>Net<color=red>Ware</color> v1.9.41 | " + currentTime + " | " + SettingsH.fpsCounterContent + " FPS</b>");
+                GUIContent titleContent = new GUIContent("<b>Net<color=red>Ware</color> v1.9.42 | " + currentTime + " | " + SettingsH.fpsCounterContent + " FPS</b>");
                 GUIStyle titleStyle = new GUIStyle("Label")
                 {
                     wordWrap = false,

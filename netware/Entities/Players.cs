@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace NetWare
 {
-    public class Players : MonoBehaviour
+    public static class Players
     {
         public static Vector3 GetHeadPosition(PlayerController playerController)
         {

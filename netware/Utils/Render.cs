@@ -3,7 +3,7 @@
 namespace NetWare
 {
 
-    public class Render : MonoBehaviour
+    public static class Render
     {
         public static void DrawLine(Color color, Vector3 origin, Vector3 destination)
         {

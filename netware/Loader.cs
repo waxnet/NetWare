@@ -2,7 +2,7 @@
 
 namespace NetWare
 {
-    public class Loader
+    public static class Loader
     {
         public static void Load()
         {

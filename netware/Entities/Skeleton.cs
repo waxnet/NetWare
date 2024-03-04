@@ -2,7 +2,7 @@
 
 namespace NetWare
 {
-    public class Skeleton
+    public static class Skeleton
     {
         // body parts
         public static HumanBodyBones[] spine = {

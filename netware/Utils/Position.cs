@@ -2,7 +2,7 @@
 
 namespace NetWare
 {
-    public class Position : MonoBehaviour
+    public static class Position
     {
         public static Vector3 ToScreen(Vector3 worldPosition)
         {

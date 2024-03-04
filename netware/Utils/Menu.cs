@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace NetWare
 {
-    public class Menu
+    public static class Menu
     {
         public static Rect windowRect;
         public static bool displayWindow = true;

@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace NetWare
 {
-    public class Combat : MonoBehaviour
+    public static class Combat
     {
         public static void Execute()
         {
