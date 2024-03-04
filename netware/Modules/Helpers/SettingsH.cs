@@ -1,6 +1,6 @@
 ﻿namespace NetWare.Helpers
 {
-    public class SettingsH
+    public static class SettingsH
     {
         // values
         public static string textFieldContent = "";

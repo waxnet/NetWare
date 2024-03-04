@@ -2,7 +2,7 @@
 
 namespace NetWare.Helpers
 {
-    public class CombatH
+    public static class CombatH
     {
         // values
         public static int rapidFireTimer = 0;

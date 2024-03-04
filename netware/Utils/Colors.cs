@@ -2,7 +2,7 @@
 
 namespace NetWare
 {
-    public class Colors : MonoBehaviour
+    public static class Colors
     {
         public static Color GetRainbow(float offset = 0)
         {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace NetWare
 {
-    public class Mouse
+    public static class Mouse
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         private static extern void mouse_event(uint dwFlags, int dx, int dy, int dwData, int dwExtraInfo);

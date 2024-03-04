@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace NetWare
 {
-    public class Visual : MonoBehaviour
+    public static class Visual
     {
         public static void Execute()
         {

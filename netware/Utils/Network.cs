@@ -1,9 +1,8 @@
 ﻿using Photon.Pun;
-using UnityEngine;
 
 namespace NetWare
 {
-    public class Network : MonoBehaviour
+    public static class Network
     {
         public static BuildingNetworkController GetBuildingNetworkController()
         {
@@ -12,7 +11,7 @@ namespace NetWare
 
         public static void BecomeMasterClient()
         {
-            PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
+            PhotonNetwork.CurrentRoom.SetMasterClient(PhotonNetwork.LocalPlayer);
         }
 
         public static FirebaseManager GetFirebaseManager()

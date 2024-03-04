@@ -51,7 +51,7 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Draw Fov
             - FOV Size (10 - 500)
             - FOV Color Picker (type rgb for rainbow fov)
-      + Silent Aim
+      + Magic Bullet
             - Enabled
             - Frequency (1 - 100)
             - Check FOV

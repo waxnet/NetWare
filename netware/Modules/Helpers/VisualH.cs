@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace NetWare.Helpers
 {
-    public class VisualH
+    public static class VisualH
     {
         // values
         public static bool resetFOV = false;

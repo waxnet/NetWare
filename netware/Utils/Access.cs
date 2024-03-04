@@ -2,7 +2,7 @@
 
 namespace NetWare
 {
-    public class Access
+    public static class Access
     {
         public static void SetValue<T>(T instance, string field, object newValue)
         {

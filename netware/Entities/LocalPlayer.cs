@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace NetWare
 {
-    public class LocalPlayer : MonoBehaviour
+    public static class LocalPlayer
     {
         // other
         public static PlayerController Get()
