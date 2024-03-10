@@ -15,16 +15,6 @@ namespace NetWare
             return new Color(red, green, blue);
         }
 
-        public static Color HexToRGBAA(string hexColor)
-        {
-            if (hexColor.Length != 7)
-                return Color.white;
-
-            if (ColorUtility.TryParseHtmlString(hexColor, out Color color))
-                return color;
-            return Color.white;
-        }
-
         public static Color HexToRGB(string hexColor)
         {
             if (hexColor.Length != 7)

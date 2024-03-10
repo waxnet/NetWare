@@ -85,6 +85,14 @@ namespace NetWare
                     }
                 }
             }
+
+            // speed graph
+            if (Config.GetBool("visual.speedgraph.enabled"))
+                VisualH.DrawSpeedGraph();
+
+            // crosshair
+            if (Config.GetBool("visual.crosshair.enabled"))
+                VisualH.DrawCrosshair();
         }
 
         public static void Tab()
@@ -188,6 +196,60 @@ namespace NetWare
                     Config.GetFloat("visual.fovchanger.fovchangeramount"),
                     20,
                     150
+                )
+            );
+
+            Menu.NewSection("Speed Graph");
+            Config.SetBool(
+                "visual.speedgraph.enabled",
+                Menu.NewToggle(
+                    Config.GetBool("visual.speedgraph.enabled"),
+                    "Enabled"
+                )
+            );
+            Config.SetString(
+                "visual.speedgraph.color",
+                Menu.NewTextField(
+                    "Line Color",
+                    Config.GetString("visual.speedgraph.color").ToUpper()
+                )
+            );
+            Config.SetString(
+                "visual.speedgraph.colormode",
+                Menu.NewList(
+                    "Line Color Mode",
+                    Config.GetString("visual.speedgraph.colormode"),
+                    new string[] { "Normal", "Rainbow", "Rainbow Wave" }
+                )
+            );
+
+            Menu.NewSection("Crosshair");
+            Config.SetBool(
+                "visual.crosshair.enabled",
+                Menu.NewToggle(
+                    Config.GetBool("visual.crosshair.enabled"),
+                    "Enabled"
+                )
+            );
+            Config.SetBool(
+                "visual.crosshair.dynamic",
+                Menu.NewToggle(
+                    Config.GetBool("visual.crosshair.dynamic"),
+                    "Dynamic"
+                )
+            );
+            Config.SetString(
+                "visual.crosshair.color",
+                Menu.NewTextField(
+                    "Line Color",
+                    Config.GetString("visual.crosshair.color").ToUpper()
+                )
+            );
+            Config.SetBool(
+                "visual.crosshair.rainbow",
+                Menu.NewToggle(
+                    Config.GetBool("visual.crosshair.rainbow"),
+                    "Rainbow"
                 )
             );
 

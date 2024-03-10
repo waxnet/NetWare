@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Invector.CharacterController;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace NetWare.Helpers
 {
@@ -7,6 +9,8 @@ namespace NetWare.Helpers
     {
         // values
         public static bool resetFOV = false;
+        public static int[] speedGraphData = new int[30];
+        public static int speedGraphTimer = 0;
 
         // esp
         public static void DrawPlayerTracer(PlayerController playerController)
@@ -475,6 +479,117 @@ namespace NetWare.Helpers
                     playerName
                 );
             }
+        }
+
+        // other
+        public static void DrawSpeedGraph()
+        {
+            // update data
+            if (speedGraphTimer >= 10)
+            {
+                speedGraphTimer = 0;
+
+                for (int index = 0; index < (speedGraphData.Length - 1); index++)
+                {
+                    speedGraphData[index] = speedGraphData[index + 1];
+                }
+
+                vThirdPersonController localPlayer = LocalPlayer.GetThirdPersonController();
+                if (localPlayer == null || localPlayer.Rigidbody == null) {
+                    speedGraphData[speedGraphData.Length - 1] = 0;
+                } else {
+                    speedGraphData[speedGraphData.Length - 1] = (int)(localPlayer.Rigidbody.velocity.magnitude);
+                }
+            }
+            speedGraphTimer++;
+
+            // get highest value
+            float highestValue = .1f;
+            foreach (int point in speedGraphData)
+                if (point > highestValue)
+                    highestValue = point;
+
+            // draw box
+            Vector2 boxPosition = new Vector2(Render.screenCenterBottom.x, (Render.screenCenterBottom.y - 100));
+
+            Color boxColor = Color.black;
+            boxColor.a = .5f;
+
+            Render.DrawBox(
+                boxColor,
+                boxPosition,
+                584,
+                86
+            );
+
+            // draw point
+            Vector3 pointsOrigin = (Render.screenCenterBottom - new Vector3(290, 60));
+            
+            string colorMode = Config.GetString("visual.speedgraph.colormode");
+            Color lineColor = Color.white;
+            if (colorMode == "Normal")
+                lineColor = Colors.HexToRGB(Config.GetString("visual.speedgraph.color"));
+
+            float rainbowOffset = 0;
+
+            for (int index = 0; index < (speedGraphData.Length - 1); index++)
+            {
+                int normalizedValue1 = (int)(speedGraphData[index] * 80 / highestValue);
+                int normalizedValue2 = (int)(speedGraphData[index + 1] * 80 / highestValue);
+
+                if (colorMode == "Rainbow") {
+                    lineColor = Colors.GetRainbow();
+                } else if (colorMode == "Rainbow Wave") {
+                    lineColor = Colors.GetRainbow(rainbowOffset);
+                }
+
+                Render.DrawLine(
+                    lineColor,
+                    new Vector2(pointsOrigin.x, (pointsOrigin.y - normalizedValue1)),
+                    new Vector2((pointsOrigin.x + 20), (pointsOrigin.y - normalizedValue2))
+                );
+
+                rainbowOffset -= .025f;
+                pointsOrigin.x += 20;
+            }
+        }
+        public static void DrawCrosshair()
+        {
+            Color color = Colors.HexToRGB(Config.GetString("visual.crosshair.color"));
+            if (Config.GetBool("visual.crosshair.rainbow"))
+                color = Colors.GetRainbow();
+
+            Vector3 position = Render.screenCenter;
+            if (Config.GetBool("visual.crosshair.dynamic"))
+            {
+                Vector3? aimPosition = LocalPlayer.GetAimPosition();
+                if (aimPosition.HasValue)
+                    position = Position.ToScreen((Vector3)aimPosition);
+            }
+            if (Position.IsBehindCamera(position))
+                return;
+
+            Render.DrawBox(
+                Color.black,
+                position,
+                4, 26
+            );
+            Render.DrawBox(
+                Color.black,
+                position,
+                26, 4
+            );
+
+            Render.DrawBox(
+                color,
+                position,
+                2, 24
+            );
+            Render.DrawBox(
+                color,
+                position,
+                24, 2
+            );
         }
     }
 }

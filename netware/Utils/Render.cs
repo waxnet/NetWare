@@ -14,7 +14,7 @@ namespace NetWare
             GL.PushMatrix();
             overlayMaterial.SetPass(0);
             GL.LoadPixelMatrix(0, Screen.width, Screen.height, 0);
-            GL.Begin(2);
+            GL.Begin(1);
             GL.Color(color);
 
             GL.Vertex(new Vector3(origin.x, origin.y));

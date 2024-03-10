@@ -237,9 +237,8 @@ namespace NetWare
             // aimbot
             if (Config.GetBool("combat.aimbot.enabled") && Config.GetBool("combat.aimbot.checkfov") && Config.GetBool("combat.aimbot.drawfov"))
             {
-                string fovSelectedColor = Config.GetString("combat.aimbot.fovcolor");
-                Color fovColor = Colors.HexToRGB(fovSelectedColor);
-                if (fovSelectedColor == "RGB")
+                Color fovColor = Colors.HexToRGB(Config.GetString("combat.aimbot.fovcolor"));
+                if (Config.GetBool("combat.aimbot.rainbowfov"))
                     fovColor = Colors.GetRainbow();
 
                 if (Config.GetBool("combat.aimbot.dynamicfov")) {
@@ -262,9 +261,8 @@ namespace NetWare
             // silent aim
             if (Config.GetBool("combat.silentaim.enabled") && Config.GetBool("combat.silentaim.checkfov") && Config.GetBool("combat.silentaim.drawfov"))
             {
-                string fovSelectedColor = Config.GetString("combat.silentaim.fovcolor");
-                Color fovColor = Colors.HexToRGB(fovSelectedColor);
-                if (fovSelectedColor == "RGB")
+                Color fovColor = Colors.HexToRGB(Config.GetString("combat.silentaim.fovcolor"));
+                if (Config.GetBool("combat.silentaim.rainbowfov"))
                     fovColor = Colors.GetRainbow();
 
                 if (Config.GetBool("combat.silentaim.dynamicfov")) {
@@ -287,9 +285,8 @@ namespace NetWare
             // magic bullet
             if (Config.GetBool("combat.magicbullet.enabled") && Config.GetBool("combat.magicbullet.checkfov") && Config.GetBool("combat.magicbullet.drawfov"))
             {
-                string fovSelectedColor = Config.GetString("combat.magicbullet.fovcolor");
-                Color fovColor = Colors.HexToRGB(fovSelectedColor);
-                if (fovSelectedColor == "RGB")
+                Color fovColor = Colors.HexToRGB(Config.GetString("combat.magicbullet.fovcolor"));
+                if (Config.GetBool("combat.magicbullet.rainbowfov"))
                     fovColor = Colors.GetRainbow();
 
                 if (Config.GetBool("combat.magicbullet.dynamicfov"))
@@ -398,6 +395,13 @@ namespace NetWare
                     Config.GetString("combat.aimbot.fovcolor").ToUpper()
                 )
             );
+            Config.SetBool(
+                "combat.aimbot.rainbowfov",
+                Menu.NewToggle(
+                    Config.GetBool("combat.aimbot.rainbowfov"),
+                    "Rainbow FOV"
+                )
+            );
 
             Menu.NewSection("Magic Bullet");
             Config.SetBool(
@@ -463,6 +467,13 @@ namespace NetWare
                 Menu.NewTextField(
                     "FOV Color",
                     Config.GetString("combat.magicbullet.fovcolor").ToUpper()
+                )
+            );
+            Config.SetBool(
+                "combat.magicbullet.rainbowfov",
+                Menu.NewToggle(
+                    Config.GetBool("combat.magicbullet.rainbowfov"),
+                    "Rainbow FOV"
                 )
             );
 
@@ -531,6 +542,13 @@ namespace NetWare
                 Menu.NewTextField(
                     "FOV Color",
                     Config.GetString("combat.silentaim.fovcolor").ToUpper()
+                )
+            );
+            Config.SetBool(
+                "combat.silentaim.rainbowfov",
+                Menu.NewToggle(
+                    Config.GetBool("combat.silentaim.rainbowfov"),
+                    "Rainbow FOV"
                 )
             );
 

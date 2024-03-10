@@ -1,4 +1,6 @@
 ﻿using Photon.Pun;
+using System;
+using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 
 namespace NetWare

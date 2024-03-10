@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using NetWare.Helpers;
+using System.Linq;
 
 namespace NetWare
 {
@@ -13,7 +14,7 @@ namespace NetWare
             {
                 // get current time
                 string currentTime = DateTime.Now.ToString("hh:mm:ss tt");
-                if (Config.GetString("settings.interface.timetype") == "Military")
+                if (Config.GetString("settings.interface.watermarktimetype") == "Military")
                 {
                     currentTime = DateTime.Now.ToString("HH:mm:ss");
                 }
@@ -33,7 +34,7 @@ namespace NetWare
                 SettingsH.fpsCounterTimer++;
 
                 // watermark content and style
-                GUIContent titleContent = new GUIContent("<b>Net<color=red>Ware</color> v1.9.42 | " + currentTime + " | " + SettingsH.fpsCounterContent + " FPS</b>");
+                GUIContent titleContent = new GUIContent("<b>Net<color=red>Ware</color> v1.9.5 | " + currentTime + " | " + SettingsH.fpsCounterContent + " FPS</b>");
                 GUIStyle titleStyle = new GUIStyle("Label")
                 {
                     wordWrap = false,
@@ -90,6 +91,78 @@ namespace NetWare
                     lineOrigin.x += 1;
                 }
             }
+
+            // feature list
+            if (Config.GetBool("settings.interface.featurelist"))
+            {
+                // text data
+                string colorMode = Config.GetString("settings.interface.featurelistcolormode");
+                GUIStyle style = new GUIStyle
+                {
+                    fontStyle = FontStyle.Bold
+                };
+                style.normal.textColor = Colors.HexToRGB(Config.GetString("settings.interface.featurelistcolor"));
+
+                // lists
+                string[] features = Config.toggles.Keys.ToArray();
+
+                string[] sortedList = features
+                    .Select(feature => (Key: feature, Text: Config.toggles[feature]))
+                    .OrderByDescending(group => style.CalcSize(new GUIContent(group.Text)).x)
+                    .Select(group => group.Key).ToArray();
+
+                // display list
+                float rainbowOffset = 0;
+                int yPosition = 0;
+
+                foreach (string feature in sortedList)
+                {
+                    // check if feature is enabled
+                    if (!Config.GetBool(feature))
+                        continue;
+
+                    // text
+                    GUIContent text = new GUIContent(Config.toggles[feature]);
+
+                    // data
+                    Vector2 textSize = style.CalcSize(text);
+
+                    int boxWidth = (int)(textSize.x + 20);
+                    int boxHeight = 30;
+
+                    Vector2 boxPosition = new Vector3((Screen.width - (boxWidth / 2)), (yPosition + (boxHeight / 2)));
+
+                    // draw box
+                    Render.DrawBox(
+                        Color.black,
+                        boxPosition,
+                        boxWidth,
+                        boxHeight
+                    );
+
+                    // draw text
+                    if (colorMode == "Rainbow") {
+                        style.normal.textColor = Colors.GetRainbow();
+                    } else if (colorMode == "Rainbow Wave") {
+                        style.normal.textColor = Colors.GetRainbow(rainbowOffset);
+                    }
+                    
+                    GUI.Label(
+                        new Rect(
+                            (boxPosition.x - (textSize.x / 2)),
+                            (boxPosition.y - (textSize.y / 2)),
+                            textSize.x,
+                            textSize.y
+                        ),
+                        text,
+                        style
+                    );
+
+                    // increase y position
+                    rainbowOffset -= .05f;
+                    yPosition += boxHeight;
+                }
+            }
         }
 
         public static void Tab()
@@ -101,21 +174,44 @@ namespace NetWare
             Menu.NewButton("Save", SettingsH.Save);
             Menu.NewButton("Delete", SettingsH.Delete);
 
-            Menu.NewSection("Interface");
+            Menu.NewSection("Watermark");
             Config.SetBool(
                 "settings.interface.watermark",
                 Menu.NewToggle(
                     Config.GetBool("settings.interface.watermark"),
-                    "Watermark"
+                    "Enabled"
                 )
             );
-            Menu.NewTitle("Settings");
             Config.SetString(
-                "settings.interface.timetype",
+                "settings.interface.watermarktimetype",
                 Menu.NewList(
                     "Time Type",
-                    Config.GetString("settings.interface.timetype"),
+                    Config.GetString("settings.interface.watermarktimetype"),
                     new string[] { "Standard", "Military" }
+                )
+            );
+
+            Menu.NewSection("Feature List");
+            Config.SetBool(
+                "settings.interface.featurelist",
+                Menu.NewToggle(
+                    Config.GetBool("settings.interface.featurelist"),
+                    "Enabled"
+                )
+            );
+            Config.SetString(
+                "settings.interface.featurelistcolor",
+                Menu.NewTextField(
+                    "Text Color",
+                    Config.GetString("settings.interface.featurelistcolor").ToUpper()
+                )
+            );
+            Config.SetString(
+                "settings.interface.featurelistcolormode",
+                Menu.NewList(
+                    "Text Color Mode",
+                    Config.GetString("settings.interface.featurelistcolormode"),
+                    new string[] { "Normal", "Rainbow", "Rainbow Wave" }
                 )
             );
 

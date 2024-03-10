@@ -23,6 +23,7 @@ namespace NetWare
             ["combat.aimbot.fovsides"] = "50",
             ["combat.aimbot.smoothing"] = "5",
             ["combat.aimbot.fovcolor"] = "#FF4C4C",
+            ["combat.aimbot.rainbowfov"] = "false",
 
             ["combat.silentaim.enabled"] = "false",
             ["combat.silentaim.aimbone"] = "Head",
@@ -32,6 +33,7 @@ namespace NetWare
             ["combat.silentaim.fovsize"] = "200",
             ["combat.silentaim.fovsides"] = "50",
             ["combat.silentaim.fovcolor"] = "#4C4CFF",
+            ["combat.silentaim.rainbowfov"] = "false",
 
             ["combat.magicbullet.enabled"] = "false",
             ["combat.magicbullet.frequency"] = "10",
@@ -41,6 +43,7 @@ namespace NetWare
             ["combat.magicbullet.fovsize"] = "200",
             ["combat.magicbullet.fovsides"] = "50",
             ["combat.magicbullet.fovcolor"] = "#9900FF",
+            ["combat.magicbullet.rainbowfov"] = "false",
 
             ["combat.weapons.norecoil"] = "false",
             ["combat.weapons.nospread"] = "false",
@@ -63,6 +66,15 @@ namespace NetWare
 
             ["visual.fovchanger.enabled"] = "false",
             ["visual.fovchanger.fovchangeramount"] = "100",
+
+            ["visual.speedgraph.enabled"] = "false",
+            ["visual.speedgraph.color"] = "#FFFFFF",
+            ["visual.speedgraph.colormode"] = "Normal",
+
+            ["visual.crosshair.enabled"] = "true",
+            ["visual.crosshair.dynamic"] = "false",
+            ["visual.crosshair.color"] = "#FFFFFF",
+            ["visual.crosshair.rainbow"] = "false",
 
             // movement
             ["movement.speed.enabled"] = "false",
@@ -93,16 +105,71 @@ namespace NetWare
 
             // settings
             ["settings.interface.watermark"] = "true",
-            ["settings.interface.timetype"] = "Standard",
+            ["settings.interface.watermarktimetype"] = "Standard",
+
+            ["settings.interface.featurelist"] = "false",
+            ["settings.interface.featurelistcolor"] = "#FFFFFF",
+            ["settings.interface.featurelistcolormode"] = "Normal",
+        };
+        public static Dictionary<string, string> toggles = new Dictionary<string, string>() // there are probably better ways to do this but idc
+        {
+            // combat
+            ["combat.aimbot.enabled"] = "Aimbot",
+            ["combat.silentaim.enabled"] = "Silent Aim",
+            ["combat.magicbullet.enabled"] = "Magic Bullet",
+            ["combat.weapons.norecoil"] = "No Recoil",
+            ["combat.weapons.nospread"] = "No Spread",
+            ["combat.weapons.infiniteammo"] = "Infinite Ammo",
+            ["combat.weapons.rapidfire"] = "Rapid Fire",
+            ["combat.weapons.infiniterange"] = "Infinite Range",
+
+            // visual
+            ["visual.esp.tracers"] = "Tracers",
+            ["visual.esp.skeleton"] = "Skeleton",
+            ["visual.esp.3dboxes"] = "3D Boxes",
+            ["visual.esp.2dboxes"] = "2D Boxes",
+            ["visual.esp.filledboxes"] = "Filled Boxes",
+            ["visual.esp.info"] = "Info",
+            ["visual.esp.nametags"] = "Nametags",
+
+            ["visual.fovchanger.enabled"] = "FOV Changer",
+
+            ["visual.speedgraph.enabled"] = "Speed Graph",
+
+            // movement
+            ["movement.speed.enabled"] = "Speed",
+
+            ["movement.fly.enabled"] = "Fly",
+
+            ["movement.bhop.enabled"] = "BHop",
+
+            // exploits
+            ["exploits.player.godmode"] = "Godmode",
+            ["exploits.player.instantland"] = "Instant Land",
+            ["exploits.player.infinitematerials"] = "Infinite Materials",
+            ["exploits.player.antifreeze"] = "Anti Freeze",
+
+            ["exploits.gameplay.autoplay"] = "Auto Play",
+
+            ["exploits.game.buildingspam"] = "Building Spam",
+            ["exploits.game.rigspam"] = "Rig Spam",
+            ["exploits.game.instantbreak"] = "Instant Break",
+
+            ["exploits.fun.levelchanger"] = "Level Changer",
+
+            ["exploits.fun.buildinggun"] = "Building Gun",
+            ["exploits.fun.teleportgun"] = "Teleport Gun",
+            ["exploits.fun.explosiongun"] = "Explosion Gun",
+
+            // settings
+            ["settings.interface.watermark"] = "Watermark",
         };
 
         // setup
         public static void Setup()
         {
             if (!Directory.Exists(configFolder))
-            {
                 Directory.CreateDirectory(configFolder);
-            }
 
             foreach (string file in Directory.GetFiles(configFolder))
             {
