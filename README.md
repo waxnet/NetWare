@@ -42,7 +42,8 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Draw Fov
             - FOV Size (10 - 500)
             - Smoothing (5 - 10)
-            - FOV Color Picker (type rgb for rainbow fov)
+            - FOV Color Picker
+            - Rainbow FOV
       + Silent Aim
             - Enabled
             - Aim Bone
@@ -50,15 +51,17 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Dynamic Fov
             - Draw Fov
             - FOV Size (10 - 500)
-            - FOV Color Picker (type rgb for rainbow fov)
+            - FOV Color Picker
+            - Rainbow FOV
       + Magic Bullet
             - Enabled
-            - Frequency (1 - 100)
+            - Frequency (1 - 100 the lower the better)
             - Check FOV
             - Dynamic Fov
             - Draw Fov
             - FOV Size (10 - 500)
-            - FOV Color Picker (type rgb for rainbow fov)
+            - FOV Color Picker
+            - Rainbow FOV
       + Weapons
             - No Recoil
             - Infinite Ammo
@@ -82,6 +85,15 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
       + FOV Changer
             - Enabled
             - Amount (20 - 150)
+      + Speed Graph
+            - Enabled
+            - Color Picker (line)
+            - Color Mode (normal, rainbow, rainbow wave)
+      + Crosshair
+            - Enabled
+            - Dynamic
+            - Color Picker
+            - Rainbow
 
 • Movement
       + Speed
@@ -127,9 +139,13 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
       + Config Manager
             - Save
             - Delete
-      + Interface
-            - Watermark
-            - Watermark Time Type
+      + Watermark
+            - Enabled
+            - Time Type
+      + Feature List
+            - Enabled
+            - Color Picker (text)
+            - Color Mode (normal, rainbow, rainbow wave)
       + Config Loader
 ```
 
