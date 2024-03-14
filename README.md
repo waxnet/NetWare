@@ -141,7 +141,7 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Delete
       + Watermark
             - Enabled
-            - Time Type
+            - Time Type (standard, military)
       + Feature List
             - Enabled
             - Color Picker (text)
