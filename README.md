@@ -40,8 +40,8 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Check FOV
             - Dynamic Fov
             - Draw Fov
-            - FOV Size (10 - 500)
-            - Smoothing (5 - 10)
+            - FOV Size (10 -> 500)
+            - Smoothing (5 -> 10)
             - FOV Color Picker
             - Rainbow FOV
       + Silent Aim
@@ -50,16 +50,16 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Check FOV
             - Dynamic Fov
             - Draw Fov
-            - FOV Size (10 - 500)
+            - FOV Size (10 -> 500)
             - FOV Color Picker
             - Rainbow FOV
       + Magic Bullet
             - Enabled
-            - Frequency (1 - 100 the lower the better)
+            - Frequency (1 -> 100 the lower the better)
             - Check FOV
             - Dynamic Fov
             - Draw Fov
-            - FOV Size (10 - 500)
+            - FOV Size (10 -> 500)
             - FOV Color Picker
             - Rainbow FOV
       + Weapons
@@ -84,7 +84,7 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Bot Color Picker
       + FOV Changer
             - Enabled
-            - Amount (20 - 150)
+            - Amount (20 -> 150)
       + Speed Graph
             - Enabled
             - Color Picker (line)
@@ -98,7 +98,7 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
 • Movement
       + Speed
             - Enabled
-            - Amount (1 - 10)
+            - Amount (1 -> 10)
       + Fly
             - Enabled
       + BHop
