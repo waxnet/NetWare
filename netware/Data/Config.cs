@@ -65,16 +65,22 @@ namespace NetWare
             ["visual.esp.botcolor"] = "#FFFFFF",
 
             ["visual.fovchanger.enabled"] = "false",
-            ["visual.fovchanger.fovchangeramount"] = "100",
+            ["visual.fovchanger.amount"] = "100",
 
             ["visual.speedgraph.enabled"] = "false",
             ["visual.speedgraph.color"] = "#FFFFFF",
             ["visual.speedgraph.colormode"] = "Normal",
 
-            ["visual.crosshair.enabled"] = "true",
+            ["visual.crosshair.enabled"] = "false",
             ["visual.crosshair.dynamic"] = "false",
+            ["visual.crosshair.betterscope"] = "false",
             ["visual.crosshair.color"] = "#FFFFFF",
             ["visual.crosshair.rainbow"] = "false",
+
+            ["visual.camerasettings.enabled"] = "false",
+            ["visual.camerasettings.x"] = "0.2",
+            ["visual.camerasettings.y"] = "1.5",
+            ["visual.camerasettings.z"] = "2.5",
 
             // movement
             ["movement.speed.enabled"] = "false",
@@ -97,7 +103,7 @@ namespace NetWare
             ["exploits.game.instantbreak"] = "false",
 
             ["exploits.fun.levelchanger"] = "false",
-            ["exploits.fun.levelchangeramount"] = "100000",
+            ["exploits.fun.levelchanger.amount"] = "100000",
 
             ["exploits.fun.buildinggun"] = "false",
             ["exploits.fun.teleportgun"] = "false",
@@ -105,11 +111,18 @@ namespace NetWare
 
             // settings
             ["settings.interface.watermark"] = "true",
-            ["settings.interface.watermarktimetype"] = "Standard",
+            ["settings.interface.watermark.timetype"] = "Standard",
 
             ["settings.interface.featurelist"] = "false",
-            ["settings.interface.featurelistcolor"] = "#FFFFFF",
-            ["settings.interface.featurelistcolormode"] = "Normal",
+            ["settings.interface.featurelist.color"] = "#FFFFFF",
+            ["settings.interface.featurelist.colormode"] = "Normal",
+
+            ["settings.interface.menueffects"] = "false",
+            ["settings.interface.menueffects.speed"] = "0.2",
+            ["settings.interface.menueffects.spawndelaymin"] = "0.1",
+            ["settings.interface.menueffects.spawndelaymax"] = "0.1",
+            ["settings.interface.menueffects.color"] = "#FFFFFF",
+            ["settings.interface.menueffects.colormode"] = "Normal",
         };
         public static Dictionary<string, string> toggles = new Dictionary<string, string>() // there are probably better ways to do this but idc
         {
@@ -135,6 +148,10 @@ namespace NetWare
             ["visual.fovchanger.enabled"] = "FOV Changer",
 
             ["visual.speedgraph.enabled"] = "Speed Graph",
+
+            ["visual.crosshair.enabled"] = "Crosshair",
+
+            ["visual.camerasettings.enabled"] = "Camera Settings",
 
             // movement
             ["movement.speed.enabled"] = "Speed",
@@ -163,6 +180,10 @@ namespace NetWare
 
             // settings
             ["settings.interface.watermark"] = "Watermark",
+
+            ["settings.interface.featurelist"] = "Feature List",
+
+            ["settings.interface.menueffects"] = "Menu Effects",
         };
 
         // setup

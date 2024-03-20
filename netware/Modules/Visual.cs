@@ -7,21 +7,33 @@ namespace NetWare
     {
         public static void Execute()
         {
+            // reset zoom state if needed
+            if (Config.GetBool("visual.fovchanger.enabled") || Config.GetBool("visual.camerasettings.enabled"))
+            {
+                LocalPlayer.GetCameraManager()?.ResetZoomStateInstant();
+            }
+
             // fov changer
             if (Config.GetBool("visual.fovchanger.enabled"))
             {
                 VisualH.resetFOV = true;
-
-                CameraManager cameraManager = LocalPlayer.GetCameraManager();
-
-                if (cameraManager != null)
-                {
-                    cameraManager.ResetZoomStateInstant();
-                    Camera.main.fieldOfView = Config.GetFloat("visual.fovchanger.fovchangeramount");
-                }
+                Camera.main.fieldOfView = Config.GetFloat("visual.fovchanger.amount");
             } else if (VisualH.resetFOV) {
                 VisualH.resetFOV = false;
                 Camera.main.fieldOfView = 60;
+            }
+
+            // camera settings
+            if (Config.GetBool("visual.camerasettings.enabled"))
+            {
+                vThirdPersonCamera thirdPersonCamera = LocalPlayer.GetThirdPersonCamera();
+
+                if (thirdPersonCamera != null)
+                {
+                    thirdPersonCamera.rightOffset = Config.GetFloat("visual.camerasettings.x");
+                    thirdPersonCamera.SetHeight(Config.GetFloat("visual.camerasettings.y"));
+                    thirdPersonCamera.defaultDistance = Config.GetFloat("visual.camerasettings.z");
+                }
             }
         }
 
@@ -179,6 +191,43 @@ namespace NetWare
                 )
             );
 
+            Menu.NewSection("Camera Settings");
+            Config.SetBool(
+                "visual.camerasettings.enabled",
+                Menu.NewToggle(
+                    Config.GetBool("visual.camerasettings.enabled"),
+                    "Enabled"
+                )
+            );
+            Menu.NewTitle("Settings");
+            Config.SetFloat(
+                "visual.camerasettings.x",
+                Menu.NewSlider(
+                    "X Offset",
+                    Config.GetFloat("visual.camerasettings.x"),
+                    -5,
+                    5
+                )
+            );
+            Config.SetFloat(
+                "visual.camerasettings.y",
+                Menu.NewSlider(
+                    "Y Offset",
+                    Config.GetFloat("visual.camerasettings.y"),
+                    -5,
+                    5
+                )
+            );
+            Config.SetFloat(
+                "visual.camerasettings.z",
+                Menu.NewSlider(
+                    "Z Offset",
+                    Config.GetFloat("visual.camerasettings.z"),
+                    -5,
+                    5
+                )
+            );
+
             Menu.Separate();
 
             Menu.NewSection("FOV Changer");
@@ -190,10 +239,10 @@ namespace NetWare
                 )
             );
             Config.SetFloat(
-                "visual.fovchanger.fovchangeramount",
+                "visual.fovchanger.amount",
                 Menu.NewSlider(
                     "Amount",
-                    Config.GetFloat("visual.fovchanger.fovchangeramount"),
+                    Config.GetFloat("visual.fovchanger.amount"),
                     20,
                     150
                 )
@@ -207,6 +256,7 @@ namespace NetWare
                     "Enabled"
                 )
             );
+            Menu.NewTitle("Colors");
             Config.SetString(
                 "visual.speedgraph.color",
                 Menu.NewTextField(
@@ -231,6 +281,7 @@ namespace NetWare
                     "Enabled"
                 )
             );
+            Menu.NewTitle("Settings");
             Config.SetBool(
                 "visual.crosshair.dynamic",
                 Menu.NewToggle(
@@ -238,6 +289,14 @@ namespace NetWare
                     "Dynamic"
                 )
             );
+            Config.SetBool(
+                "visual.crosshair.betterscope",
+                Menu.NewToggle(
+                    Config.GetBool("visual.crosshair.betterscope"),
+                    "Better Scope"
+                )
+            );
+            Menu.NewTitle("Colors");
             Config.SetString(
                 "visual.crosshair.color",
                 Menu.NewTextField(

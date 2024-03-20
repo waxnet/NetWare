@@ -87,6 +87,11 @@ namespace NetWare
 
             GUILayout.EndVertical();
 
+            if (newValue < minimum) {
+                return minimum;
+            } else if (newValue > maximum) {
+                return maximum;
+            }
             return newValue;
         }
 

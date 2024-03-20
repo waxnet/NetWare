@@ -14,7 +14,7 @@ namespace NetWare
             {
                 // get current time
                 string currentTime = DateTime.Now.ToString("hh:mm:ss tt");
-                if (Config.GetString("settings.interface.watermarktimetype") == "Military")
+                if (Config.GetString("settings.interface.watermark.timetype") == "Military")
                 {
                     currentTime = DateTime.Now.ToString("HH:mm:ss");
                 }
@@ -34,7 +34,7 @@ namespace NetWare
                 SettingsH.fpsCounterTimer++;
 
                 // watermark content and style
-                GUIContent titleContent = new GUIContent("<b>Net<color=red>Ware</color> v1.9.5 | " + currentTime + " | " + SettingsH.fpsCounterContent + " FPS</b>");
+                GUIContent titleContent = new GUIContent("<b>Net<color=red>Ware</color> v1.9.6 | " + currentTime + " | " + SettingsH.fpsCounterContent + " FPS</b>");
                 GUIStyle titleStyle = new GUIStyle("Label")
                 {
                     wordWrap = false,
@@ -96,12 +96,12 @@ namespace NetWare
             if (Config.GetBool("settings.interface.featurelist"))
             {
                 // text data
-                string colorMode = Config.GetString("settings.interface.featurelistcolormode");
+                string colorMode = Config.GetString("settings.interface.featurelist.colormode");
                 GUIStyle style = new GUIStyle
                 {
                     fontStyle = FontStyle.Bold
                 };
-                style.normal.textColor = Colors.HexToRGB(Config.GetString("settings.interface.featurelistcolor"));
+                style.normal.textColor = Colors.HexToRGB(Config.GetString("settings.interface.featurelist.color"));
 
                 // lists
                 string[] features = Config.toggles.Keys.ToArray();
@@ -182,11 +182,12 @@ namespace NetWare
                     "Enabled"
                 )
             );
+            Menu.NewTitle("Settings");
             Config.SetString(
-                "settings.interface.watermarktimetype",
+                "settings.interface.watermark.timetype",
                 Menu.NewList(
                     "Time Type",
-                    Config.GetString("settings.interface.watermarktimetype"),
+                    Config.GetString("settings.interface.watermark.timetype"),
                     new string[] { "Standard", "Military" }
                 )
             );
@@ -199,19 +200,73 @@ namespace NetWare
                     "Enabled"
                 )
             );
+            Menu.NewTitle("Colors");
             Config.SetString(
-                "settings.interface.featurelistcolor",
+                "settings.interface.featurelist.color",
                 Menu.NewTextField(
                     "Text Color",
-                    Config.GetString("settings.interface.featurelistcolor").ToUpper()
+                    Config.GetString("settings.interface.featurelist.color").ToUpper()
                 )
             );
             Config.SetString(
-                "settings.interface.featurelistcolormode",
+                "settings.interface.featurelist.colormode",
                 Menu.NewList(
                     "Text Color Mode",
-                    Config.GetString("settings.interface.featurelistcolormode"),
+                    Config.GetString("settings.interface.featurelist.colormode"),
                     new string[] { "Normal", "Rainbow", "Rainbow Wave" }
+                )
+            );
+
+            Menu.NewSection("Menu Effects");
+            Config.SetBool(
+                "settings.interface.menueffects",
+                Menu.NewToggle(
+                    Config.GetBool("settings.interface.menueffects"),
+                    "Enabled"
+                )
+            );
+            Menu.NewTitle("Settings");
+            Config.SetFloat(
+                "settings.interface.menueffects.speed",
+                Menu.NewSlider(
+                    "Speed",
+                    Config.GetFloat("settings.interface.menueffects.speed"),
+                    .1f,
+                    1
+                )
+            );
+            Config.SetFloat(
+                "settings.interface.menueffects.spawndelaymin",
+                Menu.NewSlider(
+                    "Spawn Delay Min",
+                    Config.GetFloat("settings.interface.menueffects.spawndelaymin"),
+                    0,
+                    Config.GetFloat("settings.interface.menueffects.spawndelaymax")
+                )
+            );
+            Config.SetFloat(
+                "settings.interface.menueffects.spawndelaymax",
+                Menu.NewSlider(
+                    "Spawn Delay Max",
+                    Config.GetFloat("settings.interface.menueffects.spawndelaymax"),
+                    Config.GetFloat("settings.interface.menueffects.spawndelaymin"),
+                    1
+                )
+            );
+            Menu.NewTitle("Colors");
+            Config.SetString(
+                "settings.interface.menueffects.color",
+                Menu.NewTextField(
+                    "Color",
+                    Config.GetString("settings.interface.menueffects.color").ToUpper()
+                )
+            );
+            Config.SetString(
+                "settings.interface.menueffects.colormode",
+                Menu.NewList(
+                    "Color Mode",
+                    Config.GetString("settings.interface.menueffects.colormode"),
+                    new string[] { "Normal", "Rainbow", "Confetti" }
                 )
             );
 

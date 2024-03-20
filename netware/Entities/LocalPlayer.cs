@@ -1,4 +1,5 @@
 ﻿using Invector.CharacterController;
+using JustPlay.Equipment;
 using UnityEngine;
 
 namespace NetWare
@@ -37,6 +38,11 @@ namespace NetWare
             return GetWeaponsController()?.LICGBKBBPBJ;
         }
 
+        public static WeaponStats GetWeaponStats()
+        {
+            return (WeaponStats)(GetWeaponModel()?.IIADOJDLHCO);
+        }
+
         // camera
         public static CameraManager GetCameraManager()
         {
@@ -52,6 +58,11 @@ namespace NetWare
         public static bool IsHoldingWeapon()
         {
             return (GetPlayerBuildingManager()?.state == CEFHGHANAKP.NONE) || (!GetPlayerBuildingManager().enabled);
+        }
+
+        public static bool IsAiming()
+        {
+            return (bool)(GetWeaponsController()?.LLCGNJLGOMJ);
         }
 
         // other

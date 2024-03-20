@@ -1,6 +1,5 @@
 ﻿using Photon.Pun;
-using System;
-using System.Runtime.InteropServices.ComTypes;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace NetWare
@@ -61,9 +60,58 @@ namespace NetWare
             }
         }
 
-        // internal methods
+        // internal methods and variables
+        private static List<List<float>> menuEffectsPoints = new List<List<float>>();
+        private static float menuEffectsTimer = 0;
+
         private static void BuildMenu(int _)
         {
+            // particles
+            if (Config.GetBool("settings.interface.menueffects"))
+            {
+                float delay = Random.Range(
+                    Config.GetFloat("settings.interface.menueffects.spawndelaymin"),
+                    Config.GetFloat("settings.interface.menueffects.spawndelaymax")
+                );
+
+                if ((Time.time - menuEffectsTimer) >= delay)
+                {
+                    menuEffectsPoints.Add(new List<float> {
+                        (Menu.windowRect.width - Random.Range(10, (Menu.windowRect.width - 10))),
+                        0
+                    });
+                    menuEffectsTimer = (Time.time + Random.Range(0, 1));
+                }
+                for (int index = 0; index < menuEffectsPoints.Count; index++)
+                {
+                    List<float> point = menuEffectsPoints[index];
+                    int realX = (int)(Menu.windowRect.x + point[0]);
+                    int realY = (int)(Menu.windowRect.y - point[1]);
+
+                    Color particleColor = Colors.HexToRGB(Config.GetString("settings.interface.menueffects.color"));
+                    switch (Config.GetString("settings.interface.menueffects.colormode"))
+                    {
+                        case "Rainbow":
+                            particleColor = Colors.GetRainbow();
+                            break;
+                        case "Confetti":
+                            particleColor = Colors.GetRainbow(point[0]);
+                            break;
+                    }
+                    Render.DrawBox(
+                        particleColor,
+                        new Vector2(realX, realY),
+                        3, 3
+                    );
+                    point[1] -= Config.GetFloat("settings.interface.menueffects.speed");
+
+                    if (realY >= (Menu.windowRect.y + Menu.windowRect.height))
+                    {
+                        menuEffectsPoints.RemoveAt(index);
+                    }
+                }
+            }
+
             // tab selectors
             GUILayout.BeginArea(new Rect(10, 10, (Menu.windowRect.width - 20), (Menu.windowRect.height - 20)));
             GUILayout.Space(10);

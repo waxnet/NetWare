@@ -1,7 +1,6 @@
 ﻿using Invector.CharacterController;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 namespace NetWare.Helpers
 {
@@ -555,6 +554,31 @@ namespace NetWare.Helpers
         }
         public static void DrawCrosshair()
         {
+            Color scopeColor = HudManager.Instance.SniperScope.color;
+            if (
+                Config.GetBool("visual.crosshair.betterscope") &&
+                LocalPlayer.GetWeaponStats().ZoomSettings.HasScope &&
+                LocalPlayer.IsAiming()
+            ) {
+                scopeColor.a = 0;
+                HudManager.Instance.SniperScope.color = scopeColor;
+
+                Render.DrawBox(
+                    Color.black,
+                    Render.screenCenter,
+                    Screen.width, 1
+                );
+                Render.DrawBox(
+                    Color.black,
+                    Render.screenCenter,
+                    1, Screen.height
+                );
+
+                return;
+            }
+            scopeColor.a = 1;
+            HudManager.Instance.SniperScope.color = scopeColor;
+
             Color color = Colors.HexToRGB(Config.GetString("visual.crosshair.color"));
             if (Config.GetBool("visual.crosshair.rainbow"))
                 color = Colors.GetRainbow();
@@ -569,26 +593,27 @@ namespace NetWare.Helpers
             if (Position.IsBehindCamera(position))
                 return;
 
-            Render.DrawBox(
-                Color.black,
-                position,
-                4, 26
-            );
+
             Render.DrawBox(
                 Color.black,
                 position,
                 26, 4
             );
+            Render.DrawBox(
+                Color.black,
+                position,
+                4, 26
+            );
 
             Render.DrawBox(
                 color,
                 position,
-                2, 24
+                24, 2
             );
             Render.DrawBox(
                 color,
                 position,
-                24, 2
+                2, 24
             );
         }
     }
