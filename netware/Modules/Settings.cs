@@ -34,7 +34,7 @@ namespace NetWare
                 SettingsH.fpsCounterTimer++;
 
                 // watermark content and style
-                GUIContent titleContent = new GUIContent("<b>Net<color=red>Ware</color> v1.9.6 | " + currentTime + " | " + SettingsH.fpsCounterContent + " FPS</b>");
+                GUIContent titleContent = new GUIContent("<b>Net<color=red>Ware</color> v1.9.6.1 | " + currentTime + " | " + SettingsH.fpsCounterContent + " FPS</b>");
                 GUIStyle titleStyle = new GUIStyle("Label")
                 {
                     wordWrap = false,
@@ -230,7 +230,7 @@ namespace NetWare
                 "settings.interface.menueffects.speed",
                 Menu.NewSlider(
                     "Speed",
-                    Config.GetFloat("settings.interface.menueffects.speed"),
+                    Config.GetFloat("settings.interface.menueffects.speed", .2f),
                     .1f,
                     1
                 )
@@ -239,17 +239,17 @@ namespace NetWare
                 "settings.interface.menueffects.spawndelaymin",
                 Menu.NewSlider(
                     "Spawn Delay Min",
-                    Config.GetFloat("settings.interface.menueffects.spawndelaymin"),
+                    Config.GetFloat("settings.interface.menueffects.spawndelaymin", .1f),
                     0,
-                    Config.GetFloat("settings.interface.menueffects.spawndelaymax")
+                    Config.GetFloat("settings.interface.menueffects.spawndelaymax", .1f)
                 )
             );
             Config.SetFloat(
                 "settings.interface.menueffects.spawndelaymax",
                 Menu.NewSlider(
                     "Spawn Delay Max",
-                    Config.GetFloat("settings.interface.menueffects.spawndelaymax"),
-                    Config.GetFloat("settings.interface.menueffects.spawndelaymin"),
+                    Config.GetFloat("settings.interface.menueffects.spawndelaymax", .1f),
+                    Config.GetFloat("settings.interface.menueffects.spawndelaymin", .1f),
                     1
                 )
             );
@@ -275,12 +275,7 @@ namespace NetWare
             Menu.NewSection("Config Loader");
             foreach (string config in Config.configList)
             {
-                void Load()
-                {
-                    Config.Load(config);
-                }
-
-                Menu.NewButton(config, Load);
+                Menu.NewButton(config, () => { Config.Load(config); });
             }
 
             Menu.End();

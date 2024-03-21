@@ -24,7 +24,7 @@ namespace NetWare
                         {
                             playerController = CombatH.GetBestPlayerInFOV(Camera.main.fieldOfView + 80);
                         } else {
-                            playerController = CombatH.GetBestPlayerInFOV(Config.GetFloat("combat.aimbot.fovsize"));
+                            playerController = CombatH.GetBestPlayerInFOV(Config.GetFloat("combat.aimbot.fovsize", 200));
                         }
                     } else {
                         playerController = CombatH.GetBestPlayerInFOV(Screen.width);
@@ -62,7 +62,7 @@ namespace NetWare
                             Quaternion newRotation = Quaternion.Lerp(
                                 startRotation,
                                 endRotation,
-                                (Config.GetFloat("combat.aimbot.smoothing") / 10)
+                                (Config.GetFloat("combat.aimbot.smoothing", 5) / 10)
                             );
 
                             // set camera rotation
@@ -88,7 +88,7 @@ namespace NetWare
                         {
                             playerController = CombatH.GetBestPlayerInFOV(Camera.main.fieldOfView + 80);
                         } else {
-                            playerController = CombatH.GetBestPlayerInFOV(Config.GetFloat("combat.silentaim.fovsize"));
+                            playerController = CombatH.GetBestPlayerInFOV(Config.GetFloat("combat.silentaim.fovsize", 200));
                         }
                     } else {
                         playerController = CombatH.GetBestPlayer();
@@ -124,7 +124,7 @@ namespace NetWare
                                 {
                                     playerController = CombatH.GetBestPlayerInFOV(Camera.main.fieldOfView + 80);
                                 } else {
-                                    playerController = CombatH.GetBestPlayerInFOV(Config.GetFloat("combat.magicbullet.fovsize"));
+                                    playerController = CombatH.GetBestPlayerInFOV(Config.GetFloat("combat.magicbullet.fovsize", 200));
                                 }
                             } else {
                                 playerController = CombatH.GetBestPlayer();
@@ -382,7 +382,7 @@ namespace NetWare
                 "combat.aimbot.smoothing",
                 Menu.NewSlider(
                     "Smoothing",
-                    Config.GetFloat("combat.aimbot.smoothing"),
+                    Config.GetFloat("combat.aimbot.smoothing", 5),
                     1,
                     10
                 )

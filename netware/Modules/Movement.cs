@@ -14,7 +14,7 @@ namespace NetWare
             {
                 // speed
                 if (Config.GetBool("movement.speed.enabled")) {
-                    playerController.MDPHLPFKBAN = Config.GetFloat("movement.speed.amount");
+                    playerController.MDPHLPFKBAN = Config.GetFloat("movement.speed.amount", 5);
                 } else {
                     playerController.MDPHLPFKBAN = 1;
                 }
@@ -46,7 +46,7 @@ namespace NetWare
                 "movement.speed.amount",
                 Menu.NewSlider(
                     "Amount",
-                    Config.GetFloat("movement.speed.amount"),
+                    Config.GetFloat("movement.speed.amount", 5),
                     1,
                     10
                 )

@@ -70,8 +70,8 @@ namespace NetWare
             if (Config.GetBool("settings.interface.menueffects"))
             {
                 float delay = Random.Range(
-                    Config.GetFloat("settings.interface.menueffects.spawndelaymin"),
-                    Config.GetFloat("settings.interface.menueffects.spawndelaymax")
+                    Config.GetFloat("settings.interface.menueffects.spawndelaymin", .1f),
+                    Config.GetFloat("settings.interface.menueffects.spawndelaymax", .1f)
                 );
 
                 if ((Time.time - menuEffectsTimer) >= delay)
@@ -103,7 +103,7 @@ namespace NetWare
                         new Vector2(realX, realY),
                         3, 3
                     );
-                    point[1] -= Config.GetFloat("settings.interface.menueffects.speed");
+                    point[1] -= Config.GetFloat("settings.interface.menueffects.speed", .2f);
 
                     if (realY >= (Menu.windowRect.y + Menu.windowRect.height))
                     {

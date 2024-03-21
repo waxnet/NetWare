@@ -260,9 +260,13 @@ namespace NetWare
         }
 
         // floats
-        public static float GetFloat(string key)
+        public static float GetFloat(string key, float safetyValue)
         {
-            return (float)Math.Round(float.Parse(config[key]), 1);
+            if (float.TryParse(config[key], out float value))
+            {
+                return (float)Math.Round(value, 1);
+            }
+            return safetyValue;
         }
         public static void SetFloat(string key, float value)
         {

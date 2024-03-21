@@ -17,7 +17,7 @@ namespace NetWare
             if (Config.GetBool("visual.fovchanger.enabled"))
             {
                 VisualH.resetFOV = true;
-                Camera.main.fieldOfView = Config.GetFloat("visual.fovchanger.amount");
+                Camera.main.fieldOfView = Config.GetFloat("visual.fovchanger.amount", 100);
             } else if (VisualH.resetFOV) {
                 VisualH.resetFOV = false;
                 Camera.main.fieldOfView = 60;
@@ -30,9 +30,9 @@ namespace NetWare
 
                 if (thirdPersonCamera != null)
                 {
-                    thirdPersonCamera.rightOffset = Config.GetFloat("visual.camerasettings.x");
-                    thirdPersonCamera.SetHeight(Config.GetFloat("visual.camerasettings.y"));
-                    thirdPersonCamera.defaultDistance = Config.GetFloat("visual.camerasettings.z");
+                    thirdPersonCamera.rightOffset = Config.GetFloat("visual.camerasettings.x", .2f);
+                    thirdPersonCamera.SetHeight(Config.GetFloat("visual.camerasettings.y", 1.5f));
+                    thirdPersonCamera.defaultDistance = Config.GetFloat("visual.camerasettings.z", 2.5f);
                 }
             }
         }
@@ -204,7 +204,7 @@ namespace NetWare
                 "visual.camerasettings.x",
                 Menu.NewSlider(
                     "X Offset",
-                    Config.GetFloat("visual.camerasettings.x"),
+                    Config.GetFloat("visual.camerasettings.x", .2f),
                     -5,
                     5
                 )
@@ -213,7 +213,7 @@ namespace NetWare
                 "visual.camerasettings.y",
                 Menu.NewSlider(
                     "Y Offset",
-                    Config.GetFloat("visual.camerasettings.y"),
+                    Config.GetFloat("visual.camerasettings.y", 1.5f),
                     -5,
                     5
                 )
@@ -222,7 +222,7 @@ namespace NetWare
                 "visual.camerasettings.z",
                 Menu.NewSlider(
                     "Z Offset",
-                    Config.GetFloat("visual.camerasettings.z"),
+                    Config.GetFloat("visual.camerasettings.z", 2.5f),
                     -5,
                     5
                 )
@@ -242,7 +242,7 @@ namespace NetWare
                 "visual.fovchanger.amount",
                 Menu.NewSlider(
                     "Amount",
-                    Config.GetFloat("visual.fovchanger.amount"),
+                    Config.GetFloat("visual.fovchanger.amount", 100),
                     20,
                     150
                 )
