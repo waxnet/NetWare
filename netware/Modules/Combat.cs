@@ -176,12 +176,12 @@ namespace NetWare
 
                 if (Config.GetBool("combat.weapons.rapidfire"))
                 {
-                    LocalPlayer.GetWeaponsController()?.ApplyFireRateMultiplier(1.1f);
+                    LocalPlayer.GetWeaponsController()?.ApplyFireRateMultiplier(1.25f);
                 }
 
                 if (Config.GetBool("combat.weapons.rapidreload"))
                 {
-                    LocalPlayer.GetWeaponsController()?.ApplyReloadSpeedMultiplier(1.1f);
+                    LocalPlayer.GetWeaponsController()?.ApplyReloadSpeedMultiplier(1.25f);
                 }
             }
 
