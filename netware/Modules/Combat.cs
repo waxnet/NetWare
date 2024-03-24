@@ -176,24 +176,12 @@ namespace NetWare
 
                 if (Config.GetBool("combat.weapons.rapidfire"))
                 {
-                    CombatH.rapidFireTimer++;
+                    LocalPlayer.GetWeaponsController()?.ApplyFireRateMultiplier(1.1f);
+                }
 
-                    if (CombatH.rapidFireTimer > 3)
-                    {
-                        WeaponsController weaponsController = LocalPlayer.GetWeaponsController();
-
-                        weaponsController?.photonView?.RPC(
-                            "FireWeaponRemote",
-                            RpcTarget.All,
-                            new object[] {
-                                null,
-                                true,
-                                1
-                            }
-                        );
-
-                        CombatH.rapidFireTimer = 0;
-                    }
+                if (Config.GetBool("combat.weapons.rapidreload"))
+                {
+                    LocalPlayer.GetWeaponsController()?.ApplyReloadSpeedMultiplier(1.1f);
                 }
             }
 
@@ -202,7 +190,7 @@ namespace NetWare
                 WeaponModel weaponModel = LocalPlayer.GetWeaponModel();
                 if (weaponModel == null)
                     return;
-                WeaponStats stats = weaponModel.IIADOJDLHCO;
+                WeaponStats stats = LocalPlayer.GetWeaponStats();
 
                 bool editWeaponStats = false;
 
@@ -222,8 +210,8 @@ namespace NetWare
 
                 if (editWeaponStats)
                 {
-                    PropertyInfo property = typeof(WeaponModel).GetProperty("IIADOJDLHCO");
-                    property.DeclaringType.GetProperty("IIADOJDLHCO");
+                    PropertyInfo property = typeof(WeaponModel).GetProperty("APPPJGCCEBG");
+                    property.DeclaringType.GetProperty("APPPJGCCEBG");
                     property.GetSetMethod(true).Invoke(weaponModel, new object[] { stats });
                 }
 
@@ -579,6 +567,13 @@ namespace NetWare
                 Menu.NewToggle(
                     Config.GetBool("combat.weapons.rapidfire"),
                     "Rapid Fire"
+                )
+            );
+            Config.SetBool(
+                "combat.weapons.rapidreload",
+                Menu.NewToggle(
+                    Config.GetBool("combat.weapons.rapidreload"),
+                    "Rapid Reload"
                 )
             );
             Config.SetBool(

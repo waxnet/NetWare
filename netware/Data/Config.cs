@@ -49,6 +49,7 @@ namespace NetWare
             ["combat.weapons.nospread"] = "false",
             ["combat.weapons.infiniteammo"] = "false",
             ["combat.weapons.rapidfire"] = "false",
+            ["combat.weapons.rapidreload"] = "false",
             ["combat.weapons.infiniterange"] = "false",
 
             // visual
@@ -134,6 +135,7 @@ namespace NetWare
             ["combat.weapons.nospread"] = "No Spread",
             ["combat.weapons.infiniteammo"] = "Infinite Ammo",
             ["combat.weapons.rapidfire"] = "Rapid Fire",
+            ["combat.weapons.rapidreload"] = "Rapid Reload",
             ["combat.weapons.infiniterange"] = "Infinite Range",
 
             // visual

@@ -34,7 +34,7 @@ namespace NetWare
                 SettingsH.fpsCounterTimer++;
 
                 // watermark content and style
-                GUIContent titleContent = new GUIContent("<b>Net<color=red>Ware</color> v1.9.6.1 | " + currentTime + " | " + SettingsH.fpsCounterContent + " FPS</b>");
+                GUIContent titleContent = new GUIContent("<b>Net<color=red>Ware</color> v1.9.7 | " + currentTime + " | " + SettingsH.fpsCounterContent + " FPS</b>");
                 GUIStyle titleStyle = new GUIStyle("Label")
                 {
                     wordWrap = false,

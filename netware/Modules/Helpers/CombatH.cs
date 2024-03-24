@@ -5,7 +5,6 @@ namespace NetWare.Helpers
     public static class CombatH
     {
         // values
-        public static int rapidFireTimer = 0;
         public static int weaponStatsTimer = 0;
         public static int magicBulletSkips = 0;
         public static bool magicBulletReset = false;

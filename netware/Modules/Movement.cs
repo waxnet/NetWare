@@ -14,9 +14,9 @@ namespace NetWare
             {
                 // speed
                 if (Config.GetBool("movement.speed.enabled")) {
-                    playerController.MDPHLPFKBAN = Config.GetFloat("movement.speed.amount", 5);
+                    playerController.MICHJLNNPEI = Config.GetFloat("movement.speed.amount", 5);
                 } else {
-                    playerController.MDPHLPFKBAN = 1;
+                    playerController.MICHJLNNPEI = 1;
                 }
 
                 // fly

@@ -557,9 +557,11 @@ namespace NetWare.Helpers
             Color scopeColor = HudManager.Instance.SniperScope.color;
             if (
                 Config.GetBool("visual.crosshair.betterscope") &&
+                LocalPlayer.GetWeaponModel() != null &&
                 LocalPlayer.GetWeaponStats().ZoomSettings.HasScope &&
                 LocalPlayer.IsAiming()
-            ) {
+            )
+            {
                 scopeColor.a = 0;
                 HudManager.Instance.SniperScope.color = scopeColor;
 
@@ -592,7 +594,6 @@ namespace NetWare.Helpers
             }
             if (Position.IsBehindCamera(position))
                 return;
-
 
             Render.DrawBox(
                 Color.black,
