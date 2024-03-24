@@ -22,10 +22,10 @@
 -----
 
 ### <p align="center">🔑 Usage 🔑</p>
-<p align="center"><i><b>
+<p align="center"><b>
 After you've downloaded and extracted the <a href="https://github.com/waxnet/NetWare/releases/latest">latest release</a>, open 
 "NetWareLoader.exe" and select the option 1 to load NetWare.
-</b></i></p>
+</b></p>
 
 -----
 
@@ -92,8 +92,14 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
       + Crosshair
             - Enabled
             - Dynamic
+            - Better Scope
             - Color Picker
             - Rainbow
+      + Camera Settings
+            - Enabled
+            - X (-5 -> 5)
+            - Y (-5 -> 5)
+            - Z (-5 -> 5)
 
 • Movement
       + Speed
@@ -146,6 +152,13 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Enabled
             - Color Picker (text)
             - Color Mode (normal, rainbow, rainbow wave)
+      + Menu Effects
+            - Enabled
+            - Speed
+            - Spawn Delay Min (0 -> MAX)
+            - Spawn Delay Max (MIN -> 1)
+            - Color Picker
+            - Color Mode (normal, rainbow, confetti)
       + Config Loader
 ```
 
@@ -155,23 +168,25 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
 
     • Fix my shitty code.
 
-<p align="center"><i><b>Feel free to submit any idea by making a pull request on this repository!</b></i></p>
+<p align="center"><b>Feel free to submit any idea by making a pull request on this repository!</b></p>
 
 -----
 
 ### <p align="center">💾 Dependencies 💾</p>
-<p align="center"><a href="https://github.com/warbler/SharpMonoInjector">SharpMonoInjector</a></p>
-<p align="center"><a href="https://github.com/0xd4d/dnlib">dnlib</a></p>
-<p align="center"><a href="https://github.com/Fody/Costura">Costura.Fody</a></p>
-<p align="center"><a href="https://github.com/shravan2x/Gameloop.Vdf">Gameloop.Vdf</a></p>
-<p align="center"><a href="https://github.com/shravan2x/Gameloop.Vdf.JsonConverter">Gameloop.Vdf.JsonConverter</a></p>
-<p align="center"><a href="https://github.com/JamesNK/Newtonsoft.Json">Newtonsoft.Json</a></p>
+```
+SharpMonoInjector
+dnlib
+Costura.Fody
+Gameloop.Vdf
+Gameloop.Vdf.JsonConverter
+Newtonsoft.Json
+```
 
 -----
 
 ### <p align="center">⚠️ Disclaimer ⚠️</p>
 
-<p align="center"><i><b>This program is meant for educational purposes only.</b></i></p>
+<p align="center"><b>This program is meant for educational purposes only.</b></p>
 
 -----
 
