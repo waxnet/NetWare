@@ -64,9 +64,10 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Rainbow FOV
       + Weapons
             - No Recoil
+            - No Spread
             - Infinite Ammo
             - Rapid Fire
-            - No Spread
+            - Rapid Reload
             - Infinite Range
 
 • Visual
@@ -119,10 +120,11 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
       + Gameplay
             - Leave Game
             - Auto Play
+      + Account
+            - Sign Out
       + Locker
             - Unlock Emotes
             - Unlock Stickers
-            - Skin Changer
             - Pickaxe Changer
       + Game
             - Force Win
@@ -137,6 +139,7 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Add 10k Fake Gold
             - Add 10k Fake Gems
             - Loadout Level Changer
+      + Weapon Mods
             - Building Gun
             - Teleport Gun
             - Explosion Gun
@@ -154,7 +157,7 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Color Mode (normal, rainbow, rainbow wave)
       + Menu Effects
             - Enabled
-            - Speed
+            - Speed (0.1 -> 1)
             - Spawn Delay Min (0 -> MAX)
             - Spawn Delay Max (MIN -> 1)
             - Color Picker
