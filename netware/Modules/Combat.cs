@@ -210,8 +210,8 @@ namespace NetWare
 
                 if (editWeaponStats)
                 {
-                    PropertyInfo property = typeof(WeaponModel).GetProperty("APPPJGCCEBG");
-                    property.DeclaringType.GetProperty("APPPJGCCEBG");
+                    PropertyInfo property = typeof(WeaponModel).GetProperty("IEIDNJPAHEB");
+                    property.DeclaringType.GetProperty("IEIDNJPAHEB");
                     property.GetSetMethod(true).Invoke(weaponModel, new object[] { stats });
                 }
 

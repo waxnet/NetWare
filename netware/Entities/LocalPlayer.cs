@@ -9,12 +9,12 @@ namespace NetWare
         // other
         public static PlayerController Get()
         {
-            return PlayerController.EDDEFNBPDPF;
+            return PlayerController.BFLGFELENMF;
         }
 
         public static PlayerHealth GetHealth()
         {
-            return Get()?.BOPJGJLLKAK;
+            return Get()?.KEPLIKHCFNG;
         }
 
         public static PlayerBuildingManager GetPlayerBuildingManager()
@@ -25,28 +25,28 @@ namespace NetWare
         // controllers
         public static vThirdPersonController GetThirdPersonController()
         {
-            return Get()?.NKNCIFGBIGP;
+            return Get()?.KNIHOFNCMCE;
         }
 
         public static WeaponsController GetWeaponsController()
         {
-            return Get()?.ANHKGOHBCLO;
+            return Get()?.EHGPGJGFIOL;
         }
 
         public static WeaponModel GetWeaponModel()
         {
-            return GetWeaponsController()?.GKNADIJBIPC;
+            return GetWeaponsController()?.NCCDAMICFME;
         }
 
         public static WeaponStats GetWeaponStats()
         {
-            return (WeaponStats)(GetWeaponModel()?.APPPJGCCEBG);
+            return (WeaponStats)(GetWeaponModel()?.IEIDNJPAHEB);
         }
 
         // camera
         public static CameraManager GetCameraManager()
         {
-            return CameraManager.OOAIICFKEKI;
+            return CameraManager.ALADDIOCPKF;
         }
 
         public static vThirdPersonCamera GetThirdPersonCamera()
@@ -57,18 +57,18 @@ namespace NetWare
         // checks
         public static bool IsHoldingWeapon()
         {
-            return (GetPlayerBuildingManager()?.state == LJCLAABHFLF.NONE) || (!GetPlayerBuildingManager().enabled);
+            return (GetPlayerBuildingManager()?.state == CLLGBGCNKHC.NONE) || (!GetPlayerBuildingManager().enabled);
         }
 
         public static bool IsAiming()
         {
-            return (bool)(GetWeaponsController()?.NOLHAAGPGIJ);
+            return (bool)(GetWeaponsController()?.ENNCKHFABDM);
         }
 
         // other
         public static Vector3? GetAimPosition()
         {
-            return GetWeaponsController()?.MLKOPKJNBPH.point;
+            return GetWeaponsController()?.HMMBACDKGFM.point;
         }
     }
 }
