@@ -16,12 +16,12 @@ namespace NetWare
 
         public static FirebaseManager GetFirebaseManager()
         {
-            return FirebaseManager.ALADDIOCPKF;
+            return FirebaseManager.FJEIAIJOKFI;
         }
 
         public static ServerUser GetServerUser()
         {
-            return GetFirebaseManager()?.FECNCMAKFGG;
+            return GetFirebaseManager()?.NBDOPIFAIGB;
         }
     }
 }

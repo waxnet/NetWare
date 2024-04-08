@@ -1,5 +1,4 @@
-﻿using Photon.Pun;
-using UnityEngine;
+﻿using UnityEngine;
 using NetWare.Helpers;
 using JustPlay.Equipment;
 using System.Reflection;
@@ -176,12 +175,12 @@ namespace NetWare
 
                 if (Config.GetBool("combat.weapons.rapidfire"))
                 {
-                    LocalPlayer.GetWeaponsController()?.ApplyFireRateMultiplier(1.25f);
+                    LocalPlayer.GetWeaponsController()?.ApplyFireRateMultiplier(1.5f);
                 }
 
                 if (Config.GetBool("combat.weapons.rapidreload"))
                 {
-                    LocalPlayer.GetWeaponsController()?.ApplyReloadSpeedMultiplier(1.25f);
+                    LocalPlayer.GetWeaponsController()?.ApplyReloadSpeedMultiplier(1.5f);
                 }
             }
 
@@ -210,8 +209,8 @@ namespace NetWare
 
                 if (editWeaponStats)
                 {
-                    PropertyInfo property = typeof(WeaponModel).GetProperty("IEIDNJPAHEB");
-                    property.DeclaringType.GetProperty("IEIDNJPAHEB");
+                    PropertyInfo property = typeof(WeaponModel).GetProperty("GCHLINKEEJD");
+                    property.DeclaringType.GetProperty("GCHLINKEEJD");
                     property.GetSetMethod(true).Invoke(weaponModel, new object[] { stats });
                 }
 

@@ -14,9 +14,9 @@ namespace NetWare
             {
                 // speed
                 if (Config.GetBool("movement.speed.enabled")) {
-                    playerController.OOPFKGIEINO = Config.GetFloat("movement.speed.amount", 5);
+                    playerController.CCONHFGPGNH = Config.GetFloat("movement.speed.amount", 5);
                 } else {
-                    playerController.OOPFKGIEINO = 1;
+                    playerController.CCONHFGPGNH = 1;
                 }
 
                 // fly
