@@ -554,7 +554,6 @@ namespace NetWare.Helpers
         }
         public static void DrawCrosshair()
         {
-            Color scopeColor = HudManager.Instance.SniperScope.color;
             if (
                 Config.GetBool("visual.crosshair.betterscope") &&
                 LocalPlayer.GetWeaponModel() != null &&
@@ -562,8 +561,7 @@ namespace NetWare.Helpers
                 LocalPlayer.IsAiming()
             )
             {
-                scopeColor.a = 0;
-                HudManager.Instance.SniperScope.color = scopeColor;
+                HudManager.Instance.crossHairsContainer.SetActive(false);
 
                 Render.DrawBox(
                     Color.black,
@@ -578,8 +576,7 @@ namespace NetWare.Helpers
 
                 return;
             }
-            scopeColor.a = 1;
-            HudManager.Instance.SniperScope.color = scopeColor;
+            HudManager.Instance.crossHairsContainer.SetActive(true);
 
             Color color = Colors.HexToRGB(Config.GetString("visual.crosshair.color"));
             if (Config.GetBool("visual.crosshair.rainbow"))
