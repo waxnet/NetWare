@@ -120,8 +120,6 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
       + Gameplay
             - Leave Game
             - Auto Play
-      + Account
-            - Sign Out
       + Locker
             - Unlock Emotes
             - Unlock Stickers
