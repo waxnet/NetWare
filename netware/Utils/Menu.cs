@@ -41,9 +41,7 @@ namespace NetWare
         public static void NewSection(string text)
         {
             if (isSectionOpen)
-            {
                 GUILayout.EndVertical();
-            }
 
             GUILayout.BeginVertical(new GUIContent(), "Box", GUILayout.Width((windowRect.width / 2) - 12));
             GUILayout.Box("<b>" + text + "</b>");
@@ -54,17 +52,14 @@ namespace NetWare
         {
             // make button and execute callback if pressed
             if (GUILayout.Button(text))
-            {
                 callback();
-            }
         }
 
         public static bool NewToggle(bool value, string text)
         {
             // set toggle style
             GUIStyle toggleStyle = new GUIStyle("Box") { fontSize = 12 };
-            if (value)
-            {
+            if (value) {
                 toggleStyle.normal.textColor = new Color(0, 1, 0);
             } else {
                 toggleStyle.normal.textColor = new Color(1, 0, 0);
@@ -152,8 +147,7 @@ namespace NetWare
             {
                 int newIndex = (currentValueIndex + 1);
 
-                if (newIndex >= values.Length)
-                {
+                if (newIndex >= values.Length) {
                     newValue = values[0];
                 } else {
                     newValue = values[newIndex];
@@ -163,6 +157,53 @@ namespace NetWare
             GUILayout.EndVertical();
 
             return newValue;
+        }
+
+        public static string NewKeybind(string value)
+        {
+            string newValue = value;
+
+            // set new value
+            if (GUILayout.Button(newValue) || newValue == "...")
+            {
+                newValue = "...";
+                if (!Input.anyKey)
+                    return newValue;
+
+                foreach (KeyCode keyCode in Enum.GetValues(typeof(KeyCode)))
+                {
+                    if (Input.GetKeyDown(keyCode))
+                    {
+                        newValue = keyCode.ToString();
+                        if (keyCode == KeyCode.Escape)
+                            newValue = "None";
+                        break;
+                    }
+                }
+            }
+
+            return newValue;
+        }
+
+        // other
+        public static void CheckKeybinds()
+        {
+            if (!Input.anyKey)
+                return;
+
+            foreach (string key in Config.config.Keys)
+            {
+                if (key.Split('.').Last() != "keybind")
+                    continue;
+
+                string keybindString = Config.GetString(key);
+                KeyCode keybindKeycode = (KeyCode)Enum.Parse(typeof(KeyCode), keybindString);
+                string toggleKey = key.Replace("keybind", "enabled");
+
+                if (keybindString != "..." && keybindString != "None")
+                    if (Input.GetKeyDown(keybindKeycode))
+                        Config.SetBool(toggleKey, !Config.GetBool(toggleKey));
+            }
         }
     }
 }

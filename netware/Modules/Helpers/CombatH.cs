@@ -63,12 +63,9 @@ namespace NetWare.Helpers
                 }
             }
 
-            if (lastDistance <= fov)
-            {
+            if (lastDistance <= fov) {
                 return bestPlayerController;
-            }
-            else
-            {
+            } else {
                 return null;
             }
         }

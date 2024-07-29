@@ -24,9 +24,7 @@ namespace NetWare
 
                 // bhop
                 if (Config.GetBool("movement.bhop.enabled") && Input.GetKey(KeyCode.Space))
-                {
                     thirdPersonController.Jump();
-                }
             }
         }
 
@@ -42,6 +40,13 @@ namespace NetWare
                     "Enabled"
                 )
             );
+            Config.SetString(
+                "movement.speed.keybind",
+                Menu.NewKeybind(
+                    Config.GetString("movement.speed.keybind")
+                )
+            );
+            Menu.NewTitle("Settings");
             Config.SetFloat(
                 "movement.speed.amount",
                 Menu.NewSlider(
@@ -62,6 +67,12 @@ namespace NetWare
                     "Enabled"
                 )
             );
+            Config.SetString(
+                "movement.fly.keybind",
+                Menu.NewKeybind(
+                    Config.GetString("movement.fly.keybind")
+                )
+            );
 
             Menu.NewSection("BHop");
             Config.SetBool(
@@ -69,6 +80,12 @@ namespace NetWare
                 Menu.NewToggle(
                     Config.GetBool("movement.bhop.enabled"),
                     "Enabled"
+                )
+            );
+            Config.SetString(
+                "movement.bhop.keybind",
+                Menu.NewKeybind(
+                    Config.GetString("movement.bhop.keybind")
                 )
             );
 

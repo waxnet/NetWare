@@ -36,11 +36,12 @@ namespace NetWare
                 Exploits.Execute();
             }
 
+            // check keybinds
+            Menu.CheckKeybinds();
+
             // toggle window
             if (Input.GetKeyDown(KeyCode.Insert))
-            {
                 Menu.displayWindow = !Menu.displayWindow;
-            }
         }
 
         public void OnGUI()
@@ -48,16 +49,12 @@ namespace NetWare
             // run features
             Combat.Draw();
             if (PhotonNetwork.InRoom)
-            {
                 Visual.Draw();
-            }
             Settings.Draw();
 
             // display window
             if (Menu.displayWindow)
-            {
                 Menu.windowRect = GUI.Window(0, Menu.windowRect, BuildMenu, "<b>Net<color=red>Ware</color></b>", "Box");
-            }
         }
 
         // internal methods and variables
@@ -106,9 +103,7 @@ namespace NetWare
                     point[1] -= Config.GetFloat("settings.interface.menueffects.speed", .2f);
 
                     if (realY >= (Menu.windowRect.y + Menu.windowRect.height))
-                    {
                         menuEffectsPoints.RemoveAt(index);
-                    }
                 }
             }
 
@@ -122,8 +117,7 @@ namespace NetWare
                 string name = Menu.tabs[index];
 
                 GUIStyle toggleStyle = new GUIStyle("Box");
-                if (selected)
-                {
+                if (selected) {
                     toggleStyle.normal.textColor = Color.white;
                 } else {
                     toggleStyle.normal.textColor = Color.gray;
@@ -131,14 +125,10 @@ namespace NetWare
 
                 int offset = 8;
                 if (index == 2)
-                {
                     offset = 4;
-                }
 
                 if (GUILayout.Toggle(selected, "<b>" + name + "</b>", toggleStyle, GUILayout.Width((Menu.windowRect.width / Menu.tabs.Length) - offset)))
-                {
                     Menu.currentTab = index;
-                }
             }
             GUILayout.EndHorizontal();
 

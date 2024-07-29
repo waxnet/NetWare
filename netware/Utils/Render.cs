@@ -30,7 +30,6 @@ namespace NetWare
 
             // draw circle
             for (float angle = 0; angle < 6.28318548f; angle += angleIncrement)
-            {
                 DrawLine(
                     color,
                     new Vector3(
@@ -42,7 +41,6 @@ namespace NetWare
                         ((Mathf.Sin(angle + angleIncrement) * radius) + position.y)
                     )
                 );
-            }
         }
 
         public static void DrawBox(Color color, Vector2 position, float width, float height)
@@ -86,19 +84,19 @@ namespace NetWare
         private static void Init()
         {
             // create overlay material
-            if (overlayMaterial == null)
+            if (overlayMaterial != null)
+                return;
+
+            overlayMaterial = new Material(Shader.Find("Hidden/Internal-Colored"))
             {
-                overlayMaterial = new Material(Shader.Find("Hidden/Internal-Colored"))
-                {
-                    hideFlags = HideFlags.DontSaveInEditor | HideFlags.HideInHierarchy
-                };
-                overlayMaterial.SetInt("_SrcBlend", 5);
-                overlayMaterial.SetInt("_DstBlend", 10);
-                overlayMaterial.SetInt("_Cull", 0);
-                overlayMaterial.SetInt("_ZTest", 8);
-                overlayMaterial.SetInt("_ZWrite", 0);
-                overlayMaterial.SetColor("_Color", Color.white);
-            }
+                hideFlags = HideFlags.DontSaveInEditor | HideFlags.HideInHierarchy
+            };
+            overlayMaterial.SetInt("_SrcBlend", 5);
+            overlayMaterial.SetInt("_DstBlend", 10);
+            overlayMaterial.SetInt("_Cull", 0);
+            overlayMaterial.SetInt("_ZTest", 8);
+            overlayMaterial.SetInt("_ZWrite", 0);
+            overlayMaterial.SetColor("_Color", Color.white);
         }
     }
 }

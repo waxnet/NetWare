@@ -74,9 +74,7 @@ namespace NetWare.Helpers
                     Vector3 destinationPosition = Position.ToScreen(animator.GetBoneTransform(destinationBone).transform.position);
 
                     if (!Position.IsBehindCamera(originPosition) && !Position.IsBehindCamera(destinationPosition))
-                    {
                         Render.DrawLine(color, originPosition, destinationPosition);
-                    }
                 }
 
                 // legs
@@ -89,9 +87,7 @@ namespace NetWare.Helpers
                     Vector3 destinationPosition = Position.ToScreen(animator.GetBoneTransform(destinationBone).transform.position);
 
                     if (!Position.IsBehindCamera(originPosition) && !Position.IsBehindCamera(destinationPosition))
-                    {
                         Render.DrawLine(color, originPosition, destinationPosition);
-                    }
                 }
             }
         }
@@ -104,8 +100,7 @@ namespace NetWare.Helpers
             Vector3 headWorldPosition = Players.GetHeadPosition(playerController);
             Vector3 feetWorldPosition = Players.GetFeetPosition(playerController);
 
-            if (headWorldPosition.y > feetWorldPosition.y)
-            {
+            if (headWorldPosition.y > feetWorldPosition.y) {
                 headWorldPosition.y += .22f;
                 feetWorldPosition.y -= .2f;
             } else {
@@ -150,9 +145,7 @@ namespace NetWare.Helpers
                 // get box screen points and check if they are drawable
                 List<Vector3> screenPoints = new List<Vector3>();
                 foreach (Vector3 worldPoint in worldPoints)
-                {
                     screenPoints.Add(Position.ToScreen(worldPoint));
-                }
 
                 bool areScreenPointsDrawable = true;
                 foreach (Vector3 screenPoint in screenPoints)
@@ -170,9 +163,7 @@ namespace NetWare.Helpers
                     for (int index = 0; index < 4; index++)
                     {
                         if ((index + 1) > 4)
-                        {
                             break;
-                        }
 
                         Vector3 pointA = screenPoints[index];
                         Vector3 pointB = screenPoints[index + 1];
@@ -186,9 +177,7 @@ namespace NetWare.Helpers
                     for (int index = 5; index < 9; index++)
                     {
                         if ((index + 1) > 9)
-                        {
                             break;
-                        }
 
                         Vector3 pointA = screenPoints[index];
                         Vector3 pointB = screenPoints[index + 1];
@@ -202,9 +191,7 @@ namespace NetWare.Helpers
                     for (int index = 0; index < 9; index++)
                     {
                         if ((index + 5) > 9)
-                        {
                             break;
-                        }
 
                         Vector3 pointA = screenPoints[index];
                         Vector3 pointB = screenPoints[index + 5];
@@ -363,14 +350,10 @@ namespace NetWare.Helpers
                 foreach (Vector2 size in sizes)
                 {
                     if (size.x > biggestSize.x)
-                    {
                         biggestSize.x = size.x;
-                    }
 
                     if (size.y > biggestSize.y)
-                    {
                         biggestSize.y = size.y;
-                    }
                 }
 
                 // draw info box
@@ -489,9 +472,7 @@ namespace NetWare.Helpers
                 speedGraphTimer = 0;
 
                 for (int index = 0; index < (speedGraphData.Length - 1); index++)
-                {
                     speedGraphData[index] = speedGraphData[index + 1];
-                }
 
                 vThirdPersonController localPlayer = LocalPlayer.GetThirdPersonController();
                 if (localPlayer == null || localPlayer.Rigidbody == null) {

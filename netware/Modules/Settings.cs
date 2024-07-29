@@ -15,9 +15,7 @@ namespace NetWare
                 // get current time
                 string currentTime = DateTime.Now.ToString("hh:mm:ss tt");
                 if (Config.GetString("settings.interface.watermark.timetype") == "Military")
-                {
                     currentTime = DateTime.Now.ToString("HH:mm:ss");
-                }
 
                 // get current fps
                 if (SettingsH.fpsCounterTimer >= 20)
@@ -34,7 +32,7 @@ namespace NetWare
                 SettingsH.fpsCounterTimer++;
 
                 // watermark content and style
-                GUIContent titleContent = new GUIContent("<b>Net<color=red>Ware</color> v1.9.7.3 | " + currentTime + " | " + SettingsH.fpsCounterContent + " FPS</b>");
+                GUIContent titleContent = new GUIContent("<b>Net<color=red>Ware</color> v1.9.8 | " + currentTime + " | " + SettingsH.fpsCounterContent + " FPS</b>");
                 GUIStyle titleStyle = new GUIStyle("Label")
                 {
                     wordWrap = false,
@@ -78,9 +76,7 @@ namespace NetWare
                 for (int counter = 0; counter < backgroundWidth; counter++)
                 {
                     if ((counter % 2) == 0)
-                    {
                         offset += .01f;
-                    }
 
                     Vector3 lineDestination = (lineOrigin + new Vector3(0, 2, 0));
                     Render.DrawLine(

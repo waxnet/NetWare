@@ -10,10 +10,11 @@ namespace NetWare
         private static readonly string configFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/NetWare/configs";
         public static List<string> configList = new List<string>();
 
-        private static Dictionary<string, string> config = new Dictionary<string, string>()
+        public static Dictionary<string, string> config = new Dictionary<string, string>()
         {
             // combat
             ["combat.aimbot.enabled"] = "false",
+            ["combat.aimbot.keybind"] = "None",
             ["combat.aimbot.aimbone"] = "Head",
             ["combat.aimbot.aimmode"] = "Camera",
             ["combat.aimbot.checkfov"] = "true",
@@ -26,6 +27,7 @@ namespace NetWare
             ["combat.aimbot.rainbowfov"] = "false",
 
             ["combat.silentaim.enabled"] = "false",
+            ["combat.silentaim.keybind"] = "None",
             ["combat.silentaim.aimbone"] = "Head",
             ["combat.silentaim.checkfov"] = "true",
             ["combat.silentaim.dynamicfov"] = "false",
@@ -36,6 +38,7 @@ namespace NetWare
             ["combat.silentaim.rainbowfov"] = "false",
 
             ["combat.magicbullet.enabled"] = "false",
+            ["combat.magicbullet.keybind"] = "None",
             ["combat.magicbullet.frequency"] = "10",
             ["combat.magicbullet.checkfov"] = "true",
             ["combat.magicbullet.dynamicfov"] = "false",
@@ -85,11 +88,14 @@ namespace NetWare
 
             // movement
             ["movement.speed.enabled"] = "false",
+            ["movement.speed.keybind"] = "None",
             ["movement.speed.amount"] = "5",
 
             ["movement.fly.enabled"] = "false",
+            ["movement.fly.keybind"] = "None",
 
             ["movement.bhop.enabled"] = "false",
+            ["movement.bhop.keybind"] = "None",
 
             // exploits
             ["exploits.player.godmode"] = "false",
@@ -207,19 +213,17 @@ namespace NetWare
         {
             string configPath = Path.Combine(configFolder, configName + ".nwc");
 
-            if (File.Exists(configPath))
+            if (!File.Exists(configPath))
+                return;
+
+            string[] packedContent = File.ReadAllText(configPath).Split(new string[] { "\n" }, StringSplitOptions.None);
+
+            foreach (string packedData in packedContent)
             {
-                string[] packedContent = File.ReadAllText(configPath).Split(new string[] { "\n" }, StringSplitOptions.None);
+                string[] unpackedData = packedData.Split(new string[] { " " }, StringSplitOptions.None);
 
-                foreach (string packedData in packedContent)
-                {
-                    string[] unpackedData = packedData.Split(new string[] { " " }, StringSplitOptions.None);
-
-                    if (unpackedData.Length == 2)
-                    {
-                        config[unpackedData[0]] = unpackedData[1];
-                    }
-                }
+                if (unpackedData.Length == 2)
+                    config[unpackedData[0]] = unpackedData[1];
             }
         }
         public static void Save(string configName)
@@ -228,16 +232,12 @@ namespace NetWare
             string packedConfig = "";
 
             foreach (KeyValuePair<string, string> data in config)
-            {
                 packedConfig += (data.Key + " " + data.Value + "\n");
-            }
 
             File.WriteAllText(configPath, packedConfig);
 
             if (!configList.Contains(configName))
-            {
                 configList.Add(configName);
-            }
         }
         public static void Delete(string configName)
         {
@@ -246,9 +246,7 @@ namespace NetWare
             File.Delete(configPath);
 
             if (configList.Contains(configName))
-            {
                 configList.Remove(configName);
-            }
         }
 
         // booleans
@@ -265,9 +263,7 @@ namespace NetWare
         public static float GetFloat(string key, float safetyValue)
         {
             if (float.TryParse(config[key], out float value))
-            {
                 return (float)Math.Round(value, 1);
-            }
             return safetyValue;
         }
         public static void SetFloat(string key, float value)

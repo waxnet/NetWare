@@ -9,9 +9,7 @@ namespace NetWare
         {
             // reset zoom state if needed
             if (Config.GetBool("visual.fovchanger.enabled") || Config.GetBool("visual.camerasettings.enabled"))
-            {
                 LocalPlayer.GetCameraManager()?.ResetZoomStateInstant();
-            }
 
             // fov changer
             if (Config.GetBool("visual.fovchanger.enabled"))
@@ -59,41 +57,27 @@ namespace NetWare
 
                         // tracers
                         if (Config.GetBool("visual.esp.tracers"))
-                        {
                             VisualH.DrawPlayerTracer(playerController);
-                        }
 
                         // skeleton
                         if (Config.GetBool("visual.esp.skeleton"))
-                        {
                             VisualH.DrawPlayerSkeleton(playerController);
-                        }
 
                         // 3d, 2d and filled boxes
                         if (Config.GetBool("visual.esp.3dboxes"))
-                        {
                             VisualH.DrawPlayer3DBox(playerController);
-                        }
                         if (Config.GetBool("visual.esp.2dboxes"))
-                        {
                             VisualH.DrawPlayer2DBox(playerController);
-                        }
                         if (Config.GetBool("visual.esp.filledboxes"))
-                        {
                             VisualH.DrawPlayerFilledBox(playerController);
-                        }
 
                         // info
                         if (Config.GetBool("visual.esp.info"))
-                        {
                             VisualH.DrawPlayerInfo(playerController, backgroundColor);
-                        }
 
                         // nametags
                         if (Config.GetBool("visual.esp.nametags"))
-                        {
                             VisualH.DrawPlayerNametag(playerController, backgroundColor);
-                        }
                     }
                 }
             }

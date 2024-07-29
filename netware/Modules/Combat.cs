@@ -19,8 +19,7 @@ namespace NetWare
                     // get best player
                     if (Config.GetBool("combat.aimbot.checkfov"))
                     {
-                        if (Config.GetBool("combat.aimbot.dynamicfov"))
-                        {
+                        if (Config.GetBool("combat.aimbot.dynamicfov")) {
                             playerController = CombatH.GetBestPlayerInFOV(Camera.main.fieldOfView + 80);
                         } else {
                             playerController = CombatH.GetBestPlayerInFOV(Config.GetFloat("combat.aimbot.fovsize", 200));
@@ -42,9 +41,8 @@ namespace NetWare
                         string aimbotAimMode = Config.GetString("combat.aimbot.aimmode");
 
                         // aim at player
-                        if (aimbotAimMode == "Mouse" && Position.IsOnScreen(playerScreenPosition)) {
+                        if (aimbotAimMode == "Mouse" && Position.IsOnScreen(playerScreenPosition))
                             Mouse.MoveTo(playerScreenPosition, Config.GetInt("combat.aimbot.smoothing"));
-                        }
 
                         if (aimbotAimMode == "Camera") {
                             vThirdPersonCamera camera = LocalPlayer.GetThirdPersonCamera();
@@ -83,8 +81,7 @@ namespace NetWare
                     // get best player
                     if (Config.GetBool("combat.silentaim.checkfov"))
                     {
-                        if (Config.GetBool("combat.silentaim.dynamicfov"))
-                        {
+                        if (Config.GetBool("combat.silentaim.dynamicfov")) {
                             playerController = CombatH.GetBestPlayerInFOV(Camera.main.fieldOfView + 80);
                         } else {
                             playerController = CombatH.GetBestPlayerInFOV(Config.GetFloat("combat.silentaim.fovsize", 200));
@@ -119,8 +116,7 @@ namespace NetWare
                             // get best player
                             if (Config.GetBool("combat.magicbullet.checkfov"))
                             {
-                                if (Config.GetBool("combat.magicbullet.dynamicfov"))
-                                {
+                                if (Config.GetBool("combat.magicbullet.dynamicfov")) {
                                     playerController = CombatH.GetBestPlayerInFOV(Camera.main.fieldOfView + 80);
                                 } else {
                                     playerController = CombatH.GetBestPlayerInFOV(Config.GetFloat("combat.magicbullet.fovsize", 200));
@@ -161,9 +157,7 @@ namespace NetWare
 
                 // weapons
                 if (Config.GetBool("combat.weapons.norecoil"))
-                {
                     LocalPlayer.GetThirdPersonCamera()?.AddRecoil(Vector2.zero, 0, 0);
-                }
 
                 if (Config.GetBool("combat.weapons.infiniteammo"))
                 {
@@ -174,14 +168,10 @@ namespace NetWare
                 }
 
                 if (Config.GetBool("combat.weapons.rapidfire"))
-                {
                     LocalPlayer.GetWeaponsController()?.ApplyFireRateMultiplier(1.5f);
-                }
 
                 if (Config.GetBool("combat.weapons.rapidreload"))
-                {
                     LocalPlayer.GetWeaponsController()?.ApplyReloadSpeedMultiplier(1.5f);
-                }
             }
 
             if (CombatH.weaponStatsTimer >= 10)
@@ -307,6 +297,12 @@ namespace NetWare
                     "Enabled"
                 )
             );
+            Config.SetString(
+                "combat.aimbot.keybind",
+                Menu.NewKeybind(
+                    Config.GetString("combat.aimbot.keybind")
+                )
+            );
             Menu.NewTitle("Targeting");
             Config.SetString(
                 "combat.aimbot.aimbone",
@@ -398,6 +394,12 @@ namespace NetWare
                     "Enabled"
                 )
             );
+            Config.SetString(
+                "combat.magicbullet.keybind",
+                Menu.NewKeybind(
+                    Config.GetString("combat.magicbullet.keybind")
+                )
+            );
             Menu.NewTitle("Targeting");
             Config.SetInt(
                 "combat.magicbullet.frequency",
@@ -472,6 +474,12 @@ namespace NetWare
                 Menu.NewToggle(
                     Config.GetBool("combat.silentaim.enabled"),
                     "Enabled"
+                )
+            );
+            Config.SetString(
+                "combat.silentaim.keybind",
+                Menu.NewKeybind(
+                    Config.GetString("combat.silentaim.keybind")
                 )
             );
             Menu.NewTitle("Targeting");
