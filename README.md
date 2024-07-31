@@ -25,6 +25,7 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
 • Combat
       + Aimbot
             - Enabled
+            - Keybind
             - Aim Bone
             - Aim Mode
             - Check FOV
@@ -36,6 +37,7 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Rainbow FOV
       + Silent Aim
             - Enabled
+            - Keybind
             - Aim Bone
             - Check FOV
             - Dynamic Fov
@@ -45,6 +47,7 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Rainbow FOV
       + Magic Bullet
             - Enabled
+            - Keybind
             - Frequency (1 -> 100 the lower the better)
             - Check FOV
             - Dynamic Fov
@@ -95,11 +98,14 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
 • Movement
       + Speed
             - Enabled
+            - Keybind
             - Amount (1 -> 10)
       + Fly
             - Enabled
+            - Keybind
       + BHop
             - Enabled
+            - Keybind
 
 • Exploits
       + Player
