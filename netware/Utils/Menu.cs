@@ -163,7 +163,7 @@ namespace NetWare
         {
             string newValue = value;
 
-            // set new value
+            // keybind selection logic
             if (GUILayout.Button(newValue) || newValue == "...")
             {
                 newValue = "...";
