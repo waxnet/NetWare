@@ -1,4 +1,4 @@
-### <p align="center">🕸️ NetWare 🕸️</p>
+# <p align="center"> NetWare </p>
 <p align= "center">
   <img src="https://img.shields.io/github/last-commit/waxnet/NetWare">
   <img src="https://img.shields.io/github/license/waxnet/NetWare">
@@ -9,134 +9,75 @@
   <img src="https://img.shields.io/github/forks/waxnet/NetWare">
 </p>
 
------
+---
 
-### <p align="center">🔑 Usage 🔑</p>
-<p align="center"><b>
+### <p align="center">Usage</p>
+<p align="center">
 After you've downloaded and extracted the <a href="https://github.com/waxnet/NetWare/releases/latest">latest release</a>, open 
-"NetWareLoader.exe" and select the option 1 to load NetWare.
-</b></p>
+"Loader.exe" and select the option 1 to load NetWare.
+</p>
 
------
+---
 
-### <p align="center">📜 Features 📜</p>
+### <p align="center">Features</p>
 
 ```
 • Combat
       + Aimbot
-            - Enabled
-            - Keybind
-            - Aim Bone
-            - Aim Mode
+            - Enabled (with keybind)
+            - Aim Bone (head, neck, upperchest or hips)
+            - Aim Mode (legit or lock)
+            - Smoothing (1 -> 10)
+            - Distance (10 -> 1000)
             - Check FOV
-            - Dynamic Fov
             - Draw Fov
+            - Dynamic Fov
             - FOV Size (10 -> 500)
-            - Smoothing (5 -> 10)
+            - FOV Sides (3 -> 80)
             - FOV Color Picker
             - Rainbow FOV
       + Silent Aim
-            - Enabled
-            - Keybind
-            - Aim Bone
+            - Enabled (with keybind)
+            - Aim Bone (head, neck, upperchest or hips)
+            - Distance (10 -> 1000)
             - Check FOV
-            - Dynamic Fov
             - Draw Fov
+            - Dynamic Fov
             - FOV Size (10 -> 500)
+            - FOV Sides (3 -> 80)
             - FOV Color Picker
             - Rainbow FOV
-      + Magic Bullet
-            - Enabled
-            - Keybind
-            - Frequency (1 -> 100 the lower the better)
-            - Check FOV
-            - Dynamic Fov
-            - Draw Fov
-            - FOV Size (10 -> 500)
-            - FOV Color Picker
-            - Rainbow FOV
-      + Weapons
-            - No Recoil
-            - No Spread
-            - Infinite Ammo
-            - Rapid Fire
-            - Rapid Reload
-            - Infinite Range
 
 • Visual
-      + ESP
-            - Tracers
-            - Skeleton
-            - 3D Boxes
-            - 2D Boxes
-            - Filled Boxes
-            - Info
-            - Nametags
+      + Nametags
+            - Enabled
+            - Team Color Picker
+            - Enemy Color Picker
+            - Bot Color Picker
             - Background Color Picker
-            - Teammate Color Picker
+      + Boxes
+            - Enabled
+            - Team Color Picker
+            - Enemy Color Picker
+            - Bot Color Picker
+      + Skeleton
+            - Enabled
+            - Team Color Picker
+            - Enemy Color Picker
+            - Bot Color Picker
+      + Tracers
+            - Enabled
+            - Team Color Picker
             - Enemy Color Picker
             - Bot Color Picker
       + FOV Changer
             - Enabled
             - Amount (20 -> 150)
-      + Speed Graph
-            - Enabled
-            - Color Picker (line)
-            - Color Mode (normal, rainbow, rainbow wave)
-      + Crosshair
-            - Enabled
-            - Dynamic
-            - Better Scope
-            - Color Picker
-            - Rainbow
       + Camera Settings
             - Enabled
             - X (-5 -> 5)
             - Y (-5 -> 5)
             - Z (-5 -> 5)
-
-• Movement
-      + Speed
-            - Enabled
-            - Keybind
-            - Amount (1 -> 10)
-      + Fly
-            - Enabled
-            - Keybind
-      + BHop
-            - Enabled
-            - Keybind
-
-• Exploits
-      + Player
-            - Godmode
-            - Instant Land
-            - Infinite Materials
-            - Anti Freeze
-      + Gameplay
-            - Leave Game
-            - Auto Play
-      + Locker
-            - Unlock Emotes
-            - Unlock Stickers
-            - Pickaxe Changer
-      + Game
-            - Force Win
-            - Freeze All
-            - Kill All
-            - Destroy Buildings
-            - Open Crates
-            - Building Spam
-            - Rig Spam
-            - Instant Break
-      + Fun
-            - Add 10k Fake Gold
-            - Add 10k Fake Gems
-            - Loadout Level Changer
-      + Weapon Mods
-            - Building Gun
-            - Teleport Gun
-            - Explosion Gun
 
 • Settings
       + Config Manager
@@ -145,31 +86,12 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
       + Watermark
             - Enabled
             - Time Type (standard, military)
-      + Feature List
-            - Enabled
-            - Color Picker (text)
-            - Color Mode (normal, rainbow, rainbow wave)
-      + Menu Effects
-            - Enabled
-            - Speed (0.1 -> 1)
-            - Spawn Delay Min (0 -> MAX)
-            - Spawn Delay Max (MIN -> 1)
-            - Color Picker
-            - Color Mode (normal, rainbow, confetti)
       + Config Loader
 ```
 
------
+---
 
-### <p align="center">💡 Ideas 💡</p>
-
-    • Fix my shitty code.
-
-<p align="center"><b>Feel free to submit any idea by making a pull request on this repository!</b></p>
-
------
-
-### <p align="center">💾 Dependencies 💾</p>
+### <p align="center">Dependencies</p>
 ```
 SharpMonoInjector
 dnlib
@@ -179,12 +101,6 @@ Gameloop.Vdf.JsonConverter
 Newtonsoft.Json
 ```
 
------
-
-### <p align="center">⚠️ Disclaimer ⚠️</p>
-
-<p align="center"><b>This program is meant for educational purposes only.</b></p>
-
------
+---
 
 ### <p align="center"><a href="https://github.com/waxnet">waxnet</a></p>
