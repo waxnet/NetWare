@@ -23,7 +23,17 @@ namespace Loader
 
             // extract files
             try {
-                ZipFile.ExtractToDirectory(unstrippedFilesPath, gameFilesPath, true);
+                using ZipArchive archive = ZipFile.OpenRead(unstrippedFilesPath);
+
+                ZipArchiveEntry entry = archive.GetEntry("UnityEngine.IMGUIModule.dll");
+
+                if (entry != null)
+                    entry.ExtractToFile(
+                        Path.Combine(gameFilesPath, entry.FullName),
+                        true
+                    );
+                else
+                    return false;
             } catch {
                 return false;
             }
