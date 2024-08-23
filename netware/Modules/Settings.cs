@@ -1,4 +1,6 @@
-﻿namespace NetWare.Modules
+﻿using Photon.Pun;
+
+namespace NetWare.Modules
 {
     public static class Settings
     {
@@ -27,6 +29,9 @@
                     new string[] { "Standard", "Military" }
                 )
             );
+
+            Menu.NewSection("Gameplay");
+            Menu.NewButton("Leave Game", () => PhotonNetwork.Disconnect());
 
             Menu.Separate();
 
