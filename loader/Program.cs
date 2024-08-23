@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using SharpMonoInjector;
-using Microsoft.Win32;
 
 namespace Loader
 {
@@ -11,6 +10,8 @@ namespace Loader
             // setup console
             Window.SetSize(80, 20);
             Window.SetTitle("NetWare Loader");
+            Window.DisableResizing();
+            Console.CursorVisible = false;
 
             while (true)
             {
@@ -19,7 +20,7 @@ namespace Loader
                 Banner.Display();
 
                 char selection = IO.WaitForInput(
-                    " [1] Load\n [2] Clean\n [3] Exit\n\n",
+                    " [1] Load\n [2] Spoof\n [3] Exit\n\n",
                     ConsoleColor.DarkGray
                 );
 
@@ -34,7 +35,7 @@ namespace Loader
                         Load();
                         break;
                     case '2':
-                        Clean();
+                        Spoof();
                         break;
                     case '3':
                         return;
@@ -57,9 +58,10 @@ namespace Loader
             IO.Puts("Searching paths . . .", ConsoleColor.DarkYellow);
             Resolve.CheatPath();
             Resolve.SteamPaths();
+            Resolve.TempPath();
             if (!Data.ArePathsValid())
             {
-                Message.ShowError("000");
+                Message.ShowError("000A");
                 return;
             }
 
@@ -75,7 +77,7 @@ namespace Loader
             );
             if (!downloadedFile)
             {
-                Message.ShowError("001");
+                Message.ShowError("001A");
                 return;
             }
 
@@ -83,7 +85,15 @@ namespace Loader
             IO.Puts("Patching AntiCheat . . .", ConsoleColor.DarkYellow);
             if (!AntiCheat.Patch())
             {
-                Message.ShowError("002");
+                Message.ShowError("002A");
+                return;
+            }
+
+            // download unstripped files
+            IO.Puts("Unstripping files . . .", ConsoleColor.DarkYellow);
+            if (!GameFiles.Unstrip())
+            {
+                Message.ShowError("003A");
                 return;
             }
 
@@ -91,7 +101,7 @@ namespace Loader
             IO.Puts("Starting 1v1.LOL . . .", ConsoleColor.DarkYellow);
             if (!Manager.StartGameProcess())
             {
-                Message.ShowError("003");
+                Message.ShowError("004A");
                 return;
             }
 
@@ -109,7 +119,7 @@ namespace Loader
 
             if (hasInjected == IntPtr.Zero)
             {
-                Message.ShowError("004");
+                Message.ShowError("005A");
                 return;
             }
 
@@ -118,12 +128,46 @@ namespace Loader
             IO.WaitForInput("\nPress any key to continue . . .", ConsoleColor.DarkGray);
         }
 
-        public static void Clean()
+        public static void Spoof()
         {
-            // delete 1v1.lol registry data
-            IO.Puts("Deleting registry data . . .", ConsoleColor.DarkYellow);
-            if (Registry.CurrentUser.OpenSubKey("HKEY_CURRENT_USER\\SOFTWARE\\JustPlay.LOL") != null)
-                Registry.CurrentUser.DeleteSubKeyTree("HKEY_CURRENT_USER\\SOFTWARE\\JustPlay.LOL");
+            // generate account
+            IO.Puts("Generating account . . .", ConsoleColor.DarkYellow);
+            Task<(string, bool)> generationTask = Network.GenerateAccount();
+            generationTask.Wait();
+            (string, bool) accountData = generationTask.Result;
+            if (!accountData.Item2)
+            {
+                Message.ShowError("000B");
+                return;
+            }
+
+            // set refresh token
+            IO.Puts("Setting refresh token . . .", ConsoleColor.DarkYellow);
+            string refreshTokenKey = RegEdit.FindRefreshTokenKey();
+            if (refreshTokenKey == "")
+            {
+                Message.ShowError("001B");
+                return;
+            }
+            if (!RegEdit.SetRefreshToken(refreshTokenKey, accountData.Item1))
+            {
+                Message.ShowError("002B");
+                return;
+            }
+
+            // set sign in platform
+            IO.Puts("Setting sign in platform . . .", ConsoleColor.DarkYellow);
+            string signInPlatformKey = RegEdit.FindSignInPlatformKey();
+            if (signInPlatformKey == "")
+            {
+                Message.ShowError("003B");
+                return;
+            }
+            if (!RegEdit.SetSignInPlatform(signInPlatformKey))
+            {
+                Message.ShowError("004B");
+                return;
+            }
 
             // wait for input to exit
             IO.Puts("Done!", ConsoleColor.DarkGreen);

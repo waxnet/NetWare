@@ -4,9 +4,11 @@ namespace Loader
 {
     public static class Message
     {
+        // internal methods
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern void MessageBox(IntPtr hWnd, string text, string caption, uint type);
 
+        // methods
         public static void ShowError(string errorCode)
         {
             MessageBox(

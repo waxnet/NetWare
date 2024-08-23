@@ -8,8 +8,10 @@ namespace Loader
 {
     public static class Resolve
     {
+        // data
         private static readonly string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
+        // methods
         public static void CheatPath()
         {
             string cheatPath = Path.Combine(appdata, "NetWare\\loader");
@@ -55,6 +57,16 @@ namespace Loader
                 if (Directory.Exists(possibleDirectory))
                     Data.gamePath = possibleDirectory;
             }
+        }
+
+        public static void TempPath()
+        {
+            string tempPath = Path.Combine(appdata, "NetWare\\temp");
+            if (!Directory.Exists(tempPath))
+            {
+                Directory.CreateDirectory(tempPath);
+            }
+            Data.tempPath = tempPath;
         }
     }
 }

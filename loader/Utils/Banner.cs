@@ -2,6 +2,7 @@
 {
     public static class Banner
     {
+        // data
         private static readonly string[] banner =
         {
             "   _  __      __  _      __               ",
@@ -10,27 +11,23 @@
             "/_/|_/ \\__/ \\__/ |__/|__/ \\_,_//_/   \\__/ "
         };
 
+        // methods
         public static void Display()
         {
             foreach (string part in banner)
             {
                 for (int _ = 0; _ < ((Console.BufferWidth / 2) - 21); _++)
-                {
                     IO.Puts(" ", ConsoleColor.White, false);
-                }
 
                 IO.Puts(part[..17], ConsoleColor.White, false);
                 IO.Puts(part[17..42], ConsoleColor.Red, false);
 
                 if (part.Length > 42)
-                {
                     IO.Puts(part[42..48], ConsoleColor.DarkGray, false);
-                }
-
                 IO.NewLine();
             }
 
-            IO.Puts("\n");
+            IO.Puts("\n\n");
         }
     }
 }
