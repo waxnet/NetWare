@@ -27,8 +27,9 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Enabled (with keybind)
             - Aim Bone (head, neck, upperchest or hips)
             - Aim Mode (legit or lock)
-            - Smoothing (1 -> 10)
             - Distance (10 -> 1000)
+            - Smoothing (1 -> 10)
+            - Use Sensitivity
             - Check FOV
             - Draw Fov
             - Dynamic Fov
@@ -86,6 +87,9 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
       + Watermark
             - Enabled
             - Time Type (standard, military)
+      + Gameplay
+            - FPS Capper
+            - Leave Game
       + Config Loader
 ```
 
