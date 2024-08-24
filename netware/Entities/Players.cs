@@ -81,7 +81,7 @@ namespace NetWare
             try {
                 return GetPlayerInfo(playerController).GCCNGNHHLMC;
             } catch {
-                return "Enemy";
+                return "Player";
             }
         }
 
