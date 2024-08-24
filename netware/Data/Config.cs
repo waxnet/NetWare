@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using UnityEngine;
 
 namespace NetWare
 {
@@ -17,8 +18,9 @@ namespace NetWare
             ["combat.aimbot.keybind"] = "None",
             ["combat.aimbot.aimbone"] = "Head",
             ["combat.aimbot.aimmode"] = "Legit",
-            ["combat.aimbot.smoothing"] = "5",
             ["combat.aimbot.distance"] = "500",
+            ["combat.aimbot.smoothing"] = "5",
+            ["combat.aimbot.usesensitivity"] = "true",
             ["combat.aimbot.checkfov"] = "true",
             ["combat.aimbot.drawfov"] = "true",
             ["combat.aimbot.dynamicfov"] = "false",
@@ -72,6 +74,8 @@ namespace NetWare
             // settings
             ["settings.watermark.enabled"] = "true",
             ["settings.watermark.timetype"] = "Standard",
+
+            ["settings.fpscapper.fps"] = Application.targetFrameRate.ToString(),
         };
 
         // setup

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System;
+using UnityEngine;
 
 namespace NetWare
 {
@@ -76,77 +78,28 @@ namespace NetWare
 
         public static HumanBodyBones GetBoneFromString(string boneName)
         {
-            HumanBodyBones bone;
-
-            switch (boneName)
+            return new Dictionary<string, HumanBodyBones>(StringComparer.OrdinalIgnoreCase)
             {
-                // spine
-                case "Head":
-                    bone = HumanBodyBones.Head;
-                    break;
-                case "Neck":
-                    bone = HumanBodyBones.Neck;
-                    break;
-                case "UpperChest":
-                    bone = HumanBodyBones.UpperChest;
-                    break;
-                case "Hips":
-                    bone = HumanBodyBones.Hips;
-                    break;
-
-                // arms
-                case "RightShoulder":
-                    bone = HumanBodyBones.RightShoulder;
-                    break;
-                case "RightUpperArm":
-                    bone = HumanBodyBones.RightUpperArm;
-                    break;
-                case "RightLowerArm":
-                    bone = HumanBodyBones.RightLowerArm;
-                    break;
-                case "RightHand":
-                    bone = HumanBodyBones.RightHand;
-                    break;
-                case "LeftShoulder":
-                    bone = HumanBodyBones.LeftShoulder;
-                    break;
-                case "LeftUpperArm":
-                    bone = HumanBodyBones.LeftUpperArm;
-                    break;
-                case "LeftLowerArm":
-                    bone = HumanBodyBones.LeftLowerArm;
-                    break;
-                case "LeftHand":
-                    bone = HumanBodyBones.LeftHand;
-                    break;
-
-                // legs
-                case "RightUpperLeg":
-                    bone = HumanBodyBones.RightUpperLeg;
-                    break;
-                case "RightLowerLeg":
-                    bone = HumanBodyBones.RightLowerLeg;
-                    break;
-                case "RightFoot":
-                    bone = HumanBodyBones.RightFoot;
-                    break;
-                case "LeftUpperLeg":
-                    bone = HumanBodyBones.LeftUpperLeg;
-                    break;
-                case "LeftLowerLeg":
-                    bone = HumanBodyBones.LeftLowerLeg;
-                    break;
-                case "LeftFoot":
-                    bone = HumanBodyBones.LeftFoot;
-                    break;
-
-                // default bone
-                default:
-                    bone = HumanBodyBones.Head;
-                    break;
-            }
-
-            return bone;
+                { "Head", HumanBodyBones.Head },
+                { "Neck", HumanBodyBones.Neck },
+                { "UpperChest", HumanBodyBones.UpperChest },
+                { "Hips", HumanBodyBones.Hips },
+                { "RightShoulder", HumanBodyBones.RightShoulder },
+                { "RightUpperArm", HumanBodyBones.RightUpperArm },
+                { "RightLowerArm", HumanBodyBones.RightLowerArm },
+                { "RightHand", HumanBodyBones.RightHand },
+                { "LeftShoulder", HumanBodyBones.LeftShoulder },
+                { "LeftUpperArm", HumanBodyBones.LeftUpperArm },
+                { "LeftLowerArm", HumanBodyBones.LeftLowerArm },
+                { "LeftHand", HumanBodyBones.LeftHand },
+                { "RightUpperLeg", HumanBodyBones.RightUpperLeg },
+                { "RightLowerLeg", HumanBodyBones.RightLowerLeg },
+                { "RightFoot", HumanBodyBones.RightFoot },
+                { "LeftUpperLeg", HumanBodyBones.LeftUpperLeg },
+                { "LeftLowerLeg", HumanBodyBones.LeftLowerLeg },
+                { "LeftFoot", HumanBodyBones.LeftFoot }
+            
+            }.TryGetValue(boneName, out HumanBodyBones bone) ? bone : HumanBodyBones.Head;
         }
     }
 }

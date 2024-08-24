@@ -8,7 +8,7 @@ namespace NetWare
         {
             // start storage updater
             StartCoroutine(Storage.Update());
-
+            
             // setup window data
             int windowWidth = 550;
             int windowHeight = 650;
@@ -16,7 +16,7 @@ namespace NetWare
             int windowX = 200;
             int windowY = ((Screen.height / 2) - (windowHeight / 2));
 
-            Menu.version = "v2.0";
+            Menu.version = "v2.1";
             Menu.color = Color.red;
             Menu.tabs = new string[] { "Combat", "Visual", "Settings" };
             Menu.windowRect = new Rect(windowX, windowY, windowWidth, windowHeight);
@@ -85,7 +85,7 @@ namespace NetWare
                     fontSize = 12,
                 };
 
-                if (GUILayout.Toggle(selected, toggleContent, toggleStyle, GUILayout.Width(toggleStyle.CalcSize(toggleContent).x)))
+                if (GUILayout.Toggle(selected, toggleContent, toggleStyle, GUILayout.Width(toggleStyle.CalcSize(toggleContent).x + 2)))
                     Menu.currentTab = index;
             }
             GUILayout.EndHorizontal();

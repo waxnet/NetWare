@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
 namespace NetWare.Modules
 {
@@ -6,7 +7,7 @@ namespace NetWare.Modules
     {
         public void Update()
         {
-            if (!(Input.GetMouseButton(1) && Config.GetBool("combat.aimbot.enabled")))
+            if (!PhotonNetwork.InRoom || (!(Input.GetMouseButton(1) && Config.GetBool("combat.aimbot.enabled"))))
                 return;
 
             // get target
@@ -53,7 +54,20 @@ namespace NetWare.Modules
 
             // aim at player
             if (aimbotAimMode == "Legit" && Position.IsOnScreen(playerScreenPosition))
-                Mouse.MoveTo(playerScreenPosition, Config.GetInt("combat.aimbot.smoothing"));
+            {
+                if (Config.GetBool("combat.aimbot.usesensitivity"))
+                    Mouse.MoveTo(
+                        playerScreenPosition,
+                        Config.GetInt("combat.aimbot.smoothing"),
+                        SettingsPanel.SensitivityX,
+                        SettingsPanel.SensitivityY
+                    );
+                else
+                    Mouse.MoveTo(
+                        playerScreenPosition,
+                        Config.GetInt("combat.aimbot.smoothing")
+                    );
+            }
 
             if (aimbotAimMode == "Lock")
             {

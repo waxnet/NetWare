@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
 namespace NetWare.Modules
 {
@@ -6,7 +7,7 @@ namespace NetWare.Modules
     {
         public void OnGUI()
         {
-            if (!Config.GetBool("visual.nametags.enabled"))
+            if (!PhotonNetwork.InRoom || !Config.GetBool("visual.nametags.enabled"))
                 return;
 
             foreach (PlayerController player in Storage.players)

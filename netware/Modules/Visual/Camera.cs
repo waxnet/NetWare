@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
 namespace NetWare.Modules
 {
@@ -6,6 +7,10 @@ namespace NetWare.Modules
     {
         public void Update()
         {
+            if (!PhotonNetwork.InRoom)
+                return;
+
+            // reset zoom if needed
             if (Data.resetZoom)
             {
                 Data.resetZoom = false;

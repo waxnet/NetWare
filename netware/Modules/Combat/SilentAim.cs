@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
 namespace NetWare.Modules
 {
@@ -6,7 +7,7 @@ namespace NetWare.Modules
     {
         public void Update()
         {
-            if (!(Input.GetMouseButton(0) && Config.GetBool("combat.silentaim.enabled") && LocalPlayer.IsHoldingWeapon()))
+            if (!PhotonNetwork.InRoom || (!(Input.GetMouseButton(0) && Config.GetBool("combat.silentaim.enabled") && LocalPlayer.IsHoldingWeapon())))
                 return;
             
             // get target

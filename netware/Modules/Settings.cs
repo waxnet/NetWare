@@ -1,4 +1,5 @@
 ﻿using Photon.Pun;
+using UnityEngine;
 
 namespace NetWare.Modules
 {
@@ -31,6 +32,13 @@ namespace NetWare.Modules
             );
 
             Menu.NewSection("Gameplay");
+            Config.SetString(
+                "settings.fpscapper.fps",
+                Menu.NewTextField(
+                    "FPS Cap",
+                    Config.GetString("settings.fpscapper.fps")
+                )
+            );
             Menu.NewButton("Leave Game", () => PhotonNetwork.Disconnect());
 
             Menu.Separate();

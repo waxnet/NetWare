@@ -37,12 +37,20 @@ namespace NetWare
 
         public static bool IsPlayerTeammate(PlayerController playerController)
         {
-            return playerController?.JDJGEBHGLMI ?? true;
+            try {
+                return playerController.JDJGEBHGLMI;
+            } catch {
+                return Resolver.GetProperty<PlayerController, bool>(playerController, "IsTeammate");
+            }
         }
 
         public static bool IsPlayerBot(PlayerController playerController)
         {
-            return playerController?.OAHKGPBBLCP ?? true;
+            try {
+                return playerController.OAHKGPBBLCP;
+            } catch {
+                return Resolver.GetProperty<PlayerController, bool>(playerController, "IsBot");
+            }
         }
         
         public static bool IsPlayerValid(PlayerController playerController)
@@ -61,17 +69,29 @@ namespace NetWare
 
         public static BABFPNELLFA GetPlayerInfo(PlayerController playerController)
         {
-            return playerController?.HGJCDHLIOII;
+            try {
+                return playerController.HGJCDHLIOII;
+            } catch {
+                return null;
+            }
         }
 
         public static string GetPlayerName(PlayerController playerController)
         {
-            return GetPlayerInfo(playerController)?.GCCNGNHHLMC;
+            try {
+                return GetPlayerInfo(playerController).GCCNGNHHLMC;
+            } catch {
+                return "Enemy";
+            }
         }
 
         public static PlayerHealth GetHealth(PlayerController playerController)
         {
-            return playerController?.LFMCIILGNAJ;
+            try {
+                return playerController.LFMCIILGNAJ;
+            } catch {
+                return Resolver.GetProperty<PlayerController, PlayerHealth>(playerController, "Health");
+            }
         }
     }
 }

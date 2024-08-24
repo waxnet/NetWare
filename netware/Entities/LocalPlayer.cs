@@ -5,7 +5,11 @@
         // other
         public static PlayerController Get()
         {
-            return PlayerController.NALHMIPKGPO;
+            try {
+                return PlayerController.NALHMIPKGPO;
+            } catch {
+                return Resolver.GetInstance<PlayerController>();
+            }
         }
 
         public static PlayerBuildingManager GetPlayerBuildingManager()
@@ -16,7 +20,11 @@
         // camera
         public static CameraManager GetCameraManager()
         {
-            return CameraManager.OEPCIBFBPLE;
+            try {
+                return CameraManager.OEPCIBFBPLE;
+            } catch {
+                return Resolver.GetInstance<CameraManager>();
+            }
         }
 
         public static vThirdPersonCamera GetThirdPersonCamera()
@@ -27,7 +35,7 @@
         // checks
         public static bool IsHoldingWeapon()
         {
-            return (GetPlayerBuildingManager()?.state == IFLOFNCLLMO.NONE) || (!GetPlayerBuildingManager().enabled);
+            return (GetPlayerBuildingManager()?.state.ToString() == "NONE") || (!GetPlayerBuildingManager().enabled);
         }
     }
 }

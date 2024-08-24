@@ -8,10 +8,10 @@ namespace NetWare
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         private static extern void mouse_event(uint dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
 
-        public static void MoveTo(Vector3 position, int lerp = 1)
+        public static void MoveTo(Vector3 position, int lerp = 1, float xSensitivity = 1, float ySensitivity = 1)
         {
-            position.x = ((position.x - Render.screenCenter.x) / lerp);
-            position.y = ((position.y - Render.screenCenter.y) / lerp);
+            position.x = (((position.x - Render.screenCenter.x) / lerp) * xSensitivity);
+            position.y = (((position.y - Render.screenCenter.y) / lerp) * ySensitivity);
 
             mouse_event(
                 0x0001,

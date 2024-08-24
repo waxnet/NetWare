@@ -36,21 +36,29 @@
                 )
             );
             Config.SetFloat(
-                "combat.aimbot.smoothing",
-                Menu.NewSlider(
-                    "Smoothing",
-                    Config.GetFloat("combat.aimbot.smoothing", 5),
-                    1,
-                    10
-                )
-            );
-            Config.SetFloat(
                 "combat.aimbot.distance",
                 Menu.NewSlider(
                     "Distance",
                     Config.GetFloat("combat.aimbot.distance", 500),
                     10,
                     1000
+                )
+            );
+            Menu.NewTitle("Smoothing");
+            Config.SetFloat(
+                "combat.aimbot.smoothing",
+                Menu.NewSlider(
+                    "Smoothing Amount",
+                    Config.GetFloat("combat.aimbot.smoothing", 5),
+                    1,
+                    10
+                )
+            );
+            Config.SetBool(
+                "combat.aimbot.usesensitivity",
+                Menu.NewToggle(
+                    Config.GetBool("combat.aimbot.usesensitivity"),
+                    "Use Sensitivity"
                 )
             );
             Menu.NewTitle("FOV Settings");

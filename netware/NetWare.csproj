@@ -31,8 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="1v1">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\1v1.dll</HintPath>
+    <Reference Include="1v1, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\1v1.dll</HintPath>
     </Reference>
     <Reference Include="PhotonUnityNetworking">
       <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\PhotonUnityNetworking.dll</HintPath>
@@ -69,6 +70,7 @@
     <Compile Include="Data\Storage.cs" />
     <Compile Include="Entities\LocalPlayer.cs" />
     <Compile Include="Entities\Players.cs" />
+    <Compile Include="Entities\Resolver.cs" />
     <Compile Include="Entities\Skeleton.cs" />
     <Compile Include="Loader.cs" />
     <Compile Include="Main.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Modules\Combat.cs" />
     <Compile Include="Modules\Combat\SilentAim.cs" />
     <Compile Include="Modules\Settings.cs" />
+    <Compile Include="Modules\Settings\FPSCapper.cs" />
     <Compile Include="Modules\Settings\Watermark.cs" />
     <Compile Include="Modules\Data.cs" />
     <Compile Include="Modules\Visual.cs" />

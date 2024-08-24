@@ -23,6 +23,7 @@ namespace NetWare
             instance.AddComponent<Modules.Camera>();
 
             instance.AddComponent<Modules.Watermark>();
+            instance.AddComponent<Modules.FPSCapper>();
 
             instance.AddComponent<MenuChecks>();
 
