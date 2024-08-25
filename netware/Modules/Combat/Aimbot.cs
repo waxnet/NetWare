@@ -7,41 +7,60 @@ namespace NetWare.Modules
     {
         public void Update()
         {
-            if (!PhotonNetwork.InRoom || (!(Input.GetMouseButton(1) && Config.GetBool("combat.aimbot.enabled"))))
-                return;
+            if (
+                !PhotonNetwork.InRoom ||
+                !Config.GetBool("combat.aimbot.enabled") ||
+                !Input.GetMouseButton(1) ||
+                LocalPlayer.Get() == null
+                ) return;
 
             // get target
             PlayerController target = null;
-            float lastDistance = Config.GetFloat("combat.aimbot.distance", 500);
+
+            float lastDistanceScreen = float.MaxValue;
+            float lastDistanceWorld = float.MaxValue;
+
+            float fov = Config.GetBool("combat.aimbot.dynamicfov") ? (UnityEngine.Camera.main.fieldOfView + 60) : (
+                    Config.GetBool("combat.aimbot.checkfov") ? Config.GetInt("combat.aimbot.fovsize") : Screen.width
+                );
 
             foreach (PlayerController player in Storage.players)
                 if (!Players.IsPlayerTeammate(player) && Players.IsPlayerValid(player))
                 {
-                    Vector3 playerWorld = Players.GetHeadPosition(player);
+                    // player data
+                    PlayerController localPlayer = LocalPlayer.Get();
+
+                    Vector3 playerWorld = Players.GetHipPosition(player);
                     Vector3 playerScreen = Position.ToScreen(playerWorld);
 
-                    if (Position.IsOnScreen(playerScreen))
-                    {
-                        float screenDistance = new Vector2(
-                            playerScreen.x - Render.screenCenter.x,
-                            playerScreen.y - Render.screenCenter.y
-                        ).magnitude;
+                    // distances
+                    float worldDistance = (Players.GetHipPosition(localPlayer) - playerWorld).magnitude;
+                    if (
+                        worldDistance > Config.GetFloat("combat.aimbot.maxdistance", 500) ||
+                        worldDistance < Config.GetFloat("combat.aimbot.mindistance", 0)
+                        )
+                        continue;
 
-                        if (screenDistance < lastDistance)
+                    float screenDistance = new Vector2(
+                        playerScreen.x - Render.screenCenter.x,
+                        playerScreen.y - Render.screenCenter.y
+                    ).magnitude;
+                    if (!Position.IsOnScreen(playerScreen) || screenDistance > fov)
+                        continue;
+
+                    // target selection
+                    if (Config.GetString("combat.aimbot.filterby") == "FOV & Closest") {
+                        if (worldDistance < lastDistanceWorld)
                         {
-                            lastDistance = screenDistance;
+                            lastDistanceWorld = worldDistance;
                             target = player;
                         }
+                    } else if (screenDistance < lastDistanceScreen) {
+                        lastDistanceScreen = screenDistance;
+                        target = player;
                     }
                 }
-
-            float fov = Screen.width;
-            if (Config.GetBool("combat.aimbot.dynamicfov"))
-                fov = (UnityEngine.Camera.main.fieldOfView + 60);
-            else if (Config.GetBool("combat.aimbot.checkfov"))
-                fov = Config.GetInt("combat.aimbot.fovsize");
-
-            if (lastDistance > fov || target == null)
+            if (target == null)
                 return;
 
             // data

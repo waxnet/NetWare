@@ -20,8 +20,8 @@ namespace NetWare
         );
 
         // cache system
-        private static Dictionary<string, PropertyInfo> propertyCache = new Dictionary<string, PropertyInfo>();
-        private static Dictionary<string, MethodInfo> methodCache = new Dictionary<string, MethodInfo>();
+        private static Dictionary<string, PropertyInfo> instanceCache = new Dictionary<string, PropertyInfo>();
+        private static Dictionary<string, MethodInfo> propertyCache = new Dictionary<string, MethodInfo>();
         
         private static string GetCacheKey(params string[] values)
         {
@@ -36,7 +36,7 @@ namespace NetWare
 
             // check cache
             string cacheKey = GetCacheKey($"{type.Name}_instance");
-            if (propertyCache.TryGetValue(cacheKey, out PropertyInfo cacheProperty))
+            if (instanceCache.TryGetValue(cacheKey, out PropertyInfo cacheProperty))
                 return (T)cacheProperty.GetValue(null);
 
             // resolve class instance property
@@ -55,7 +55,7 @@ namespace NetWare
                 }
 
             // invoke getter
-            propertyCache[cacheKey] = instance;
+            instanceCache[cacheKey] = instance;
             return (T)instance.GetValue(null);
         }
 
@@ -66,7 +66,7 @@ namespace NetWare
 
             // check cache
             string cacheKey = GetCacheKey($"{type.Name}_{getterName}");
-            if (methodCache.TryGetValue(cacheKey, out MethodInfo cacheMethod))
+            if (propertyCache.TryGetValue(cacheKey, out MethodInfo cacheMethod))
                 return (TProperty)cacheMethod.Invoke(instance, null);
 
             // resolve getter by name
@@ -75,7 +75,7 @@ namespace NetWare
                 return default;
 
             // invoke getter and add to cache
-            methodCache[cacheKey] = getter;
+            propertyCache[cacheKey] = getter;
             return (TProperty)getter.Invoke(instance, null);
         }
     }

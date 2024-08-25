@@ -22,7 +22,7 @@
             Config.SetString(
                 "combat.aimbot.aimbone",
                 Menu.NewDropdown(
-                    "Aim Bone",
+                    "Aim Bone", "aimbotaimbone",
                     Config.GetString("combat.aimbot.aimbone"),
                     new string[] { "Head", "Neck", "UpperChest", "Hips" }
                 )
@@ -30,18 +30,35 @@
             Config.SetString(
                 "combat.aimbot.aimmode",
                 Menu.NewDropdown(
-                    "Aim Mode",
+                    "Aim Mode", "aimbotaimmode",
                     Config.GetString("combat.aimbot.aimmode"),
                     new string[] { "Legit", "Lock" }
                 )
             );
+            Config.SetString(
+                "combat.aimbot.filterby",
+                Menu.NewDropdown(
+                    "Filter By", "aimbotfilterby",
+                    Config.GetString("combat.aimbot.filterby"),
+                    new string[] { "FOV", "FOV & Closest" }
+                )
+            );
             Config.SetFloat(
-                "combat.aimbot.distance",
+                "combat.aimbot.maxdistance",
                 Menu.NewSlider(
-                    "Distance",
-                    Config.GetFloat("combat.aimbot.distance", 500),
-                    10,
+                    "Max Distance",
+                    Config.GetFloat("combat.aimbot.maxdistance", 500),
+                    Config.GetFloat("combat.aimbot.mindistance", 0),
                     1000
+                )
+            );
+            Config.SetFloat(
+                "combat.aimbot.mindistance",
+                Menu.NewSlider(
+                    "Min Distance",
+                    Config.GetFloat("combat.aimbot.mindistance", 0),
+                    0,
+                    Config.GetFloat("combat.aimbot.maxdistance", 500)
                 )
             );
             Menu.NewTitle("Smoothing");
@@ -101,7 +118,6 @@
                     80
                 )
             );
-            Menu.NewTitle("Colors");
             Config.SetString(
                 "combat.aimbot.fovcolor",
                 Menu.NewTextField(
@@ -135,18 +151,35 @@
             Config.SetString(
                 "combat.silentaim.aimbone",
                 Menu.NewDropdown(
-                    "Aim Bone",
+                    "Aim Bone", "silentaimaimbone",
                     Config.GetString("combat.silentaim.aimbone"),
                     new string[] { "Head", "Neck", "UpperChest", "Hips" }
                 )
             );
+            Config.SetString(
+                "combat.silentaim.filterby",
+                Menu.NewDropdown(
+                    "Filter By", "silentaimfilterby",
+                    Config.GetString("combat.silentaim.filterby"),
+                    new string[] { "FOV", "FOV & Closest" }
+                )
+            );
             Config.SetFloat(
-                "combat.silentaim.distance",
+                "combat.silentaim.maxdistance",
                 Menu.NewSlider(
-                    "Distance",
-                    Config.GetFloat("combat.silentaim.distance", 500),
-                    10,
+                    "Max Distance",
+                    Config.GetFloat("combat.silentaim.maxdistance", 500),
+                    Config.GetFloat("combat.silentaim.mindistance", 0),
                     1000
+                )
+            );
+            Config.SetFloat(
+                "combat.silentaim.mindistance",
+                Menu.NewSlider(
+                    "Min Distance",
+                    Config.GetFloat("combat.silentaim.mindistance", 0),
+                    0,
+                    Config.GetFloat("combat.silentaim.maxdistance", 500)
                 )
             );
             Menu.NewTitle("FOV Settings");
@@ -189,7 +222,6 @@
                     80
                 )
             );
-            Menu.NewTitle("Colors");
             Config.SetString(
                 "combat.silentaim.fovcolor",
                 Menu.NewTextField(

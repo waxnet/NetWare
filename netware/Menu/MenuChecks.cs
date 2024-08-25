@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using System;
+using UnityEngine;
 
 namespace NetWare
 {
@@ -6,8 +8,22 @@ namespace NetWare
     {
         public void Update()
         {
-            // check keybinds
-            Menu.CheckKeybinds();
+            if (!Input.anyKey)
+                return;
+
+            foreach (string key in Config.config.Keys)
+            {
+                if (key.Split('.').Last() != "keybind")
+                    continue;
+
+                string keybindString = Config.GetString(key);
+                KeyCode keybindKeycode = (KeyCode)Enum.Parse(typeof(KeyCode), keybindString);
+                string toggleKey = key.Replace("keybind", "enabled");
+
+                if (keybindString != "..." && keybindString != "None")
+                    if (Input.GetKeyDown(keybindKeycode))
+                        Config.SetBool(toggleKey, !Config.GetBool(toggleKey));
+            }
         }
     }
 }

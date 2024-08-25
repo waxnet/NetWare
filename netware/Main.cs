@@ -16,7 +16,7 @@ namespace NetWare
             int windowX = 200;
             int windowY = ((Screen.height / 2) - (windowHeight / 2));
 
-            Menu.version = "v2.1";
+            Menu.version = "v2.2";
             Menu.color = Color.red;
             Menu.tabs = new string[] { "Combat", "Visual", "Settings" };
             Menu.windowRect = new Rect(windowX, windowY, windowWidth, windowHeight);

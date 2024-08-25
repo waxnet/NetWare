@@ -399,7 +399,7 @@ namespace NetWare
 
             GUILayout.Label($"<b>{separators} {text} {separators}</b>", labelStyle);
         }
-        public static string NewDropdown(string title, string currentValue, string[] values)
+        public static string NewDropdown(string title, string identifier, string currentValue, string[] values)
         {
             // styles
             GUIStyle areaStyle = GetOrCreateStyle(GetCacheKey($"{title}_area"), () => new GUIStyle("Box")
@@ -436,10 +436,10 @@ namespace NetWare
             GUILayout.Label(title, titleStyle);
             GUILayout.Space(-4);
 
-            if (currentDropdown != title && GUILayout.Button(currentValue, buttonStyle))
-                currentDropdown = title;
+            if (currentDropdown != identifier && GUILayout.Button(currentValue, buttonStyle))
+                currentDropdown = identifier;
 
-            if (currentDropdown == title)
+            if (currentDropdown == identifier)
             {
                 GUILayout.BeginVertical(areaStyle);
                 for (int i = 0; i < values.Length; i++)
@@ -454,27 +454,6 @@ namespace NetWare
 
             // return value
             return currentValue;
-        }
-
-        // other
-        public static void CheckKeybinds()
-        {
-            if (!Input.anyKey)
-                return;
-
-            foreach (string key in Config.config.Keys)
-            {
-                if (key.Split('.').Last() != "keybind")
-                    continue;
-
-                string keybindString = Config.GetString(key);
-                KeyCode keybindKeycode = (KeyCode)Enum.Parse(typeof(KeyCode), keybindString);
-                string toggleKey = key.Replace("keybind", "enabled");
-
-                if (keybindString != "..." && keybindString != "None")
-                    if (Input.GetKeyDown(keybindKeycode))
-                        Config.SetBool(toggleKey, !Config.GetBool(toggleKey));
-            }
         }
     }
 }

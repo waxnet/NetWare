@@ -25,7 +25,7 @@ namespace NetWare.Modules
             Config.SetString(
                 "settings.watermark.timetype",
                 Menu.NewDropdown(
-                    "Time Type",
+                    "Time Type", "watermarktimetype",
                     Config.GetString("settings.watermark.timetype"),
                     new string[] { "Standard", "Military" }
                 )

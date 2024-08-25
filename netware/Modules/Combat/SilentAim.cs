@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+﻿using JustPlay.FTUE;
+using Photon.Pun;
 using UnityEngine;
 
 namespace NetWare.Modules
@@ -7,41 +8,58 @@ namespace NetWare.Modules
     {
         public void Update()
         {
-            if (!PhotonNetwork.InRoom || (!(Input.GetMouseButton(0) && Config.GetBool("combat.silentaim.enabled") && LocalPlayer.IsHoldingWeapon())))
-                return;
+            if (
+                !PhotonNetwork.InRoom ||
+                !Config.GetBool("combat.silentaim.enabled") ||
+                !Input.GetMouseButton(0) ||
+                LocalPlayer.Get() == null ||
+                !LocalPlayer.IsHoldingWeapon()
+                ) return;
             
             // get target
             PlayerController target = null;
-            float lastDistance = Config.GetFloat("combat.silentaim.distance", 500);
+
+            float lastDistanceScreen = float.MaxValue;
+            float lastDistanceWorld = float.MaxValue;
+
+            float fov = Config.GetBool("combat.silentaim.dynamicfov") ? (UnityEngine.Camera.main.fieldOfView + 60) : (
+                    Config.GetBool("combat.silentaim.checkfov") ? Config.GetInt("combat.silentaim.fovsize") : Screen.width
+                );
 
             foreach (PlayerController player in Storage.players)
                 if (!Players.IsPlayerTeammate(player) && Players.IsPlayerValid(player))
                 {
-                    Vector3 playerWorld = Players.GetHeadPosition(player);
+                    // player data
+                    PlayerController localPlayer = LocalPlayer.Get();
+                    
+                    Vector3 playerWorld = Players.GetHipPosition(player);
                     Vector3 playerScreen = Position.ToScreen(playerWorld);
 
-                    if (Position.IsOnScreen(playerScreen))
-                    {
-                        float screenDistance = new Vector2(
-                            playerScreen.x - Render.screenCenter.x,
-                            playerScreen.y - Render.screenCenter.y
-                        ).magnitude;
+                    // distances
+                    float worldDistance = (Players.GetHipPosition(localPlayer) - playerWorld).magnitude;
+                    if (worldDistance > Config.GetFloat("combat.silentaim.maxdistance", 500))
+                        continue;
 
-                        if (screenDistance < lastDistance)
+                    float screenDistance = new Vector2(
+                        playerScreen.x - Render.screenCenter.x,
+                        playerScreen.y - Render.screenCenter.y
+                    ).magnitude;
+                    if (!Position.IsOnScreen(playerScreen) || screenDistance > fov)
+                        continue;
+
+                    // target selection
+                    if (Config.GetString("combat.silentaim.filterby") == "FOV & Closest") {
+                        if (worldDistance < lastDistanceWorld)
                         {
-                            lastDistance = screenDistance;
+                            lastDistanceWorld = worldDistance;
                             target = player;
                         }
+                    } else if (screenDistance < lastDistanceScreen) {
+                        lastDistanceScreen = screenDistance;
+                        target = player;
                     }
                 }
-
-            float fov = Screen.width;
-            if (Config.GetBool("combat.silentaim.dynamicfov"))
-                fov = (UnityEngine.Camera.main.fieldOfView + 60);
-            else if (Config.GetBool("combat.silentaim.checkfov"))
-                fov = Config.GetInt("combat.silentaim.fovsize");
-
-            if (lastDistance > fov || target == null)
+            if (target == null)
                 return;
 
             // set rotation
