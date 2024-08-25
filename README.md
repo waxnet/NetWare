@@ -27,8 +27,10 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Enabled (with keybind)
             - Aim Bone (head, neck, upperchest or hips)
             - Aim Mode (legit or lock)
-            - Distance (10 -> 1000)
-            - Smoothing (1 -> 10)
+            - Filter By (fov or fov & closest)
+            - Max Distance (min -> 1000)
+            - Min Distance (0 -> max)
+            - Smoothing Amount (1 -> 10)
             - Use Sensitivity
             - Check FOV
             - Draw Fov
@@ -40,7 +42,9 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
       + Silent Aim
             - Enabled (with keybind)
             - Aim Bone (head, neck, upperchest or hips)
-            - Distance (10 -> 1000)
+            - Filter By (fov or fov & closest)
+            - Max Distance (min -> 1000)
+            - Min Distance (0 -> max)
             - Check FOV
             - Draw Fov
             - Dynamic Fov
@@ -88,7 +92,7 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Enabled
             - Time Type (standard, military)
       + Gameplay
-            - FPS Capper
+            - FPS Cap
             - Leave Game
       + Config Loader
 ```
