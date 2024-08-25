@@ -16,7 +16,7 @@ namespace NetWare
             int windowX = 200;
             int windowY = ((Screen.height / 2) - (windowHeight / 2));
 
-            Menu.version = "v2.2";
+            Menu.version = "v2.2.1";
             Menu.color = Color.red;
             Menu.tabs = new string[] { "Combat", "Visual", "Settings" };
             Menu.windowRect = new Rect(windowX, windowY, windowWidth, windowHeight);
@@ -44,8 +44,8 @@ namespace NetWare
             if (Menu.version != null)
             {
                 // styles and data
-                GUIContent versionContent = new GUIContent(Menu.version);
-                GUIStyle versionStyle = new GUIStyle("Box")
+                var versionContent = new GUIContent(Menu.version);
+                var versionStyle = new GUIStyle("Box")
                 {
                     normal = {
                         background = Texture.NewTransparent(),
@@ -70,8 +70,8 @@ namespace NetWare
             {
                 bool selected = (Menu.currentTab == index);
 
-                GUIContent toggleContent = new GUIContent(Menu.tabs[index]);
-                GUIStyle toggleStyle = new GUIStyle("Box")
+                var toggleContent = new GUIContent(Menu.tabs[index]);
+                var toggleStyle = new GUIStyle("Box")
                 {
                     normal = {
                         background = Texture.New(.075f, .075f, .075f),

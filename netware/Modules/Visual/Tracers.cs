@@ -10,14 +10,14 @@ namespace NetWare.Modules
             if (!PhotonNetwork.InRoom || !Config.GetBool("visual.tracers.enabled"))
                 return;
 
-            foreach (PlayerController player in Storage.players)
+            foreach (var player in Storage.players)
             {
                 if (!Players.IsPlayerValid(player))
                     continue;
 
                 Vector3 screenPosition = Position.ToScreen(Players.GetHipPosition(player));
-                
-                Color color = Colors.HexToRGB(Config.GetString("visual.skeleton.enemy"));
+
+                var color = Colors.HexToRGB(Config.GetString("visual.skeleton.enemy"));
                 if (Players.IsPlayerTeammate(player))
                     color = Colors.HexToRGB(Config.GetString("visual.skeleton.team"));
                 else if (Players.IsPlayerBot(player))

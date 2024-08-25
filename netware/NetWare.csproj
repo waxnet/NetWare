@@ -70,7 +70,7 @@
     <Compile Include="Data\Storage.cs" />
     <Compile Include="Entities\LocalPlayer.cs" />
     <Compile Include="Entities\Players.cs" />
-    <Compile Include="Entities\Resolver.cs" />
+    <Compile Include="Utils\Resolver.cs" />
     <Compile Include="Entities\Skeleton.cs" />
     <Compile Include="Loader.cs" />
     <Compile Include="Main.cs" />

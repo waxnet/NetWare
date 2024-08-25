@@ -32,8 +32,8 @@ namespace NetWare.Modules
             timer++;
 
             // data
-            GUIContent titleContent = new GUIContent($"Net<color=red>Ware</color> {Menu.version} | {time} | {content} FPS");
-            GUIStyle titleStyle = new GUIStyle("Label")
+            var titleContent = new GUIContent($"Net<color=red>Ware</color> {Menu.version} | {time} | {content} FPS");
+            var titleStyle = new GUIStyle("Label")
             {
                 wordWrap = false,
                 alignment = TextAnchor.MiddleCenter,
@@ -44,7 +44,7 @@ namespace NetWare.Modules
             float backgroundWidth = (titleSize.x + 20);
             float backgroundHeight = 30;
 
-            Vector2 boxPosition = new Vector2(
+            var boxPosition = new Vector2(
                 ((backgroundWidth / 2) + 20),
                 ((backgroundHeight / 2) + 20)
             );
@@ -58,7 +58,7 @@ namespace NetWare.Modules
             );
 
             // draw title
-            Rect titleRect = new Rect(
+            var titleRect = new Rect(
                 (boxPosition.x - (backgroundWidth / 2)),
                 (boxPosition.y - (backgroundHeight / 2)),
                 backgroundWidth,

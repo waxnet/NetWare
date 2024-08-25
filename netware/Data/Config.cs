@@ -119,7 +119,7 @@ namespace NetWare
             string configPath = Path.Combine(configFolder, configName + ".nwc");
             string packedConfig = "";
 
-            foreach (KeyValuePair<string, string> data in config)
+            foreach (var data in config)
                 packedConfig += (data.Key + " " + data.Value + "\n");
 
             File.WriteAllText(configPath, packedConfig);

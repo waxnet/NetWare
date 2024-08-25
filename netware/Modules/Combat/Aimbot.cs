@@ -24,11 +24,11 @@ namespace NetWare.Modules
                     Config.GetBool("combat.aimbot.checkfov") ? Config.GetInt("combat.aimbot.fovsize") : Screen.width
                 );
 
-            foreach (PlayerController player in Storage.players)
+            foreach (var player in Storage.players)
                 if (!Players.IsPlayerTeammate(player) && Players.IsPlayerValid(player))
                 {
                     // player data
-                    PlayerController localPlayer = LocalPlayer.Get();
+                    var localPlayer = LocalPlayer.Get();
 
                     Vector3 playerWorld = Players.GetHipPosition(player);
                     Vector3 playerScreen = Position.ToScreen(playerWorld);
@@ -64,26 +64,26 @@ namespace NetWare.Modules
                 return;
 
             // data
-            Vector3 playerWorldPosition = Players.GetBonePosition(
+            Vector3 playerBoneWorld = Players.GetBonePosition(
                 target,
                 NetWare.Skeleton.GetBoneFromString(Config.GetString("combat.aimbot.aimbone"))
             );
-            Vector3 playerScreenPosition = Position.ToScreen(playerWorldPosition);
+            Vector3 playerBoneScreen = Position.ToScreen(playerBoneWorld);
             string aimbotAimMode = Config.GetString("combat.aimbot.aimmode");
 
             // aim at player
-            if (aimbotAimMode == "Legit" && Position.IsOnScreen(playerScreenPosition))
+            if (aimbotAimMode == "Legit" && Position.IsOnScreen(playerBoneScreen))
             {
                 if (Config.GetBool("combat.aimbot.usesensitivity"))
                     Mouse.MoveTo(
-                        playerScreenPosition,
+                        playerBoneScreen,
                         Config.GetInt("combat.aimbot.smoothing"),
                         SettingsPanel.SensitivityX,
                         SettingsPanel.SensitivityY
                     );
                 else
                     Mouse.MoveTo(
-                        playerScreenPosition,
+                        playerBoneScreen,
                         Config.GetInt("combat.aimbot.smoothing")
                     );
             }
@@ -94,7 +94,7 @@ namespace NetWare.Modules
 
                 // rotations
                 Quaternion startRotation = camera.transform.rotation;
-                camera.transform.LookAt(playerWorldPosition);
+                camera.transform.LookAt(playerBoneWorld);
                 Quaternion endRotation = camera.transform.rotation;
                 
                 camera.transform.rotation = startRotation;
@@ -110,7 +110,7 @@ namespace NetWare.Modules
         {
             if (Config.GetBool("combat.aimbot.enabled") && Config.GetBool("combat.aimbot.checkfov") && Config.GetBool("combat.aimbot.drawfov"))
             {
-                Color fovColor = Colors.HexToRGB(Config.GetString("combat.aimbot.fovcolor"));
+                var fovColor = Colors.HexToRGB(Config.GetString("combat.aimbot.fovcolor"));
                 if (Config.GetBool("combat.aimbot.rainbowfov"))
                     fovColor = Colors.GetRainbow();
 

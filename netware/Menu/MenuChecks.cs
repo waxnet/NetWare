@@ -17,7 +17,7 @@ namespace NetWare
                     continue;
 
                 string keybindString = Config.GetString(key);
-                KeyCode keybindKeycode = (KeyCode)Enum.Parse(typeof(KeyCode), keybindString);
+                var keybindKeycode = (KeyCode)Enum.Parse(typeof(KeyCode), keybindString);
                 string toggleKey = key.Replace("keybind", "enabled");
 
                 if (keybindString != "..." && keybindString != "None")

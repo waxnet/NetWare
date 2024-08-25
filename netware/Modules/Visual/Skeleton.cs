@@ -10,17 +10,17 @@ namespace NetWare.Modules
             if (!PhotonNetwork.InRoom || !Config.GetBool("visual.skeleton.enabled"))
                 return;
 
-            foreach (PlayerController player in Storage.players)
+            foreach (var player in Storage.players)
             {
                 if (!Players.IsPlayerValid(player))
                     continue;
 
                 // player data
-                Animator animator = player.GetComponent<Animator>();
+                var animator = player.GetComponent<Animator>();
                 if (animator == null)
                     continue;
 
-                Color color = Colors.HexToRGB(Config.GetString("visual.skeleton.enemy"));
+                var color = Colors.HexToRGB(Config.GetString("visual.skeleton.enemy"));
                 if (Players.IsPlayerTeammate(player))
                     color = Colors.HexToRGB(Config.GetString("visual.skeleton.team"));
                 else if (Players.IsPlayerBot(player))
@@ -34,8 +34,8 @@ namespace NetWare.Modules
                 // spine
                 for (int index = 0; (index + 1) != spine.Length; index++)
                 {
-                    HumanBodyBones originBone = spine[index];
-                    HumanBodyBones destinationBone = spine[index + 1];
+                    var originBone = spine[index];
+                    var destinationBone = spine[index + 1];
 
                     Vector3 originPosition = Position.ToScreen(animator.GetBoneTransform(originBone).transform.position);
                     Vector3 destinationPosition = Position.ToScreen(animator.GetBoneTransform(destinationBone).transform.position);
@@ -59,8 +59,8 @@ namespace NetWare.Modules
                 // arms
                 for (int index = 0; (index + 1) != arms.Length; index++)
                 {
-                    HumanBodyBones originBone = arms[index];
-                    HumanBodyBones destinationBone = arms[index + 1];
+                    var originBone = arms[index];
+                    var destinationBone = arms[index + 1];
 
                     Vector3 originPosition = Position.ToScreen(animator.GetBoneTransform(originBone).transform.position);
                     Vector3 destinationPosition = Position.ToScreen(animator.GetBoneTransform(destinationBone).transform.position);
@@ -72,8 +72,8 @@ namespace NetWare.Modules
                 // legs
                 for (int index = 0; (index + 1) != legs.Length; index++)
                 {
-                    HumanBodyBones originBone = legs[index];
-                    HumanBodyBones destinationBone = legs[index + 1];
+                    var originBone = legs[index];
+                    var destinationBone = legs[index + 1];
 
                     Vector3 originPosition = Position.ToScreen(animator.GetBoneTransform(originBone).transform.position);
                     Vector3 destinationPosition = Position.ToScreen(animator.GetBoneTransform(destinationBone).transform.position);

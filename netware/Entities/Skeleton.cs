@@ -63,10 +63,10 @@ namespace NetWare
         // methods
         public static bool HasSkeleton(PlayerController playerController)
         {
-            Animator playerAnimator = playerController?.GetComponent<Animator>();
+            var playerAnimator = playerController?.GetComponent<Animator>();
             bool hasSkeleton = true;
 
-            foreach (HumanBodyBones bone in body)
+            foreach (var bone in body)
                 if (playerAnimator?.GetBoneTransform(bone) == null)
                 {
                     hasSkeleton = false;
@@ -99,7 +99,7 @@ namespace NetWare
                 { "LeftLowerLeg", HumanBodyBones.LeftLowerLeg },
                 { "LeftFoot", HumanBodyBones.LeftFoot }
             
-            }.TryGetValue(boneName, out HumanBodyBones bone) ? bone : HumanBodyBones.Head;
+            }.TryGetValue(boneName, out var bone) ? bone : HumanBodyBones.Head;
         }
     }
 }

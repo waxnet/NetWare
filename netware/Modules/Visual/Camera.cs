@@ -30,7 +30,7 @@ namespace NetWare.Modules
             // camera settings
             if (Config.GetBool("visual.camerasettings.enabled"))
             {
-                vThirdPersonCamera thirdPersonCamera = LocalPlayer.GetThirdPersonCamera();
+                var thirdPersonCamera = LocalPlayer.GetThirdPersonCamera();
 
                 if (thirdPersonCamera != null)
                 {

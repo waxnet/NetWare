@@ -10,7 +10,7 @@ namespace NetWare.Modules
             if (!PhotonNetwork.InRoom || !Config.GetBool("visual.nametags.enabled"))
                 return;
 
-            foreach (PlayerController player in Storage.players)
+            foreach (var player in Storage.players)
             {
                 if (!Players.IsPlayerValid(player))
                     continue;
@@ -29,20 +29,20 @@ namespace NetWare.Modules
                     name += " (BOT)";
 
                 // data
-                GUIContent nameContent = new GUIContent(name);
-                GUIStyle textStyle = new GUIStyle("Label")
+                var nameContent = new GUIContent(name);
+                var nameStyle = new GUIStyle("Label")
                 {
                     alignment = TextAnchor.MiddleCenter,
                     fontSize = 12,
                 };
-                Vector2 nameSize = textStyle.CalcSize(nameContent);
+                Vector2 nameSize = nameStyle.CalcSize(nameContent);
 
                 if (Players.IsPlayerTeammate(player))
-                    textStyle.normal.textColor = Colors.HexToRGB(Config.GetString("visual.nametags.team"));
+                    nameStyle.normal.textColor = Colors.HexToRGB(Config.GetString("visual.nametags.team"));
                 else if (Players.IsPlayerBot(player))
-                    textStyle.normal.textColor = Colors.HexToRGB(Config.GetString("visual.nametags.bot"));
+                    nameStyle.normal.textColor = Colors.HexToRGB(Config.GetString("visual.nametags.bot"));
                 else
-                    textStyle.normal.textColor = Colors.HexToRGB(Config.GetString("visual.nametags.enemy"));
+                    nameStyle.normal.textColor = Colors.HexToRGB(Config.GetString("visual.nametags.enemy"));
 
                 // draw name box
                 float boxX = headScreen.x;
@@ -69,7 +69,7 @@ namespace NetWare.Modules
                         (nameSize.y * 1.5f)
                     ),
                     nameContent,
-                    textStyle
+                    nameStyle
                 );
             }
         }

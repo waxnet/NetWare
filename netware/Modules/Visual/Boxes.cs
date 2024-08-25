@@ -10,13 +10,13 @@ namespace NetWare.Modules
             if (!PhotonNetwork.InRoom || !Config.GetBool("visual.boxes.enabled"))
                 return;
 
-            foreach (PlayerController player in Storage.players)
+            foreach (var player in Storage.players)
             {
                 if (!Players.IsPlayerValid(player))
                     continue;
 
                 // get color
-                Color color = Colors.HexToRGB(Config.GetString("visual.boxes.enemy"));
+                var color = Colors.HexToRGB(Config.GetString("visual.boxes.enemy"));
                 if (Players.IsPlayerTeammate(player))
                     color = Colors.HexToRGB(Config.GetString("visual.boxes.team"));
                 else if (Players.IsPlayerBot(player))
@@ -26,13 +26,10 @@ namespace NetWare.Modules
                 Vector3 headWorld = Players.GetHeadPosition(player);
                 Vector3 feetWorld = Players.GetFeetPosition(player);
 
-                if (headWorld.y > feetWorld.y)
-                {
+                if (headWorld.y > feetWorld.y) {
                     headWorld.y += .22f;
                     feetWorld.y -= .2f;
-                }
-                else
-                {
+                } else {
                     headWorld.y -= .22f;
                     feetWorld.y += .2f;
                 }

@@ -25,17 +25,12 @@ namespace NetWare
         // cache system
         private static Dictionary<string, GUIStyle> cache = new Dictionary<string, GUIStyle>();
 
-        public static string GetCacheKey(params string[] values)
-        {
-            return string.Join("_", values);
-        }
-
         public static GUIStyle GetOrCreateStyle(string key, Func<GUIStyle> createStyle)
         {
-            if (cache.TryGetValue(key, out GUIStyle cachedStyle))
+            if (cache.TryGetValue(key, out var cachedStyle))
                 return cachedStyle;
 
-            GUIStyle newStyle = createStyle();
+            var newStyle = createStyle();
 
             cache[key] = newStyle;
             return newStyle;
@@ -67,7 +62,7 @@ namespace NetWare
             if (displayWindow)
             {
                 // styles
-                GUIStyle menuStyle = GetOrCreateStyle(GetCacheKey($"{title}_window"), () => new GUIStyle("Box")
+                var menuStyle = GetOrCreateStyle($"{title}_window", () => new GUIStyle("Box")
                 {
                     normal = {
                         background = Texture.NewBorder(color.r, color.g, color.b, .075f, .075f, .075f),
@@ -89,8 +84,8 @@ namespace NetWare
                 GUILayout.EndVertical();
 
             // styles
-            GUIContent titleText = new GUIContent(text);
-            GUIStyle titleStyle = GetOrCreateStyle(GetCacheKey($"{text}_sectiontitle"), () => new GUIStyle("Box")
+            var titleContent = new GUIContent(text);
+            var titleStyle = GetOrCreateStyle($"{text}_sectiontitle", () => new GUIStyle("Box")
             {
                 normal = {
                     background = Texture.New(.075f, .075f, .075f),
@@ -99,7 +94,7 @@ namespace NetWare
                 fontSize = 13,
             });
 
-            GUIStyle sectionStyle = GetOrCreateStyle(GetCacheKey($"{text}_section"), () => new GUIStyle("Box")
+            var sectionStyle = GetOrCreateStyle($"{text}_section", () => new GUIStyle("Box")
             {
                 normal = {
                     background = Texture.NewBorder(.5f, .5f, .5f, .075f, .075f, .075f),
@@ -110,13 +105,13 @@ namespace NetWare
             // draw
             GUILayout.BeginVertical(GUIContent.none, sectionStyle, GUILayout.Width((windowRect.width / 2) - 12));
             GUILayout.Space(-8);
-            GUILayout.Label(titleText, titleStyle, GUILayout.Width(titleStyle.CalcSize(titleText).x + 20));
+            GUILayout.Label(titleContent, titleStyle, GUILayout.Width(titleStyle.CalcSize(titleContent).x + 20));
             isSectionOpen = true;
         }
         public static void NewButton(string text, Action callback)
         {
             // style
-            GUIStyle buttonStyle = GetOrCreateStyle(GetCacheKey($"{text}_button"), () => new GUIStyle("Box")
+            var buttonStyle = GetOrCreateStyle($"{text}_button", () => new GUIStyle("Box")
             {
                 normal = {
                     background = Texture.NewBorder(0, 0, 0, .1f, .1f, .1f),
@@ -140,7 +135,7 @@ namespace NetWare
             string newKeybind = keybind.ToUpper();
 
             // styles
-            GUIStyle toggleStyle = GetOrCreateStyle(GetCacheKey($"{text}_toggle"), () => new GUIStyle("Box")
+            var toggleStyle = GetOrCreateStyle($"{text}_toggle", () => new GUIStyle("Box")
             {
                 onNormal = {
                     background = Texture.NewBorder(0, 0, 0, color.r, color.g, color.b),
@@ -153,8 +148,8 @@ namespace NetWare
                 fixedWidth = 18,
             });
 
-            GUIContent displayText = new GUIContent(text);
-            GUIStyle textStyle = GetOrCreateStyle(GetCacheKey($"{text}_text"), () => new GUIStyle("Box")
+            var textContent = new GUIContent(text);
+            var textStyle = GetOrCreateStyle($"{text}_text", () => new GUIStyle("Box")
             {
                 normal = {
                     background = Texture.New(.075f, .075f, .075f),
@@ -163,8 +158,8 @@ namespace NetWare
                 fontSize = 13,
             });
 
-            GUIContent valueContent = new GUIContent($"[ {newKeybind} ]");
-            GUIStyle buttonStyle = GetOrCreateStyle(GetCacheKey($"{text}_keybind"), () => new GUIStyle("Box")
+            var valueContent = new GUIContent($"[ {newKeybind} ]");
+            var buttonStyle = GetOrCreateStyle($"{text}_keybind", () => new GUIStyle("Box")
             {
                 normal = {
                     background = Texture.New(.075f, .075f, .075f),
@@ -185,7 +180,7 @@ namespace NetWare
             GUILayout.BeginVertical(GUILayout.Height(toggleStyle.fixedHeight));
             GUILayout.FlexibleSpace();
             GUILayout.Space(2);
-            GUILayout.Label(displayText, textStyle, GUILayout.Width(textStyle.CalcSize(displayText).x + 2));
+            GUILayout.Label(textContent, textStyle, GUILayout.Width(textStyle.CalcSize(textContent).x + 2));
             GUILayout.FlexibleSpace();
             GUILayout.EndVertical();
 
@@ -217,7 +212,7 @@ namespace NetWare
         public static bool NewToggle(bool value, string text)
         {
             // styles
-            GUIStyle toggleStyle = GetOrCreateStyle(GetCacheKey($"{text}_toggle"), () => new GUIStyle("Box")
+            var toggleStyle = GetOrCreateStyle($"{text}_toggle", () => new GUIStyle("Box")
             {
                 onNormal = {
                     background = Texture.NewBorder(0, 0, 0, color.r, color.g, color.b),
@@ -230,8 +225,8 @@ namespace NetWare
                 fixedWidth = 18,
             });
 
-            GUIContent displayText = new GUIContent(text);
-            GUIStyle textStyle = GetOrCreateStyle(GetCacheKey($"{text}_text"), () => new GUIStyle("Box")
+            var textContent = new GUIContent(text);
+            var textStyle = GetOrCreateStyle($"{text}_text", () => new GUIStyle("Box")
             {
                 normal = {
                     background = Texture.New(.075f, .075f, .075f),
@@ -247,7 +242,7 @@ namespace NetWare
             GUILayout.BeginVertical(GUILayout.Height(toggleStyle.fixedHeight));
             GUILayout.FlexibleSpace();
             GUILayout.Space(2);
-            GUILayout.Label(displayText, textStyle, GUILayout.Width(textStyle.CalcSize(displayText).x + 2));
+            GUILayout.Label(textContent, textStyle, GUILayout.Width(textStyle.CalcSize(textContent).x + 2));
             GUILayout.FlexibleSpace();
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
@@ -257,7 +252,7 @@ namespace NetWare
         public static float NewSlider(string text, float value, float minimum, float maximum)
         {
             // styles
-            GUIStyle areaStyle = GetOrCreateStyle(GetCacheKey($"{text}{minimum}{maximum}_area"), () => new GUIStyle("Box")
+            var areaStyle = GetOrCreateStyle($"{text}{minimum}{maximum}_area", () => new GUIStyle("Box")
             {
                 normal = {
                     background = Texture.NewBorder(.2f, .2f, .2f, .075f, .075f, .075f),
@@ -265,7 +260,7 @@ namespace NetWare
                 border = new RectOffset(1, 1, 1, 1),
             });
 
-            GUIStyle sliderStyle = GetOrCreateStyle(GetCacheKey($"{text}{minimum}{maximum}_slider"), () => new GUIStyle("HorizontalSlider")
+            var sliderStyle = GetOrCreateStyle($"{text}{minimum}{maximum}_slider", () => new GUIStyle("HorizontalSlider")
             {
                 normal = {
                     background = Texture.NewBorder(0, 0, 0, .15f, .15f, .15f),
@@ -274,7 +269,7 @@ namespace NetWare
                 border = new RectOffset(1, 1, 1, 1),
             });
 
-            GUIStyle thumbStyle = GetOrCreateStyle(GetCacheKey($"{text}{minimum}{maximum}_thumb"), () => new GUIStyle("HorizontalSliderThumb")
+            var thumbStyle = GetOrCreateStyle($"{text}{minimum}{maximum}_thumb", () => new GUIStyle("HorizontalSliderThumb")
             {
                 normal = {
                     background = Texture.NewBorder(0, 0, 0, .3f, .3f, .3f),
@@ -290,8 +285,8 @@ namespace NetWare
                 border = new RectOffset(1, 1, 1, 1),
             });
 
-            GUIContent textContent = new GUIContent(text);
-            GUIStyle textStyle = GetOrCreateStyle(GetCacheKey($"{text}{minimum}{maximum}_text"), () => new GUIStyle("Label")
+            var textContent = new GUIContent(text);
+            var textStyle = GetOrCreateStyle($"{text}{minimum}{maximum}_text", () => new GUIStyle("Label")
             {
                 fontStyle = FontStyle.Bold,
                 fontSize = 13,
@@ -299,8 +294,8 @@ namespace NetWare
                 contentOffset = new Vector2(10, 0),
             });
 
-            GUIContent valueContent = new GUIContent(value.ToString("F1"));
-            GUIStyle valueStyle = GetOrCreateStyle(GetCacheKey($"{text}{minimum}{maximum}_value"), () => new GUIStyle("Label")
+            var valueContent = new GUIContent(value.ToString("F1"));
+            var valueStyle = GetOrCreateStyle($"{text}{minimum}{maximum}_value", () => new GUIStyle("Label")
             {
                 fontStyle = FontStyle.Bold,
                 fontSize = 13,
@@ -328,7 +323,7 @@ namespace NetWare
         public static string NewTextField(string title, string value)
         {
             // styles
-            GUIStyle areaStyle = GetOrCreateStyle(GetCacheKey($"{title}_area"), () => new GUIStyle("Box")
+            var areaStyle = GetOrCreateStyle($"{title}_area", () => new GUIStyle("Box")
             {
                 normal = {
                     background = Texture.NewBorder(.2f, .2f, .2f, .075f, .075f, .075f),
@@ -336,14 +331,14 @@ namespace NetWare
                 border = new RectOffset(1, 1, 1, 1),
             });
 
-            GUIStyle titleStyle = GetOrCreateStyle(GetCacheKey($"{title}_title"), () => new GUIStyle("Label")
+            var titleStyle = GetOrCreateStyle($"{title}_title", () => new GUIStyle("Label")
             {
                 alignment = TextAnchor.MiddleCenter,
                 fontStyle = FontStyle.Bold,
                 fontSize = 13,
             });
 
-            GUIStyle textFieldStyle = GetOrCreateStyle(GetCacheKey($"{title}_textfield"), () => new GUIStyle("Label")
+            var textFieldStyle = GetOrCreateStyle($"{title}_textfield", () => new GUIStyle("Label")
             {
                 normal = {
                     background = Texture.NewBorder(0, 0, 0, .1f, .1f, .1f),
@@ -374,7 +369,7 @@ namespace NetWare
         public static void NewTitle(string text)
         {
             // style
-            GUIStyle labelStyle = GetOrCreateStyle(GetCacheKey($"{text}_label"), () => new GUIStyle("Label")
+            var labelStyle = GetOrCreateStyle($"{text}_label", () => new GUIStyle("Label")
             {
                 normal = {
                     textColor = Color.gray,
@@ -402,7 +397,7 @@ namespace NetWare
         public static string NewDropdown(string title, string identifier, string currentValue, string[] values)
         {
             // styles
-            GUIStyle areaStyle = GetOrCreateStyle(GetCacheKey($"{title}_area"), () => new GUIStyle("Box")
+            var areaStyle = GetOrCreateStyle($"{title}_area", () => new GUIStyle("Box")
             {
                 normal = {
                     background = Texture.NewBorder(.2f, .2f, .2f, .075f, .075f, .075f),
@@ -410,14 +405,14 @@ namespace NetWare
                 border = new RectOffset(1, 1, 1, 1),
             });
 
-            GUIStyle titleStyle = GetOrCreateStyle(GetCacheKey($"{title}_title"), () => new GUIStyle("Label")
+            var titleStyle = GetOrCreateStyle($"{title}_title", () => new GUIStyle("Label")
             {
                 alignment = TextAnchor.MiddleCenter,
                 fontStyle = FontStyle.Bold,
                 fontSize = 13,
             });
 
-            GUIStyle buttonStyle = GetOrCreateStyle(GetCacheKey($"{title}_button"), () => new GUIStyle("Box")
+            var buttonStyle = GetOrCreateStyle($"{title}_button", () => new GUIStyle("Box")
             {
                 normal = {
                     background = Texture.NewBorder(0, 0, 0, .1f, .1f, .1f),

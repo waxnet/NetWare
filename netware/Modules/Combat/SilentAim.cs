@@ -26,11 +26,11 @@ namespace NetWare.Modules
                     Config.GetBool("combat.silentaim.checkfov") ? Config.GetInt("combat.silentaim.fovsize") : Screen.width
                 );
 
-            foreach (PlayerController player in Storage.players)
+            foreach (var player in Storage.players)
                 if (!Players.IsPlayerTeammate(player) && Players.IsPlayerValid(player))
                 {
                     // player data
-                    PlayerController localPlayer = LocalPlayer.Get();
+                    var localPlayer = LocalPlayer.Get();
                     
                     Vector3 playerWorld = Players.GetHipPosition(player);
                     Vector3 playerScreen = Position.ToScreen(playerWorld);
@@ -77,7 +77,7 @@ namespace NetWare.Modules
         {
             if (Config.GetBool("combat.silentaim.enabled") && Config.GetBool("combat.silentaim.checkfov") && Config.GetBool("combat.silentaim.drawfov"))
             {
-                Color fovColor = Colors.HexToRGB(Config.GetString("combat.silentaim.fovcolor"));
+                var fovColor = Colors.HexToRGB(Config.GetString("combat.silentaim.fovcolor"));
                 if (Config.GetBool("combat.silentaim.rainbowfov"))
                     fovColor = Colors.GetRainbow();
 
