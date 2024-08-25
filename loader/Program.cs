@@ -61,7 +61,10 @@ namespace Loader
             Resolve.TempPath();
             if (!Data.ArePathsValid())
             {
-                Message.ShowError("000A");
+                Message.ShowError(
+                    "restart steam",
+                    "000A"
+                );
                 return;
             }
 
@@ -77,7 +80,10 @@ namespace Loader
             );
             if (!downloadedFile)
             {
-                Message.ShowError("001A");
+                Message.ShowError(
+                    "check your connection and disable antivirus",
+                    "001A"
+                );
                 return;
             }
 
@@ -85,7 +91,10 @@ namespace Loader
             IO.Puts("Patching AntiCheat . . .", ConsoleColor.DarkYellow);
             if (!AntiCheat.Patch())
             {
-                Message.ShowError("002A");
+                Message.ShowError(
+                    "disable antivirus",
+                    "002A"
+                );
                 return;
             }
 
@@ -93,7 +102,10 @@ namespace Loader
             IO.Puts("Unstripping files . . .", ConsoleColor.DarkYellow);
             if (!GameFiles.Unstrip())
             {
-                Message.ShowError("003A");
+                Message.ShowError(
+                    "check your connection and disable antivirus",
+                    "003A"
+                );
                 return;
             }
 
@@ -101,7 +113,10 @@ namespace Loader
             IO.Puts("Starting 1v1.LOL . . .", ConsoleColor.DarkYellow);
             if (!Manager.StartGameProcess())
             {
-                Message.ShowError("004A");
+                Message.ShowError(
+                    "check 1v1.LOL installation",
+                    "004A"
+                );
                 return;
             }
 
@@ -119,7 +134,10 @@ namespace Loader
 
             if (hasInjected == IntPtr.Zero)
             {
-                Message.ShowError("005A");
+                Message.ShowError(
+                    "disable antivirus",
+                    "005A"
+                );
                 return;
             }
 
@@ -137,7 +155,10 @@ namespace Loader
             (string, bool) accountData = generationTask.Result;
             if (!accountData.Item2)
             {
-                Message.ShowError("000B");
+                Message.ShowError(
+                    "check your connection and disable antivirus",
+                    "000B"
+                );
                 return;
             }
 
@@ -146,12 +167,18 @@ namespace Loader
             string refreshTokenKey = RegEdit.FindRefreshTokenKey();
             if (refreshTokenKey == "")
             {
-                Message.ShowError("001B");
+                Message.ShowError(
+                    "check 1v1.LOL installation",
+                    "001B"
+                );
                 return;
             }
             if (!RegEdit.SetRefreshToken(refreshTokenKey, accountData.Item1))
             {
-                Message.ShowError("002B");
+                Message.ShowError(
+                    "disable antivirus",
+                    "002B"
+                );
                 return;
             }
 
@@ -160,12 +187,18 @@ namespace Loader
             string signInPlatformKey = RegEdit.FindSignInPlatformKey();
             if (signInPlatformKey == "")
             {
-                Message.ShowError("003B");
+                Message.ShowError(
+                    "check 1v1.LOL installation",
+                    "003B"
+                );
                 return;
             }
             if (!RegEdit.SetSignInPlatform(signInPlatformKey))
             {
-                Message.ShowError("004B");
+                Message.ShowError(
+                    "disable antivirus",
+                    "004B"
+                );
                 return;
             }
 

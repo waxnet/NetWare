@@ -9,10 +9,7 @@ namespace Loader
             Process[] processes = Process.GetProcessesByName("1v1_LOL");
 
             if (processes.Length == 1)
-            {
                 return processes[0];
-            }
-
             return null;
         }
 

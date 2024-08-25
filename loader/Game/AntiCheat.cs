@@ -15,17 +15,17 @@ namespace Loader
                 return false;
 
             // load anticheat assembly
-            ModuleDefMD module = ModuleDefMD.Load(originalAssembly);
+            var module = ModuleDefMD.Load(originalAssembly);
 
             // patch anticheat assembly
-            foreach (TypeDef type in module.GetTypes())
+            foreach (var type in module.GetTypes())
             {
                 // check if type is valid
                 if (!type.FullName.StartsWith("CodeStage.AntiCheat.Detectors"))
                     continue;
 
                 // patch all methods called "StartDetection" inside the type
-                foreach (MethodDef method in type.FindMethods("StartDetection"))
+                foreach (var method in type.FindMethods("StartDetection"))
                 {
                     method.Body.Instructions.Clear();
                     method.Body.Instructions.Add(OpCodes.Ldnull.ToInstruction());

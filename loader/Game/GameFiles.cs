@@ -23,9 +23,9 @@ namespace Loader
 
             // extract files
             try {
-                using ZipArchive archive = ZipFile.OpenRead(unstrippedFilesPath);
+                using var archive = ZipFile.OpenRead(unstrippedFilesPath);
 
-                ZipArchiveEntry entry = archive.GetEntry("UnityEngine.IMGUIModule.dll");
+                var entry = archive.GetEntry("UnityEngine.IMGUIModule.dll");
 
                 if (entry != null)
                     entry.ExtractToFile(

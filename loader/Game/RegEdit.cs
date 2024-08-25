@@ -7,7 +7,7 @@ namespace Loader
         public static bool SetRefreshToken(string valueName, string value)
         {
             // open the registry key for 1v1.lol with write access
-            using RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1.LOL", true);
+            using var registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1.LOL", true);
             if (registryKey == null)
                 return false;
 
@@ -23,7 +23,7 @@ namespace Loader
         public static bool SetSignInPlatform(string valueName)
         {
             // open the registry key for 1v1.lol with write access
-            using RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1.LOL", true);
+            using var registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1.LOL", true);
             if (registryKey == null)
                 return false;
 
@@ -40,7 +40,7 @@ namespace Loader
         public static string FindRefreshTokenKey()
         {
             // open the registry key for 1v1.lol
-            using RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1.LOL");
+            using var registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1.LOL");
             if (registryKey == null)
                 return "";
 
@@ -59,7 +59,7 @@ namespace Loader
         public static string FindSignInPlatformKey()
         {
             // open the registry key for 1v1.lol
-            using RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1.LOL");
+            using var registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1.LOL");
             if (registryKey == null)
                 return "";
 

@@ -48,7 +48,7 @@ namespace Loader
             // parse request content
             string content = await generationResponse.Content.ReadAsStringAsync();
 
-            ResponseStruct jsonResponse = JsonSerializer.Deserialize<ResponseStruct>(content);
+            var jsonResponse = JsonSerializer.Deserialize<ResponseStruct>(content);
             if (jsonResponse == null)
                 return ("", false);;
 

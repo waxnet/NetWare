@@ -16,9 +16,7 @@ namespace Loader
         {
             string cheatPath = Path.Combine(appdata, "NetWare\\loader");
             if (!Directory.Exists(cheatPath))
-            {
                 Directory.CreateDirectory(cheatPath);
-            }
             Data.cheatPath = Path.Combine(cheatPath, "NetWare.dll");
         }
 
@@ -26,11 +24,10 @@ namespace Loader
         {
             // get correct registry key
             string registryKey;
-            if (Environment.Is64BitOperatingSystem) {
+            if (Environment.Is64BitOperatingSystem)
                 registryKey = "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Valve\\Steam";
-            } else {
+            else
                 registryKey = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Valve\\Steam";
-            }
 
             // get steam path and check if it exists
             if (Registry.GetValue(registryKey, "InstallPath", null) is not string steamPath)
@@ -48,7 +45,7 @@ namespace Loader
                     continue;
 
                 // check if 1v1.lol is in the steam apps
-                JObject steamApps = JObject.Parse(libraryFolder["apps"].ToJson().ToString());
+                var steamApps = JObject.Parse(libraryFolder["apps"].ToJson().ToString());
                 if (!steamApps.ContainsKey("2305790"))
                     continue;
 
@@ -63,9 +60,7 @@ namespace Loader
         {
             string tempPath = Path.Combine(appdata, "NetWare\\temp");
             if (!Directory.Exists(tempPath))
-            {
                 Directory.CreateDirectory(tempPath);
-            }
             Data.tempPath = tempPath;
         }
     }
