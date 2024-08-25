@@ -92,7 +92,7 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Enabled
             - Time Type (standard, military)
       + Gameplay
-            - FPS Cap
+            - FPS Cap (set fps cap)
             - Leave Game
       + Config Loader
 ```
