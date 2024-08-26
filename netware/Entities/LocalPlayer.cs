@@ -1,41 +1,40 @@
-﻿namespace NetWare
+﻿namespace NetWare.Entities;
+
+public static class LocalPlayer
 {
-    public static class LocalPlayer
+    // other
+    public static PlayerController Get()
     {
-        // other
-        public static PlayerController Get()
-        {
-            try {
-                return PlayerController.NALHMIPKGPO;
-            } catch {
-                return Resolver.GetInstance<PlayerController>();
-            }
+        try {
+            return PlayerController.NALHMIPKGPO;
+        } catch {
+            return Resolver.GetInstance<PlayerController>();
         }
+    }
 
-        public static PlayerBuildingManager GetPlayerBuildingManager()
-        {
-            return Get()?.PlayerBuildingManager;
-        }
+    public static PlayerBuildingManager GetPlayerBuildingManager()
+    {
+        return Get()?.PlayerBuildingManager;
+    }
 
-        // camera
-        public static CameraManager GetCameraManager()
-        {
-            try {
-                return CameraManager.OEPCIBFBPLE;
-            } catch {
-                return Resolver.GetInstance<CameraManager>();
-            }
+    // camera
+    public static CameraManager GetCameraManager()
+    {
+        try {
+            return CameraManager.OEPCIBFBPLE;
+        } catch {
+            return Resolver.GetInstance<CameraManager>();
         }
+    }
 
-        public static vThirdPersonCamera GetThirdPersonCamera()
-        {
-            return GetCameraManager()?.TPCamera;
-        }
+    public static vThirdPersonCamera GetThirdPersonCamera()
+    {
+        return GetCameraManager()?.TPCamera;
+    }
 
-        // checks
-        public static bool IsHoldingWeapon()
-        {
-            return (GetPlayerBuildingManager()?.state.ToString() == "NONE") || (!GetPlayerBuildingManager().enabled);
-        }
+    // checks
+    public static bool IsHoldingWeapon()
+    {
+        return (GetPlayerBuildingManager()?.state.ToString() == "NONE") || (!GetPlayerBuildingManager().enabled);
     }
 }

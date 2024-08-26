@@ -1,36 +1,44 @@
-﻿using UnityEngine;
+﻿using NetWare.Attributes;
+using NetWare.Utils;
+using System;
+using System.Linq;
+using System.Runtime.InteropServices;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
-namespace NetWare
+namespace NetWare;
+
+public static class Loader
 {
-    public static class Loader
+    private static GameObject _instance;
+
+    public static void Load()
     {
-        public static void Load()
-        {
-            // cheat instance
-            instance = new GameObject();
+        // cheat instance
+        _instance = new GameObject();
 
-            // main class
-            instance.AddComponent<Main>();
+        // components
+        var componentTypes = SourceUtils
+            .GetTypesWithAttribute<NetWareComponentAttribute>()
+            .Select(x => x.Type); // this is NOT an extra allocation, IEnumerable is differed
 
-            // modules
-            instance.AddComponent<Modules.Aimbot>();
-            instance.AddComponent<Modules.SilentAim>();
+        foreach (var componentType in componentTypes)
+            _instance.AddComponent(componentType);
 
-            instance.AddComponent<Modules.Nametags>();
-            instance.AddComponent<Modules.Boxes>();
-            instance.AddComponent<Modules.Skeleton>();
-            instance.AddComponent<Modules.Tracers>();
-            instance.AddComponent<Modules.Camera>();
-
-            instance.AddComponent<Modules.Watermark>();
-            instance.AddComponent<Modules.FPSCapper>();
-
-            instance.AddComponent<MenuChecks>();
-
-            // settings
-            Object.DontDestroyOnLoad(instance);
-        }
-
-        private static GameObject instance;
+        // settings
+        Object.DontDestroyOnLoad(_instance);
     }
+
+    public static void Unload()
+    {
+        Object.DestroyImmediate(_instance);
+    }
+}
+
+public static class Native
+{
+    [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+    private static extern int MessageBox(IntPtr hWnd, string text, string caption, uint type);
+
+    public static void MessageBox(string msg) => MessageBox(IntPtr.Zero, msg, null, 0);
 }

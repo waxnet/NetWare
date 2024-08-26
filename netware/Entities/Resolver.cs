@@ -1,82 +1,80 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NetWare.Storage;
+using System;
+using System.Linq.Expressions;
 using System.Reflection;
 
-namespace NetWare
+namespace NetWare.Entities;
+
+public static class Resolver
 {
-    public static class Resolver
+    // flags
+    private const BindingFlags _staticFlags =
+        BindingFlags.Static |
+        BindingFlags.Public |
+        BindingFlags.NonPublic;
+
+    private const BindingFlags _nonStaticFlags =
+        BindingFlags.Instance |
+        BindingFlags.Public |
+        BindingFlags.NonPublic;
+
+    // cache system
+    private static readonly CacheStorage<Delegate> _instanceCache = new();
+    private static readonly CacheStorage<Delegate> _propertyCache = new();
+
+    public static T GetInstance<T>() where T : class
     {
-        // flags
-        private static BindingFlags staticFlags = (
-            BindingFlags.Static |
-            BindingFlags.Public |
-            BindingFlags.NonPublic
-        );
+        var type = typeof(T);
+        var cacheKey = CacheStorage.CreateCacheKey(type.Name, "instance");
+        var func = (Func<T>)_instanceCache.GetOrCreate(cacheKey, () => CreateInstance<T>(type));
 
-        private static BindingFlags nonStaticFlags = (
-            BindingFlags.Instance |
-            BindingFlags.Public |
-            BindingFlags.NonPublic
-        );
+        return func is null ? default : func.Invoke();
+    }
 
-        // cache system
-        private static Dictionary<string, PropertyInfo> instanceCache = new Dictionary<string, PropertyInfo>();
-        private static Dictionary<string, MethodInfo> propertyCache = new Dictionary<string, MethodInfo>();
-        
-        private static string GetCacheKey(params string[] values)
+    private static Delegate CreateInstance<T>(Type type) where T : class
+    {
+        // resolve class instance property
+        var instanceProperty = type.GetProperty("Instance", _staticFlags);
+
+        if (instanceProperty is null)
         {
-            return string.Join("_", values);
-        }
+            foreach (var property in type.GetProperties(_staticFlags))
+            {
+                var getMethod = property.GetGetMethod(true);
 
-        // methods
-        public static T GetInstance<T>() where T : class
-        {
-            // class type
-            Type type = typeof(T);
-
-            // check cache
-            string cacheKey = GetCacheKey($"{type.Name}_instance");
-            if (instanceCache.TryGetValue(cacheKey, out PropertyInfo cacheProperty))
-                return (T)cacheProperty.GetValue(null);
-
-            // resolve class instance property
-            PropertyInfo instance = type.GetProperty("Instance", staticFlags);
-
-            if (instance == null)
-                foreach (PropertyInfo property in type.GetProperties(staticFlags))
+                if (getMethod is not null && getMethod.ReturnType == type)
                 {
-                    MethodInfo getMethod = property.GetGetMethod(true);
-
-                    if (getMethod != null && getMethod.ReturnType == type)
-                    {
-                        instance = property;
-                        break;
-                    }
+                    instanceProperty = property;
+                    break;
                 }
-
-            // invoke getter
-            instanceCache[cacheKey] = instance;
-            return (T)instance.GetValue(null);
+            }
         }
 
-        public static TProperty GetProperty<T, TProperty>(T instance, string getterName) where T : class
-        {
-            // class type
-            Type type = typeof(T);
+        // build expression and add to cache
+        return Expression.Lambda<Func<T>>(Expression.Property(null, instanceProperty)).Compile();
+    }
 
-            // check cache
-            string cacheKey = GetCacheKey($"{type.Name}_{getterName}");
-            if (propertyCache.TryGetValue(cacheKey, out MethodInfo cacheMethod))
-                return (TProperty)cacheMethod.Invoke(instance, null);
+    public static TProperty GetProperty<T, TProperty>(T instance, string getterName) where T : class
+    {
+        var type = typeof(T);
+        var cacheKey = CacheStorage.CreateCacheKey(type.Name, getterName);
+        var func = (Func<T, TProperty>)_propertyCache.GetOrCreate(cacheKey, () => CreateProperty<T, TProperty>(type, getterName));
 
-            // resolve getter by name
-            MethodInfo getter = type.GetMethod($"get_{getterName}", nonStaticFlags);
-            if (getter == null)
-                return default;
+        return func is null ? default : func.Invoke(instance);
+    }
 
-            // invoke getter and add to cache
-            propertyCache[cacheKey] = getter;
-            return (TProperty)getter.Invoke(instance, null);
-        }
+    private static Delegate CreateProperty<T, TProperty>(Type type, string getterName)
+    {
+        // resolve getter by name
+        var getterMethod = type.GetMethod($"get_{getterName}", _nonStaticFlags);
+        if (getterMethod is null)
+            return default;
+
+        // build expresssion and add to cache
+        var expressionParameter = Expression.Parameter(typeof(T), "instance");
+        var propertyAccess = Expression.Property(expressionParameter, getterMethod);
+        var expression = Expression.Lambda<Func<T, TProperty>>(propertyAccess, expressionParameter).Compile();
+
+        return expression;
     }
 }

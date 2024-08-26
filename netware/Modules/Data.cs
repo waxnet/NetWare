@@ -1,9 +1,7 @@
-﻿namespace NetWare.Modules
+﻿namespace NetWare.Modules;
+
+public static class Data
 {
-    public static class Data
-    {
-        public static string configName = "";
-        public static bool resetFOV = false;
-        public static bool resetZoom = false;
-    }
+    public static bool ResetFov { get; set; }
+    public static bool ResetZoom { get; set; }
 }

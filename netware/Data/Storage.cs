@@ -2,21 +2,24 @@
 using System.Collections;
 using UnityEngine;
 
-namespace NetWare
+namespace NetWare.Data;
+
+public static class Storage
 {
-    public class Storage : MonoBehaviour
+    public static PlayerController[] Players { get; private set; } = [];
+
+    public static IEnumerator Update()
     {
-        public static PlayerController[] players = { };
-
-        public static IEnumerator Update()
+        while (true)
         {
-            while (true)
-            {
-                if (PhotonNetwork.InRoom)
-                    players = FindObjectsOfType<PlayerController>();
-
-                yield return new WaitForSeconds(1);
-            }
+            UpdatePlayers();
+            yield return new WaitForSeconds(1);
         }
+    }
+
+    private static void UpdatePlayers()
+    {
+        if (PhotonNetwork.InRoom)
+            Players = Object.FindObjectsOfType<PlayerController>();
     }
 }
