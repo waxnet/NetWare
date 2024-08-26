@@ -9,7 +9,7 @@ using UnityEngine;
 namespace NetWare.Modules.VisualModules;
 
 [NetWareComponent]
-public class Nametags : MonoBehaviour
+public sealed class Nametags : MonoBehaviour
 {
     public void OnGUI()
     {

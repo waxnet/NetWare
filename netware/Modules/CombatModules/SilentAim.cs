@@ -9,7 +9,7 @@ using UnityEngine;
 namespace NetWare.Modules.CombatModules;
 
 [NetWareComponent]
-public class SilentAim : MonoBehaviour
+public sealed class SilentAim : MonoBehaviour
 {
     public void Update()
     {

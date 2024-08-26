@@ -5,7 +5,7 @@ using NetWare.Attributes;
 namespace NetWare.UI;
 
 [NetWareComponent]
-public class MenuChecks : MonoBehaviour
+public sealed class MenuChecks : MonoBehaviour
 {
     public void Update()
     {

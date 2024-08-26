@@ -1,6 +1,5 @@
 ﻿using NetWare.Attributes;
 using NetWare.Configuration;
-using NetWare.Data;
 using NetWare.Entities;
 using NetWare.Extensions;
 using Photon.Pun;
@@ -9,7 +8,7 @@ using UnityEngine;
 namespace NetWare.Modules.VisualModules;
 
 [NetWareComponent]
-public class Skeleton : MonoBehaviour
+public sealed class Skeleton : MonoBehaviour
 {
     public void OnGUI()
     {

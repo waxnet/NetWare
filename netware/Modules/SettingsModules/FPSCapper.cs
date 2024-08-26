@@ -5,7 +5,7 @@ using UnityEngine;
 namespace NetWare.Modules.SettingsModules;
 
 [NetWareComponent]
-public class FPSCapper : MonoBehaviour
+public sealed class FPSCapper : MonoBehaviour
 {
     public void Update()
     {

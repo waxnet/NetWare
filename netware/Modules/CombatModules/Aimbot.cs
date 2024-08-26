@@ -9,7 +9,7 @@ using UnityEngine;
 namespace NetWare.Modules.CombatModules;
 
 [NetWareComponent]
-public class Aimbot : MonoBehaviour
+public sealed class Aimbot : MonoBehaviour
 {
     public void Update()
     {

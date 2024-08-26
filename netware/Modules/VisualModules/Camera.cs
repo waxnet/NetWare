@@ -7,7 +7,7 @@ using UnityEngine;
 namespace NetWare.Modules.VisualModules;
 
 [NetWareComponent]
-public class Camera : MonoBehaviour
+public sealed class Camera : MonoBehaviour
 {
     public void Update()
     {

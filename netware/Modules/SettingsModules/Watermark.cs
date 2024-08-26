@@ -8,7 +8,7 @@ using UnityEngine;
 namespace NetWare.Modules.SettingsModules;
 
 [NetWareComponent]
-public class Watermark : MonoBehaviour
+public sealed class Watermark : MonoBehaviour
 {
     private string content = "Unknown";
     private int timer = 0;

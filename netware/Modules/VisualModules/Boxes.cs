@@ -8,7 +8,7 @@ using UnityEngine;
 namespace NetWare.Modules.VisualModules;
 
 [NetWareComponent]
-public class Boxes : MonoBehaviour
+public sealed class Boxes : MonoBehaviour
 {
     public void OnGUI()
     {

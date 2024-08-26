@@ -8,7 +8,7 @@ using UnityEngine;
 namespace NetWare.Modules.VisualModules;
 
 [NetWareComponent]
-public class Tracers : MonoBehaviour
+public sealed class Tracers : MonoBehaviour
 {
     public void OnGUI()
     {
