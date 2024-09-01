@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D469283D-0772-47D9-90E3-9DBE9E621FFB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NetWare</RootNamespace>
+    <AssemblyName>NetWare</AssemblyName>
+    <LangVersion>latest</LangVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Utils\Attributes\ConfigProperty.cs" />
+    <Compile Include="Utils\Attributes\MenuTabAttribute.cs" />
+    <Compile Include="Utils\Attributes\NetWareComponent.cs" />
+    <Compile Include="Utils\Attributes\StringReinterpretation.cs" />
+    <Compile Include="Configuration\Utils\Interfaces\IBindable.cs" />
+    <Compile Include="Configuration\Serializer\ConfigDeserializer.cs" />
+    <Compile Include="Configuration\Serializer\ConfigSerializer.cs" />
+    <Compile Include="Configuration\Configs\Combat\AimbotConfig.cs" />
+    <Compile Include="Configuration\Configs\Settings\FpsCapperConfig.cs" />
+    <Compile Include="Configuration\Configs\Settings\WatermarkConfig.cs" />
+    <Compile Include="Configuration\Configs\Visual\FovChangerConfig.cs" />
+    <Compile Include="Configuration\Configs\Visual\CameraSettingsConfig.cs" />
+    <Compile Include="Configuration\Configs\Visual\TracersConfig.cs" />
+    <Compile Include="Configuration\Configs\Visual\SkeletonConfig.cs" />
+    <Compile Include="Configuration\Configs\Visual\BoxesConfig.cs" />
+    <Compile Include="Configuration\Configs\Visual\NameTagsConfig.cs" />
+    <Compile Include="Configuration\Configs\Combat\SilentAimConfig.cs" />
+    <Compile Include="Configuration\Config.cs" />
+    <Compile Include="Data\Storage.cs" />
+    <Compile Include="Utils\Entities\LocalPlayer.cs" />
+    <Compile Include="Utils\Entities\Players.cs" />
+    <Compile Include="Utils\Entities\Resolver.cs" />
+    <Compile Include="Utils\Entities\Skeleton.cs" />
+    <Compile Include="Configuration\Utils\Enums\EAimBone.cs" />
+    <Compile Include="Configuration\Utils\Enums\EAimFilter.cs" />
+    <Compile Include="Configuration\Utils\Enums\EAimMode.cs" />
+    <Compile Include="Configuration\Utils\Enums\ETimeType.cs" />
+    <Compile Include="Utils\Extensions\EnumExtension.cs" />
+    <Compile Include="Utils\Extensions\PlayerControllerExtension.cs" />
+    <Compile Include="Utils\Extensions\StringExtension.cs" />
+    <Compile Include="Loader.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="Configuration\Utils\Models\Range.cs" />
+    <Compile Include="Modules\Tabs\Interfaces\IMenuTab.cs" />
+    <Compile Include="Modules\Tabs\Interfaces\MenuTab.cs" />
+    <Compile Include="Modules\Tabs\CombatTab\AimbotSection.cs" />
+    <Compile Include="Modules\Tabs\CombatTab\SilentAimSection.cs" />
+    <Compile Include="Modules\Tabs\SettingsTab\ConfigManagerSection.cs" />
+    <Compile Include="Modules\Tabs\SettingsTab\ConfigSelectionSection.cs" />
+    <Compile Include="Modules\Tabs\SettingsTab\GameplaySection.cs" />
+    <Compile Include="Modules\Tabs\SettingsTab\WatermarkSection.cs" />
+    <Compile Include="Modules\Tabs\VisualTab\BoxesSection.cs" />
+    <Compile Include="Modules\Tabs\VisualTab\CameraSettingsSection.cs" />
+    <Compile Include="Modules\Tabs\VisualTab\FovChangerSection.cs" />
+    <Compile Include="Modules\Tabs\VisualTab\NameTagsSection.cs" />
+    <Compile Include="Modules\Tabs\VisualTab\SkeletonSection.cs" />
+    <Compile Include="Modules\Tabs\VisualTab\TracersSection.cs" />
+    <Compile Include="UI\MenuChecks.cs" />
+    <Compile Include="UI\Menu.cs" />
+    <Compile Include="UI\Styles\ButtonStyles.cs" />
+    <Compile Include="UI\Styles\DropdownStyles.cs" />
+    <Compile Include="UI\Styles\LabelStyles.cs" />
+    <Compile Include="UI\Styles\SectionStyles.cs" />
+    <Compile Include="UI\Styles\SliderStyles.cs" />
+    <Compile Include="UI\Styles\TitleStyles.cs" />
+    <Compile Include="UI\Styles\ToggleStyles.cs" />
+    <Compile Include="UI\Styles\WindowStyles.cs" />
+    <Compile Include="UI\Texture.cs" />
+    <Compile Include="Modules\CombatModules\Aimbot.cs" />
+    <Compile Include="Modules\Tabs\Combat.cs" />
+    <Compile Include="Modules\CombatModules\SilentAim.cs" />
+    <Compile Include="Modules\Tabs\Settings.cs" />
+    <Compile Include="Modules\SettingsModules\FPSCapper.cs" />
+    <Compile Include="Modules\SettingsModules\Watermark.cs" />
+    <Compile Include="Modules\Data.cs" />
+    <Compile Include="Modules\Tabs\Visual.cs" />
+    <Compile Include="Modules\VisualModules\Boxes.cs" />
+    <Compile Include="Modules\VisualModules\Camera.cs" />
+    <Compile Include="Modules\VisualModules\Nametags.cs" />
+    <Compile Include="Modules\VisualModules\Skeleton.cs" />
+    <Compile Include="Modules\VisualModules\Tracers.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Data\CacheStorage.cs" />
+    <Compile Include="Utils\Colors.cs" />
+    <Compile Include="Utils\Mouse.cs" />
+    <Compile Include="Utils\Position.cs" />
+    <Compile Include="Utils\Render.cs" />
+    <Compile Include="Utils\SourceUtils.cs" />
+    <Compile Include="Utils\SystemUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="1v1">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\1v1.dll</HintPath>
+    </Reference>
+    <Reference Include="PhotonUnityNetworking">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\PhotonUnityNetworking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\UnityEngine.AnimationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
+  </Target>
+  <Import Project="packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
+</Project>
