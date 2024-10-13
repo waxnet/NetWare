@@ -22,7 +22,7 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
 ### <p align="center">Features</p>
 
 ```
-• Combat
+• Legit
       + Aimbot
             - Enabled (with keybind)
             - Aim Bone (head, neck, upperchest or hips)
@@ -45,6 +45,21 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - Filter By (fov or fov & closest)
             - Max Distance (min -> 1000)
             - Min Distance (0 -> max)
+            - Check FOV
+            - Draw Fov
+            - Dynamic Fov
+            - FOV Size (10 -> 500)
+            - FOV Sides (3 -> 80)
+            - FOV Color Picker
+            - Rainbow FOV
+
+• Rage
+      + Magic Bullet
+            - Enabled (with keybind)
+            - Filter By (fov or fov & closest)
+            - Max Distance (min -> 1000)
+            - Min Distance (0 -> max)
+            - Frame Skips (0 -> 10)
             - Check FOV
             - Draw Fov
             - Dynamic Fov
