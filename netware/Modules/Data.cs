@@ -1,4 +1,6 @@
-﻿namespace NetWare.Modules;
+﻿using UnityEngine;
+
+namespace NetWare.Modules;
 
 public static class Data
 {
@@ -7,4 +9,5 @@ public static class Data
     public static string SelectedConfig { get; set; }
     public static int MagicBulletFrameSkips { get; set; }
     public static bool ResetMagicBullet { get; set; }
+    public static Vector3 playerPosition { get; set; } = default;
 }

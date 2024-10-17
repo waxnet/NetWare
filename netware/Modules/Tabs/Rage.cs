@@ -18,6 +18,14 @@ public sealed class Rage : MenuTab
 
         MagicBulletSection.Draw();
 
+        Menu.Separate();
+
+        FireRateModifierSection.Draw();
+        RecoilModifierSection.Draw();
+        ReloadSpeedModifierSection.Draw();
+        ExploitsSection.Draw();
+        FlySection.Draw();
+
         Menu.End();
     }
 }

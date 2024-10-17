@@ -17,6 +17,7 @@ public static class MagicBulletSection
 
     private static void DrawToggle()
     {
+        // enabled
         var (Value, KeyBind) = Menu.NewToggle(
                 "Enabled",
                 Config.Active.MagicBullet.Enabled,

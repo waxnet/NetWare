@@ -15,9 +15,11 @@ public sealed class Legit : MenuTab
     public override void Tab()
     {
         Menu.Begin();
+
         AimbotSection.Draw();
 
         Menu.Separate();
+
         SilentAimSection.Draw();
 
         Menu.End();

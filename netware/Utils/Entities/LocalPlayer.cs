@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Invector.CharacterController;
+
+using UnityEngine;
 
 namespace NetWare.Entities;
 
@@ -14,9 +16,27 @@ public static class LocalPlayer
         }
     }
 
+    public static PlayerHealth GetHealth()
+    {
+        try {
+            return Get().LFMCIILGNAJ;
+        } catch {
+            return Resolver.GetProperty<PlayerController, PlayerHealth>(Get(), "Health");
+        }
+    }
+
+    public static vThirdPersonController GetThirdPersonController()
+    {
+        try {
+            return Get().HBPLNFBJBCI;
+        } catch {
+            return Resolver.GetProperty<PlayerController, vThirdPersonController>(Get(), "ThirdPersonController");
+        }
+    }
+
     public static PlayerBuildingManager GetPlayerBuildingManager()
     {
-        return Get()?.PlayerBuildingManager;
+        return PlayerBuildingManager.Instance;
     }
 
     // camera

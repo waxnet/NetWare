@@ -17,6 +17,7 @@ public static class SilentAimSection
 
     private static void DrawToggle()
     {
+        // enabled
         var (Value, KeyBind) = Menu.NewToggle(
                 "Enabled",
                 Config.Active.SilentAim.Enabled,

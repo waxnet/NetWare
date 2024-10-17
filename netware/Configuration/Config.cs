@@ -39,6 +39,11 @@ public sealed class Config
     [ConfigProperty] public SilentAimConfig SilentAim { get; set; } = new();
 
     [ConfigProperty] public MagicBulletConfig MagicBullet { get; set; } = new();
+    [ConfigProperty] public FireRateModifierConfig FireRateModifier { get; set; } = new();
+    [ConfigProperty] public RecoilModifierConfig RecoilModifier { get; set; } = new();
+    [ConfigProperty] public ReloadSpeedModifierConfig ReloadSpeedModifier { get; set; } = new();
+    [ConfigProperty] public ExploitsConfig Exploits { get; set; } = new();
+    [ConfigProperty] public FlyConfig Fly { get; set; } = new();
 
     [ConfigProperty] public NameTagsConfig NameTags { get; set; } = new();
     [ConfigProperty] public BoxesConfig Boxes { get; set; } = new();
