@@ -67,6 +67,27 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - FOV Sides (3 -> 80)
             - FOV Color Picker
             - Rainbow FOV
+      + Fire Rate Modifier
+            - Enabled
+            - Multiplier (1 -> 50)
+      + Recoil Modifier
+            - Enabled
+            - Multiplier (0 -> 1)
+      + Reload Speed Modifier
+            - Enabled
+            - Multiplier (1 -> 50)
+      + Exploits
+            - God Mode
+            - One Tap Buildings
+            - No Dive
+            - Infinite Ammo
+            - Infinite Materials
+            - Infinite Level Weapons
+      + Fly
+            - Enabled (with keybind)
+            - Horizontal Speed (1 -> 50)
+            - Vertical Speed (1 -> 50)
+            - Spin
 
 • Visual
       + Nametags
