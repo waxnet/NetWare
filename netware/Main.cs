@@ -22,7 +22,7 @@ public class Main : MonoBehaviour
         // setup window data
         int windowHeight = 650;
 
-        Menu.Version = "v2.3.1";
+        Menu.Version = "v2.4";
         Menu.Color = Color.red;
         Menu.WindowRect = new Rect(200, ((Screen.height / 2) - (windowHeight / 2)), 550, windowHeight);
         Menu.Tabs = SourceUtils.CreateInstancesAs<MenuTab>(

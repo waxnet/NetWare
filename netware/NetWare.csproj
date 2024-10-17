@@ -34,11 +34,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Configuration\Configs\Rage\ExploitsConfig.cs" />
+    <Compile Include="Configuration\Configs\Rage\FlyConfig.cs" />
     <Compile Include="Configuration\Configs\Rage\MagicBulletConfig.cs" />
+    <Compile Include="Configuration\Configs\Rage\ReloadSpeedModifierConfig.cs" />
+    <Compile Include="Configuration\Configs\Rage\RecoilModifierConfig.cs" />
+    <Compile Include="Configuration\Configs\Rage\FireRateModifierConfig.cs" />
+    <Compile Include="Modules\RageModules\Exploits.cs" />
+    <Compile Include="Modules\RageModules\ReloadSpeedModifier.cs" />
+    <Compile Include="Modules\RageModules\Fly.cs" />
+    <Compile Include="Modules\RageModules\RecoilModifier.cs" />
+    <Compile Include="Modules\RageModules\FireRateModifier.cs" />
     <Compile Include="Modules\Tabs\Enums\Aim.cs" />
+    <Compile Include="Modules\Tabs\RageTab\ExploitsSection.cs" />
+    <Compile Include="Modules\Tabs\RageTab\ReloadSpeedModifierSection.cs" />
+    <Compile Include="Modules\Tabs\RageTab\FlySection.cs" />
+    <Compile Include="Modules\Tabs\RageTab\RecoilModifierSection.cs" />
     <Compile Include="Modules\Tabs\Rage.cs" />
     <Compile Include="Modules\RageModules\MagicBullet.cs" />
     <Compile Include="Modules\Tabs\RageTab\MagicBulletSection.cs" />
+    <Compile Include="Modules\Tabs\RageTab\FireRateModifierSection.cs" />
     <Compile Include="Utils\Access.cs" />
     <Compile Include="Utils\Attributes\ConfigProperty.cs" />
     <Compile Include="Utils\Attributes\MenuTabAttribute.cs" />
@@ -61,7 +76,7 @@
     <Compile Include="Data\Storage.cs" />
     <Compile Include="Utils\Entities\LocalPlayer.cs" />
     <Compile Include="Utils\Entities\Players.cs" />
-    <Compile Include="Utils\Entities\Resolver.cs" />
+    <Compile Include="Utils\Resolver.cs" />
     <Compile Include="Utils\Entities\Skeleton.cs" />
     <Compile Include="Configuration\Utils\Enums\EAimBone.cs" />
     <Compile Include="Configuration\Utils\Enums\EAimFilter.cs" />
