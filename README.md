@@ -14,7 +14,7 @@
 ### <p align="center">Usage</p>
 <p align="center">
 After you've downloaded and extracted the <a href="https://github.com/waxnet/NetWare/releases/latest">latest release</a>, open 
-"Loader.exe" and select the option 1 to load NetWare.
+"Launcher.exe" and wait for the loader to open up, after that click "Load" to load 1v1.LOL and NetWare.
 </p>
 
 ---
