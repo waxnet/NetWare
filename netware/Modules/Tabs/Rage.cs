@@ -17,11 +17,11 @@ public sealed class Rage : MenuTab
         Menu.Begin();
 
         MagicBulletSection.Draw();
+        SpeedModifierSection.Draw();
 
         Menu.Separate();
 
         FireRateModifierSection.Draw();
-        RecoilModifierSection.Draw();
         ReloadSpeedModifierSection.Draw();
         ExploitsSection.Draw();
         FlySection.Draw();

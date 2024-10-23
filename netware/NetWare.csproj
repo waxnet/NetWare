@@ -38,22 +38,30 @@
     <Compile Include="Configuration\Configs\Rage\FlyConfig.cs" />
     <Compile Include="Configuration\Configs\Rage\MagicBulletConfig.cs" />
     <Compile Include="Configuration\Configs\Rage\ReloadSpeedModifierConfig.cs" />
-    <Compile Include="Configuration\Configs\Rage\RecoilModifierConfig.cs" />
+    <Compile Include="Configuration\Configs\Legit\RecoilModifierConfig.cs" />
     <Compile Include="Configuration\Configs\Rage\FireRateModifierConfig.cs" />
+    <Compile Include="Configuration\Configs\Rage\SpeedModifierConfig.cs" />
+    <Compile Include="Data\LockerData.cs" />
+    <Compile Include="Modules\MiscModules\Locker.cs" />
     <Compile Include="Modules\RageModules\Exploits.cs" />
     <Compile Include="Modules\RageModules\ReloadSpeedModifier.cs" />
     <Compile Include="Modules\RageModules\Fly.cs" />
-    <Compile Include="Modules\RageModules\RecoilModifier.cs" />
+    <Compile Include="Modules\LegitModules\RecoilModifier.cs" />
     <Compile Include="Modules\RageModules\FireRateModifier.cs" />
+    <Compile Include="Modules\RageModules\SpeedModifier.cs" />
     <Compile Include="Modules\Tabs\Enums\Aim.cs" />
+    <Compile Include="Modules\Tabs\Misc.cs" />
+    <Compile Include="Modules\Tabs\MiscTab\GamePlaySection.cs" />
+    <Compile Include="Modules\Tabs\MiscTab\LockerSection.cs" />
     <Compile Include="Modules\Tabs\RageTab\ExploitsSection.cs" />
     <Compile Include="Modules\Tabs\RageTab\ReloadSpeedModifierSection.cs" />
     <Compile Include="Modules\Tabs\RageTab\FlySection.cs" />
-    <Compile Include="Modules\Tabs\RageTab\RecoilModifierSection.cs" />
+    <Compile Include="Modules\Tabs\LegitTab\RecoilModifierSection.cs" />
     <Compile Include="Modules\Tabs\Rage.cs" />
     <Compile Include="Modules\RageModules\MagicBullet.cs" />
     <Compile Include="Modules\Tabs\RageTab\MagicBulletSection.cs" />
     <Compile Include="Modules\Tabs\RageTab\FireRateModifierSection.cs" />
+    <Compile Include="Modules\Tabs\RageTab\SpeedModifierSection.cs" />
     <Compile Include="Utils\Access.cs" />
     <Compile Include="Utils\Attributes\ConfigProperty.cs" />
     <Compile Include="Utils\Attributes\MenuTabAttribute.cs" />
@@ -143,6 +151,10 @@
     <Reference Include="1v1, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\1v1.dll</HintPath>
+    </Reference>
+    <Reference Include="ACTk.Runtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\ACTk.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="PhotonUnityNetworking">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\PhotonUnityNetworking.dll</HintPath>

@@ -21,6 +21,8 @@ public static class FireRateModifierSection
 
     private static void DrawSettings()
     {
+        Menu.NewTitle("Settings");
+
         // multiplier
         var multiplier = Menu.NewSlider("Multiplier", Config.Active.FireRateModifier.Multiplier, 1, 50);
         Config.Active.FireRateModifier.Multiplier = multiplier;

@@ -10,6 +10,7 @@ public static class FlySection
         Menu.NewSection("Fly");
         DrawToggle();
         DrawSettings();
+        DrawOther();
     }
 
     private static void DrawToggle()
@@ -26,6 +27,8 @@ public static class FlySection
 
     private static void DrawSettings()
     {
+        Menu.NewTitle("Speed Settings");
+
         // horizontal speed
         var horizontalSpeed = Menu.NewSlider("Horizontal Speed", Config.Active.Fly.HorizontalSpeed, 1, 50);
         Config.Active.Fly.HorizontalSpeed = horizontalSpeed;
@@ -33,6 +36,11 @@ public static class FlySection
         // vertical speed
         var verticalSpeed = Menu.NewSlider("Vertical Speed", Config.Active.Fly.VerticalSpeed, 1, 50);
         Config.Active.Fly.VerticalSpeed = verticalSpeed;
+    }
+
+    private static void DrawOther()
+    {
+        Menu.NewTitle("Other");
 
         // spin
         var spin = Menu.NewToggle("Spin", Config.Active.Fly.Spin);

@@ -21,6 +21,7 @@ public sealed class Legit : MenuTab
         Menu.Separate();
 
         SilentAimSection.Draw();
+        RecoilModifierSection.Draw();
 
         Menu.End();
     }

@@ -21,6 +21,8 @@ public static class ReloadSpeedModifierSection
 
     private static void DrawSettings()
     {
+        Menu.NewTitle("Settings");
+
         // multiplier
         var multiplier = Menu.NewSlider("Multiplier", Config.Active.ReloadSpeedModifier.Multiplier, 1, 50);
         Config.Active.ReloadSpeedModifier.Multiplier = multiplier;

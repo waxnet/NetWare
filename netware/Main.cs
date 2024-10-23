@@ -20,11 +20,12 @@ public class Main : MonoBehaviour
         StartCoroutine(Config.Update());
 
         // setup window data
+        int windowWidth = 550;
         int windowHeight = 650;
 
-        Menu.Version = "v2.4";
+        Menu.Version = "v2.4.1";
         Menu.Color = Color.red;
-        Menu.WindowRect = new Rect(200, ((Screen.height / 2) - (windowHeight / 2)), 550, windowHeight);
+        Menu.WindowRect = new Rect(200, ((Screen.height / 2) - (windowHeight / 2)), windowWidth, windowHeight);
         Menu.Tabs = SourceUtils.CreateInstancesAs<MenuTab>(
             SourceUtils.GetTypesWithAttribute<MenuTabAttribute>()
                 .Where(x => !x.Type.IsAbstract)

@@ -15,16 +15,17 @@ public sealed class Visual : MenuTab
     public override void Tab()
     {
         Menu.Begin();
+
         NameTagsSection.Draw();
         SkeletonSection.Draw();
         CameraSettingsSection.Draw();
 
         Menu.Separate();
+
         TracersSection.Draw();
         BoxesSection.Draw();
         FovChangerSection.Draw();
 
         Menu.End();
     }
-
 }

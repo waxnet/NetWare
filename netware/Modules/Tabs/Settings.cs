@@ -5,7 +5,7 @@ using NetWare.UI;
 
 namespace NetWare.Modules.Tabs;
 
-[MenuTab("Settings", 3)]
+[MenuTab("Settings", 100)]
 public sealed class Settings : MenuTab
 {
     public Settings() : base()
@@ -15,11 +15,13 @@ public sealed class Settings : MenuTab
     public override void Tab()
     {
         Menu.Begin();
+
         ConfigManagerSection.Draw();
         WatermarkSection.Draw();
         GameplaySection.Draw();
 
         Menu.Separate();
+
         ConfigSelectionSection.Draw();
 
         Menu.End();
