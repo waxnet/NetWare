@@ -38,7 +38,6 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - FOV Size (10 -> 500)
             - FOV Sides (3 -> 80)
             - FOV Color Picker
-            - Rainbow FOV
       + Silent Aim
             - Enabled (with keybind)
             - Aim Bone (head, neck, upperchest or hips)
@@ -51,43 +50,6 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
             - FOV Size (10 -> 500)
             - FOV Sides (3 -> 80)
             - FOV Color Picker
-            - Rainbow FOV
-
-• Rage
-      + Magic Bullet
-            - Enabled (with keybind)
-            - Filter By (fov or fov & closest)
-            - Max Distance (min -> 1000)
-            - Min Distance (0 -> max)
-            - Frame Skips (0 -> 10)
-            - Check FOV
-            - Draw Fov
-            - Dynamic Fov
-            - FOV Size (10 -> 500)
-            - FOV Sides (3 -> 80)
-            - FOV Color Picker
-            - Rainbow FOV
-      + Fire Rate Modifier
-            - Enabled
-            - Multiplier (1 -> 50)
-      + Recoil Modifier
-            - Enabled
-            - Multiplier (0 -> 1)
-      + Reload Speed Modifier
-            - Enabled
-            - Multiplier (1 -> 50)
-      + Exploits
-            - God Mode
-            - One Tap Buildings
-            - No Dive
-            - Infinite Ammo
-            - Infinite Materials
-            - Infinite Level Weapons
-      + Fly
-            - Enabled (with keybind)
-            - Horizontal Speed (1 -> 50)
-            - Vertical Speed (1 -> 50)
-            - Spin
 
 • Visual
       + Nametags
@@ -143,6 +105,7 @@ Costura.Fody
 Gameloop.Vdf
 Gameloop.Vdf.JsonConverter
 Newtonsoft.Json
+BepInEx
 ```
 
 ---
