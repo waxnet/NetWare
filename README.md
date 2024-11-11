@@ -84,15 +84,15 @@ After you've downloaded and extracted the <a href="https://github.com/waxnet/Net
 
 • Settings
       + Config Manager
+            - Config Name (text box)
             - Save
+            - Load
             - Delete
-      + Watermark
-            - Enabled
-            - Time Type (standard, military)
+            - Open Config Folder
       + Gameplay
             - FPS Cap (set fps cap)
             - Leave Game
-      + Config Loader
+      + Config Selection
 ```
 
 ---
