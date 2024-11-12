@@ -12,9 +12,16 @@ public static class Resolve
     private static readonly string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
     // methods
-    public static void CheatPath()
+    public static void NormalCheatPath()
     {
         string cheatPath = Path.Combine(appdata, "NetWare\\loader");
+        if (!Directory.Exists(cheatPath))
+            Directory.CreateDirectory(cheatPath);
+        Data.cheatPath = Path.Combine(cheatPath, "NetWare.dll");
+    }
+    public static void BepInExCheatPath()
+    {
+        string cheatPath = Path.Combine(Data.gamePath, "BepInEx\\plugins");
         if (!Directory.Exists(cheatPath))
             Directory.CreateDirectory(cheatPath);
         Data.cheatPath = Path.Combine(cheatPath, "NetWare.dll");

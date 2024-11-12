@@ -1,5 +1,3 @@
-using System.Windows.Forms;
-
 namespace Loader;
 
 public partial class Window : Form
@@ -37,11 +35,10 @@ public partial class Window : Form
     // console logging logic
     public void AddConsoleLog(string text = "", Brush color = null)
     {
-        if (color is null) {
+        if (color is null)
             brushes.Add(Brushes.White);
-        } else {
+        else
             brushes.Add(color);
-        }
         consoleBox.Items.Add(text);
     }
     public void ClearConsole()
@@ -54,22 +51,18 @@ public partial class Window : Form
     private void LoadButton_Click(object _, MouseEventArgs __)
     {
         if (Program.runningFunction is null || Program.runningFunction?.Status == TaskStatus.RanToCompletion)
-        {
             Program.runningFunction = Task.Run(
-                () => { Program.Load(Program.cancellationToken.Token); }
+                () => { Functions.Load.BepInEx(Program.cancellationToken.Token); }
             );
-        }
     }
 
     // spoof button logic
     private void SpoofButton_Click(object _, MouseEventArgs __)
     {
         if (Program.runningFunction is null || Program.runningFunction?.Status == TaskStatus.RanToCompletion)
-        {
             Program.runningFunction = Task.Run(
-                () => { Program.Spoof(Program.cancellationToken.Token); }
+                () => { Functions.Spoof.Run(Program.cancellationToken.Token); }
             );
-        }
     }
 
     // close button logic

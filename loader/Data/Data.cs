@@ -9,13 +9,22 @@ public static class Data
     public static string? tempPath;
 
     // methods
-    public static bool ArePathsValid()
+    public static bool NormalArePathsValid()
     {
         return (
             cheatPath != null &&
             steamPath != null &&
             gamePath != null &&
             tempPath != null
+        );
+    }
+
+    public static bool BepInExArePathsValid()
+    {
+        return (
+            cheatPath != null &&
+            steamPath != null &&
+            gamePath != null
         );
     }
 }
