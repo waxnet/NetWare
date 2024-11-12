@@ -94,6 +94,7 @@
             consoleBox.BackColor = Color.FromArgb(24, 24, 24);
             consoleBox.BorderStyle = BorderStyle.None;
             consoleBox.DrawMode = DrawMode.OwnerDrawFixed;
+            consoleBox.Enabled = false;
             consoleBox.Font = new Font("Arial", 8F, FontStyle.Bold);
             consoleBox.ForeColor = Color.White;
             consoleBox.FormattingEnabled = true;
@@ -103,7 +104,6 @@
             consoleBox.Size = new Size(386, 192);
             consoleBox.TabIndex = 5;
             consoleBox.TabStop = false;
-            consoleBox.Enabled = false;
             // 
             // titleBar
             // 
