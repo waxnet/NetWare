@@ -5,7 +5,7 @@ from . import Tasks
 
 # task
 @Tasks(1, "Installing .NET . . .", "Could not install .NET")
-def _install_dotnet():
+def _install_dotnet() -> bool:
     is_installed = False
 
     # check for dotnet

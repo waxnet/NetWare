@@ -6,7 +6,7 @@ from . import Tasks
 
 # task
 @Tasks(2, "Starting loader . . .", "Could not start the loader")
-def _start_loader():
+def _start_loader() -> bool:
     # get loader path
     current_path = os.getcwd()
     loader_path = os.path.join(

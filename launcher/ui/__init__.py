@@ -4,7 +4,7 @@ import tkinter as tk
 
 # window class
 class Window:
-    def __init__(self, root):
+    def __init__(self, root) -> None:
         # initialize variables
         self._progress_value = 0
 
@@ -31,7 +31,7 @@ class Window:
         self._build()
 
     # menu
-    def _build(self):
+    def _build(self) -> None:
         # outline
         outline_frame = tk.Frame(
             self.root,
@@ -104,22 +104,22 @@ class Window:
         title_bar.bind("<ButtonRelease-1>", self._stop_drag)
 
     # drag logic
-    def _drag(self, event):
+    def _drag(self, event) -> None:
         if self._dragging:
             x = self.root.winfo_x() + (event.x - self._mouse_x)
             y = self.root.winfo_y() + (event.y - self._mouse_y)
             self.root.geometry(f"+{x}+{y}")
 
-    def _start_drag(self, event):
+    def _start_drag(self, event) -> None:
         self._dragging = True
         self._mouse_x = event.x
         self._mouse_y = event.y
 
-    def _stop_drag(self, _):
+    def _stop_drag(self, _) -> None:
         self._dragging = False
 
     # update values
-    def update_progress(self, value):
+    def update_progress(self, value : int) -> None:
         self._progress_value += value
         
         self._progress_bar.delete("all")
@@ -132,11 +132,11 @@ class Window:
             fill="#00ff00"
         )
 
-    def update_status(self, text):
+    def update_status(self, text : str) -> None:
         self._status_label.config(text=text)
 
     # error
-    def error(self):
+    def error(self) -> None:
         self._progress_bar.delete("all")
         self._progress_bar.create_rectangle(
             0,

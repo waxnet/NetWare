@@ -1,8 +1,8 @@
 # check decorator
 class Tasks:
-    registry = {}
+    registry : dict = {}
 
-    def __init__(self, tag, message, error):
+    def __init__(self, tag : int, message : str, error : str) -> None:
         self.tag = tag
         self.message = message
         self.error = error
@@ -12,5 +12,5 @@ class Tasks:
         return target
 
     @staticmethod
-    def get():
+    def get() -> list[tuple]:
         return [(message, target, error) for (_, (message, target, error)) in sorted(Tasks.registry.items())]

@@ -15,7 +15,7 @@ from tasks import (
 )
 
 # methods
-def main():
+def main() -> None:
     # make root
     root = tk.Tk()
 

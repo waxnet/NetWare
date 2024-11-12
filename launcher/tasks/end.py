@@ -3,5 +3,5 @@ from . import Tasks
 
 # task
 @Tasks(100, "Done!", "")
-def _done():
+def _done() -> bool:
     return True
