@@ -16,14 +16,14 @@ public class Main : MonoBehaviour
     public void Start()
     {
         // start updaters
-        StartCoroutine(Data.Storage.Update().WrapToIl2Cpp());
-        StartCoroutine(Config.Update().WrapToIl2Cpp());
+        StartCoroutine(Data.Storage.Update());
+        StartCoroutine(Config.Update());
 
         // setup window data
         int windowWidth = 550;
         int windowHeight = 650;
 
-        Menu.Version = "v2.4.3";
+        Menu.Version = "v2.4.5";
         Menu.Color = Color.red;
         Menu.WindowRect = new Rect(200, ((Screen.height / 2) - (windowHeight / 2)), windowWidth, windowHeight);
         Menu.Tabs = SourceUtils.CreateInstancesAs<MenuTab>(
@@ -48,7 +48,7 @@ public class Main : MonoBehaviour
     public void OnGUI()
     {
         // display window
-        Menu.Window((GUI.WindowFunction)BuildMenu, "Net<color=red>Ware</color>");
+        Menu.Window(BuildMenu, "Net<color=red>Ware</color>");
     }
     private void BuildMenu(int _)
     {
