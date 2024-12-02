@@ -1,48 +1,37 @@
 ﻿using System.IO.Compression;
+using System.Net;
 
 namespace Loader;
 
 public static class GameFiles
 {
-    public static bool InstallBepInEx()
+    public static bool Revert()
     {
         // paths
-        string bepinexZipPath = Path.Combine(Data.gamePath, "bepinex.zip");
+        string gameFilesPath = Path.Combine(Data.tempPath, "1v1_LOL.zip");
 
-        // check path
-        if (Directory.Exists(Path.Combine(Data.gamePath, "doorstop_config.ini")))
-            return true;
-
-        // download bepinex
-        bool downloadedFile = Network.DownloadFile(
-            "https://builds.bepinex.dev/projects/bepinex_be/725/BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.725%2Be1974e2.zip",
-            bepinexZipPath
-        );
-        if (!downloadedFile)
-            return false;
-
-        // extract files
+        // download game files
         try {
-            using var archive = ZipFile.OpenRead(bepinexZipPath);
-
-            foreach (var entry in archive.Entries)
-            {
-                string destinationPath = Path.Combine(Data.gamePath, entry.FullName);
-
-                if (entry.FullName.EndsWith("/"))
-                {
-                    Directory.CreateDirectory(destinationPath);
-                } else {
-                    Directory.CreateDirectory(Path.GetDirectoryName(destinationPath) ?? string.Empty);
-                    entry.ExtractToFile(destinationPath, overwrite: true);
-                }
-            }
+            using var client = new WebClient();
+            client.DownloadFile(
+                "https://github.com/waxnet/NetWare/releases/download/loader_v3/GAMEFILES_DO_NOT_DOWNLOAD.zip",
+                gameFilesPath
+            );
         } catch {
             return false;
         }
 
-        // cleanup
-        File.Delete(bepinexZipPath);
+        // extract game files and cleanup
+        try {
+            if (Directory.Exists(Data.gamePath))
+                Directory.Delete(Data.gamePath, true);
+            ZipFile.ExtractToDirectory(gameFilesPath, Data.gamePath);
+        } catch {
+            return false;
+        } finally {
+            if (File.Exists(gameFilesPath))
+                File.Delete(gameFilesPath);
+        }
 
         return true;
     }

@@ -18,13 +18,4 @@ public static class Data
             tempPath != null
         );
     }
-
-    public static bool BepInExArePathsValid()
-    {
-        return (
-            cheatPath != null &&
-            steamPath != null &&
-            gamePath != null
-        );
-    }
 }

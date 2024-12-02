@@ -19,13 +19,6 @@ public static class Resolve
             Directory.CreateDirectory(cheatPath);
         Data.cheatPath = Path.Combine(cheatPath, "NetWare.dll");
     }
-    public static void BepInExCheatPath()
-    {
-        string cheatPath = Path.Combine(Data.gamePath, "BepInEx\\plugins");
-        if (!Directory.Exists(cheatPath))
-            Directory.CreateDirectory(cheatPath);
-        Data.cheatPath = Path.Combine(cheatPath, "NetWare.dll");
-    }
 
     public static void SteamPaths()
     {
