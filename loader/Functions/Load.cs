@@ -32,7 +32,7 @@ public static class Load
         if (token.IsCancellationRequested) return;
 
         // revert game files if needed
-        string checkPath = Path.Combine(Data.gamePath, "baselib.dll");
+        string checkPath = Path.Combine(Data.gamePath, "GameAssembly.dll");
         if (File.Exists(checkPath))
         {
             Program.window.AddConsoleLog("Reverting game files . . .", Brushes.Orange);
