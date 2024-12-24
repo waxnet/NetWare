@@ -52,7 +52,7 @@ public partial class Window : Form
     {
         if (Program.runningFunction is null || Program.runningFunction?.Status == TaskStatus.RanToCompletion)
             Program.runningFunction = Task.Run(
-                () => { Functions.Load.Normal(Program.cancellationToken.Token); }
+                () => { Functions.Load.Run(Program.cancellationToken.Token); }
             );
     }
 

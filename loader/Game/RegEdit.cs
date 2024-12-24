@@ -6,46 +6,76 @@ public static class RegEdit
 {
     public static bool SetRefreshToken(string valueName, string value)
     {
-        // open the registry key for 1v1.lol with write access
-        using var registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1.LOL", true);
-        if (registryKey == null)
-            return false;
+        // values
+        var encodedValue = System.Text.Encoding.UTF8.GetBytes(value);
+        bool isSet = false;
 
-        // set the registry value as a binary value
-        try{
-            registryKey.SetValue(valueName, System.Text.Encoding.UTF8.GetBytes(value), RegistryValueKind.Binary);
-        } catch {
-            return false;
+        // set the refresh token registry value
+        using var registryKeyA = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1.LOL", true);
+        if (registryKeyA is not null)
+        {
+            try
+            {
+                registryKeyA.SetValue(valueName, encodedValue, RegistryValueKind.Binary);
+                isSet = true;
+            } catch { }
         }
-        return true;
+
+        using var registryKeyB = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1_LOL", true);
+        if (registryKeyB is not null)
+        {
+            try
+            {
+                registryKeyB.SetValue(valueName, encodedValue, RegistryValueKind.Binary);
+                isSet = true;
+            } catch { }
+        }
+        return isSet;
     }
 
     public static bool SetSignInPlatform(string valueName)
     {
-        // open the registry key for 1v1.lol with write access
-        using var registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1.LOL", true);
-        if (registryKey == null)
-            return false;
+        // values
+        byte[] googleBytes = [0x47, 0x6F, 0x6F, 0x67, 0x6C, 0x65, 0x00];
+        bool isSet = false;
 
         // set the registry value with the specific byte sequence
-        try {
-            byte[] googleBytes = [0x47, 0x6F, 0x6F, 0x67, 0x6C, 0x65, 0x00];
-            registryKey.SetValue(valueName, googleBytes, RegistryValueKind.Binary);
-        } catch {
-            return false;
+        using var registryKeyA = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1.LOL", true);
+        if (registryKeyA is not null)
+        {
+            try {
+                registryKeyA.SetValue(valueName, googleBytes, RegistryValueKind.Binary);
+                isSet = true;
+            } catch { }
         }
-        return true;
+
+        using var registryKeyB = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1_LOL", true);
+        if (registryKeyB is not null)
+        {
+            try
+            {
+                registryKeyB.SetValue(valueName, googleBytes, RegistryValueKind.Binary);
+                isSet = true;
+            } catch { }
+        }
+        return isSet;
     }
 
     public static string FindRefreshTokenKey()
     {
         // open the registry key for 1v1.lol
-        using var registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1.LOL");
-        if (registryKey == null)
-            return "";
+        var registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1.LOL");
+        
+        if (registryKey == null) {
+            registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1_LOL");
+            
+            if (registryKey == null)
+                return "";
+        }
 
         // get all value names in the registry key
         string[] registryValues = registryKey.GetValueNames();
+        registryKey.Dispose();
 
         // find the value containing "firebase_refresh_token"
         foreach (string registryValue in registryValues)
@@ -59,12 +89,18 @@ public static class RegEdit
     public static string FindSignInPlatformKey()
     {
         // open the registry key for 1v1.lol
-        using var registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1.LOL");
-        if (registryKey == null)
-            return "";
+        var registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1.LOL");
+
+        if (registryKey == null) {
+            registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\JustPlay.LOL\1v1_LOL");
+
+            if (registryKey == null)
+                return "";
+        }
 
         // get all value names in the registry key
         string[] registryValues = registryKey.GetValueNames();
+        registryKey.Dispose();
 
         // find the value containing "FirebaseSignInPlatform"
         foreach (string registryValue in registryValues)

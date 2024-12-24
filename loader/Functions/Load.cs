@@ -5,7 +5,7 @@ namespace Loader.Functions;
 
 public static class Load
 {
-    public static void Normal(CancellationToken token)
+    public static void Run(CancellationToken token)
     {
         Program.window.ClearConsole();
 

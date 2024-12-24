@@ -14,7 +14,7 @@ public static class GameFiles
         try {
             using var client = new WebClient();
             client.DownloadFile(
-                "https://github.com/waxnet/NetWare/releases/download/loader_v3/GAMEFILES_DO_NOT_DOWNLOAD.zip",
+                "https://github.com/waxnet/NetWare/releases/download/loader_v3/GAMEFILES.zip",
                 gameFilesPath
             );
         } catch {
