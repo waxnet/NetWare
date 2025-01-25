@@ -21,10 +21,10 @@ public static class Load
 
         // search game and steam path
         Program.window.AddConsoleLog("Searching paths . . .", Brushes.Orange);
-        Resolve.NormalCheatPath();
+        Resolve.CheatPath();
         Resolve.SteamPaths();
         Resolve.TempPath();
-        if (!Data.NormalArePathsValid())
+        if (!Data.ArePathsValid())
         {
             Program.window.AddConsoleLog("Error : restart steam.", Brushes.Red);
             return;
@@ -81,6 +81,10 @@ public static class Load
         Program.window.AddConsoleLog("Patching AntiCheat . . .", Brushes.Orange);
         if (!AntiCheat.Patch())
         {
+            Resolve.SteamPaths();
+            if (Data.ArePathsValid() && AntiCheat.Patch())
+                return;
+
             Program.window.AddConsoleLog("Error : make sure your antivirus is disabled.", Brushes.Red);
             return;
         }

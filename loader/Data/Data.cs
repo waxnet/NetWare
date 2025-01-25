@@ -9,7 +9,7 @@ public static class Data
     public static string? tempPath;
 
     // methods
-    public static bool NormalArePathsValid()
+    public static bool ArePathsValid()
     {
         return (
             cheatPath != null &&

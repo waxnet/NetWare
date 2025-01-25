@@ -12,7 +12,7 @@ public static class Resolve
     private static readonly string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
     // methods
-    public static void NormalCheatPath()
+    public static void CheatPath()
     {
         string cheatPath = Path.Combine(appdata, "NetWare\\loader");
         if (!Directory.Exists(cheatPath))
