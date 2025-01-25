@@ -1,5 +1,4 @@
 ﻿using Invector.CharacterController;
-
 using UnityEngine;
 
 namespace NetWare.Entities;

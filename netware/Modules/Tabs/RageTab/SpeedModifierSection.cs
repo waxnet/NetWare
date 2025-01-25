@@ -26,5 +26,9 @@ public sealed class SpeedModifierSection
         // multiplier
         var multiplier = Menu.NewSlider("Multiplier", Config.Active.SpeedModifier.Multiplier, 1, 30);
         Config.Active.SpeedModifier.Multiplier = multiplier;
+
+        // bhop
+        var bhop = Menu.NewToggle("BHop", Config.Active.SpeedModifier.BHop);
+        Config.Active.SpeedModifier.BHop = bhop;
     }
 }

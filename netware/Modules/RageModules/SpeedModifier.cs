@@ -27,5 +27,12 @@ public sealed class SpeedModifier : MonoBehaviour
             "PlayerSpeedMultiplier",
             Config.Active.SpeedModifier.Multiplier
         );
+
+        // bhop logic
+        if (
+            Config.Active.SpeedModifier.BHop &&
+            Input.GetKey(KeyCode.Space)
+            )
+            LocalPlayer.GetThirdPersonController()?.Jump();
     }
 }

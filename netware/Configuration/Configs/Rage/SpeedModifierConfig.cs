@@ -11,4 +11,5 @@ public sealed class SpeedModifierConfig : IBindable
 
     // settings
     [ConfigProperty] public float Multiplier { get; set; } = 15;
+    [ConfigProperty] public bool BHop { get; set; } = false;
 }

@@ -24,6 +24,18 @@ public static class LockerSection
             MiscModules.Locker.UnlockChampionSkins
         );
 
+        // unlock weapons
+        Menu.NewButton(
+            "Unlock Weapons",
+            MiscModules.Locker.UnlockWeapons
+        );
+
+        // unlock weapon skins
+        Menu.NewButton(
+            "Unlock Weapon Skins",
+            MiscModules.Locker.UnlockWeaponSkins
+        );
+
         // unlock emotes
         Menu.NewButton(
             "Unlock Emotes",
