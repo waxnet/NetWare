@@ -226,9 +226,6 @@
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\1v1.LOL\1v1_LOL_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

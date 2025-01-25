@@ -28,32 +28,6 @@ public static class Locker
                 serverUser.Skins.CharacterSkins.Add(championSkinId);
     }
 
-    public static void UnlockWeapons()
-    {
-        var firebaseManager = Resolver.GetInstance<FirebaseManager>();
-        var serverUser = Resolver.GetProperty<FirebaseManager, ServerUser>(firebaseManager, "ServerUser");
-
-        if (serverUser is null)
-            return;
-
-        foreach (var weaponId in NetWare.Data.LockerData.WeaponIds)
-            if (!serverUser.Equipment.Equipment.ContainsKey(weaponId))
-                serverUser.Equipment.Equipment.Add(weaponId, new UserUpgradeableItem());
-    }
-
-    public static void UnlockWeaponSkins()
-    {
-        var firebaseManager = Resolver.GetInstance<FirebaseManager>();
-        var serverUser = Resolver.GetProperty<FirebaseManager, ServerUser>(firebaseManager, "ServerUser");
-
-        if (serverUser is null)
-            return;
-
-        foreach (var weaponSkinId in NetWare.Data.LockerData.WeaponSkinIds)
-            if (!serverUser.Skins.WeaponSkins.Contains(weaponSkinId))
-                serverUser.Skins.WeaponSkins.Add(weaponSkinId);
-    }
-
     public static void UnlockEmotes()
     {
         var firebaseManager = Resolver.GetInstance<FirebaseManager>();
