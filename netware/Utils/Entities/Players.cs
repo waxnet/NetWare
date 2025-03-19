@@ -46,19 +46,15 @@ public static class Players
         return GetHealth(playerController)?.KillerId is null;
     }
 
-    public static BABFPNELLFA GetPlayerInfo(PlayerController playerController)
+    public static InGamePlayerInfo GetPlayerInfo(PlayerController playerController)
     {
-        try {
-            return playerController.HGJCDHLIOII;
-        } catch {
-            return null;
-        }
+        return Resolver.GetProperty<PlayerController, InGamePlayerInfo>(playerController, "PlayerInfo");
     }
 
     public static string GetPlayerName(PlayerController playerController)
     {
         try {
-            return GetPlayerInfo(playerController).GCCNGNHHLMC;
+            return GetPlayerInfo(playerController).Nickname;
         } catch {
             return "Player";
         }
