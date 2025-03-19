@@ -23,7 +23,8 @@ public class Main : MonoBehaviour
         int windowWidth = 550;
         int windowHeight = 650;
 
-        Menu.Version = "v2.5.2";
+        Menu.Title = "Net<color=red>Ware</color>";
+        Menu.Version = "v2.5.3";
         Menu.Color = Color.red;
         Menu.WindowRect = new Rect(200, ((Screen.height / 2) - (windowHeight / 2)), windowWidth, windowHeight);
         Menu.Tabs = SourceUtils.CreateInstancesAs<MenuTab>(
@@ -48,7 +49,7 @@ public class Main : MonoBehaviour
     public void OnGUI()
     {
         // display window
-        Menu.Window(BuildMenu, "Net<color=red>Ware</color>");
+        Menu.Window(BuildMenu);
     }
     private void BuildMenu(int _)
     {
