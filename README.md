@@ -2,7 +2,7 @@
 
 ### <p align="center"> End of Development & Support </p>
 <p align="center">
-As of October 2025, 1v1.LOL is shutting down. Because of this, **NetWare will no longer be developed or supported**.
+As of October 2025, 1v1.LOL is shutting down. Because of this, <b>NetWare will no longer be developed or supported</b>.
 </p>
 
 ---
